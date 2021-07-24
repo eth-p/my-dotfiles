@@ -1,3 +1,6 @@
+# dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/dotfiles
+
 window:
   padding:
     x: 4
@@ -21,9 +24,34 @@ colors:
     background: '#1c1c1c'
     foreground: '#c8c8c8'
 
+
+# -----------------------------------------------------------------------------
+# Shell
+# -----------------------------------------------------------------------------
+
+env:
+  REAL_SHELL: fish
+
 shell:
-  program: '/usr/local/bin/fish'
-  args: [--login]
+  program: '/usr/bin/env'
+  args:
+  - 'bash'
+  - '-c'
+  - |-
+    # Switch the SHELL environment variable to the user's desired shell.
+    export SHELL="$REAL_SHELL"
+    unset REAL_SHELL
+
+    # Append to the PATH.
+    PATH="/usr/local/bin:$PATH"
+
+    # Start a new tmux session for tab and split support.
+    tmux new-session "bash -c 'tmux unbind d; exec \"$SHELL\" -l'" || bash
+
+
+# -----------------------------------------------------------------------------
+# Bindings
+# -----------------------------------------------------------------------------
 
 key_bindings:
   - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+C -> Ctrl+Q
