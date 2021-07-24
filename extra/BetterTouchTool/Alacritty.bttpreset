@@ -1,0 +1,104 @@
+{
+  "BTTPresetCreatorNotes" : "Keyboard shotcuts for my Alacritty setup.",
+  "BTTPresetInfoURL" : "https:\/\/github.com\/eth-p\/my-dotfiles",
+  "BTTPresetName" : "Alacritty",
+  "BTTPresetColor" : "145.407460, 72.481200, 190.740000, 255.000000",
+  "BTTPresetUUID" : "4B232E34-FE37-4497-A465-DAAEE34D17E2",
+  "BTTPresetContent" : [
+    {
+      "BTTAppBundleIdentifier" : "BT.G",
+      "BTTAppName" : "Global",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTTriggers" : [
+        {
+          "BTTTriggerType" : 630,
+          "BTTTriggerTypeDescription" : "Group",
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTEnabled2" : 1,
+          "BTTKeyboardShortcutKeyboardType" : 0,
+          "BTTRepeatDelay" : 0,
+          "BTTUUID" : "51C85536-09A1-4301-A01E-27D1BDFC4CAB",
+          "BTTTriggerOnDown" : 1,
+          "BTTNotesInsteadOfDescription" : 0,
+          "BTTGroupName" : "Command + Tilde Workaround",
+          "BTTEnabled" : 1,
+          "BTTModifierMode" : 0,
+          "BTTShortcutKeyCode" : -1,
+          "BTTShortcutModifierKeys" : -1,
+          "BTTOrder" : 0,
+          "BTTDisplayOrder" : 0,
+          "BTTAutoAdaptToKeyboardLayout" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTTriggerType" : 0,
+              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+              "BTTPredefinedActionType" : 172,
+              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
+              "BTTInlineAppleScript" : "tell application \"System Events\"\r\tkey code 50 using {command down, option down}\r\nend tell",
+              "BTTAdditionalConfiguration" : "1048584",
+              "BTTEnabled2" : 1,
+              "BTTKeyboardShortcutKeyboardType" : 2611,
+              "BTTRepeatDelay" : 0,
+              "BTTUUID" : "494624DE-4C11-4770-B70F-89A789877BD1",
+              "BTTTriggerOnDown" : 1,
+              "BTTNotesInsteadOfDescription" : 0,
+              "BTTLayoutIndependentChar" : "`",
+              "BTTEnabled" : 1,
+              "BTTModifierMode" : 0,
+              "BTTShortcutKeyCode" : 50,
+              "BTTShortcutModifierKeys" : 1048576,
+              "BTTOrder" : 0,
+              "BTTDisplayOrder" : 0,
+              "BTTAutoAdaptToKeyboardLayout" : 0
+            },
+            {
+              "BTTTriggerType" : 0,
+              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+              "BTTPredefinedActionType" : 172,
+              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
+              "BTTInlineAppleScript" : "tell application \"System Events\"\r\tkey code 50 using {command down, option down, shift down}\r\nend tell",
+              "BTTAdditionalConfiguration" : "1179658",
+              "BTTEnabled2" : 1,
+              "BTTKeyboardShortcutKeyboardType" : 2611,
+              "BTTRepeatDelay" : 0,
+              "BTTUUID" : "418348C1-4EA8-4004-AABE-F6FE16FE63E6",
+              "BTTTriggerOnDown" : 1,
+              "BTTNotesInsteadOfDescription" : 0,
+              "BTTLayoutIndependentChar" : "`",
+              "BTTEnabled" : 1,
+              "BTTModifierMode" : 0,
+              "BTTShortcutKeyCode" : 50,
+              "BTTShortcutModifierKeys" : 1179648,
+              "BTTOrder" : 1,
+              "BTTDisplayOrder" : 0,
+              "BTTAutoAdaptToKeyboardLayout" : 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "BTTAppBundleIdentifier" : "com.apple.finder",
+      "BTTAppName" : "Finder",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTTriggers" : [
+
+      ]
+    },
+    {
+      "BTTAppBundleIdentifier" : "io.alacritty",
+      "BTTAppName" : "Alacritty",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTAppProcessMatchMode" : 2,
+      "BTTAppProcessName" : "Alacritty",
+      "BTTTriggers" : [
+
+      ]
+    }
+  ],
+  "BTTPresetSnapAreas" : [
+
+  ]
+}

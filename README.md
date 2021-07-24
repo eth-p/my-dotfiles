@@ -43,9 +43,16 @@ Tools
 ### alacritty
 
 **Install**  
+
+1. Copy the alacritty config files.
+2. Install [BetterTouchTool](https://folivora.ai/).
+3. Install the BetterTouchTool [Alacritty preset](extra/BetterTouchTool).  
+   *This allows <kbd>Cmd+&grave;</kbd> to work correctly.*
+
 No special instructions, just copy the files.
 
 **Bindings**  
+
 |Key|Action|
 |:--|:--|
 |<kbd>Cmd+K</kbd>|Clears the current `tmux` pane.|
