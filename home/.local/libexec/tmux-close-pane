@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/dotfiles
+
+# This script will attempt to close the current tmux pane.
+
+ALLOWED_SAFE_CLOSE_COMMANDS=('-*' fish ssh)
+
+# -----------------------------------------------------------------------------
+set -eo pipefail
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# We pass the socket and pane ID through the run-shell command. 
+export TMUX="$2"
+export TMUX_PANE="$3"
+
+# Recursively prints the names of children commands.
+# $1: The parent pid.
+# $2: The pid to stop at.
+children() {
+	if [ "$1" = "$2" ]; then
+		return 0
+	fi
+
+	local command_pid
+	local command
+	while read -r command_pid command; do
+		echo "$command"
+		children "$command_pid" "$2"
+	done < <(ps ax -o pid,ppid,comm | awk '$2 == '"$1"' { print $1" "$3 }')
+}
+
+#tmux confirm-before -p "blah blah?" "nah"
+# Get the pane shell's PID.
+pane_pid="$(tmux display-message -p -F "#{pane_pid}" -t"$TMUX_PANE")"
+
+# Find all its children.
+# If a single one of them isn't allowed, we need to ask.
+need_prompt=false
+need_prompt_command=""
+while read -r child; do
+	for allowed_command in "${ALLOWED_SAFE_CLOSE_COMMANDS[@]}"; do
+		if [[ "$child" = $allowed_command ]]; then
+			continue 2
+		fi
+	done
+
+	need_prompt=true
+	need_prompt_command="$child"
+	break
+done < <(children "$pane_pid" "$$")
+
+# Prompt?
+if "$need_prompt"; then
+	tmux confirm-before -p "Pane is running '$need_prompt_command'. Close it?" kill-pane
+	exit 0
+fi
+
+# No prompt.
+tmux kill-pane
+exit 0
+

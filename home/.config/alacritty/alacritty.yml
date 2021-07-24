@@ -1,0 +1,61 @@
+window:
+  padding:
+    x: 4
+    y: 2
+
+font:
+  normal:
+    family: "JetBrains Mono NL"
+
+  bold:
+    family: "JetBrains Mono NL"
+
+  italic:
+    family: "JetBrains Mono NL"
+
+  bold_italic:
+    family: "JetBrains Mono NL"
+
+colors:
+  primary:
+    background: '#1c1c1c'
+    foreground: '#c8c8c8'
+
+shell:
+  program: '/usr/local/bin/fish'
+  args: [--login]
+
+key_bindings:
+  - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+C -> Ctrl+Q
+
+
+  # Remind CMD+K to use tmux.
+  - { key: K, mods: Command, chars: "\u0001k" } # Clear pane.
+
+  # Rebind CMD+N/CMD+W to use tmux.
+  - { key: N, mods: Command, chars: "\u0001c" }
+  - { key: T, mods: Command, chars: "\u0001c" }
+  - { key: W, mods: Command, chars: "\u0001x" }
+
+  # Rebind CMDL+D/CMD+SHIFT+D to use tmux.
+  - { key: D, mods: Command,       chars: "\u0001|" } # Vertical split pane.
+  - { key: D, mods: Command|Shift, chars: "\u0001-" } # Horizontal split pane.
+
+  # Rebind CMD+[number] to use tmux.
+  - { key: 'Key1', mods: Command, chars: "\u00011" }
+  - { key: 'Key2', mods: Command, chars: "\u00012" }
+  - { key: 'Key3', mods: Command, chars: "\u00013" }
+  - { key: 'Key4', mods: Command, chars: "\u00014" }
+  - { key: 'Key5', mods: Command, chars: "\u00015" }
+  - { key: 'Key6', mods: Command, chars: "\u00016" }
+  - { key: 'Key7', mods: Command, chars: "\u00017" }
+  - { key: 'Key8', mods: Command, chars: "\u00018" }
+  - { key: 'Key9', mods: Command, chars: "\u00019" }
+
+  # Rebind CMD+` to use tmux.
+  - { key: Grave, mods: Command,       chars: "\u0001n" }
+  - { key: Grave, mods: Command|Shift, chars: "\u0001p" }
+
+  - { key: Grave, mods: Alt|Command,       chars: "\u0001n" } # Workaround using BTT
+  - { key: Grave, mods: Alt|Command|Shift, chars: "\u0001p" } # Workaround using BTT
+

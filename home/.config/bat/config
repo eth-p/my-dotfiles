@@ -1,0 +1,6 @@
+--tabs 4
+--pager='less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse --wheel-lines=2'
+
+# Syntaxes
+#--map-syntax From:to
+
