@@ -1,5 +1,5 @@
-" dotfiles | Copyright (C) 2021 eth-p
-" Repository: https://github.com/eth-p/dotfiles
+" my-dotfiles | Copyright (C) 2021 eth-p
+" Repository: https://github.com/eth-p/my-dotfiles
 
 filetype plugin on
 call plug#begin()

@@ -6,7 +6,7 @@ A collection of dotfiles that I use to configure my terminal programs.
 
 ## Requirements
 
-My configuration is designed around using [tmux](https://github.com/tmux/tmux/wiki) and [fish](https://fishshell.com/) inside of the [alacritty](https://github.com/alacritty/alacritty) terminal emulator. It might work with other configurations, but I'm not going to make any guarantees or promises.
+My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and [fish](https://fishshell.com/) inside of the [alacritty](https://github.com/alacritty/alacritty) terminal emulator. It might work in other environments, but I'm not going to make any guarantees or promises.
 
 - [fisher](https://github.com/jorgebucaran/fisher) to install fish plugins.
 - [vim-plug](https://github.com/junegunn/vim-plug) to install vim/nvim plugins.
@@ -54,7 +54,9 @@ No special instructions, just copy the files.
 |<kbd>Cmd+D</kbd>|Creates a new vertical split in `tmux`.|
 |<kbd>Cmd+Shift+D</kbd>|Creates a new horizontal split in `tmux`.|
 |<kbd>Cmd+[1-9]</kbd>|Switches the the `tmux` window.|
-|<kbd>Cmd+`</kbd>/<kbd>Cmd+Shift+`</kbd>|Switches between the next and previous `tmux` window.|
+|<kbd>Cmd+&grave;</kbd>/<kbd>Cmd+Shift+&grave;</kbd>|Switches between the next and previous `tmux` window.|
+
+
 
 ---
 
