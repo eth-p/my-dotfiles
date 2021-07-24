@@ -4,7 +4,10 @@
 
 # This script will attempt to close the current tmux pane.
 
-ALLOWED_SAFE_CLOSE_COMMANDS=('-*' fish ssh)
+ALLOWED_SAFE_CLOSE_COMMANDS=(
+	'-*' fish ssh
+	"$(basename -- "$SHELL")"
+)
 
 # -----------------------------------------------------------------------------
 set -eo pipefail
@@ -22,6 +25,7 @@ export TMUX_PANE="$3"
 # Recursively prints the names of children commands.
 # $1: The parent pid.
 # $2: The pid to stop at.
+CACHED_PS="$(ps ax -o pid,ppid,comm)"
 children() {
 	if [ "$1" = "$2" ]; then
 		return 0
@@ -32,7 +36,7 @@ children() {
 	while read -r command_pid command; do
 		echo "$command"
 		children "$command_pid" "$2"
-	done < <(ps ax -o pid,ppid,comm | awk '$2 == '"$1"' { print $1" "$3 }')
+	done < <(awk '$2 == '"$1"' { print $1" "$3 }' <<< "$CACHED_PS")
 }
 
 #tmux confirm-before -p "blah blah?" "nah"
@@ -45,13 +49,13 @@ need_prompt=false
 need_prompt_command=""
 while read -r child; do
 	for allowed_command in "${ALLOWED_SAFE_CLOSE_COMMANDS[@]}"; do
-		if [[ "$child" = $allowed_command ]]; then
+		if [[ "$(basename -- "$child")" = $allowed_command ]]; then
 			continue 2
 		fi
 	done
 
 	need_prompt=true
-	need_prompt_command="$child"
+	need_prompt_command="$(basename -- "$child")"
 	break
 done < <(children "$pane_pid" "$$")
 
