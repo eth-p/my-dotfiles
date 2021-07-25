@@ -2,7 +2,7 @@
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 
-# This script will attempt to save the editor in the current tmux pane.
+# This script will attempt to open a file/directory in the current tmux pane.
 
 USE_FISH_INTEGRATIONS=true
 
@@ -19,28 +19,23 @@ fi
 export TMUX="$2"
 export TMUX_PANE="$3"
 
-# Try to clear based on the current command.
+# Try to open based on the current command.
 PANE_CURRENT_COMMAND="$4"
 PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
 case "$PANE_CURRENT_COMMAND_NAME" in
 	fish)
 		if "$USE_FISH_INTEGRATIONS"; then
-			tmux send-keys -t "$TMUX_PANE" 'C-F12' 'e' 'k'
+			tmux send-keys -t "$TMUX_PANE" 'C-F12' 'e' 'c'
 			exit 0
 		fi
 		;;
 	
 	vi|vim|nvim|neovim)
-		exit 0 # This won't end well.
-		;;
-
-	bat|less)
-		exit 0 # This also won't end well.
+		: # TODO
 		;;
 esac
 
-# Brute force method.
-tmux clear-history -t "$TMUX_PANE"
-tmux send-keys -t "$TMUX_PANE" -R
+# Unsupported.
+tmux display-message "Don't know how to open in '$PANE_CURRENT_COMMAND'"
 exit 0
 

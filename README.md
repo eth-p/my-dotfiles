@@ -68,6 +68,7 @@ No special instructions, just copy the files.
 |<kbd>Cmd+&grave;</kbd>/<kbd>Cmd+Shift+&grave;</kbd>|Switches between the next and previous `tmux` window.|
 |<kbd>Cmd+C</kbd>|Enters `tmux` copy mode.<br />*When in `vim`, this will copy visual mode highlighted text.*|
 |<kbd>Cmd+S</kbd>|Tells `tmux` to try to save the file in the active panel.|
+|<kbd>Cmd+O</kbd>|Open a new directory in `fish`, using `ranger` as a file chooser.|
 
 **Customizations.**  
 
@@ -146,17 +147,20 @@ No special instructions, just copy the files.
 |<kbd>Ctrl+A</kbd>|Prefix key.|
 |<kbd>Ctrl+A</kbd><kbd>\|</kbd>|Create a vertical split.|
 |<kbd>Ctrl+A</kbd><kbd>\-</kbd>|Create a horizontal split.|
-|<kbd>Ctrl+A</kbd><kbd>K</kbd>|Clear the current pane.<br />*This requires help from a bash script and fish keybinding.*|
-|<kbd>Ctrl+A</kbd><kbd>X</kbd>|Close the current pane.<br />*This requires help from a bash script.*|
+|<kbd>Ctrl+A</kbd><kbd>K</kbd>|Clear the current pane. \* \*\*|
+|<kbd>Ctrl+A</kbd><kbd>X</kbd>|Close the current pane. \*|
 |<kbd>Ctrl+A</kbd><kbd>R</kbd>|Reload the tmux config.|
-|<kbd>Ctrl+A</kbd><kbd>F6</kbd>|Attempt to save the vim buffer in the current pane.<br />*This requires help from a bash script.*|
-|<kbd>Ctrl+X</kbd>|Open the pane context menu.<br />*This requires help from a bash script.*|
+|<kbd>Ctrl+A</kbd><kbd>F6</kbd>|Attempt to save the vim buffer in the current pane. \*|
+|<kbd>Ctrl+X</kbd>|Open the pane context menu. \*|
 |<kbd>Alt+Left</kbd>|Select the pane to the left of the current pane.|
 |<kbd>Alt+Right</kbd>|Select the pane to the right of the current pane.|
 |<kbd>Alt+Up</kbd>|Select the pane above the current pane.|
 |<kbd>Alt+Down</kbd>|Select the pane below the current pane.|
 |<kbd>Alt+Shift+Left</kbd>|Select the previous window.|
 |<kbd>Alt+Shift+Right</kbd>|Select the next window.|
+
+\* Requires help from one of the `tmux-` bash scripts.  
+\*\* Requires `10-ethp-integrations.fish`.  
 
 **Copy Mode Bindings**
 |Key|Action|
