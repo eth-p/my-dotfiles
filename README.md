@@ -130,6 +130,7 @@ No special instructions, just copy the files.
 |<kbd>Ctrl+A</kbd><kbd>X</kbd>|Close the current pane.<br />*This requires help from a bash script.*|
 |<kbd>Ctrl+A</kbd><kbd>R</kbd>|Reload the tmux config.|
 |<kbd>Ctrl+A</kbd><kbd>F6</kbd>|Attempt to save the vim buffer in the current pane.<br />*This requires help from a bash script.*|
+|<kbd>Ctrl+X</kbd>|Open the pane context menu.<br />*This requires help from a bash script.*|
 |<kbd>Alt+Left</kbd>|Select the pane to the left of the current pane.|
 |<kbd>Alt+Right</kbd>|Select the pane to the right of the current pane.|
 |<kbd>Alt+Up</kbd>|Select the pane above the current pane.|
@@ -143,4 +144,10 @@ No special instructions, just copy the files.
 |<kbd>Enter</kbd>|Start selection.|
 |<kbd>Y</kbd>|Save selection to system clipboard.|
 |<kbd>Ctrl+C</kbd>/<kbd>Escape</kbd>|Cancel copy mode.|
+
+**Context Menu**  
+With <kbd>Ctrl+X</kbd>, a context menu is displayed for the currently active pane.
+This has additional menu items for:
+
+- `vim`
 

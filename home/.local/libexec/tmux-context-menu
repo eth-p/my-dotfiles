@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+
+# This script displays a contextual popup menu in tmux.
+
+PASSTHROUGH_CX_BINDING_COMMANDS=(
+)
+
+# -----------------------------------------------------------------------------
+set -eo pipefail
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# We pass the socket and pane ID through the run-shell command.
+export TMUX="$2"
+export TMUX_PANE="$3"
+
+# Get information about the tmux environment.
+POPUP_TYPE="$4"
+POPUP_TRIGGER="$5"
+POPUP_MOUSE_X="$6"
+POPUP_MOUSE_Y="$7"
+PANE_CURRENT_COMMAND="$8"
+PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+GIT_REPO=false
+GIT_DIR=
+
+if command -v git &>/dev/null && GIT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+	GIT_REPO=true
+fi
+
+
+# -----------------------------------------------------------------------------
+# Pane Popup:
+# -----------------------------------------------------------------------------
+
+popup_pane() {
+
+	# Pane swapping.
+	popup_item "Swap Up"    u "swap-pane -t '${TMUX_PANE}' -U"
+	popup_item "Swap Down"  d "swap-pane -t '${TMUX_PANE}' -D"
+	popup_item "#{?pane_marked_set,,-}Swap Marked" s "swap-pane -t '${TMUX_PANE}'"
+	popup_item "Zoom" z "resize-pane -t '${TMUX_PANE}' -Z"
+	popup_item "#{?pane_marked,Unmark,Mark}" m "select-pane -t '${TMUX_PANE}' -m"
+
+	# Program-specific items.
+	case "$PANE_CURRENT_COMMAND_NAME" in
+		vi|vim|nvim|neovim)
+			popup_separator
+			popup_header "$PANE_CURRENT_COMMAND_NAME"
+			popup_item "Undo" "C-z" "$(tmux_send_keys Escape Escape u)"
+			popup_item "Redo" "C-y" "$(tmux_send_keys Escape Escape C-r)" 
+			popup_item "Save" "C-s" "$(tmux_send_keys Escape Escape :w Enter)"
+			if $GIT_REPO; then
+				popup_item "Previous Conflict" "[" "$(tmux_send_keys Escape Escape :ConflictMarkerPrevHunk Enter)"
+				popup_item "Next Conflict" "]" "$(tmux_send_keys Escape Escape :ConflictMarkerNextHunk Enter)"
+			fi
+			;;
+	esac
+
+	# Pane control.
+	popup_separator
+	popup_item "Clear Pane" "C-k" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-clear-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
+	popup_item "Kill Pane" "" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-close-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
+
+	# Extra.
+	popup_separator
+	popup_item "Send Ctrl+X" "C-x" "$(tmux_send_keys C-x)"
+}
+
+
+# -----------------------------------------------------------------------------
+# Popup:
+# -----------------------------------------------------------------------------
+
+popup_item() {
+	local name="$1"
+	if [ "$4" = "disabled" ]; then
+		name="-$name"
+	fi
+
+	POPUP_ARGS+=("$name" "$2" "$3")
+	POPUP_ITEMS=$((POPUP_ITEMS+1)) || true
+}
+
+popup_header() {
+	popup_item "#[fg=colour147, bold]$1" "" "" disabled
+}
+
+popup_separator() {
+	POPUP_ARGS+=("")
+	POPUP_ITEMS=$((POPUP_ITEMS+1)) || true
+}
+
+tmux_send_keys() {
+	printf "send-keys -t '%s' " "${TMUX_PANE}"
+	printf '%q ' "$@"
+}
+
+
+# -----------------------------------------------------------------------------
+# Main:
+# -----------------------------------------------------------------------------
+
+# Generate the popup.
+POPUP_ARGS=()
+POPUP_ITEMS=0
+
+"popup_${POPUP_TYPE}" || exit $?
+
+case "$POPUP_TYPE" in
+	pane)
+		pop_x="$((POPUP_MOUSE_X))"
+		pop_y="$((POPUP_MOUSE_Y+3+POPUP_ITEMS))"
+		;;
+esac
+
+# Handle special cases for Ctrl+X.
+case "$POPUP_TRIGGER" in
+	bind)
+		pop_y="$((POPUP_MOUSE_Y))"
+
+		# Passthrough if certain programs.
+		for passthrough_command in "${PASSTHROUGH_CX_BINDING_COMMANDS[@]}"; do
+			if [[ "$PANE_CURRENT_COMMAND_NAME" =~ $passthrough_command ]]; then
+				tmux send-keys -t "$TMUX_PANE" C-X
+				exit 0
+			fi
+		done
+		;;
+esac
+
+# Display the popup
+sleep 0.075
+tmux display-menu -t "$TMUX_PANE" \
+	-T "#[align=centre] Pane #{pane_id} " \
+	-x "${pop_x}" -y "${pop_y}" \
+	"${POPUP_ARGS[@]}"
+exit $?
+
