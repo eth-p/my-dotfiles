@@ -12,6 +12,7 @@ call plug#begin()
 
 	" Terminal stuff.
 	" Plug 'eth-p/vim-it2-touchbar'
+	Plug 'tmux-plugins/vim-tmux-focus-events'
 
 	" Languages.
 	Plug 'dag/vim-fish'
@@ -91,11 +92,14 @@ call plug#end()
 		colorscheme monokai
 		let g:lightline['colorscheme'] = 'powerline'
 
-		if $__CFBundleIdentifier == 'io.alacritty'
-			highlight Normal ctermbg=NONE
+		if $TMUX != ''
+			au FocusGained * highlight LineNr ctermbg=235
+			au FocusLost * highlight LineNr ctermbg=234
+			if $__CFBundleIdentifier == 'io.alacritty'
+				highlight Normal ctermbg=NONE
+			end
 		end
 
-		" highlight Normal ctermbg=NONE
 		" highlight SignColumn guibg=245
 	endif
 
