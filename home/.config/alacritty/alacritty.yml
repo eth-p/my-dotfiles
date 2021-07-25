@@ -46,6 +46,7 @@ shell:
     PATH="/usr/local/bin:$PATH"
 
     # Start a new tmux session for tab and split support.
+    echo $SHELL
     tmux new-session "bash -c 'tmux unbind d; exec \"$SHELL\" -l'" || bash
 
 
@@ -54,11 +55,13 @@ shell:
 # -----------------------------------------------------------------------------
 
 key_bindings:
-  - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+C -> Ctrl+Q
+  - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+Q -> Ctrl+Q
 
-
-  # Remind CMD+K to use tmux.
+  # Rebind CMD+K to use tmux.
   - { key: K, mods: Command, chars: "\u0001k" } # Clear pane.
+
+  # Rebind CMD+C to enter tmux copy mode.
+  - { key: C, mods: Command, chars: "\u0001[" }
 
   # Rebind CMD+N/CMD+W to use tmux.
   - { key: N, mods: Command, chars: "\u0001c" }

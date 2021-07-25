@@ -62,6 +62,7 @@ No special instructions, just copy the files.
 |<kbd>Cmd+Shift+D</kbd>|Creates a new horizontal split in `tmux`.|
 |<kbd>Cmd+[1-9]</kbd>|Switches the the `tmux` window.|
 |<kbd>Cmd+&grave;</kbd>/<kbd>Cmd+Shift+&grave;</kbd>|Switches between the next and previous `tmux` window.|
+|<kbd>Cmd+C</kbd>|Enters `tmux` copy mode.|
 
 
 
@@ -130,3 +131,11 @@ No special instructions, just copy the files.
 |<kbd>Alt+Down</kbd>|Select the pane below the current pane.|
 |<kbd>Alt+Shift+Left</kbd>|Select the previous window.|
 |<kbd>Alt+Shift+Right</kbd>|Select the next window.|
+
+**Copy Mode Bindings**
+|Key|Action|
+|:--|:--|
+|<kbd>Enter</kbd>|Start selection.|
+|<kbd>Y</kbd>|Save selection to system clipboard.|
+|<kbd>Ctrl+C</kbd>/<kbd>Escape</kbd>|Cancel copy mode.|
+
