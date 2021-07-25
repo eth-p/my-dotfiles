@@ -12,6 +12,7 @@ call plug#begin()
 
 	" Terminal stuff.
 	" Plug 'eth-p/vim-it2-touchbar'
+	Plug 'eth-p/vim-tmux'
 	Plug 'tmux-plugins/vim-tmux-focus-events'
 
 	" Languages.

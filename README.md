@@ -112,6 +112,14 @@ No special instructions, just copy the files.
 |Any|<kbd>F8</kbd>|Undo the last change.|
 |Any|<kbd>F9</kbd>|Redo the last change.|
 
+**Integrations** (using [eth-p/vim-tmux](https://github.com/eth-p/vim-tmux))  
+
+- Command: `Wcmd [shell command...]`
+  Run a shell command on save.  
+  
+  Runs `[shell command...]` in the tmux pane that was marked when `Wcmd` was called.
+
+
 ---
 
 ### tmux
