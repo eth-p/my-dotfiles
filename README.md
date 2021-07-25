@@ -64,7 +64,10 @@ No special instructions, just copy the files.
 |<kbd>Cmd+&grave;</kbd>/<kbd>Cmd+Shift+&grave;</kbd>|Switches between the next and previous `tmux` window.|
 |<kbd>Cmd+C</kbd>|Enters `tmux` copy mode.|
 
+**Customizations.**  
 
+- If running `vim`, <kbd>Cmd+W</kbd> will attempt to close the `vim` buffer instead of the `tmux` pane.
+   You can disable this setting in `.local/libexec/tmux-close-pane`.
 
 ---
 
