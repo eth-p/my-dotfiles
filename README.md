@@ -126,7 +126,7 @@ No special instructions, just copy the files.
 |<kbd>Ctrl+A</kbd>|Prefix key.|
 |<kbd>Ctrl+A</kbd><kbd>\|</kbd>|Create a vertical split.|
 |<kbd>Ctrl+A</kbd><kbd>\-</kbd>|Create a horizontal split.|
-|<kbd>Ctrl+A</kbd><kbd>K</kbd>|Clear the current pane.<br />*This requires help from a fish keybinding.*|
+|<kbd>Ctrl+A</kbd><kbd>K</kbd>|Clear the current pane.<br />*This requires help from a bash script and fish keybinding.*|
 |<kbd>Ctrl+A</kbd><kbd>X</kbd>|Close the current pane.<br />*This requires help from a bash script.*|
 |<kbd>Ctrl+A</kbd><kbd>R</kbd>|Reload the tmux config.|
 |<kbd>Ctrl+A</kbd><kbd>F6</kbd>|Attempt to save the vim buffer in the current pane.<br />*This requires help from a bash script.*|

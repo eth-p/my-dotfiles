@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+
+# This script will attempt to save the editor in the current tmux pane.
+
+USE_FISH_CLEAR_BINDING=true
+
+# -----------------------------------------------------------------------------
+set -eo pipefail
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# We pass the socket and pane ID through the run-shell command. 
+export TMUX="$2"
+export TMUX_PANE="$3"
+
+# Try to clear based on the current command.
+PANE_CURRENT_COMMAND="$4"
+case "$PANE_CURRENT_COMMAND" in
+	fish)
+		if "$USE_FISH_CLEAR_BINDING"; then
+			tmux send-keys M-C-K
+			exit 0
+		fi
+		;;
+	
+	vi|vim|nvim|neovim)
+		exit 0 # This won't end well.
+		;;
+
+	bat|less)
+		exit 0 # This also won't end well.
+		;;
+esac
+
+# Brute force method.
+tmux clear-history
+tmux send-keys -R
+exit 0
+
