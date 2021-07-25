@@ -11,6 +11,7 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 - [fisher](https://github.com/jorgebucaran/fisher) to install fish plugins.
 - [vim-plug](https://github.com/junegunn/vim-plug) to install vim/nvim plugins.
 - [gitmux](https://github.com/arl/gitmux) for git info in the tmux status bar.
+- [ranger](https://github.com/ranger/ranger) for file browsing in the terminal.
 - `JetBrains Mono NL` font.
 
 
@@ -20,6 +21,7 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 - Alacritty keybinds similar to iTerm2.
 - Useful tmux integrations.
 - Fish shell prompt using [promptfessional](https://github.com/eth-p/fish-promptfessional).
+- Ranger for file browsing.
 - Monokai theme.
 
 
@@ -36,6 +38,7 @@ Tools
 
 - [bat](#bat)
 - [nvim](#nvim)
+- [ranger](#ranger)
 
 
 
@@ -86,6 +89,13 @@ No special instructions, just copy the files.
 1. Install [fisher](https://github.com/jorgebucaran/fisher).
 2. Copy the files.
 3. `fisher`
+
+---
+
+### ranger
+
+**Install**  
+No special instructions, just copy the files.
 
 ---
 
