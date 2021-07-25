@@ -6,6 +6,11 @@ function fish_prompt
         promptfessional show private
         promptfessional show jobs
         promptfessional show sudo
+	
+	promptfessional section cmdtime
+		promptfessional show cmdtime \
+			--min-time=1000 \
+			--min-slow=30000
 
     promptfessional section path --pattern=' %s '
         promptfessional show path \
