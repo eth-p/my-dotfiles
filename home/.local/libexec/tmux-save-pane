@@ -21,14 +21,13 @@ export TMUX_PANE="$3"
 
 # Try to save based on the current command.
 PANE_CURRENT_COMMAND="$4"
-case "$PANE_CURRENT_COMMAND" in
+PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+case "$PANE_CURRENT_COMMAND_NAME" in
 	vi|vim|nvim|neovim)
 		if "$USE_VI_F6_SAVE"; then
-			tmux send-keys F6
+			tmux send-keys -t "$TMUX_PANE" F6
 		else
-			tmux send-keys C-c
-			sleep 0.1
-			tmux send-keys :w Enter
+			tmux send-keys -t "$TMUX_PANE" Escape Escape :w Enter
 		fi
 		exit 0
 		;;

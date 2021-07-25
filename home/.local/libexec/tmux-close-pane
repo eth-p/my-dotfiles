@@ -26,11 +26,10 @@ export TMUX_PANE="$3"
 # If our current program is vi/vim/nvim, close the buffer instead.
 if "$CLOSE_BUFFER_IF_VIM"; then
 	PANE_CURRENT_COMMAND="$4"
-	case "$PANE_CURRENT_COMMAND" in
+	PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+	case "$PANE_CURRENT_COMMAND_NAME" in
 		vi|vim|nvim|neovim)
-			tmux send-keys C-c
-			sleep 0.1
-			tmux send-keys :q Enter
+			tmux send-keys -t "$TMUX_PANE" Escape Escape :q Enter
 			exit 0
 			;;
 	esac
@@ -75,11 +74,13 @@ done < <(children "$pane_pid" "$$")
 
 # Prompt?
 if "$need_prompt"; then
-	tmux confirm-before -p "Pane is running '$need_prompt_command'. Close it?" kill-pane
+	tmux confirm-before \
+		-p "Pane is running '$need_prompt_command'. Close it?" \
+		"kill-pane -t '$TMUX_PANE'"
 	exit 0
 fi
 
 # No prompt.
-tmux kill-pane
+tmux kill-pane -t "$TMUX_PANE"
 exit 0
 

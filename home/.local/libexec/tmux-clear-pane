@@ -21,10 +21,11 @@ export TMUX_PANE="$3"
 
 # Try to clear based on the current command.
 PANE_CURRENT_COMMAND="$4"
-case "$PANE_CURRENT_COMMAND" in
+PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+case "$PANE_CURRENT_COMMAND_NAME" in
 	fish)
 		if "$USE_FISH_CLEAR_BINDING"; then
-			tmux send-keys M-C-K
+			tmux send-keys -t "$TMUX_PANE" M-C-K
 			exit 0
 		fi
 		;;
@@ -39,7 +40,7 @@ case "$PANE_CURRENT_COMMAND" in
 esac
 
 # Brute force method.
-tmux clear-history
-tmux send-keys -R
+tmux clear-history -t "$TMUX_PANE"
+tmux send-keys -t "$TMUX_PANE" -R
 exit 0
 
