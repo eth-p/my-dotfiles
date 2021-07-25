@@ -10,6 +10,7 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 
 - [fisher](https://github.com/jorgebucaran/fisher) to install fish plugins.
 - [vim-plug](https://github.com/junegunn/vim-plug) to install vim/nvim plugins.
+- [gitmux](https://github.com/arl/gitmux) for git info in the tmux status bar.
 - `JetBrains Mono NL` font.
 
 
@@ -119,6 +120,7 @@ No special instructions, just copy the files.
 
 1. Copy the tmux config files.
 2. Copy the `.local/libexe/tmux-*` files to `$HOME/.local/libexec/`.
+3. Install [gitmux](https://github.com/arl/gitmux).
 
 **Bindings**  
 |Key|Action|
