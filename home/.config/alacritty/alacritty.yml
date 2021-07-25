@@ -57,6 +57,9 @@ shell:
 key_bindings:
   - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+Q -> Ctrl+Q
 
+  # Rebind CMD+S to send F6 (bound to save) to tmux.
+  - { key: S, mods: Command, chars: "\u0001\x1B[17~" } # F6 
+
   # Rebind CMD+K to use tmux.
   - { key: K, mods: Command, chars: "\u0001k" } # Clear pane.
 
@@ -68,7 +71,7 @@ key_bindings:
   - { key: T, mods: Command, chars: "\u0001c" }
   - { key: W, mods: Command, chars: "\u0001x" }
 
-  # Rebind CMDL+D/CMD+SHIFT+D to use tmux.
+  # Rebind CMD+D/CMD+SHIFT+D to use tmux.
   - { key: D, mods: Command,       chars: "\u0001|" } # Vertical split pane.
   - { key: D, mods: Command|Shift, chars: "\u0001-" } # Horizontal split pane.
 

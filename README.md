@@ -63,6 +63,7 @@ No special instructions, just copy the files.
 |<kbd>Cmd+[1-9]</kbd>|Switches the the `tmux` window.|
 |<kbd>Cmd+&grave;</kbd>/<kbd>Cmd+Shift+&grave;</kbd>|Switches between the next and previous `tmux` window.|
 |<kbd>Cmd+C</kbd>|Enters `tmux` copy mode.|
+|<kbd>Cmd+S</kbd>|Tells `tmux` to try to save the file in the active panel.|
 
 **Customizations.**  
 
@@ -128,6 +129,7 @@ No special instructions, just copy the files.
 |<kbd>Ctrl+A</kbd><kbd>K</kbd>|Clear the current pane.<br />*This requires help from a fish keybinding.*|
 |<kbd>Ctrl+A</kbd><kbd>X</kbd>|Close the current pane.<br />*This requires help from a bash script.*|
 |<kbd>Ctrl+A</kbd><kbd>R</kbd>|Reload the tmux config.|
+|<kbd>Ctrl+A</kbd><kbd>F6</kbd>|Attempt to save the vim buffer in the current pane.<br />*This requires help from a bash script.*|
 |<kbd>Alt+Left</kbd>|Select the pane to the left of the current pane.|
 |<kbd>Alt+Right</kbd>|Select the pane to the right of the current pane.|
 |<kbd>Alt+Up</kbd>|Select the pane above the current pane.|
