@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+
+# This script will copy text to the system clipboard.
+
+# -----------------------------------------------------------------------------
+set -eo pipefail
+
+# Try to copy STDIN into a clipboard.
+if command -v pbcopy &>/dev/null; then
+	pbcopy
+elif command -v xclip &>/dev/null; then
+	xclip -in -selection clipboard
+else
+	echo "Unsupported system." 1>&2
+	exit 1
+fi
+

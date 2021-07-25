@@ -62,7 +62,7 @@ No special instructions, just copy the files.
 |<kbd>Cmd+Shift+D</kbd>|Creates a new horizontal split in `tmux`.|
 |<kbd>Cmd+[1-9]</kbd>|Switches the the `tmux` window.|
 |<kbd>Cmd+&grave;</kbd>/<kbd>Cmd+Shift+&grave;</kbd>|Switches between the next and previous `tmux` window.|
-|<kbd>Cmd+C</kbd>|Enters `tmux` copy mode.|
+|<kbd>Cmd+C</kbd>|Enters `tmux` copy mode.<br />*When in `vim`, this will copy visual mode highlighted text.*|
 |<kbd>Cmd+S</kbd>|Tells `tmux` to try to save the file in the active panel.|
 
 **Customizations.**  
