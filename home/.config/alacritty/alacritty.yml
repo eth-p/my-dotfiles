@@ -7,6 +7,9 @@ window:
     y: 2
 
 font:
+  size: 11
+  use_thin_strokes: true
+
   normal:
     family: "JetBrains Mono NL"
 
@@ -24,6 +27,8 @@ colors:
     background: '#1c1c1c'
     foreground: '#c8c8c8'
 
+scrolling:
+  history: 0
 
 # -----------------------------------------------------------------------------
 # Shell
