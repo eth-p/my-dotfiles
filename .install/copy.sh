@@ -46,6 +46,20 @@ cp_cache() {
 	VERBOSE= cp "$@"
 }
 
+# Copies a file, only if $INSTALL is not "dry".
+cp_install() {
+	if [[ "${INSTALL:-}" != "dry" ]]; then
+		cp "$@" || return $?
+	fi
+}
+
+# Movies a file, only if $INSTALL is not "dry".
+mv_install() {
+	if [[ "${INSTALL:-}" != "dry" ]]; then
+		mv "$@" || return $?
+	fi
+}
+
 # Prompts the user for a choice.
 # $1 -- The prompt message.
 # $2 -- The prompt options. The default should be in caps.
@@ -142,7 +156,7 @@ fi
 # If the file doesn't exist, copy it.
 if ! [[ -e "$COPY_TO" ]]; then
 	vmsg "No file at $COPY_TO, installing."
-	cp "$COPY_FROM" "$COPY_TO"
+	cp_install "$COPY_FROM" "$COPY_TO"
 	cp_cache "$COPY_FROM" "$CACHE_FILE"
 	msg "Installed: $COPY_TO"
 	exit 0
@@ -169,7 +183,7 @@ if ! [[ -f "$CACHE_FILE" ]]; then
 		case "$(prompt "[S]kip, [M]erge, [O]verwrite, [D]iff, [A]bort?" "Smoda" || echo 'a')" in
 			o) # Overwrite
 				vmsg "Overwriting file: $COPY_FROM -> $COPY_TO"
-				cp "$COPY_FROM" "$COPY_TO"
+				cp_install "$COPY_FROM" "$COPY_TO"
 				cp_cache "$COPY_FROM" "$CACHE_FILE"
 				msg "Overwrote: $COPY_TO"
 				;;
@@ -179,6 +193,7 @@ if ! [[ -f "$CACHE_FILE" ]]; then
 
 				sdiff -o "$tempfile" "$COPY_TO" "$COPY_FROM"
 
+				mv_install "$tempfile" "$COPY_TO" 
 				cp_cache "$COPY_FROM" "$CACHE_FILE"
 				msg "Merged: $COPY_TO"
 				;;
@@ -201,9 +216,11 @@ fi
 # If the file exists, diff it with the cached version.
 
 	# Create a diff between the cache file and the latest file.
-	if diff "$COPY_FROM" "$CACHE_FILE" &>/dev/null; then
-		vmsg "Nothing to update."
-		exit 0
+	if [[ "${INSTALL:-}" != "force" ]]; then
+		if diff "$COPY_FROM" "$CACHE_FILE" &>/dev/null; then
+			vmsg "Nothing to update for $COPY_TO."
+			exit 0
+		fi
 	fi
 
 	# Create a diff between the current file and the file when it was installed.
@@ -216,7 +233,7 @@ fi
 		is_same="$(diff "$COPY_FROM" "$COPY_TO" &>/dev/null && echo "true" || echo "false")"
 		
 		vmsg "Found file at $COPY_TO, but no changes."
-		cp "$COPY_FROM" "$COPY_TO"
+		cp_install "$COPY_FROM" "$COPY_TO"
 		cp_cache "$COPY_FROM" "$CACHE_FILE"
 
 		if ! $is_same; then
@@ -232,7 +249,7 @@ fi
 		case "$(prompt "[P]atch, [M]erge, [O]verwrite, [S]kip, [D]iff, [A]bort?" "Pmosda" || echo 'a')" in
 			o) # Overwrite
 				vmsg "Overwriting file: $COPY_FROM -> $COPY_TO"
-				cp "$COPY_FROM" "$COPY_TO"
+				cp_install "$COPY_FROM" "$COPY_TO"
 				cp_cache "$COPY_FROM" "$CACHE_FILE"
 				msg "Overwrote: $COPY_TO"
 				;;
@@ -256,7 +273,7 @@ fi
 					"${VISUAL:-${EDITOR:-vi}}" "$tempfile"
 				fi
 
-				mv "$tempfile" "$COPY_TO"
+				mv_install "$tempfile" "$COPY_TO"
 				msg "Patched: $COPY_TO"
 				;;
 			m) # Merge
@@ -265,6 +282,7 @@ fi
 
 				sdiff -o "$tempfile" "$COPY_TO" "$COPY_FROM"
 
+				mv_install "$tempfile" "$COPY_TO" 
 				cp_cache "$COPY_FROM" "$CACHE_FILE"
 				msg "Merged: $COPY_TO"
 				;;
