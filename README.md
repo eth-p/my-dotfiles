@@ -16,31 +16,6 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 
 
 
-## Installation
-
-**Mac**  
-Homebrew and [some makefiles](.install/) provide an easy way to install everything.
-
-```console
-$ git clone "https://github.com/eth-p/my-dotfiles.git"
-$ cd my-dotfiles
-
-# Install requirements from Homebrew.
-$ brew tap homebrew/cask-fonts
-$ brew install tmux fish neovim ranger font-jetbrains-mono
-
-# Install vim-plug.
-$ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-# Install fisher.
-$ fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
-
-# Install config files.
-$ make install
-```
-
-
-
 ## Features
 
 - Alacritty keybinds similar to iTerm2.
@@ -48,6 +23,19 @@ $ make install
 - Fish shell prompt using [promptfessional](https://github.com/eth-p/fish-promptfessional).
 - Ranger for file browsing.
 - Monokai theme.
+
+
+
+## Installation
+
+**Mac**  
+Homebrew and [some makefiles](.install/) provide an easy way to install everything.
+
+```console
+$ make requirements
+$ make install
+```
+
 
 
 
