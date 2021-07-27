@@ -180,7 +180,7 @@ if ! [[ -f "$CACHE_FILE" ]]; then
 	vmsg "Found file at $COPY_TO, and it isn't from here."
 	msg_w "The file '${COPY_TO}' already exists."  1>&2
 	while true; do
-		case "$(prompt "[S]kip, [M]erge, [O]verwrite, [D]iff, [A]bort?" "Smoda" || echo 'a')" in
+		case "$(prompt "[S]kip, [M]erge, [O]verwrite, [K]eep [D]iff, [A]bort?" "Smokda" || echo 'a')" in
 			o) # Overwrite
 				vmsg "Overwriting file: $COPY_FROM -> $COPY_TO"
 				cp_install "$COPY_FROM" "$COPY_TO"
@@ -207,6 +207,10 @@ if ! [[ -f "$CACHE_FILE" ]]; then
 				;;
 			s) # Skip
 				msg "Skipped: $COPY_TO"
+				;;
+			k) # Keep
+				cp_cache "$COPY_FROM" "$CACHE_FILE"
+				msg "Kept: $COPY_TO"
 				;;
 		esac; break
 	done
@@ -246,7 +250,7 @@ fi
 	vmsg "Found file at $COPY_TO, and it has changes."
 	msg_w "The file '${COPY_TO}' has been modified."  1>&2
 	while true; do
-		case "$(prompt "[P]atch, [M]erge, [O]verwrite, [S]kip, [D]iff, [A]bort?" "Pmosda" || echo 'a')" in
+		case "$(prompt "[P]atch, [M]erge, [O]verwrite, [K]eep, [D]iff, [S]kip, [A]bort?" "Pmokdsa" || echo 'a')" in
 			o) # Overwrite
 				vmsg "Overwriting file: $COPY_FROM -> $COPY_TO"
 				cp_install "$COPY_FROM" "$COPY_TO"
@@ -260,6 +264,9 @@ fi
 			s) # Skip
 				msg "Skipped: $COPY_TO"
 				;;
+			k) # Keep
+				cp_cache "$COPY_FROM" "$CACHE_FILE"
+				msg "Kept: $COPY_TO"
 			d) # Diff
 				show_diff "$CACHE_FILE" "$COPY_TO" || true
 				continue
