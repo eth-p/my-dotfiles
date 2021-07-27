@@ -61,6 +61,12 @@ popup_pane() {
 				popup_item "Next Conflict" "]" "$(tmux_send_keys Escape Escape :ConflictMarkerNextHunk Enter)"
 			fi
 			;;
+
+		fish)
+			popup_separator
+			popup_header "$PANE_CURRENT_COMMAND_NAME"
+			popup_item "Change Directory" "c" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-open-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
+			;;
 	esac
 
 	# Pane control.
