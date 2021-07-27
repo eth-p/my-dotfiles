@@ -1,6 +1,4 @@
 jorgebucaran/fisher
-evanlucas/fish-kubectl-completions
 eth-p/fish-plugin-sudo
-eth-p/fish-promptfessional
 eth-p/fish-plugin-better-cd
-
+eth-p/fish-promptfessional
