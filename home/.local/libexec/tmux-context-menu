@@ -27,6 +27,8 @@ POPUP_MOUSE_X="$6"
 POPUP_MOUSE_Y="$7"
 PANE_CURRENT_COMMAND="$8"
 PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+PANE_CURRENT_TITLE=""
+PANE_MAYBE_COMMAND_NAME=""
 GIT_REPO=false
 GIT_DIR=
 
@@ -34,6 +36,14 @@ if command -v git &>/dev/null && GIT_DIR="$(git rev-parse --show-toplevel 2>/dev
 	GIT_REPO=true
 fi
 
+# Get the pane title.
+while read -r pane title; do
+	if [[ "$pane" = "$TMUX_PANE" ]]; then
+		PANE_CURRENT_TITLE="$title"
+		PANE_MAYBE_COMMAND_NAME="$(cut -d' ' -f1 <<< "$title")"
+		break
+	fi
+done < <(tmux list-panes -F '#{pane_id} #{pane_title}')
 
 # -----------------------------------------------------------------------------
 # Pane Popup:
@@ -49,10 +59,12 @@ popup_pane() {
 	popup_item "#{?pane_marked,Unmark,Mark}" m "select-pane -t '${TMUX_PANE}' -m"
 
 	# Program-specific items.
-	case "$PANE_CURRENT_COMMAND_NAME" in
+	local command_name
+	for command_name in "$PANE_CURRENT_COMMAND_NAME" "$PANE_MAYBE_COMMAND_NAME"; do
+	case "$command_name" in
 		vi|vim|nvim|neovim)
 			popup_separator
-			popup_header "$PANE_CURRENT_COMMAND_NAME"
+			popup_header "$command_name"
 			popup_item "Undo" "C-z" "$(tmux_send_keys Escape Escape u)"
 			popup_item "Redo" "C-y" "$(tmux_send_keys Escape Escape C-r)" 
 			popup_item "Save" "C-s" "$(tmux_send_keys Escape Escape :w Enter)"
@@ -60,14 +72,21 @@ popup_pane() {
 				popup_item "Previous Conflict" "[" "$(tmux_send_keys Escape Escape :ConflictMarkerPrevHunk Enter)"
 				popup_item "Next Conflict" "]" "$(tmux_send_keys Escape Escape :ConflictMarkerNextHunk Enter)"
 			fi
-			;;
+			break;;
 
 		fish)
 			popup_separator
-			popup_header "$PANE_CURRENT_COMMAND_NAME"
+			popup_header "$command_name"
 			popup_item "Change Directory" "c" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-open-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
-			;;
+			break;;
+
+		ranger)
+			popup_separator
+			popup_header "$command_name"
+			popup_item "Hidden Files" "h" "$(tmux_send_keys C-h)"
+			break;;
 	esac
+	done
 
 	# Pane control.
 	popup_separator
