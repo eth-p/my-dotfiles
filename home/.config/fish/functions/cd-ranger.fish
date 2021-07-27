@@ -5,6 +5,10 @@ function cd-ranger --description="Change directory using ranger"
 	set -l tempfile (mktemp)
 	pwd > "$tempfile"
 
+	# Set the title so tmux can better determine the context menu.
+	printf "\x1B]0;ranger %s\b" (pwd)
+
+	# Open ranger as a file picker.
 	ranger --show-only-dirs --choosedir="$tempfile" \
 		--cmd="set collapse_preview true" \
 		--cmd="set preview_directories false" \
