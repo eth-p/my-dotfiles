@@ -1,52 +1,37 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+set -eou pipefail
 
-# This script displays a contextual popup menu in tmux.
-
-PASSTHROUGH_CX_BINDING_COMMANDS=(
-)
-
-# -----------------------------------------------------------------------------
-set -eo pipefail
-
-# Attest that it's run from inside tmux.
-if [ "$1" != "--!" ]; then
-	echo "$0: this script isn't meant to be run directly"
-	exit 1
-fi
-
-# We pass the socket and pane ID through the run-shell command.
-export TMUX="$2"
-export TMUX_PANE="$3"
-
-# Get information about the tmux environment.
-POPUP_TYPE="$4"
-POPUP_TRIGGER="$5"
-POPUP_MOUSE_X="$6"
-POPUP_MOUSE_Y="$7"
-PANE_CURRENT_COMMAND="$8"
-PANE_CURRENT_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
-PANE_CURRENT_TITLE=""
-PANE_MAYBE_COMMAND_NAME=""
-GIT_REPO=false
-GIT_DIR=
-
-if command -v git &>/dev/null && GIT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)"; then
-	GIT_REPO=true
-fi
-
-# Get the pane title.
-while read -r pane title; do
-	if [[ "$pane" = "$TMUX_PANE" ]]; then
-		PANE_CURRENT_TITLE="$title"
-		PANE_MAYBE_COMMAND_NAME="$(cut -d' ' -f1 <<< "$title")"
-		break
-	fi
-done < <(tmux list-panes -F '#{pane_id} #{pane_title}')
+# tmux-context-menu
+# Arguments:
+#   [--config=CONFIG_FILE]
+#   "--!"
+#   TMUX_SOCKET
+#   TMUX_PANE
+#   POPUP_TYPE
+#   POPUP_TRIGGER
+#   POPUP_MOUSE_X
+#   POPUP_MOUSE_Y
+#   COMMAND_NAME
+#   COMMAND_TITLE
+#
+# This script will open a contextual popup menu in tmux.
+# General options are provided, along with program-specific options.
 
 # -----------------------------------------------------------------------------
-# Pane Popup:
+# Config:
+
+CONTEXT_MENU_IGNORED_PROGRAMS=()
+
+if [[ "$1" =~ --config=(.*) ]]; then
+	source "${BASH_REMATCH[1]}"
+	shift
+fi
+
+
+# -----------------------------------------------------------------------------
+# Context Menu for Panes
 # -----------------------------------------------------------------------------
 
 popup_pane() {
@@ -59,8 +44,7 @@ popup_pane() {
 	popup_item "#{?pane_marked,Unmark,Mark}" m "select-pane -t '${TMUX_PANE}' -m"
 
 	# Program-specific items.
-	local command_name
-	for command_name in "$PANE_CURRENT_COMMAND_NAME" "$PANE_MAYBE_COMMAND_NAME"; do
+	for command_name in "$PANE_COMMAND_NAME" "$TITLE_COMMAND_NAME"; do
 	case "$command_name" in
 		vi|vim|nvim|neovim)
 			popup_separator
@@ -100,12 +84,18 @@ popup_pane() {
 
 
 # -----------------------------------------------------------------------------
-# Popup:
+# Util: Popup Generation
 # -----------------------------------------------------------------------------
 
+# Adds an item to the popup menu.
+# Arguments:
+#   $1  - The item name.
+#   $2  - The item sequence.
+#   $3  - The command to run when the item is selected.
+#   $4  - If "disabled", sets the item to disabled.
 popup_item() {
 	local name="$1"
-	if [ "$4" = "disabled" ]; then
+	if [[ "$#" -gt 3 ]] && [[ "$4" = "disabled" ]]; then
 		name="-$name"
 	fi
 
@@ -113,15 +103,20 @@ popup_item() {
 	POPUP_ITEMS=$((POPUP_ITEMS+1)) || true
 }
 
+# Adds a header to the popup menu.
+# Arguments:
+#   $1  - The header name.
 popup_header() {
 	popup_item "#[fg=colour147, bold]$1" "" "" disabled
 }
 
+# Adds a separator to the popup menu.
 popup_separator() {
 	POPUP_ARGS+=("")
 	POPUP_ITEMS=$((POPUP_ITEMS+1)) || true
 }
 
+# A popup item command for sending keys to the relevant pane.
 tmux_send_keys() {
 	printf "send-keys -t '%s' " "${TMUX_PANE}"
 	printf '%q ' "$@"
@@ -129,15 +124,39 @@ tmux_send_keys() {
 
 
 # -----------------------------------------------------------------------------
-# Main:
+# Main
 # -----------------------------------------------------------------------------
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# Collect arguments.
+export TMUX="$2"
+export TMUX_PANE="$3"
+POPUP_TYPE="$4"
+POPUP_TRIGGER="$5"
+POPUP_MOUSE_X="$6"
+POPUP_MOUSE_Y="$7"
+PANE_CURRENT_COMMAND="$8"
+PANE_CURRENT_TITLE="$9"
+PANE_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+TITLE_COMMAND_NAME="$(basename -- "$(cut -d' ' -f1 <<< "$PANE_CURRENT_TITLE")")"
+
+# Check if running inside a git repo.
+GIT_REPO=false
+GIT_DIR=
+if command -v git &>/dev/null && GIT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+	GIT_REPO=true
+fi
 
 # Generate the popup.
 POPUP_ARGS=()
 POPUP_ITEMS=0
 
 "popup_${POPUP_TYPE}" || exit $?
-
 case "$POPUP_TYPE" in
 	pane)
 		pop_x="$((POPUP_MOUSE_X))"
@@ -145,25 +164,30 @@ case "$POPUP_TYPE" in
 		;;
 esac
 
-# Handle special cases for Ctrl+X.
+# Handle special cases for different triggers.
 case "$POPUP_TRIGGER" in
 	bind)
 		pop_y="$((POPUP_MOUSE_Y))"
 
-		# Passthrough if certain programs.
-		for passthrough_command in "${PASSTHROUGH_CX_BINDING_COMMANDS[@]}"; do
-			if [[ "$PANE_CURRENT_COMMAND_NAME" =~ $passthrough_command ]]; then
+		# Passthrough for ignored programs programs.
+		for test_command in "$TITLE_COMMAND_NAME" "$PANE_COMMAND_NAME"; do
+		for ignored_program in "${CONTEXT_MENU_IGNORED_PROGRAMS[@]}"; do
+			if [[ "$PANE_CURRENT_COMMAND_NAME" =~ $ignored_program ]]; then
 				tmux send-keys -t "$TMUX_PANE" C-X
 				exit 0
 			fi
 		done
+		done
+		;;
+	
+	mouse)
+		sleep 0.075
 		;;
 esac
 
 # Display the popup
-sleep 0.075
 tmux display-menu -t "$TMUX_PANE" \
-	-T "#[align=centre] Pane #{pane_id} " \
+	-T "#[align=centre] Pane #{pane_id} | ${TITLE_COMMAND_NAME:-$PANE_COMMAND_NAME} " \
 	-x "${pop_x}" -y "${pop_y}" \
 	"${POPUP_ARGS[@]}"
 exit $?

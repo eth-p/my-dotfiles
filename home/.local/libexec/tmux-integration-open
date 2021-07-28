@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+set -euo pipefail
+
+# tmux-integration-open
+# Arguments:
+#   [--config=CONFIG_FILE]
+#   "--!"
+#   TMUX_SOCKET
+#   TMUX_PANE
+#   TMUX_CURRENT_COMMAND
+#   TMUX_CURRENT_TITLE
+#
+# This script will tell the command in the target pane to open a file
+# dialog.
+
+# -----------------------------------------------------------------------------
+# Config:
+
+INTEGRATION_OPEN_FISH_BINDING=("C-F12" "e" "c")
+
+if [[ "$1" =~ --config=(.*) ]]; then
+	source "${BASH_REMATCH[1]}"
+	shift
+fi
+
+
+# -----------------------------------------------------------------------------
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# Collect arguments.
+export TMUX="$2"
+export TMUX_PANE="$3"
+PANE_CURRENT_COMMAND="$4"
+PANE_CURRENT_TITLE="$5"
+PANE_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+TITLE_COMMAND_NAME="$(basename -- "$(cut -d' ' -f1 <<< "$PANE_CURRENT_TITLE")")"
+
+# In a supported program? Open using the program's features.
+for command_name in "$PANE_COMMAND_NAME" "$TITLE_COMMAND_NAME"; do
+case "$command_name" in
+	fish)
+		if [[ "${#INTEGRATION_OPEN_FISH_BINDING[@]}" -ne 0 ]]; then
+			tmux send-keys -t "$TMUX_PANE" "${INTEGRATION_OPEN_FISH_BINDING[@]}"
+			exit 0
+		fi
+		break;;
+	
+	vi|vim|nvim|neovim)
+		: # TODO
+		break;;
+esac
+done
+
+# Unsupported.
+tmux display-message "Don't know how to open in '$PANE_CURRENT_COMMAND'"
+exit 0
+

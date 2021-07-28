@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+set -euo pipefail
+
+# tmux-integration-copy
+# Arguments:
+#   [--config=CONFIG_FILE]
+#   "--!"
+#   TMUX_SOCKET
+#   TMUX_PANE
+#   TMUX_WINDOW
+#   TMUX_CURRENT_COMMAND
+#   TMUX_CURRENT_TITLE
+#
+# This script will try to copy selected text in supported editors,
+# or enter tmux's copy mode otherwise.
+
+# -----------------------------------------------------------------------------
+# Config:
+
+INTEGRATION_COPY_VIM_BINDING=('F5')
+
+if [[ "$1" =~ --config=(.*) ]]; then
+	source "${BASH_REMATCH[1]}"
+	shift
+fi
+
+
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# Collect arguments.
+export TMUX="$2"
+export TMUX_PANE="$3"
+TMUX_WINDOW="$4"
+PANE_CURRENT_COMMAND="$5"
+PANE_CURRENT_TITLE="$6"
+PANE_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+TITLE_COMMAND_NAME="$(basename -- "$(cut -d' ' -f1 <<< "$PANE_CURRENT_TITLE")")"
+
+# In a supported program? Copy using the program's features.
+for command_name in "$PANE_COMMAND_NAME" "$TITLE_COMMAND_NAME"; do
+case "$command_name" in
+	vi|vim|nvim|neovim)
+		if [[ "${#INTEGRATION_COPY_VIM_BINDING[@]}" -ne 0 ]]; then
+			tmux send-keys -t "$TMUX_PANE" "${INTEGRATION_COPY_VIM_BINDING[@]}"
+			exit 0
+		fi
+		break;;
+esac
+done
+
+# Not a supported program.
+# Enter tmux's copy mode instead.
+tmux setw -t "$TMUX_WINDOW" mode-keys vi
+tmux copy-mode -t "$TMUX_PANE"
+exit 0
+

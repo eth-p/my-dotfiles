@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+set -eo pipefail
+
+# tmux-integration-clear
+# Arguments:
+#   [--config=CONFIG_FILE]
+#   "--!"
+#   TMUX_SOCKET
+#   TMUX_PANE
+#   TMUX_CURRENT_COMMAND
+#   TMUX_CURRENT_TITLE
+#
+# This script will try to clear the target pane.
+# If the program supports clearing its output, it will try to do that.
+# Otherwise, it will force tmux to clear the pane.
+
+
+# -----------------------------------------------------------------------------
+# Config:
+
+INTEGRATION_CLEAR_FISH_BINDING=('C-F12' 'e' 'k')
+
+if [[ "$1" =~ --config=(.*) ]]; then
+	source "${BASH_REMATCH[1]}"
+	shift
+fi
+
+
+# -----------------------------------------------------------------------------
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# Collect arguments.
+export TMUX="$2"
+export TMUX_PANE="$3"
+PANE_CURRENT_COMMAND="$4"
+PANE_CURRENT_TITLE="$5"
+PANE_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
+TITLE_COMMAND_NAME="$(basename -- "$(cut -d' ' -f1 <<< "$PANE_CURRENT_TITLE")")"
+
+# In a supported program? Clear using the program's features.
+for command_name in "$PANE_COMMAND_NAME" "$TITLE_COMMAND_NAME"; do
+case "$command_name" in
+	fish)
+		if [[ "${#INTEGRATION_CLEAR_FISH_BINDING[@]}" -ne 0 ]]; then
+			tmux send-keys -t "$TMUX_PANE" "${INTEGRATION_CLEAR_FISH_BINDING[@]}"
+			exit 0
+		fi
+		;;
+	
+	vi|vim|nvim|neovim)
+		exit 0 # This won't end well.
+		;;
+
+	bat|less)
+		exit 0 # This also won't end well.
+		;;
+esac
+done
+
+# Brute force method.
+tmux clear-history -t "$TMUX_PANE"
+tmux send-keys -t "$TMUX_PANE" -R
+exit 0
+

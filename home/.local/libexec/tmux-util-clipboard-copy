@@ -2,10 +2,15 @@
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 
-# This script will copy text to the system clipboard.
+# tmux-util-clipboard-copy
+# Usage: echo "text" | tmux-util-clipboard-copy
+#
+# This utility script will copy its input into the system clipboard.
 
 # -----------------------------------------------------------------------------
-set -eo pipefail
+set -euo pipefail
+HERE="$(cd "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# -----------------------------------------------------------------------------
 
 # Try to copy STDIN into a clipboard.
 if command -v pbcopy &>/dev/null; then
