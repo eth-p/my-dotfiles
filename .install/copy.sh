@@ -267,6 +267,7 @@ fi
 			k) # Keep
 				cp_cache "$COPY_FROM" "$CACHE_FILE"
 				msg "Kept: $COPY_TO"
+				;;
 			d) # Diff
 				show_diff "$CACHE_FILE" "$COPY_TO" || true
 				continue
