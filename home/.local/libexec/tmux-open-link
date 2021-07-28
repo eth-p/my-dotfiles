@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+
+# -----------------------------------------------------------------------------
+set -eo pipefail
+HERE="$(cd "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# Attest that it's run from inside tmux.
+if [ "$1" != "--!" ]; then
+	echo "$0: this script isn't meant to be run directly"
+	exit 1
+fi
+
+# Copy variables from the command line arguments.
+export TMUX="$2"
+export TMUX_PANE="$3"
+LINK_TEXT="$4"
+
+# Match the text with a HTTP/HTTPS link.
+if [[ "$LINK_TEXT" =~ .*(https?://[a-z0-9_\.,/=&?%-]+).* ]]; then
+	if ! result="$(bash "${HERE}/tmux-util-open-url" "${BASH_REMATCH[1]}" 2>&1)"; then
+		tmux display-message "$result"
+	fi
+fi
+

@@ -23,6 +23,7 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 - Fish shell prompt using [promptfessional](https://github.com/eth-p/fish-promptfessional).
 - Ranger for file browsing.
 - Monokai theme.
+- Control-click to open links (tmux integration).
 
 
 
