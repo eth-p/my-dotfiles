@@ -22,6 +22,8 @@ set -eou pipefail
 # -----------------------------------------------------------------------------
 # Config:
 
+INTEGRATION_OPEN_FISH_BINDING=()
+	
 CONTEXT_MENU_IGNORED_PROGRAMS=()
 
 if [[ "$1" =~ --config=(.*) ]]; then
@@ -61,7 +63,9 @@ popup_pane() {
 		fish)
 			popup_separator
 			popup_header "$command_name"
-			popup_item "Change Directory" "c" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-open-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
+			if [[ "${#INTEGRATION_OPEN_FISH_BINDING[@]}" -gt 0 ]]; then
+				popup_item "Change Directory" "c" "$(tmux_send_keys "${INTEGRATION_OPEN_FISH_BINDING[@]}")"
+			fi
 			break;;
 
 		ranger)
@@ -145,25 +149,6 @@ PANE_CURRENT_TITLE="$9"
 PANE_COMMAND_NAME="$(basename -- "$PANE_CURRENT_COMMAND")"
 TITLE_COMMAND_NAME="$(basename -- "$(cut -d' ' -f1 <<< "$PANE_CURRENT_TITLE")")"
 
-# Check if running inside a git repo.
-GIT_REPO=false
-GIT_DIR=
-if command -v git &>/dev/null && GIT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)"; then
-	GIT_REPO=true
-fi
-
-# Generate the popup.
-POPUP_ARGS=()
-POPUP_ITEMS=0
-
-"popup_${POPUP_TYPE}" || exit $?
-case "$POPUP_TYPE" in
-	pane)
-		pop_x="$((POPUP_MOUSE_X))"
-		pop_y="$((POPUP_MOUSE_Y+3+POPUP_ITEMS))"
-		;;
-esac
-
 # Handle special cases for different triggers.
 case "$POPUP_TRIGGER" in
 	bind)
@@ -182,6 +167,25 @@ case "$POPUP_TRIGGER" in
 	
 	mouse)
 		sleep 0.075
+		;;
+esac
+
+# Check if running inside a git repo.
+GIT_REPO=false
+GIT_DIR=
+if command -v git &>/dev/null && GIT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+	GIT_REPO=true
+fi
+
+# Generate the popup.
+POPUP_ARGS=()
+POPUP_ITEMS=0
+
+"popup_${POPUP_TYPE}" || exit $?
+case "$POPUP_TYPE" in
+	pane)
+		pop_x="$((POPUP_MOUSE_X))"
+		pop_y="$((POPUP_MOUSE_Y+3+POPUP_ITEMS))"
 		;;
 esac
 
