@@ -60,7 +60,8 @@ done
 
 # Not a supported program.
 # Enter tmux's copy mode instead.
-tmux setw -t "$TMUX_WINDOW" mode-keys vi
-tmux copy-mode -t "$TMUX_PANE"
+tmux if-shell -t "$TMUX_PANE" -F "#{selection_active}" \
+	"send-keys -t '$TMUX_PANE' -X copy-selection-and-cancel" \
+	"copy-mode -t '$TMUX_PANE'"
 exit 0
 
