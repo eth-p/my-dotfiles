@@ -1,19 +1,41 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Summary
+# -------
+#
+#   A bash script that will attempt to query the terminal or environment to
+#   determine if the terminal is using a dark or light background color.
+#
+#   Supported mechanisms:
+#     1. OSC 11                                             (Best)
+#     2. COLORFGBG                                          (Okay)
+#     3. Guessing based on the terminal emulator defaults.  (Bad)
+#     4. When in doubt, assume black.                       (Worst)
+#
+#   If no arguments are provided, a luminosity formula will be used on the
+#   query response, and "dark" or "light" will be printed to standard output.
+#
+# Arguments
+# ---------
+#
+#   $1  [--dump]    # Dump query info and exit.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This is used in `~/.config/fish/3-ethp-query-term.fish` to set the
+#   `$TERM_BG` environment variable to either `light` or `dark` when a
+#   new instance of the user's shell is started. Ultimately, this will
+#   help TUI programs select a better choice of foreground text color.
+#
+# =============================================================================
 set -euo pipefail
 
-# A bash script that will try to query the terminal or environment to
-# determine if the terminal has a dark or light background color.
-#
-# Supported mechanisms:
-# 1. OSC 11                                             (Best)
-# 2. COLORFGBG                                          (Okay)
-# 3. Guessing based on the terminal emulator defaults.  (Bad)
-# 4. When in doubt, assume black.                       (Worst)
-
 # -----------------------------------------------------------------------------
-# Queries:
+# Queries
 # -----------------------------------------------------------------------------
 
 # OSC 11: Query background color.
@@ -36,12 +58,22 @@ query_with_osc11() {
 
 	# Did we get a response that matches the pattern:
 	#   ^[]11;rgb:RRRR:GGGG:BBBB
-	if [[ "$response" =~ ^$'\x1B']11\;rgb:([a-fA-F0-9]{4})/([a-fA-F0-9]{4})/([a-fA-F0-9]{4})$ ]]; then
+	#   ^[]11;rgba:RRRR:GGGG:BBBB:AAAA
+	if [[ "$response" =~ ^$'\x1B']11\;rgba?:([a-fA-F0-9]{2,4})/([a-fA-F0-9]{2,4})/([a-fA-F0-9]{2,4})(/[a-fA-F0-9]{2,4})?$ ]]; then
 		BG_METHOD=osc11
-		_set_rgb16_hex "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
+
+		local set_fn=
+		case "${#BASH_REMATCH[1]}" in
+			4) set_fn=_set_rgb16_hex ;;
+			3) set_fn=_set_rgb12_hex ;;
+			2) set_fn=_set_rgb8_hex ;;
+			*) return 1 ;;
+		esac
+
+		"$set_fn" "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
 		return 0
 	fi
-
+	
 	# Didn't get a response.
 	return 1
 }
@@ -124,6 +156,13 @@ _set_rgb8_hex() {
 	BG_BLUE="$(((16#$3)*257))"
 }
 
+# Small utility to set the BG_* variables from 3 12-bit RGB hex numbers.
+_set_rgb12_hex() {
+	BG_RED="$(((16#$1)*16 + (16#$1)/256))"
+	BG_GREEN="$(((16#$2)*16 + (16#$2)/256))"
+	BG_BLUE="$(((16#$3)*16 + (16#$3)/256))"
+}
+
 # Small utility to set the BG_* variables from 3 16-bit RGB hex numbers.
 _set_rgb16_hex() {	
 	BG_RED="$((16#$1))"
@@ -132,7 +171,7 @@ _set_rgb16_hex() {
 }
 
 # -----------------------------------------------------------------------------
-# Main:
+# Main
 # -----------------------------------------------------------------------------
 
 BG_METHOD=default
