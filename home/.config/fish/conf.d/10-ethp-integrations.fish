@@ -1,8 +1,22 @@
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Summary
+# -------
+#
+#   This init script contains key bindings that will be sent by tmux or
+#   the various `tmux-*` scripts in `~/.local/libexec`.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   The key binding sequences are sent by tmux to perform actions from the
+#   context menu or from tmux's own key bindings.
+#
+# =============================================================================
 
 # Leader Sequence: C-<F12>
-# These integrations will only activate when this sequence is sent first.
 
 # <Leader> ec -> Visual change directory.
 # This opens `ranger` to select a new directory to change to.

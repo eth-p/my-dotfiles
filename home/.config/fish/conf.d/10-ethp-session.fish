@@ -1,15 +1,36 @@
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-
-# This init script will import 'session_var' variables from the fish
-# shell in the pane that spawned this shell. This allows for certain
-# environment variables to be copied between shells.
+# =============================================================================
+#
+# Summary
+# -------
+#
+#   This init script will import 'session_var' variables from the fish
+#   shell in the pane that spawned this shell. This allows for certain
+#   environment variables to be copied between shells.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   Combined with `~/.local/libexec/tmux-new-window`, this allows variables
+#   to be copied from the active pane to a newly-created pane when creating
+#   a new window or new split.
+#
+#   For example, if I wanted to use the KUBECONFIG environment variable from,
+#   the pane I just split, this mechanism would facilitate it as long as the
+#   variable was set using
+#   `session_var -sx KUBECONFIG /path/to/some/kubeconfig.yaml`
+#
+# =============================================================================
 
 if status --is-interactive && functions -q session_var &>/dev/null
 	set creator_session ""
 	set creator_tty (tty)
 
 	# Running with my tmux integrations?
+	#
+	# Then use the INIT_TMUX_PANE_CREATOR variable to fetch the session
+	# of the pane that created this window/split.
 	if [ -n "$INIT_TMUX_PANE_CREATOR" ]
 		set -gx TMUX_PANE_CREATOR "$INIT_TMUX_PANE_CREATOR"
 		set -ge INIT_TMUX_PANE_CREATOR
@@ -19,7 +40,7 @@ if status --is-interactive && functions -q session_var &>/dev/null
 		)
 	end
 
-	# Get the session file associated with the pane creator tty.
+	# Get the session file associated with the creator tty.
 	set creator_session (session_var --file-from-tty="$creator_tty")
 		
 	# Get the creator pid from the session file.
