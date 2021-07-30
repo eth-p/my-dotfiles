@@ -1,29 +1,45 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Summary
+# -------
+#   
+#   This script will make an educated guess on what foreground program is
+#   running, and generate a context menu for tmux to present to the user.
+#
+#   Supported programs:
+#
+#    - fish
+#    - vim (and neovim)
+#    - ranger
+#
+# Arguments
+# ---------
+#
+#   $1  [--config=CONFIG_FILE]    # Optional config file.
+#   $1  "--!"                     # Attestation constant.
+#   $2  TMUX_SOCKET               # Path to the tmux socket.
+#   $3  TMUX_PANE                 # The target tmux pane.
+#   $4  POPUP_TYPE                # The popup type.
+#   $5  POPUP_TRIGGER             # What triggered the popup.
+#   $6  POPUP_MOUSE_X             # The x coordinate of the popup.
+#   $7  POPUP_MOUSE_Y             # The y coordinate of the popup.
+#   $8  COMMAND_NAME              # The current command running in the pane.
+#   $9  COMMAND_TITLE             # The current title of the pane.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This script generates the C-x menu and right-click context menu.
+#   Due to tmux limitations, the right-click context menu can't actually
+#   be clicked on, however.
+#
+# =============================================================================
 set -eou pipefail
 
-# tmux-context-menu
-# Arguments:
-#   [--config=CONFIG_FILE]
-#   "--!"
-#   TMUX_SOCKET
-#   TMUX_PANE
-#   POPUP_TYPE
-#   POPUP_TRIGGER
-#   POPUP_MOUSE_X
-#   POPUP_MOUSE_Y
-#   COMMAND_NAME
-#   COMMAND_TITLE
-#
-# This script will open a contextual popup menu in tmux.
-# General options are provided, along with program-specific options.
-
-# -----------------------------------------------------------------------------
-# Config:
-
 INTEGRATION_OPEN_FISH_BINDING=()
-	
 CONTEXT_MENU_IGNORED_PROGRAMS=()
 
 if [[ "$1" =~ --config=(.*) ]]; then
@@ -33,7 +49,7 @@ fi
 
 
 # -----------------------------------------------------------------------------
-# Context Menu for Panes
+# Context Menu
 # -----------------------------------------------------------------------------
 
 popup_pane() {

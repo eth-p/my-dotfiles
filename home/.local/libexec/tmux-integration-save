@@ -1,22 +1,35 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-set -euo pipefail
-
-# tmux-integration-save
-# Arguments:
-#   [--config=CONFIG_FILE]
-#   "--!"
-#   TMUX_SOCKET
-#   TMUX_PANE
-#   TMUX_CURRENT_COMMAND
-#   TMUX_CURRENT_TITLE
+# =============================================================================
 #
-# This script will try to save whatever file is opened in the active editor.
-
-
-# -----------------------------------------------------------------------------
-# Config:
+# Summary
+# -------
+#
+#   This script will save the current file in the foreground program.
+#
+#   Supported programs:
+#
+#   - vim (and neovim)
+#
+# Arguments
+# ---------
+#
+#   $1  [--config=CONFIG_FILE]    # Optional config file.
+#   $1  "--!"                     # Attestation constant.
+#   $2  TMUX_SOCKET               # Path to the tmux socket.
+#   $3  TMUX_PANE                 # The target tmux pane.
+#   $4  TMUX_CURRENT_COMMAND      # The target tmux window.
+#   $5  TMUX_CURRENT_TITLE        # The current title of the pane.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This script is activated by the key sequence sent from Alacritty's Cmd+S
+#   binding, through tmux.
+#
+# =============================================================================
+set -euo pipefail
 
 INTEGRATION_SAVE_VIM_BINDING=("F6")
 

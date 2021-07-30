@@ -1,11 +1,41 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+# 
+# Summary
+# -------
+# 
+#   This script runs a tmux command and appends the `-c` and `-e` variables
+#   to set the current directory and environment variables of a new shell.
+#   
+#   It is only meant to be used with the tnux `new-window` and `split-window`
+#   commands.
+#
+#   Appended variables:
+#
+#    - INIT_TMUX_PANE_CREATOR    # The active pane at the time.
+#
+# Arguments
+# ---------
+#
+#   $1  "--!"      # Attestation constant.
+#   $2  COMMAND    # The tmux command to run.
+#   ... ARG        # The arguments of the command.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This is placed in-between the split-window and new-window commands
+#   in `~/.tmux.conf`.
+#
+#   When creating new windows or splits, the injected $INIT_TMUX_PANE_CREATOR
+#   environment variable allows the new login shell to copy variables from the
+#   pane that created it. For fish, this is done with `session_var` and the
+#   `~/.local/config/fish/conf.d/10-ethp-session.fish` init script.
+#
+# =============================================================================
 set -euo pipefail
-
-# TODO: Description
-
-# -----------------------------------------------------------------------------
 
 # Attest that it's run from inside tmux.
 if [ "$1" != "--!" ]; then

@@ -1,8 +1,29 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-
-# -----------------------------------------------------------------------------
+# =============================================================================
+#
+# Summary
+# -------
+# 
+#   This script will try to parse and open a link sent by tmux.
+#
+# Arguments
+# ---------
+#
+#   $1  "--1"          # Attestation constant.
+#   $2  TMUX_SOCKET    # Path to the tmux socket.
+#   $3  TMUX_PANE      # The target tmux pane.
+#   $4  LINK_TEXT      # The text sent by tmux.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This script is activated when control-clicking text in tmux.
+#   If it finds a valid link within the clicked text, it will be opened using
+#   the `~/.local/libexec/tmux-util-open-url` script.
+#
+# =============================================================================
 set -eo pipefail
 HERE="$(cd "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 

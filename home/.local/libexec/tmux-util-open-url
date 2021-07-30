@@ -1,17 +1,33 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-
-# tmux-util-open-url
-# Usage: tmux-util-open-url URL
+# =============================================================================
 #
-# This utility script will open a URL using the system web browser.
-# If not possible, the script will exit 1 and print an error message.
-
-# -----------------------------------------------------------------------------
+# Summary
+# -------
+#
+#   This script will try to open a URL in a GUI program.
+#
+#   Supported platforms:
+#
+#    - macOS (via open)
+#    - Linux (via xdg-open)
+#
+# Arguments
+# ---------
+#
+#   $1  URL    # The URL to open.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This script is involved by the `~/.local/libexec/tmux-open-link` script
+#   when it finds a URL to open. Indirectly, it's activated when the user
+#   control-clicks on a link in tmux.
+#
+# =============================================================================
 set -euo pipefail
 HERE="$(cd "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-# -----------------------------------------------------------------------------
 
 case "$(uname -s)" in
 
@@ -29,5 +45,6 @@ case "$(uname -s)" in
 
 		echo "No program to open URL: $1"
 		exit 1;;
+
 esac
 

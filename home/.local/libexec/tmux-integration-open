@@ -1,22 +1,35 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-set -euo pipefail
-
-# tmux-integration-open
-# Arguments:
-#   [--config=CONFIG_FILE]
-#   "--!"
-#   TMUX_SOCKET
-#   TMUX_PANE
-#   TMUX_CURRENT_COMMAND
-#   TMUX_CURRENT_TITLE
+# =============================================================================
+# 
+# Summary
+# -------
 #
-# This script will tell the command in the target pane to open a file
-# dialog.
-
-# -----------------------------------------------------------------------------
-# Config:
+#   This script will try to open a file in the foreground program.
+#   
+#   Supported programs:
+#
+#    - fish    # For changing directories.
+#
+# Arguments
+# ---------
+#
+#   $1  [--config=CONFIG_FILE]    # Optional config file.
+#   $1  "--!"                     # Attestation constant.
+#   $2  TMUX_SOCKET               # Path to the tmux socket.
+#   $3  TMUX_PANE                 # The target tmux pane.
+#   $4  TMUX_CURRENT_COMMAND      # The current command running in the pane.
+#   $5  TMUX_CURRENT_TITLE        # The current title of the pane.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This script is activated by the key sequence sent from Alacritty's Cmd+O
+#   binding, through tmux.
+#
+# =============================================================================
+set -euo pipefail
 
 INTEGRATION_OPEN_FISH_BINDING=("C-F12" "e" "c")
 

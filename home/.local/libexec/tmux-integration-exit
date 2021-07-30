@@ -1,24 +1,49 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Summary
+# -------
+#
+#   This script will try to safely close the target tmux pane.
+#
+#   If any program in the shell's process hierarchy is not inside the
+#   "$INTEGRATION_EXIT_SAFE_PROGRAM" list, the user will be prompted to kill
+#   the pane. If the pane is killed, the pane process will be sent a SIGKILL
+#   signal, and all oprhaned child processes will be reaped.
+#
+#   If all the process are inside the safe list however, the pane process
+#   will be sent a SIGHUP signal to gracefully exit. If it does not exit
+#   within $INTEGRATION_EXIT_SAFE_GRACE seconds, it will be forcefully killed.
+#
+#   Additionally, if the foreground program has a supported integration,
+#   that will be used to exit the program instead.
+#
+#   Supported programs:
+#
+#    - vim (and neovim)
+#
+# Arguments
+# ---------
+#
+#   $1  [--config=CONFIG_FILE]    # Optional config file.
+#   $1  "--!"                     # Attestation constant.
+#   $2  TMUX_SOCKET               # Path to the tmux socket.
+#   $3  TMUX_PANE                 # The target tmux pane.
+#   $4  TMUX_CURRENT_COMMAND      # The current command running in the pane.
+#   $5  TMUX_CURRENT_TITLE        # The current title of the pane.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This is used by tmux's `C-a x` binding to close the active pane.
+#   It's also indirectly used by Cmd+W in Alacritty, which sends `C-a x`.
+# =============================================================================
 set -euo pipefail
 
-# tmux-integration-exit
-# Arguments:
-#   [--config=CONFIG_FILE]
-#   "--!"
-#   TMUX_SOCKET
-#   TMUX_PANE
-#   TMUX_CURRENT_COMMAND
-#   TMUX_CURRENT_TITLE
-#
-# This script will try to exit supported editors.
-# For unsupported programs, it will prompt the user to kill the pane.
-
-# -----------------------------------------------------------------------------
-# Config:
-
 INTEGRATION_EXIT_VIM_BINDING=("Escape" "Escape" ":q" "Enter")
+INTEGRATION_EXIT_SAFE_GRACE=5
 INTEGRATION_EXIT_SAFE_PROGRAMS=(
 	'-*' fish ssh
 	"$(basename -- "$SHELL")"

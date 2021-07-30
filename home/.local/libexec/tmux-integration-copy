@@ -1,23 +1,38 @@
 #!/usr/bin/env bash
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-set -euo pipefail
-
-# tmux-integration-copy
-# Arguments:
-#   [--config=CONFIG_FILE]
-#   "--!"
-#   TMUX_SOCKET
-#   TMUX_PANE
-#   TMUX_WINDOW
-#   TMUX_CURRENT_COMMAND
-#   TMUX_CURRENT_TITLE
+# =============================================================================
 #
-# This script will try to copy selected text in supported editors,
-# or enter tmux's copy mode otherwise.
-
-# -----------------------------------------------------------------------------
-# Config:
+# Summary
+# -------
+#
+#   This script will attempt to copy selected text (or enter copy mode) in the 
+#   foreground program. If the foreground program cannot be detected or does
+#   not have a supported integration, tmux's copy mode will be used instead.
+#
+#   Supported programs:
+#
+#    - vim (and neovim)
+#
+# Arguments
+# ---------
+#
+#   $1  [--config=CONFIG_FILE]    # Optional config file.
+#   $1  "--!"                     # Attestation constant.
+#   $2  TMUX_SOCKET               # Path to the tmux socket.
+#   $3  TMUX_PANE                 # The target tmux pane.
+#   $4  TMUX_WINDOW               # The target tmux window.
+#   $5  TMUX_CURRENT_COMMAND      # The current command running in the pane.
+#   $6  TMUX_CURRENT_TITLE        # The current title of the pane.
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This script is activated by the key sequence sent from Alacritty's Cmd+C
+#   binding, through tmux.
+#
+# =============================================================================
+set -euo pipefail
 
 INTEGRATION_COPY_VIM_BINDING=('F5')
 
