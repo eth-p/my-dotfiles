@@ -111,6 +111,30 @@ if "$need_prompt"; then
 fi
 
 # Otherwise, no prompt needed.
+# Try to safely kill it first, then force kill it in 5 seconds.
+if [[ -n "$INTEGRATION_EXIT_SAFE_GRACE" ]] && 
+	[[ "$INTEGRATION_EXIT_SAFE_GRACE" -gt 0 ]]; then
+	pane_pid="$(tmux display-message -t "$TMUX_PANE" -p '#{pane_pid}')"
+
+	# Kill the pane with SIGHUP.
+	kill -1 "$pane_pid"
+
+	# Hide the pane for UX.
+	tmux break-pane -s "$TMUX_PANE" -d
+
+	# Wait for it to exit.
+	timer=0
+	while [[ "$timer" -lt "$INTEGRATION_EXIT_SAFE_GRACE" ]]; do
+		timer="$((timer + 1))"
+		sleep 1
+		if ! kill -0 "$pane_pid"; then
+			tmux kill-pane -t "$TMUX_PANE" || true &>/dev/null	
+			exit 0
+		fi
+	done
+fi
+
+# Force kill the pane.
 tmux kill-pane -t "$TMUX_PANE"
 exit 0
 
