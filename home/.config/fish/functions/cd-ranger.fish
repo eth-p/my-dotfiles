@@ -1,5 +1,13 @@
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Summary
+# -------
+#
+#   This function will use ranger to change fish's working directory.  
+#
+# =============================================================================
 
 function cd-ranger --description="Change directory using ranger"
 	set -l tempfile (mktemp)

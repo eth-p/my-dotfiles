@@ -1,8 +1,50 @@
 # my-dotfiles | Copyright (C) 2021 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
-
-# A function which saves variables to a session file.
-# By default, the session files are tied to the pty of the shell.
+# =============================================================================
+# 
+# Summary
+# -------
+#
+#   A function which saves variables tied to a terminal device.
+#   This uses the `tty` command and a "session file" to store "session"
+#   variables.
+#
+#   These session variables can then be imported by other shell instances.
+#
+# Synopsis
+# --------
+#
+#   Set a session variable:
+#
+#     session_var --set VARIABLE VALUE [VALUE...]
+#
+#   Set a session variable that's exported to the environment:
+#
+#     session_var --set --export VARIABLE VALUE
+#
+#   Unset a session variable:
+#
+#     session_var --erase VARIABLE
+#
+#   Print the session file:
+#
+#     session_var --file
+#
+#   Import variables from a session file:
+#
+#     session_var --import-from-file=FILE
+#
+#   List all session variables:
+#
+#     sesion_var --list
+#
+# How it's used in my-dotfiles
+# ----------------------------
+#
+#   This is used by `~/.config/fish/conf.d/3-ethp-query-term.fish` to copy
+#   variables from the tmux pane that spawned the shell.
+#
+# =============================================================================
 
 function session_var
 	argparse -x 'set,erase,clear,file,file-from-tty,list-with-values,list,import-from-file' \
