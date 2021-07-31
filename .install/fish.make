@@ -21,6 +21,10 @@ _requirements_mac:
 		  bash .install/copy.sh home/.config/fish/fish_plugins "$${HOME}/.config/fish/fish_plugins";\
 	      fish -c 'fisher update' 1>/dev/null;\
 	  }
+	@ command -v vivid &>/dev/null || {\
+	      echo " - vivid";\
+		  brew install vivid;\
+	  }
 
 _requirements_%:
 	@ echo "No process for installing fish requiements on $*"

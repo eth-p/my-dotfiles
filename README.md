@@ -9,6 +9,7 @@ A collection of dotfiles that I use to configure my terminal programs.
 My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and [fish](https://fishshell.com/) inside of the [alacritty](https://github.com/alacritty/alacritty) terminal emulator. It might work in other environments, but I'm not going to make any guarantees or promises.
 
 - [fisher](https://github.com/jorgebucaran/fisher) to install fish plugins.
+- [vivid](https://github.com/sharkdp/vivid) for colors in `ls`.
 - [vim-plug](https://github.com/junegunn/vim-plug) to install vim/nvim plugins.
 - [gitmux](https://github.com/arl/gitmux) for git info in the tmux status bar.
 - [ranger](https://github.com/ranger/ranger) for file browsing in the terminal.
@@ -102,8 +103,9 @@ No special instructions, just copy the files.
 
 **Install**  
 1. Install [fisher](https://github.com/jorgebucaran/fisher).
-2. Copy the files.
-3. `fisher`
+2. Install [vivid](https://github.com/sharkdp/vivid).
+3. Copy the files.
+4. `fisher`
 
 ---
 
