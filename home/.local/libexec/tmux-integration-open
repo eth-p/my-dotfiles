@@ -31,7 +31,7 @@
 # =============================================================================
 set -euo pipefail
 
-INTEGRATION_OPEN_FISH_BINDING=("C-F12" "e" "c")
+INTEGRATION_OPEN_FISH_BINDING=("C-S-F12" "o")
 
 if [[ "$1" =~ --config=(.*) ]]; then
 	source "${BASH_REMATCH[1]}"

@@ -81,9 +81,9 @@ shell:
 key_bindings:
   - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+Q -> Ctrl+Q
 
-  # Rebind CMD+S to send F6 (bound to save) to tmux.
-  - { key: S, mods: Command, chars: "\u0001\x1B[17~" } # F6
-  - { key: O, mods: Command, chars: "\u0001\x1B[18~" } # F7
+  # Integrations that get forwarded to tmux.
+  - { key: O, mods: Command, chars: "\x1B[24;6~o" }
+  - { key: S, mods: Command, chars: "\x1B[24;6~s" }
 
   # Rebind CMD+K to use tmux.
   - { key: K, mods: Command, chars: "\u0001k" } # Clear pane.
