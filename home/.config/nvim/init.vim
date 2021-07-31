@@ -59,7 +59,7 @@ call plug#end()
 
 	" Enable title.
 	set title
-	set titlestring=Edit:\ %F
+	set titlestring=vim\ %F
 
 	" Enable sidebar.
 	set updatetime=0    " Immediately show the git sidebar.
