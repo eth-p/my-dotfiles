@@ -20,8 +20,8 @@ if status is-interactive
 	# Exa
 	if command -vq exa
 		alias ls "exa"
-		alias ll "exa -l"
-		alias la "exa -la"
+		alias ll "exa --git -l"
+		alias la "exa --git -la"
 	end
 
 	# Vim
