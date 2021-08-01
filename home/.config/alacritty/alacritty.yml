@@ -54,7 +54,7 @@ colors:
 # -----------------------------------------------------------------------------
 
 env:
-  REAL_SHELL: fish
+  USER_SHELL: fish
 
 shell:
   program: '/usr/bin/env'
@@ -62,16 +62,21 @@ shell:
   - 'bash'
   - '-c'
   - |-
-    # Switch the SHELL environment variable to the user's desired shell.
-    export SHELL="$REAL_SHELL"
-    unset REAL_SHELL
-
     # Append to the PATH.
     PATH="/usr/local/bin:$PATH"
 
+    # Switch the SHELL environment variable to the user's desired shell.
+    export SHELL="$USER_SHELL"
+    unset USER_SHELL
+    SHELL_PATH="$(printf '%q' "$(which "$SHELL" 2>&1 || echo bash)")"
+    SHELL_NAME="$(printf '%q' "$(basename -- "$SHELL_PATH")")"
+    
     # Start a new tmux session for tab and split support.
-    echo $SHELL
-    tmux new-session "bash -c 'tmux unbind d; exec \"$SHELL\" -l'" || bash
+    SHELL="/bin/sh" tmux new-session "
+      tmux unbind d;
+      tmux set-option default-shell $SHELL_PATH;
+      exec -a -$SHELL_NAME $SHELL_PATH
+    " || bash
 
 
 # -----------------------------------------------------------------------------
