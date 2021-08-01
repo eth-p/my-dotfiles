@@ -231,11 +231,11 @@ fi
 	IFS= read -rd '' diff_with_cache < <({
 		diff "$CACHE_FILE" "$COPY_TO"
 	}) || true
-	
+
 	# If there's no difference, update the current file.
-	if [[ -z "$diff_with_cache" ]]; then
+	if [[ -n "$diff_with_cache" ]]; then
 		is_same="$(diff "$COPY_FROM" "$COPY_TO" &>/dev/null && echo "true" || echo "false")"
-		
+
 		vmsg "Found file at $COPY_TO, but no changes."
 		cp_install "$COPY_FROM" "$COPY_TO"
 		cp_cache "$COPY_FROM" "$CACHE_FILE"
