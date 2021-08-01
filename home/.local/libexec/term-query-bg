@@ -52,9 +52,9 @@ query_with_osc11() {
 		ANSI_QUERY_BG=$'\x1BPtmux;\x1B\x1B]11;?\a\x1B\\'
 	fi
 
-	# Enter no-echo terminal mode and try to read the response within 25ms.
+	# Enter no-echo terminal mode and try to read the response within 50ms.
 	printf "%s" "$ANSI_QUERY_BG" >>/dev/tty
-	read -s -t 0.025 -d$'\a' response </dev/tty 2>/dev/null # Won't work in Bash 3.
+	read -s -r -t 0.050 -d$'\a' response </dev/tty 2>/dev/null # Won't work in Bash 3.
 
 	# Did we get a response that matches the pattern:
 	#   ^[]11;rgb:RRRR:GGGG:BBBB
