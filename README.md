@@ -20,11 +20,15 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 ## Features
 
 - Alacritty keybinds similar to iTerm2.
-- Useful tmux integrations.
-- Fish shell prompt using [promptfessional](https://github.com/eth-p/fish-promptfessional).
-- Ranger for file browsing.
+- Advanced tmux integrations.
+  - Shell variables copied to new split panes or tmux windows.
+  - Special integrations for various command line programs.
+  - Program-specific context menu with <kbd>Ctrl+X</kbd>.
+  - Control-click to open links.
+- Built to work with fish shell.
+  - Simple, fast, and informative prompt using prompt using [promptfessional](https://github.com/eth-p/fish-promptfessional).
+  - Quickly change `fish`'s working directory to a `ranger` bookmark with <kbd>Ctrl+Q</kbd>.
 - Monokai theme.
-- Control-click to open links (tmux integration).
 
 
 
