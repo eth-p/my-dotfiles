@@ -15,25 +15,29 @@
 #
 # =============================================================================
 
-# Exa
-if command -vq exa
-	alias ls "exa"
-	alias ll "exa -l"
-	alias la "exa -la"
-end
+if status is-interactive
 
-# Vim
-if command -vq nvim
-	alias vi nvim
-else if command -vq vim
-	alias vi vim
-end
+	# Exa
+	if command -vq exa
+		alias ls "exa"
+		alias ll "exa -l"
+		alias la "exa -la"
+	end
 
-# Kubectl
-if command -vq kubectl
-	alias k "kubectl"
-	alias kg "kubectl get"
-	alias kd "kubectl describe"
-	alias klog "kubectl logs"
+	# Vim
+	if command -vq nvim
+		alias vi nvim
+	else if command -vq vim
+		alias vi vim
+	end
+
+	# Kubectl
+	if command -vq kubectl
+		alias k "kubectl"
+		alias kg "kubectl get"
+		alias kd "kubectl describe"
+		alias klog "kubectl logs"
+	end
+
 end
 

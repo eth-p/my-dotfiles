@@ -23,7 +23,7 @@
 #
 # =============================================================================
 
-if status --is-interactive && functions -q session_var &>/dev/null
+if status is-interactive && functions -q session_var &>/dev/null
 	set creator_session ""
 	set creator_tty (tty)
 
