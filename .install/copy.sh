@@ -233,14 +233,21 @@ fi
 	}) || true
 
 	# If there's no difference, update the current file.
-	if [[ -n "$diff_with_cache" ]]; then
-		is_same="$(diff "$COPY_FROM" "$COPY_TO" &>/dev/null && echo "true" || echo "false")"
+	same_file=false
+	same_file_to_cache=false
+	if [[ -z "$diff_with_cache" ]]; then
+		same_file=true
+		same_file_to_cache=true
+	else
+		same_file="$(diff "$COPY_FROM" "$COPY_TO" &>/dev/null && echo "true" || echo "false")"
+	fi
 
+	if "$same_file"; then
 		vmsg "Found file at $COPY_TO, but no changes."
 		cp_install "$COPY_FROM" "$COPY_TO"
 		cp_cache "$COPY_FROM" "$CACHE_FILE"
 
-		if ! $is_same; then
+		if ! "$same_file_to_cache"; then
 			msg "Updated: $COPY_TO"
 		fi
 		exit 0
