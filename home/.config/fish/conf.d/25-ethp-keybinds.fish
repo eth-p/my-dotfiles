@@ -26,5 +26,10 @@ if status is-interactive
 		bind \cq 'cd-ranger --bookmark-hotkey'
 	end
 
+	# C-s -> Toggle sudo.
+	if functions -q __ethp_commandline_toggle_sudo
+		bind \cs '__ethp_commandline_toggle_sudo'
+	end
+
 end
 
