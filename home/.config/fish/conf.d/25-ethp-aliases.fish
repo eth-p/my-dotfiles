@@ -22,3 +22,18 @@ if command -vq exa
 	alias la "exa -la"
 end
 
+# Vim
+if command -vq nvim
+	alias vi nvim
+else if command -vq vim
+	alias vi vim
+end
+
+# Kubectl
+if command -vq kubectl
+	alias k "kubectl"
+	alias kg "kubectl get"
+	alias kd "kubectl describe"
+	alias klog "kubectl logs"
+end
+
