@@ -19,3 +19,8 @@
 # M-C-K -> Clear the scrollback buffer and repaint the prompt.
 bind \e\cK 'printf "\x1B[2J\x1B[3J\x1B[H"; commandline -f repaint'
 
+# C-q -> Change directory to a ranger bookmark.
+if command -vq ranger
+	bind \cq 'cd-ranger --bookmark-hotkey'
+end
+
