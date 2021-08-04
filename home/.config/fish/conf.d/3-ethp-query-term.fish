@@ -19,7 +19,7 @@
 if status is-interactive
 
 	if [ -f "$HOME/.local/libexec/term-query-bg" ]
-		set -x TERM_BG (
+		set -gx TERM_BG (
 			bash "$HOME/.local/libexec/term-query-bg" 2>/dev/null \
 			|| echo "dark"
 		)

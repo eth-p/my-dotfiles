@@ -27,6 +27,7 @@ function my_theme
 
 	switch "$_flag_style"
 		case "dark"
+			set -gx TERM_BG "$_flag_style"
 			__ethp_theme_dark
 			return 0
 
@@ -40,7 +41,6 @@ function my_theme
 end
 
 function __ethp_theme_dark
-	set -gx TERM_BG "$_flag_style"
 
 	# ls/exa
 	set -g THEME_EXA_COLORS "da=39:uu=37:un=33:ur=97:uw=39:ux=1;32:ue=39:tw=31:tr=33:tx=2;39:gr=2;39:gw=2;39:gx=2;39;"
