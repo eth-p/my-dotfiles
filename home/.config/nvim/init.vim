@@ -86,7 +86,7 @@ call plug#end()
 " Theme:
 " -----------------------------------------------------------------------------
 
-	if $TERM_THEME == "light"
+	if $TERM_THEME == "light" || &background == "light"
 		colorscheme intellij
 		let g:lightline['colorscheme'] = 'one'
 	else
