@@ -53,8 +53,10 @@ query_with_osc11() {
 	fi
 
 	# Enter no-echo terminal mode and try to read the response within 50ms.
-	printf "%s" "$ANSI_QUERY_BG" >>/dev/tty
-	read -s -r -t 0.050 -d$'\a' response </dev/tty 2>/dev/null # Won't work in Bash 3.
+	{
+		printf "%s" "$ANSI_QUERY_BG" >>/dev/tty
+		read -s -r -t 0.1 -d$'\a' response 2>/dev/null # Won't work in Bash 3.
+	} </dev/tty
 
 	# Did we get a response that matches the pattern:
 	#   ^[]11;rgb:RRRR:GGGG:BBBB
