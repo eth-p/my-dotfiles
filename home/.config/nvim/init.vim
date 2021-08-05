@@ -28,6 +28,17 @@ call plug#end()
 
 
 " -----------------------------------------------------------------------------
+" Overrides:
+" -----------------------------------------------------------------------------
+
+	" If the TERM_BG environment variable is set, we should trust
+	" that over what non-neo vim guesses the background color as.
+    if $TERM_BG != "" && &background != $TERM_BG
+		let &background=$TERM_BG
+	end
+
+
+" -----------------------------------------------------------------------------
 " General:
 " -----------------------------------------------------------------------------
 
@@ -86,7 +97,7 @@ call plug#end()
 " Theme:
 " -----------------------------------------------------------------------------
 
-	if $TERM_THEME == "light" || &background == "light"
+	if &background == "light"
 		colorscheme intellij
 		let g:lightline['colorscheme'] = 'one'
 	else
