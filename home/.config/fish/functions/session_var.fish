@@ -68,7 +68,11 @@ function session_var
 	# Get the session var file.
 	set -l file $_flag_using_file
 	if [ (count $file) -eq 0 ]
-		set file (session_var --file-from-tty=(tty))
+		if [ -z "$__session_var_cached_tty" ]
+			set -g __session_var_cached_tty (tty)
+		end
+
+		set file (session_var --file-from-tty="$__session_var_cached_tty")
 
 		# Create the file if it doesn't exist.
 		if ! [ -f "$tty" ]
