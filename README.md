@@ -115,6 +115,12 @@ No special instructions, just copy the files.
 
 - `kubectx`/`kubens` using [fish-kubeswitch](https://github.com/eth-p/fish-kubeswitch).
 
+**Bindings**  
+|Key|Action|
+|:--|---|
+|<kbd>Ctrl+S</kbd>|Toggle `sudo`.|
+|<kbd>Ctrl+Q</kbd>|Navigate to a `ranger` bookmark.|
+
 ---
 
 ### ranger
