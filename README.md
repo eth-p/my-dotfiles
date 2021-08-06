@@ -195,7 +195,8 @@ No special instructions, just copy the files.
 **Copy Mode Bindings**
 |Key|Action|
 |:--|:--|
-|<kbd>Enter</kbd>|Start selection.|
+|<kbd>V</kbd>|Toggle selection.|
+|<kbd>Shift+V</kbd>|Toggle line selection.|
 |<kbd>Y</kbd>|Save selection to system clipboard.|
 |<kbd>Ctrl+C</kbd>/<kbd>Escape</kbd>|Cancel copy mode.|
 
@@ -204,4 +205,6 @@ With <kbd>Ctrl+X</kbd>, a context menu is displayed for the currently active pan
 This has additional menu items for:
 
 - `vim`
+- `fish`
+- `ranger`
 
