@@ -31,6 +31,14 @@ if status is-interactive
 		alias vi vim
 	end
 
+	# Kubeswitch
+	if functions -q kubeswitch
+		kubeswitch kubectl-alias "kubectl"
+		alias kk "kubeswitch"
+		alias kubectx "kubeswitch context"
+		alias kubens "kubeswitch namespace"
+	end
+
 	# Kubectl
 	if command -vq kubectl
 		alias k "kubectl"

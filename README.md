@@ -111,6 +111,10 @@ No special instructions, just copy the files.
 3. Copy the files.
 4. `fisher`
 
+**Features**
+
+- `kubectx`/`kubens` using [fish-kubeswitch](https://github.com/eth-p/fish-kubeswitch).
+
 ---
 
 ### ranger
