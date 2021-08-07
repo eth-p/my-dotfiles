@@ -53,5 +53,7 @@ function __ethp_theme_dark
 
 	# prompt
 	__promptfessional_theme dark
+	promptfessional color 'section.kubernetes' --set --background="#555"
+
 end
 

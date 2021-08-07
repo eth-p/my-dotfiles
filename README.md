@@ -115,6 +115,12 @@ No special instructions, just copy the files.
 
 - `kubectx`/`kubens` using [fish-kubeswitch](https://github.com/eth-p/fish-kubeswitch).
 
+**Prompt**
+
+- Git status.
+- Command duration.
+- Kubernetes context/namespace. (disable with `set -g ethp_prompt_kubernetes false`)
+
 **Bindings**  
 |Key|Action|
 |:--|---|
