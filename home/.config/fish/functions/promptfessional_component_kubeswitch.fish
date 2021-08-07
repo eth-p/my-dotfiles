@@ -25,7 +25,7 @@ function promptfessional_component_kubeswitch --description 'Prompt component fo
 		$__cache_vars
 
 		# Get information from kubeswitch.
-		eval (kubeswitch show --porcelain)
+		eval (kubeswitch show --porcelain | string replace --regex '^set -l ' 'set ')
 
 		# Get the label and color from ksi.
 		set ksi_label "$CONFIG_NAME"
@@ -55,9 +55,13 @@ function promptfessional_component_kubeswitch --description 'Prompt component fo
 	
 	set -l namespace "$ACTIVE_NAMESPACE"
 	set -l bold_if_namespace (set_color --bold)
-	if [ "$namespace" = "default" ]
+	if [ "$namespace" = "default" ] || [ -z "$namespace" ]
 		set namespace ""
 		set bold_if_namespace ""
+	end
+
+	if [ -z "$ksi_label" ]
+		set ksi_label "$CONFIG_NAME"
 	end
 
 	# Process the template.
