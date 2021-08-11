@@ -99,6 +99,9 @@ call plug#end()
 	" Highlight the 80th and 120th columns.
 	set colorcolumn=80,120
 
+	" Configure Monokai theme.
+	let g:monokai_term_italic = 1
+
 	" Don't have line numbers in terminal windows.
 	if has('nvim')
 		autocmd TermOpen * setlocal nonumber norelativenumber
