@@ -16,7 +16,9 @@
 #
 # =============================================================================
 
-my_theme --style="$TERM_BG"
+if [ -n "$TERM_BG" ]
+	my_theme --style="$TERM_BG"
+end
 
 # -----------------------------------------------------------------------------
 # Use wrappers to only pass huge environment variables to commands that
