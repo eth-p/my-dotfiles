@@ -49,6 +49,8 @@ call plug#end()
 	set mouse=a             " Enable mouse support.
 	set whichwrap+=<,>,[,]  " Allow arrow keys to wrap lines.
 
+	set shell=bash          " Run scripts in bash, not fish.
+
 	" Enable syntax.
 	syntax enable
 	filetype plugin indent on
@@ -155,6 +157,21 @@ call plug#end()
 	let g:ranger_map_keys = 0
 	let g:ranger_replace_netrw = 1
 
+	" Alacritty->Tmux: Cmd+O to open Ranger.
+	nnoremap <M-C-F12>o <C-c>:call OpenIntegration()<CR>
+	cnoremap <M-C-F12>o <Esc>:call OpenIntegration()<CR>
+	inoremap <M-C-F12>o <C-o>:call OpenIntegration()<CR>
+	function OpenIntegration()
+		if &modified
+			echohl WarningMsg
+			echo "No write since last change"
+			echohl Normal
+			return
+		end
+
+		echo "Open file with Ranger."
+		Ranger
+	endfunction
 
 
 " -----------------------------------------------------------------------------

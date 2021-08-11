@@ -32,6 +32,7 @@
 set -euo pipefail
 
 INTEGRATION_OPEN_FISH_BINDING=("C-S-F12" "o")
+INTEGRATION_OPEN_VIM_BINDING=("C-M-F12" "o")
 
 if [[ "$1" =~ --config=(.*) ]]; then
 	source "${BASH_REMATCH[1]}"
@@ -66,7 +67,10 @@ case "$command_name" in
 		break;;
 	
 	vi|vim|nvim|neovim)
-		: # TODO
+		if [[ "${#INTEGRATION_OPEN_VIM_BINDING[@]}" -ne 0 ]]; then
+			tmux send-keys -t "$TMUX_PANE" "${INTEGRATION_OPEN_VIM_BINDING[@]}"
+			exit 0
+		fi
 		break;;
 esac
 done
