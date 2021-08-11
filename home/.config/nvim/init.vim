@@ -24,6 +24,10 @@ call plug#begin()
 	" Themes.
 	Plug 'crusoexia/vim-monokai'  " Dark theme.
 	Plug 'chiendo97/intellij.vim' " Light theme.
+
+	" Ranger.
+	Plug 'francoiscabrol/ranger.vim'
+	if has('nvim') | Plug 'rbgrouleff/bclose.vim' | endif
 call plug#end()
 
 
@@ -93,6 +97,11 @@ call plug#end()
 	" Highlight the 80th and 120th columns.
 	set colorcolumn=80,120
 
+	" Don't have line numbers in terminal windows.
+	if has('nvim')
+		autocmd TermOpen * setlocal nonumber norelativenumber
+	end
+
 " -----------------------------------------------------------------------------
 " Theme:
 " -----------------------------------------------------------------------------
@@ -136,6 +145,16 @@ call plug#end()
 
 	" SHIFT+H: Toggle git change highlighting.
 	nnoremap H :GitGutterLineHighlightsToggle<CR>
+
+" -----------------------------------------------------------------------------
+" Integrations:
+" -----------------------------------------------------------------------------
+
+	" Ranger instead of netrw.
+	let g:bclose_no_plugin_maps = 1
+	let g:ranger_map_keys = 0
+	let g:ranger_replace_netrw = 1
+
 
 
 " -----------------------------------------------------------------------------
