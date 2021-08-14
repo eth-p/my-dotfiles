@@ -41,6 +41,9 @@ call plug#end()
 		let &background=$TERM_BG
 	end
 
+	" File type overrides.
+	au BufRead,BufNewFile $HOME/.config/tmux/*.conf setfiletype tmux
+
 
 " -----------------------------------------------------------------------------
 " General:
