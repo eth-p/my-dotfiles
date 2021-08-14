@@ -25,3 +25,6 @@ end
 
 set -gx EDITOR $VISUAL
 
+# Less
+set -gx LESS '-R --mouse --wheel-lines=2'
+
