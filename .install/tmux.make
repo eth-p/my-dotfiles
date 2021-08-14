@@ -1,4 +1,5 @@
 files := home/.tmux.conf \
+	$(wildcard home/.config/tmux/**/*) \
 	$(wildcard home/.local/libexec/tmux-*)
 
 install//home/%: home/%
