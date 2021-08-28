@@ -19,6 +19,7 @@
 
 # Add /usr/local/bin to the path.
 fish_add_path --path --prepend "/usr/local/bin"
+fish_add_path --path --prepend "$HOME/.cargo/bin"
 
 # Add ~/.local/bin to the path.
 [ -d "$HOME/.local/bin" ] && fish_add_path --path --prepend "$HOME/.local/bin"
