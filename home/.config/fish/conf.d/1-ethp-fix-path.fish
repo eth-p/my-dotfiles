@@ -24,3 +24,12 @@ fish_add_path --path --prepend "$HOME/.cargo/bin"
 # Add ~/.local/bin to the path.
 [ -d "$HOME/.local/bin" ] && fish_add_path --path --prepend "$HOME/.local/bin"
 
+# Homebrew tools.
+if command -vq brew
+	set brew_prefix (brew --prefix)
+
+	# Add google-cloud-sdk to the path.
+	set gcloud_path "$brew_prefix/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
+	if [ -f "$gcloud_path" ]; source "$gcloud_path"; end
+end
+
