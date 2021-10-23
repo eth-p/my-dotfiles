@@ -104,6 +104,12 @@ case "$command_name" in
 			exit 0
 		fi
 		break;;
+	
+	ranger)
+		tmux send-keys -t "$TMUX_PANE" "C-c"
+		sleep 0.05
+		tmux send-keys -t "$TMUX_PANE" "q"
+		exit 0
 esac
 done
 
