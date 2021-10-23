@@ -52,5 +52,19 @@ if status is-interactive
 		function fdtree --wraps="fd"; fd $argv | as-tree; end
 	end
 
+	# Git
+	if command -vq git
+
+		function gr --description "git interactive rebase" --wraps="git rebase"
+			set -l target "$argv[1]"; [ -n "$target" ] || set target "master"
+			set -l hash (git rev-parse "$target") || return $status
+			git rebase -i "$hash"
+			return $status
+		end
+
+		alias grc "git rebase --continue"
+
+	end
+
 end
 
