@@ -77,6 +77,10 @@ case "$command_name" in
 	bat|less)
 		exit 0 # This also won't end well.
 		;;
+
+	ranger)
+		exit 0 # Neither will this.
+		;;
 esac
 done
 
