@@ -94,7 +94,7 @@ call plug#end()
 	set tabstop=4
 	set shiftwidth=4
 
-	autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2
+	autocmd FileType yaml setlocal expandtab tabstop=2 shiftwidth=2 cursorcolumn
 
 	" Enable spell check for Markdown.
 	autocmd FileType markdown setlocal spell spelllang=en_us
@@ -121,9 +121,18 @@ call plug#end()
 		colorscheme monokai
 		let g:lightline['colorscheme'] = 'powerline'
 
+		highlight CursorColumn ctermbg=235
+		highlight ColorColumn ctermbg=235
+		
 		if $TMUX != ''
 			au FocusGained * highlight LineNr ctermbg=235
+			au FocusGained * highlight CursorColumn ctermbg=235
+			au FocusGained * highlight ColorColumn ctermbg=235
+
 			au FocusLost * highlight LineNr ctermbg=234
+			au FocusLost * highlight CursorColumn ctermbg=233
+			au FocusLost * highlight ColorColumn ctermbg=233
+			
 			if $__CFBundleIdentifier == 'io.alacritty'
 				highlight Normal ctermbg=NONE
 			end
