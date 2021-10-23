@@ -22,6 +22,7 @@ if status is-interactive
 		alias ls "exa"
 		alias ll "exa --git -l"
 		alias la "exa --git -la"
+		alias tree "exa --git --tree"
 	end
 
 	# Vim
