@@ -47,5 +47,10 @@ if status is-interactive
 		alias klog "kubectl logs"
 	end
 
+	# Fd
+	if command -vq fd && command -vq as-tree
+		function fdtree --wraps="fd"; fd $argv | as-tree; end
+	end
+
 end
 
