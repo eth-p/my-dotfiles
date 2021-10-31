@@ -19,10 +19,17 @@
 
 # Add /usr/local/bin to the path.
 fish_add_path --path --prepend "/usr/local/bin"
-fish_add_path --path --prepend "$HOME/.cargo/bin"
+
+# Add go to the path.
+if [ -d "$HOME/.go/bin" ];       fish_add_path --path --prepend "$HOME/.go/bin"; end
+if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; fish_add_path --path --prepend "$GOPATH/bin"; end
+
+# Add cargo to the path.
+if [ -d "$HOME/.cargo/bin" ]; fish_add_path --path --prepend "$HOME/.cargo/bin"; end
+if [ -n "$CARGO_HOME" ] && [ -d "$CARGO_HOME/bin" ]; fish_add_path --path --prepend "$CARGO_HOME/bin"; end
 
 # Add ~/.local/bin to the path.
-[ -d "$HOME/.local/bin" ] && fish_add_path --path --prepend "$HOME/.local/bin"
+if [ -d "$HOME/.local/bin" ]; fish_add_path --path --prepend "$HOME/.local/bin"; end
 
 # Homebrew tools.
 if command -vq brew
