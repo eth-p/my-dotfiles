@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Summary
+# -------
+#
+#   A bash script for using delta for `git diff`.
+#   When the terminal is larger than 160 characters, it automatically enables
+#   side-by-side mode.
+#
+# =============================================================================
+set -euo pipefail
+args=("$@")
+
+# Try to find a delta command, or exit using less otherwise. 
+delta="git-delta"
+if ! command -v "$delta" &>/dev/null; then delta="delta"; fi
+if ! command -v "$delta" &>/dev/null; then less -R; exit $?; fi
+
+# If the tty is larger than 160 characters, side-by-side diff is nice.
+if [ -e /dev/tty ] && [ "$(stty size </dev/tty 2>/dev/tty | cut -d' ' -f2)" -gt 160 ]; then
+	args+=(--side-by-side)
+fi
+
+# Run delta.
+"$delta" "${args[@]}" || exit $?
+
