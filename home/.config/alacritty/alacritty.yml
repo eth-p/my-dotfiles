@@ -90,6 +90,7 @@ key_bindings:
   # Integrations that get forwarded to tmux.
   - { key: O, mods: Command, chars: "\x1B[24;6~o" }
   - { key: S, mods: Command, chars: "\x1B[24;6~s" }
+  - { key: J, mods: Command, chars: "\x1B[24;6~j" }
 
   # Rebind CMD+K to use tmux.
   - { key: K, mods: Command, chars: "\u0001k" } # Clear pane.
