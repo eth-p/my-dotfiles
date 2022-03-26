@@ -198,8 +198,12 @@ POPUP_ARGS=()
 POPUP_ITEMS=0
 
 "popup_${POPUP_TYPE}" || exit $?
-case "$POPUP_TYPE" in
-	pane)
+case "$POPUP_TRIGGER" in
+	bind)
+		pop_x="$((POPUP_MOUSE_X))"
+		pop_y="$((POPUP_MOUSE_Y))"
+		;;
+	mouse)
 		pop_x="$((POPUP_MOUSE_X))"
 		pop_y="$((POPUP_MOUSE_Y+3+POPUP_ITEMS))"
 		;;
