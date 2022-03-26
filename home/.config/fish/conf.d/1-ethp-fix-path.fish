@@ -22,8 +22,9 @@ function prepend_path
 	end
 end
 
-# Add /usr/local/bin to the path.
+# Add Homebrew-installed binaries to the path.
 prepend_path "/usr/local/bin"
+prepend_path "/opt/homebrew/bin"
 
 # Add go to the path.
 prepend_path "$HOME/.go/bin"
