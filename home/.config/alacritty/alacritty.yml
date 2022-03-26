@@ -64,6 +64,7 @@ shell:
   - |-
     # Append to the PATH.
     PATH="/usr/local/bin:$PATH"
+    if [ -d "/opt/homebrew/bin" ]; then PATH="/opt/homebrew/bin:$PATH"; fi
 
     # Switch the SHELL environment variable to the user's desired shell.
     export SHELL="$USER_SHELL"
