@@ -5,6 +5,7 @@ filetype plugin on
 call plug#begin()
 	Plug 'itchyny/lightline.vim'
 	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-sleuth'
 
 	" Git stuff.
 	Plug 'rhysd/conflict-marker.vim'
