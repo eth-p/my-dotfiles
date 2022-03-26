@@ -16,20 +16,25 @@
 #   user-installed command line programs take priority over system ones.
 #
 # =============================================================================
+function prepend_path
+	if [ -d $argv[1] ] && [ $argv[1] != "/bin" ]
+		fish_add_path --path --prepend --move $argv
+	end
+end
 
 # Add /usr/local/bin to the path.
-fish_add_path --path --prepend "/usr/local/bin"
+prepend_path "/usr/local/bin"
 
 # Add go to the path.
-if [ -d "$HOME/.go/bin" ];       fish_add_path --path --prepend "$HOME/.go/bin"; end
-if [ -n "$GOPATH" ] && [ -d "$GOPATH/bin" ]; fish_add_path --path --prepend "$GOPATH/bin"; end
+prepend_path "$HOME/.go/bin"
+prepend_path "$GOPATH/bin"
 
 # Add cargo to the path.
-if [ -d "$HOME/.cargo/bin" ]; fish_add_path --path --prepend "$HOME/.cargo/bin"; end
-if [ -n "$CARGO_HOME" ] && [ -d "$CARGO_HOME/bin" ]; fish_add_path --path --prepend "$CARGO_HOME/bin"; end
+prepend_path "$HOME/.cargo/bin"
+prepend_path "$CARGO_HOME/bin"
 
 # Add ~/.local/bin to the path.
-if [ -d "$HOME/.local/bin" ]; fish_add_path --path --prepend "$HOME/.local/bin"; end
+prepend_path "$HOME/.local/bin"
 
 # Homebrew tools.
 if command -vq brew
@@ -39,4 +44,7 @@ if command -vq brew
 	set gcloud_path "$brew_prefix/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 	if [ -f "$gcloud_path" ]; source "$gcloud_path"; end
 end
+
+# Remove the prepend_path utility.
+functions -e prepend_path
 
