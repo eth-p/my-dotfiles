@@ -172,7 +172,7 @@ case "$POPUP_TRIGGER" in
 
 		# Passthrough for ignored programs programs.
 		for test_command in "$TITLE_COMMAND_NAME" "$PANE_COMMAND_NAME"; do
-		for ignored_program in "${CONTEXT_MENU_IGNORED_PROGRAMS[@]}"; do
+		for ignored_program in "${CONTEXT_MENU_IGNORED_PROGRAMS[@]+"${CONTEXT_MENU_IGNORED_PROGRAMS[@]}"}"; do
 			if [[ "$PANE_CURRENT_COMMAND_NAME" =~ $ignored_program ]]; then
 				tmux send-keys -t "$TMUX_PANE" C-X
 				exit 0
