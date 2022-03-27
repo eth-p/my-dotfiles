@@ -1,6 +1,7 @@
 files := \
 		 $(wildcard home/.config/fish/**/*) \
-		 $(wildcard home/.config/fish/*)
+		 $(wildcard home/.config/fish/*) \
+		 home/.local/libexec/term-query-bg
 
 install//home/%: home/%
 	@ bash .install/copy.sh "$<" "${HOME}/$*"
