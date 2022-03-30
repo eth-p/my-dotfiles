@@ -16,6 +16,15 @@ _requirements_mac:
 		  brew install tmux;\
 	  }
 
+.PHONY: _requirements_arch
+_requirements_arch:
+	@ echo "Installing tmux requirements..."
+	@ command -v tmux &>/dev/null || {\
+	      echo " - tmux";\
+		  sudo pacman -S --noconfirm tmux;\
+	  }
+
+
 _requirements_%:
 	@ echo "No process for installing tmux requiements on $*"
 	@ exit 1

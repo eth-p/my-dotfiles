@@ -33,12 +33,18 @@ install: $(patsubst .install/%.make,install/%,$(wildcard .install/*.make))
 # -----------------------------------------------------------------------------
 
 requirements/%: .install/%.make
-	@ cd "${REPO_ROOT}";                   \
-	  system=`uname -s`;                   \
-	  case "$$system" in                   \
-	      Darwin) system='mac';;           \
-	  esac;                                \
-	  make -f "$<" _requirements_"$$system"
+	@ cd "${REPO_ROOT}";                                                    \
+	  system=`uname -s`;                                                    \
+	  case "$$system" in                                                    \
+	      Darwin)      system='mac';;                                       \
+	      Linux|linux) case "`sh -c '. /etc/os-release && echo "$$ID"'`" in \
+	          arch) system='arch';;                                         \
+	      esac;;                                                            \
+	  esac;                                                                 \
+	  make -f "$<" _requirements_"$$system";                                \
+	  if grep '^_post_requirements:' "$<" &>/dev/null; then                 \
+	      make -f "$<" _post_requirements;                                  \
+	  fi
 
 .PHONY: requirements
 requirements: $(patsubst .install/%.make,requirements/%,$(wildcard .install/*.make))

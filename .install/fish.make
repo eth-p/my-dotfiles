@@ -7,7 +7,7 @@ install//home/%: home/%
 	@ bash .install/copy.sh "$<" "${HOME}/$*"
 
 _install: $(patsubst %,install//%,$(files))
-	@ true
+	@ fish -c 'fisher update'
 
 .PHONY: _requirements_mac
 _requirements_mac:
@@ -16,16 +16,32 @@ _requirements_mac:
 	      echo " - fish";\
 		  brew install fish;\
 	  }
+	@ command -v vivid &>/dev/null || {\
+	      echo " - vivid";\
+		  brew install vivid;\
+	  }
+
+.PHONY: _requirements_arch
+_requirements_arch:
+	@ echo "Installing fish requirements..."
+	@ command -v fish &>/dev/null || {\
+	      echo " - fish";\
+		  sudo pacman -S --noconfirm fish;\
+	  }
+	@ command -v vivid &>/dev/null || {\
+	      echo " - vivid";\
+		  sudo pacman -S --noconfirm vivid;\
+	  }
+
+.PHONY: _post_requirements
+_post_requirements:
 	@ [ -f "$${HOME}/.config/fish/functions/fisher.fish" ] || {\
 		  echo " - fish plugins";\
 	      fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher' 1>/dev/null;\
 		  bash .install/copy.sh home/.config/fish/fish_plugins "$${HOME}/.config/fish/fish_plugins";\
 	      fish -c 'fisher update' 1>/dev/null;\
 	  }
-	@ command -v vivid &>/dev/null || {\
-	      echo " - vivid";\
-		  brew install vivid;\
-	  }
+
 
 _requirements_%:
 	@ echo "No process for installing fish requiements on $*"

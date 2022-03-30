@@ -17,7 +17,12 @@ _requirements_mac:
 	      brew install font-jetbrains-mono;\
 	  }
 
+.PHONY: _requirements_arch
+_requirements_arch:
+	@ true
+
 _requirements_%:
 	@ echo "No process for installing alacritty requiements on $*"
 	@ exit 1
+
 

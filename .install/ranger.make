@@ -16,6 +16,14 @@ _requirements_mac:
 		  brew install ranger;\
 	  }
 
+.PHONY: _requirements_arch
+_requirements_arch:
+	@ echo "Installing ranger requirements..."
+	@ command -v ranger &>/dev/null || {\
+	      echo " - ranger";\
+		  sudo pacman -S --noconfirm ranger;\
+	  }
+
 _requirements_%:
 	@ echo "No process for installing ranger requiements on $*"
 	@ exit 1

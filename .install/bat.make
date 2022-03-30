@@ -16,6 +16,14 @@ _requirements_mac:
 		  brew install bat;\
 	  }
 
+.PHONY: _requirements_arch
+_requirements_arch:
+	@ echo "Installing bat requirements..."
+	@ command -v bat &>/dev/null || {\
+	      echo " - bat"; \
+	          sudo pacman -S --noconfirm bat;\
+	  }
+
 _requirements_%:
 	@ echo "No process for installing bat requiements on $*"
 	@ exit 1

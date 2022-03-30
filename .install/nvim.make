@@ -20,6 +20,17 @@ _requirements_mac:
 	      echo " - nvim";\
 		  brew install nvim;\
 	  }
+
+.PHONY: _requirements_arch
+_requirements_arch:
+	@ echo "Installing nvim requirements..."
+	@ command -v nvim &>/dev/null || {\
+	      echo " - nvim";\
+		  sudo pacman -S --noconfirm neovim;\
+	  }
+
+.PHONY: _post_requirements
+_post_requirements:
 	@ [ -f "$${HOME}/.config/nvim/autoload/plug.vim" ] || {\
 		  echo " - nvim plugins";\
 		  curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim';\
