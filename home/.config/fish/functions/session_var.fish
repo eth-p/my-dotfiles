@@ -61,6 +61,10 @@ function session_var
 	# Get the session file for a tty.
 	if [ -n "$_flag_file_from_tty" ]
 		set -l tty (string replace --regex '^/dev/([a-z0-9]+)' '$1' -- "$_flag_file_from_tty")
+		set -l TMPDIR "$TMPDIR"
+		if [ -z "$TMPDIR" ]
+			set TMPDIR "/tmp"
+		end
 		echo "$TMPDIR/fish_session_var/$tty"
 		return 0
 	end
