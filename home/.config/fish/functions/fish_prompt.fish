@@ -2,7 +2,7 @@ function fish_prompt
 	promptfessional enable arrow
 
 	promptfessional section hostname
-		promptfessional show hostname
+		promptfessional show hostname --only-remote
 
 	promptfessional section status --delimiter=' '
 		promptfessional show status
