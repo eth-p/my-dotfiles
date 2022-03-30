@@ -3,3 +3,7 @@
 # Install.
 .install/cache
 
+# IDE
+.vscode
+.idea
+*.iml
