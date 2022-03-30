@@ -1,6 +1,9 @@
 function fish_prompt
 	promptfessional enable arrow
 
+	promptfessional section hostname
+		promptfessional show hostname
+
 	promptfessional section status --delimiter=' '
 		promptfessional show status
 		promptfessional show private
@@ -12,7 +15,7 @@ function fish_prompt
 			--min-time=1000 \
 			--min-slow=30000
 
-	if [ "$ethp_prompt_kubernetes" != "false" ]
+	if [ "$ethp_prompt_kubernetes" = "true" ]
 		promptfessional section kubernetes --pattern='%s'
 			promptfessional show kubeswitch \
 				--pattern='{color} {label}{/context_if_multiple}{/bold_if_namespace}{namespace}³ '
