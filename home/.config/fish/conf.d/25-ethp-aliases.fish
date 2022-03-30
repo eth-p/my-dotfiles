@@ -40,6 +40,12 @@ if status is-interactive
 		alias kubens "kubeswitch namespace"
 	end
 
+	# Better-cd
+	if functions -q bettercd
+		alias cd "bettercd"
+		alias cdun "bettercd --undo"
+	end
+
 	# Kubectl
 	if command -vq kubectl
 		alias k "kubectl"
