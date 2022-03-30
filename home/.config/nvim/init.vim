@@ -36,7 +36,7 @@ call plug#end()
 
 	" If the TERM_BG environment variable is set, we should trust
 	" that over what non-neo vim guesses the background color as.
-    if $TERM_BG != "" && &background != $TERM_BG
+	if $TERM_BG != "" && &background != $TERM_BG
 		let &background=$TERM_BG
 	end
 
@@ -48,10 +48,10 @@ call plug#end()
 " General:
 " -----------------------------------------------------------------------------
 
-	set mouse=a             " Enable mouse support.
+	set mouse=a			 " Enable mouse support.
 	set whichwrap+=<,>,[,]  " Allow arrow keys to wrap lines.
 
-	set shell=bash          " Run scripts in bash, not fish.
+	set shell=bash		  " Run scripts in bash, not fish.
 
 	" Enable syntax.
 	syntax enable
@@ -81,8 +81,8 @@ call plug#end()
 	set titlestring=vim\ %F
 
 	" Enable sidebar.
-	set updatetime=0    " Immediately show the git sidebar.
-	set number          " Enable line numbers.
+	set updatetime=0	" Immediately show the git sidebar.
+	set number		  " Enable line numbers.
 	set numberwidth=5   " Set the line number width.
 
 	if has('nvim')
