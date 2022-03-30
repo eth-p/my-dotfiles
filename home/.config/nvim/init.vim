@@ -60,12 +60,14 @@ call plug#end()
 	" Enable better status line with 'lightline'.
 	set laststatus=2
 	set noshowmode
+	let g:hostname = trim(system("{ command -v hostname >/dev/null && hostname; } || cat /etc/hostname"))
 	let g:lightline = {
 	\	'active': {
-	\		'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified'], [ 'git_status' ]]
+	\		'left': [[ 'mode', 'paste' ], ['readonly', 'hostname', 'filename', 'modified'], [ 'git_status' ]]
 	\	},
 	\	'component_function': {
-	\		'git_status': 'LLCustom_GitStatus'
+	\		'git_status': 'LLCustom_GitStatus',
+	\       'hostname':   'LLCustom_Hostname'
 	\	},
 	\	'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
 	\	'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
@@ -75,6 +77,15 @@ call plug#end()
 		let [a,m,r] = GitGutterGetHunkSummary()
 		return printf('+%d ~%d -%d', a, m, r)
 	endfunction
+
+	function! LLCustom_Hostname()
+		let l:hostname = substitute(g:hostname, '\.local$', '', '')
+		if $SSH_CLIENT == ""
+			return ""
+		endif
+		return l:hostname
+	endfunction
+
 
 	" Enable title.
 	set title
