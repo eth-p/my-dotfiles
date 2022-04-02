@@ -19,6 +19,7 @@ call plug#begin()
 	Plug 'fatih/vim-go'
 	Plug 'cespare/vim-toml'
 	Plug 'digitaltoad/vim-pug'
+	Plug 'google/vim-jsonnet'
 
 	" Themes.
 	Plug 'crusoexia/vim-monokai'  " Dark theme.
