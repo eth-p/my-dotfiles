@@ -71,6 +71,12 @@ shell:
     unset USER_SHELL
     SHELL_PATH="$(printf '%q' "$(which "$SHELL" 2>&1 || echo bash)")"
     SHELL_NAME="$(printf '%q' "$(basename -- "$SHELL_PATH")")"
+
+    detached_session_count="$(tmux list-sessions -f '#{?session_attached,,1}' | wc -l)"
+    if [ "${detached_session_count}" -eq 1 ]; then
+      tmux attach -t "$(tmux list-sessions -f '#{?session_attached,,1}' -F '#{session_id}')" || bash
+      exit 0
+    fi
     
     # Start a new tmux session for tab and split support.
     SHELL="/bin/sh" tmux new-session "
