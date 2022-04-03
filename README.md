@@ -79,7 +79,8 @@ No special instructions, just copy the files.
 |Key|Action|
 |:--|:--|
 |<kbd>Cmd+K</kbd>|Clears the current `tmux` pane.|
-|<kbd>Cmd+N</kbd>/<kbd>Cmd+T</kbd>|Creates a new `tmux` window.|
+|<kbd>Cmd+N</kbd>|Creates a new Alacritty window.|
+|<kbd>Cmd+T</kbd>|Creates a new `tmux` window.|
 |<kbd>Cmd+W</kbd>|Closes the current `tmux` pane, prompting if necessary.|
 |<kbd>Cmd+D</kbd>|Creates a new vertical split in `tmux`.|
 |<kbd>Cmd+Shift+D</kbd>|Creates a new horizontal split in `tmux`.|

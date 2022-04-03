@@ -99,7 +99,7 @@ key_bindings:
   - { key: C, mods: Command, chars: "\u0001[" }
 
   # Rebind CMD+N/CMD+W to use tmux.
-  - { key: N, mods: Command, chars: "\u0001c" }
+  - { key: N, mods: Command, action: CreateNewWindow }
   - { key: T, mods: Command, chars: "\u0001c" }
   - { key: W, mods: Command, chars: "\u0001x" }
 
