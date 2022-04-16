@@ -6,6 +6,7 @@ call plug#begin()
 	Plug 'itchyny/lightline.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-sleuth'
+	Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 	" Git stuff.
 	Plug 'rhysd/conflict-marker.vim'
@@ -198,6 +199,12 @@ call plug#end()
 		echo "Open file with Ranger."
 		Ranger
 	endfunction
+
+	" Copy using OSC52 on non-Mac systems (or SSH).
+	" Either register '*' or '+' will copy to the clipboard.
+	if !has('macunix') || $SSH_CONNECTION != ""
+		autocmd TextYankPost * if v:event.operator is 'y' && (v:event.regname is '+' || v:event.regname is '*') | execute 'OSCYankReg +' | endif
+	end
 
 
 " -----------------------------------------------------------------------------
