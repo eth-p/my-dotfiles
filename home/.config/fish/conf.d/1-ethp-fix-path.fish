@@ -44,6 +44,10 @@ if command -vq brew
 	# Add google-cloud-sdk to the path.
 	set gcloud_path "$brew_prefix/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 	if [ -f "$gcloud_path" ]; source "$gcloud_path"; end
+
+	# Add openjdk to the path.
+	set openjdk_path "$brew_prefix/opt/openjdk/bin"
+	if [ -d "$openjdk_path" ]; prepend_path "$openjdk_path"; end
 end
 
 # Remove the prepend_path utility.
