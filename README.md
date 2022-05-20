@@ -120,7 +120,8 @@ No special instructions, just copy the files.
 
 - Git status.
 - Command duration.
-- Kubernetes context/namespace. (disable with `set -g ethp_prompt_kubernetes false`)
+- Kubernetes context/namespace. (Enable with `set -g ethp_prompt_kubernetes true`)
+- Docker context. (Enable with `set -g ethp_prompt_docker true`)
 
 **Bindings**  
 |Key|Action|

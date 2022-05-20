@@ -20,6 +20,13 @@ function fish_prompt
 			promptfessional show kubeswitch \
 				--pattern='{color} {label}{/context_if_multiple}{/bold_if_namespace}{namespace}³ '
 	end
+	
+	if [ "$ethp_prompt_docker" = "true" ]
+		promptfessional section docker --pattern=' %s '
+			promptfessional show docker \
+				--only-non-default \
+				--symbol=(printf "\u229E")
+	end
 
 	promptfessional section path --pattern=' %s '
 		promptfessional show path \
