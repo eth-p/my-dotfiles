@@ -9,6 +9,9 @@
 #   emulator, and set the "$TERM_BG" color to either "dark" or "light"
 #   depending on what the query returned.
 #
+#   Additionally, this wraps the `reset` command to update the "$TERM_BG"
+#   variable whenever its called.
+#
 # How it's used in my-dotfiles
 # ----------------------------
 #
@@ -23,6 +26,26 @@ if status is-interactive
 			bash "$HOME/.local/libexec/term-query-bg" 2>/dev/null \
 			|| echo "dark"
 		)
+		
+		# Hook into the `reset` command to update the TERM_BG variable.
+		if functions -q reset
+			functions --copy reset __ethp_original_reset
+		else
+			function __ethp_original_reset
+				command reset
+				return $status
+			end
+		end
+
+		function reset
+			__ethp_original_reset
+			set -l reset_status $status
+			set -gx TERM_BG (
+				bash "$HOME/.local/libexec/term-query-bg" 2>/dev/null \
+				|| echo "dark"
+			)
+			return $status
+		end
 	end
 
 end
