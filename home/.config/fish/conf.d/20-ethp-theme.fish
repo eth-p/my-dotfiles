@@ -21,6 +21,28 @@ if [ -n "$TERM_BG" ]
 end
 
 # -----------------------------------------------------------------------------
+# Wrap the `reset` command to call my_theme after resetting.
+# -----------------------------------------------------------------------------
+
+if functions -q reset
+	functions --copy reset __ethp_original_reset_2
+else
+	function reset
+		command reset
+		return $status
+	end
+end
+
+function reset
+	__ethp_original_reset_2
+	set -l reset_status $status
+	if [ -n "$TERM_BG" ]
+		my_theme --style="$TERM_BG"
+	end
+	return $reset_status
+end
+
+# -----------------------------------------------------------------------------
 # Use wrappers to only pass huge environment variables to commands that
 # would actually use them.
 # -----------------------------------------------------------------------------
