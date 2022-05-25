@@ -15,6 +15,13 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 - [ranger](https://github.com/ranger/ranger) for file browsing in the terminal.
 - `JetBrains Mono NL` font.
 
+Recommended:
+
+- [bat](https://github.com/sharkdp/bat) as a syntax-highlighted alternative to `cat`.
+- [exa](https://github.com/ogham/exa) as an improved version of `ls`.
+- [git-delta](https://github.com/dandavison/delta) for better `git diff` and `git blame`.
+
+
 
 
 ## Features
