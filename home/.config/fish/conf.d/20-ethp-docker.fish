@@ -22,7 +22,7 @@ if status is-interactive && functions -q session_var && command -vq docker
 	if [ -n "$last_docker_context" ]
 		set -gx DOCKER_CONTEXT "$last_docker_context"
 	else
-		set -gx DOCKER_CONTEXT ''
+		set -gx DOCKER_CONTEXT 'default'
 	end
 
 	# Create a function which listens to the 'kubeswitch' event and

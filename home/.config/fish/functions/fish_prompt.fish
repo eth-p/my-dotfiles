@@ -24,7 +24,8 @@ function fish_prompt
 	if [ "$ethp_prompt_docker" = "true" ]
 		promptfessional section docker --pattern=' %s '
 			promptfessional show docker \
-				--only-non-default \
+				--hide-default \
+				--hide-context="default" \
 				--symbol=(printf "\u229E")
 	end
 
