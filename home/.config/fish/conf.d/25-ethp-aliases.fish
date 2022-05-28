@@ -78,5 +78,14 @@ if status is-interactive
 
 	end
 
+	# Tmux
+	if command -vq tmux
+		
+		function tmux
+			SHELL=(command -v fish) command tmux $argv || return $status
+		end
+
+	end
+
 end
 
