@@ -28,3 +28,8 @@ set -gx EDITOR $VISUAL
 # Less
 set -gx LESS '-R --mouse --wheel-lines=2'
 
+# NVM_DIR
+if functions -q nvm
+	set -gx NVM_DIR $nvm_data
+end
+
