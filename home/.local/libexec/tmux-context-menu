@@ -94,8 +94,8 @@ popup_pane() {
 
 	# Pane control.
 	popup_separator
-	popup_item "Clear Pane" "C-k" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-clear-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
-	popup_item "Kill Pane" "" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-close-pane' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
+	popup_item "Clear Pane" "C-k" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-integration-clear' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
+	popup_item "Kill Pane" "" "run-shell -t '${TMUX_PANE}' \"bash '$HOME/.local/libexec/tmux-integration-exit' '--!' '$TMUX' '#D' '#{pane_current_command}'\""
 
 	# Extra.
 	popup_separator
