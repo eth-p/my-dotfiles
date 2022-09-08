@@ -6,6 +6,7 @@ install//home/%: home/%
 	@ bash .install/copy.sh "$<" "${HOME}/$*"
 
 _install: $(patsubst %,install//%,$(files))
+	@ [ -d "$$HOME/.config/nvim/autoload" ] || mkdir -p "$$HOME/.config/nvim/autoload"
 	@ [ -e "$$HOME/.vimrc" ] || ln -s ".config/nvim/init.vim" "$$HOME/.vimrc"
 	@ [ -e "$$HOME/.vim" ]   || {\
 	      mkdir "$$HOME/.vim";\
