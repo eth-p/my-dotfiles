@@ -47,10 +47,12 @@ end
 # would actually use them.
 # -----------------------------------------------------------------------------
 
-function exa --wraps="exa"
-	LS_COLORS="$THEME_LS_COLORS" EXA_COLORS="$THEME_EXA_COLORS" \
-	command exa $argv
-	return $status
+if command -vq exa
+	function exa --wraps="exa"
+		LS_COLORS="$THEME_LS_COLORS" EXA_COLORS="$THEME_EXA_COLORS" \
+		command exa $argv
+		return $status
+	end
 end
 
 function ls --wraps="ls"
