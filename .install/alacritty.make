@@ -21,8 +21,15 @@ _requirements_mac:
 _requirements_arch:
 	@ true
 
+.PHONY: _requirements_termux
+_requirements_termux:
+	@ true
+
 _requirements_%:
 	@ echo "No process for installing alacritty requiements on $*"
 	@ exit 1
 
+.PHONY: _post_requirements
+_post_requirements:
+	@ true
 

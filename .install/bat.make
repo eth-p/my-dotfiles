@@ -24,7 +24,19 @@ _requirements_arch:
 	          sudo pacman -S --noconfirm bat;\
 	  }
 
+.PHONY: _requirements_termux
+_requirements_termux:
+	@ echo "Installing bat requirements..."
+	@ command -v bat &>/dev/null || {\
+	      echo " - bat";\
+	      pkg install bat;\
+	  }
+
 _requirements_%:
 	@ echo "No process for installing bat requiements on $*"
 	@ exit 1
+
+.PHONY: _post_requirements
+_post_requirements:
+	@ true
 

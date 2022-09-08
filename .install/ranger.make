@@ -24,7 +24,19 @@ _requirements_arch:
 		  sudo pacman -S --noconfirm ranger;\
 	  }
 
+.PHONY: _requirements_termux
+_requirements_termux:
+	@ echo "Installing ranger requirements..."
+	@ command -v ranger &>/dev/null || {\
+	      echo " - ranger";\
+	      pkg install ranger;\
+	  }
+
 _requirements_%:
 	@ echo "No process for installing ranger requiements on $*"
 	@ exit 1
+
+.PHONY: _post_requirements
+_post_requirements:
+	@ true
 

@@ -30,6 +30,14 @@ _requirements_arch:
 		  sudo pacman -S --noconfirm neovim;\
 	  }
 
+.PHONY: _requirements_termux
+_requirements_termux:
+	@ echo "Installing nvim requirements..."
+	@ command -v nvim &>/dev/null || {\
+	      echo " - nvim";\
+	      pkg install neovim;\
+	  }
+
 .PHONY: _post_requirements
 _post_requirements:
 	@ [ -f "$${HOME}/.config/nvim/autoload/plug.vim" ] || {\

@@ -24,8 +24,19 @@ _requirements_arch:
 		  sudo pacman -S --noconfirm tmux;\
 	  }
 
+.PHONY: _requirements_termux
+_requirements_termux:
+	@ echo "Installing tmux requirements..."
+	@ command -v tmux &>/dev/null || {\
+	      echo " - tmux";\
+	      pkg install tmux;\
+	  }
 
 _requirements_%:
 	@ echo "No process for installing tmux requiements on $*"
 	@ exit 1
+
+.PHONY: _post_requirements
+_post_requirements:
+	@ true
 

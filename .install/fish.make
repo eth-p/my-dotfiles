@@ -33,6 +33,18 @@ _requirements_arch:
 		  sudo pacman -S --noconfirm vivid;\
 	  }
 
+.PHONY: _requirements_termux
+_requirements_termux:
+	@ echo "Installing fish requirements..."
+	@ command -v fish &>/dev/null || {\
+	      echo " - fish";\
+	      pkg install fish;\
+	  }
+	@ command -v vivid &>/dev/null || {\
+	      echo " - vivid";\
+	      pkg install vivid;\
+	  }
+
 .PHONY: _post_requirements
 _post_requirements:
 	@ [ -f "$${HOME}/.config/fish/functions/fisher.fish" ] || {\
