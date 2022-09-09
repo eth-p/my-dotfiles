@@ -29,6 +29,12 @@ function fish_prompt
 				--symbol=(printf "\u229E")
 	end
 
+	if [ "$ethp_prompt_java" = "true" ]
+		promptfessional section java --pattern=' %s '
+			promptfessional show java \
+				--pattern (printf '\u2615{version}')
+	end
+
 	promptfessional section path --pattern=' %s '
 		promptfessional show path \
 			--collapse-home \
@@ -43,3 +49,4 @@ function fish_prompt
 	set_color (string replace -- "--background=" "" (promptfessional color section.path --or=component.path --only-background --print))
 	promptfessional literal "{arrow}\x1B[0m "
 end
+

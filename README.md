@@ -122,6 +122,7 @@ No special instructions, just copy the files.
 **Features**
 
 - `kubectx`/`kubens` using [fish-kubeswitch](https://github.com/eth-p/fish-kubeswitch).
+- Run and use multiple Java versions with `java#` commands. (e.g. `java11 -jar my.jar` or `java11 --use`)
 
 **Prompt**
 
@@ -129,6 +130,7 @@ No special instructions, just copy the files.
 - Command duration.
 - Kubernetes context/namespace. (Enable with `set -g ethp_prompt_kubernetes true`)
 - Docker context. (Enable with `set -g ethp_prompt_docker true`)
+- Java version. (Enable with `set -g ethp_prompt_java true`)
 
 **Bindings**  
 |Key|Action|
