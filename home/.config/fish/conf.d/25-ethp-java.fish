@@ -1,4 +1,4 @@
-# my-dotfiles | Copyright (C) 2021 eth-p
+# my-dotfiles | Copyright (C) 2022 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 # =============================================================================
 #
@@ -7,7 +7,13 @@
 #
 #   This init script creates alias functions for each different version of
 #   the JVM installed on the system.
-#   
+#
+#
+# Requirements
+# ------------
+#
+#   * 3-ethp-query-distro.fish                     (for determining the OS)
+#
 #
 # How it's used in my-dotfiles
 # ----------------------------
@@ -30,7 +36,12 @@ set -l java_version
 switch "$ethp_sys_distro"
 
 case "darwin"
-	# TODO
+	if command -vq brew
+		for java in (brew --prefix)/opt/openjdk@*
+			set java_version (string match --regex --groups-only '@(\d+)$' -- (basename "$java"))
+			set javas $javas (printf '%s\t%s' "$java_version" "$java")
+		end
+	end
 
 case "arch"
 	for java in /usr/lib/jvm/*
@@ -110,3 +121,4 @@ __create_java_alias javac
 __create_java_alias javadoc
 
 functions -e __create_java_alias
+
