@@ -122,3 +122,23 @@ __create_java_alias javadoc
 
 functions -e __create_java_alias
 
+# -----------------------------------------------------------------------------
+# Inherit the JAVA_HOME environment from session variables.
+# -----------------------------------------------------------------------------
+
+if status is-interactive && functions -q session_var && [ (count $javas) -gt 0 ]
+	if [ -n "$last_java_home" ]
+		set -gx JAVA_HOME "$last_java_home"
+	else
+		set -ge JAVA_HOME
+	end
+
+	# Create a function which listens to the 'kubeswitch' event and
+	# updates the session variables whenever the event is fired.
+	function __ethp_java_home_save --on-variable='JAVA_HOME' \
+	--description="Save JAVA_HOME environment to a session_var"
+		session_var --set last_java_home "$JAVA_HOME"
+	end
+
+end
+
