@@ -128,6 +128,7 @@ No special instructions, just copy the files.
 
 - Git status.
 - Command duration.
+- Hostname visible when connected through SSH.
 - Kubernetes context/namespace. (Enable with `set -g ethp_prompt_kubernetes true`)
 - Docker context. (Enable with `set -g ethp_prompt_docker true`)
 - Java version. (Enable with `set -g ethp_prompt_java true`)
@@ -137,6 +138,23 @@ No special instructions, just copy the files.
 |:--|---|
 |<kbd>Ctrl+S</kbd>|Toggle `sudo`.|
 |<kbd>Ctrl+Q</kbd>|Navigate to a `ranger` bookmark.|
+
+**Aliases**
+|Alias|Needs|Description|
+|:--|---|---|
+|**Command Line**|||
+|`cdun`|`bettercd`|Undo the last `cd` command.|
+|`ls`|`exa`|List files using exa.|
+|`ll`|`exa`|List files in long format, including git status.|
+|`la`|`exa`|List all files in long format, including git status.|
+|`pbcopy`|`xclip`|Copy STDIN to the clipboard.|
+|`pbpaste`|`xclip`|Paste the clipboard to STDOUT.|
+|`top`|`gotop`||
+|**Kubernetes**|||
+|`k`|`kubectl`||
+|`kg`|`kubectl`|Alias for `kubectl get`|
+|`kd`|`kubectl`|Alias for `kubectl describe`|
+
 
 ---
 
