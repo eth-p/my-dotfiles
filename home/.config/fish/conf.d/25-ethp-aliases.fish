@@ -54,6 +54,12 @@ if status is-interactive
 		alias klog "kubectl logs"
 	end
 
+	# Xclip
+	if command -vq xclip && not command -vq pbcopy
+		alias pbcopy "xclip -selection clipboard -in"
+		alias pbpaste "xclip -selection clipboard -out"
+	end
+
 	# Fd
 	if command -vq fd && command -vq as-tree
 		function fdtree --wraps="fd"; fd $argv | as-tree; end
