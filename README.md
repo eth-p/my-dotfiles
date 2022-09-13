@@ -35,6 +35,7 @@ Recommended:
 - Built to work with fish shell.
   - Simple, fast, and informative prompt using prompt using [promptfessional](https://github.com/eth-p/fish-promptfessional).
   - Quickly change `fish`'s working directory to a `ranger` bookmark with <kbd>Ctrl+Q</kbd>.
+  - Contextual greeting messages for new tmux panes, SSH sessions, IDE terminals, etc.
 - Monokai theme.
 
 
@@ -154,6 +155,19 @@ No special instructions, just copy the files.
 |`k`|`kubectl`||
 |`kg`|`kubectl`|Alias for `kubectl get`|
 |`kd`|`kubectl`|Alias for `kubectl describe`|
+
+**Contextual Greetings**
+
+Different greeting messages for different contexts:
+
+- `ethp_greeting_fish`: The user's `fish_greeting` message.
+- `ethp_greeting_ide`: When running through an IDE terminal.
+- `ethp_greeting_ssh`: When connected through SSH.
+- `ethp_greeting_tmux`: When running under tmux.
+
+The global variable `ethp_greeting_toplevel` will be set to true if fish is the top-level shell.
+
+> **Tip:** The order of greetings can be changed with the `ethp_greeting_order` variable.
 
 
 ---
