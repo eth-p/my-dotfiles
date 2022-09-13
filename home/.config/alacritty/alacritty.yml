@@ -78,7 +78,7 @@ shell:
     fi
     
     # Start a new tmux session for tab and split support.
-    SHELL="/bin/sh" tmux new-session "
+    SHLVL= SHELL="/bin/sh" tmux new-session "
       tmux unbind d;
       tmux set-option default-shell $SHELL_PATH;
       exec -a -$SHELL_NAME $SHELL_PATH
