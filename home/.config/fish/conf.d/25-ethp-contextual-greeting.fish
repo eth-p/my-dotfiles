@@ -43,6 +43,11 @@ if [ -n "$TMUX" ];                   set in_tmux true; end
 if [ -n "$TMUX_PANE_CREATOR" ];      set ethp_greeting_toplevel false; end
 if [ -n "$INIT_TMUX_PANE_CREATOR" ]; set ethp_greeting_toplevel true; end
 
+# Detect if not running from top-level shell.
+if [ "$SHLVL" != "1" ]
+	set ethp_greeting_toplevel false
+end
+
 # Set the context array.
 if $in_ide;  set -a ethp_greeting_contexts "ide";  end
 if $in_ssh;  set -a ethp_greeting_contexts "ssh";  end
