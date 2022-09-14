@@ -32,6 +32,11 @@ if status is-interactive
 		alias vi vim
 	end
 
+	# Clear (The tmux integration one works better)
+	if functions -q __ethp_integration_clear_screen
+		alias clear __ethp_integration_clear_screen
+	end
+
 	# Kubeswitch
 	if functions -q kubeswitch
 		kubeswitch kubectl-alias "kubectl"
