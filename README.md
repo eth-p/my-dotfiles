@@ -123,6 +123,7 @@ No special instructions, just copy the files.
 **Features**
 
 - `kubectx`/`kubens` using [fish-kubeswitch](https://github.com/eth-p/fish-kubeswitch).
+- Contextual greeting messages using [fish-contextual-greeting](https://github.com/eth-p/fish-contextual-greeting).
 - Run and use multiple Java versions with `java#` commands. (e.g. `java11 -jar my.jar` or `java11 --use`)
 
 **Prompt**
@@ -155,19 +156,6 @@ No special instructions, just copy the files.
 |`k`|`kubectl`||
 |`kg`|`kubectl`|Alias for `kubectl get`|
 |`kd`|`kubectl`|Alias for `kubectl describe`|
-
-**Contextual Greetings**
-
-Different greeting messages for different contexts:
-
-- `ethp_greeting_fish`: The user's `fish_greeting` message.
-- `ethp_greeting_ide`: When running through an IDE terminal.
-- `ethp_greeting_ssh`: When connected through SSH.
-- `ethp_greeting_tmux`: When running under tmux.
-
-The global variable `ethp_greeting_toplevel` will be set to true if fish is the top-level shell.
-
-> **Tip:** The order of greetings can be changed with the `ethp_greeting_order` variable.
 
 
 ---
