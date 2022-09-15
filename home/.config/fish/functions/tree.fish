@@ -28,6 +28,7 @@ if command -vq exa
 		set -l ignore \
 			node_modules     '// nodejs libs' \
 			site-packages    '// python libs' \
+			'.git'           '// git'         \
 			"$HOME/.cache"   '// cache data'  \
 			"$HOME/.go"      '// go data'     \
 			"$HOME/.rustup"  '// rustup'      \
