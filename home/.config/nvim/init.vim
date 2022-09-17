@@ -15,9 +15,6 @@ call plug#begin()
 	Plug 'rhysd/conflict-marker.vim'
 	Plug 'airblade/vim-gitgutter'
 
-	" Terminal stuff.
-	Plug 'eth-p/vim-tmux'
-
 	" Languages.
 	Plug 'dag/vim-fish'
 	Plug 'fatih/vim-go'
