@@ -142,6 +142,15 @@ key_bindings:
   - { key: Key0, mods: Alt, chars: "\x1B0" }
   - { key: Minus, mods: Alt, chars: "\x1B-" }
   - { key: Equals, mods: Alt, chars: "\x1B=" }
+  - { key: Backslash, mods: Alt, chars: "\x1B\\" }
+  - { key: Slash, mods: Alt, chars: "\x1B/" }
+  - { key: Grave, mods: Alt, chars: "\x1B`" }
+  - { key: Comma, mods: Alt, chars: "\x1B," }
+  - { key: Period, mods: Alt, chars: "\x1B." }
+  - { key: Semicolon, mods: Alt, chars: "\x1B;" }
+  - { key: Apostrophe, mods: Alt, chars: "\x1B'" }
+  - { key: LBracket, mods: Alt, chars: "\x1B[" }
+  - { key: RBracket, mods: Alt, chars: "\x1B]" }
   - { key: A, mods: Alt, chars: "\x1Ba" }
   - { key: B, mods: Alt, chars: "\x1Bb" }
   - { key: C, mods: Alt, chars: "\x1Bc" }
@@ -180,6 +189,15 @@ key_bindings:
   - { key: Key0, mods: Alt|Shift, chars: "\x1B0" }
   - { key: Minus, mods: Alt|Shift, chars: "\x1B_" }
   - { key: Equals, mods: Alt|Shift, chars: "\x1B+" }
+  - { key: Backslash, mods: Alt|Shift, chars: "\x1B|" }
+  - { key: Slash, mods: Alt|Shift, chars: "\x1B?" }
+  - { key: Grave, mods: Alt|Shift, chars: "\x1B~" }
+  - { key: Comma, mods: Alt|Shift, chars: "\x1B<" }
+  - { key: Period, mods: Alt|Shift, chars: "\x1B>" }
+  - { key: Semicolon, mods: Alt|Shift, chars: "\x1B:" }
+  - { key: Apostrophe, mods: Alt|Shift, chars: "\x1B\"" }
+  - { key: LBracket, mods: Alt|Shift, chars: "\x1B<" }
+  - { key: RBracket, mods: Alt|Shift, chars: "\x1B>" }
   - { key: A, mods: Alt|Shift, chars: "\x1BA" }
   - { key: B, mods: Alt|Shift, chars: "\x1BB" }
   - { key: C, mods: Alt|Shift, chars: "\x1BC" }
