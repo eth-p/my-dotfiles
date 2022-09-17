@@ -93,15 +93,13 @@ key_bindings:
   - { key: Q, mods: Control, chars: "\u0011" } # Ctrl+Q -> Ctrl+Q
 
   # Integrations that get forwarded to tmux.
+  - { key: C, mods: Command, chars: "\x1B[24;6~c" }
+  - { key: J, mods: Command, chars: "\x1B[24;6~j" }
+  - { key: K, mods: Command, chars: "\x1B[24;6~k" }
   - { key: O, mods: Command, chars: "\x1B[24;6~o" }
   - { key: S, mods: Command, chars: "\x1B[24;6~s" }
-  - { key: J, mods: Command, chars: "\x1B[24;6~j" }
-
-  # Rebind CMD+K to use tmux.
-  - { key: K, mods: Command, chars: "\u0001k" } # Clear pane.
 
   # Rebind CMD+C to enter tmux copy mode.
-  - { key: C, mods: Command, chars: "\u0001[" }
 
   # Rebind CMD+N/CMD+W to use tmux.
   - { key: N, mods: Command, action: CreateNewWindow }

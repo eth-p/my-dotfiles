@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# my-dotfiles | Copyright (C) 2021 eth-p
+# my-dotfiles | Copyright (C) 2021-2022 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 # =============================================================================
 # 
@@ -19,8 +19,7 @@
 # Arguments
 # ---------
 #
-#   $1  "--!"      # Attestation constant.
-#   $2  COMMAND    # The tmux command to run.
+#   $1  COMMAND    # The tmux command to run.
 #   ... ARG        # The arguments of the command.
 #
 # How it's used in my-dotfiles
@@ -37,18 +36,14 @@
 # =============================================================================
 set -euo pipefail
 
-# Attest that it's run from inside tmux.
-if [ "$1" != "--!" ]; then
-	echo "$0: this script isn't meant to be run directly"
-	exit 1
-fi
-
 # Get the tty of the active pane.
 ACTIVE_PANE="$(tmux display-message -p "#{pane_id}")"
 
 # Run the command.
 #   -c to set the pwd to the same as the active pane.
 #   -e to tell the new pane which pane created it.
-tmux "${@:2}" -c "#{pane_current_path}" -e "INIT_TMUX_PANE_CREATOR=${ACTIVE_PANE}" \
+tmux "${@}" \
+	-c "#{pane_current_path}" \
+	-e "INIT_TMUX_PANE_CREATOR=${ACTIVE_PANE}" \
 	|| exit $?
 

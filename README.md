@@ -225,8 +225,9 @@ No special instructions, just copy the files.
 |<kbd>Alt+Down</kbd>|Select the pane below the current pane.|
 |<kbd>Alt+Shift+Left</kbd>|Select the previous window.|
 |<kbd>Alt+Shift+Right</kbd>|Select the next window.|
+|<kbd>Ctrl+A</kbd><kbd>\ </kbd><kbd>s</kbd>|Save the active pane. *|
 
-\* Requires help from one of the `tmux-` bash scripts.  
+\* Requires an integration script.  
 \*\* Requires `10-ethp-integrations.fish`.  
 
 **Copy Mode Bindings**
