@@ -9,9 +9,11 @@ _install: $(patsubst %,install//%,$(files))
 	@ [ -d "$$HOME/.config/nvim/autoload" ] || mkdir -p "$$HOME/.config/nvim/autoload"
 	@ [ -e "$$HOME/.vimrc" ] || ln -s ".config/nvim/init.vim" "$$HOME/.vimrc"
 	@ [ -e "$$HOME/.vim" ]   || {\
-	      mkdir "$$HOME/.vim";\
+	      test -d "$$HOME/.vim" || mkdir "$$HOME/.vim";\
+		  test -d "$$HOME/.config/nvim/autoload" || mkdir -p "$$HOME/.config/nvim/autoload";\
+		  test -d "$$HOME/.local/share/nvim/plugged" || mkdir -p "$$HOME/.local/share/nvim/plugged";\
 		  ln -s "../.config/nvim/autoload" "$$HOME/.vim/";\
-		  ln -s "../.config/nvim/plugged" "$$HOME/.vim/";\
+		  ln -s "../.local/share/nvim/plugged" "$$HOME/.vim/";\
 	  }
 
 .PHONY: _requirements_mac
