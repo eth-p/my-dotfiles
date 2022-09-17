@@ -191,15 +191,24 @@ call plug#end()
 " Integrations:
 " -----------------------------------------------------------------------------
 
+	" Create a command that can bind integration chords.
+	" This is needed because vim and nvim handle the C-S-F12 prefix
+	" differently.
+	command! -nargs=+ Integration execute printf('%sremap %s%s %s',
+		\ split(<q-args>, ' ')[0],
+		\ has('nvim') ? '<'.'F48'.'>' : '<'.'C-S-F12'.'>',
+		\ split(<q-args>, ' ')[1],
+		\ join(split(<q-args>, ' ')[2:], ' '))
+
 	" Ranger instead of netrw.
 	let g:bclose_no_plugin_maps = 1
 	let g:ranger_map_keys = 0
 	let g:ranger_replace_netrw = 1
 
 	" Alacritty->Tmux: Cmd+O to open Ranger.
-	nnoremap <M-C-F12>o <C-c>:call OpenIntegration()<CR>
-	cnoremap <M-C-F12>o <Esc>:call OpenIntegration()<CR>
-	inoremap <M-C-F12>o <C-o>:call OpenIntegration()<CR>
+	Integration nno o <C-c>:call OpenIntegration()<CR>
+	Integration cno o <Esc>:call OpenIntegration()<CR>
+	Integration ino o <C-o>:call OpenIntegration()<CR>
 	function OpenIntegration()
 		if &modified
 			echohl WarningMsg
@@ -209,7 +218,7 @@ call plug#end()
 		end
 
 		echo "Open file with Ranger."
-		Ranger
+		execute 'Ranger'
 	endfunction
 
 	" Copy using OSC52 on non-Mac systems (or SSH).
@@ -218,11 +227,12 @@ call plug#end()
 		autocmd TextYankPost * if v:event.operator is 'y' && (v:event.regname is '+' || v:event.regname is '*') | execute 'OSCYankReg +' | endif
 	end
 
-	" F5: Yank to clipboard.
-	noremap <F5> <Nop>
-	vnoremap <F5> "*y
+	" Integration: copy
+	Integration no c <Nop>
+	Integration ino c <Nop>
+	Integration vno c "*y
 
-	" F6: Save current buffer.
-	noremap <F6> <c-C>:w<CR>
-	inoremap <F6> <c-O>:w<CR>
+	" Integration: save
+	Integration no s <c-C>:w<CR>
+	Integration ino s <c-O>:w<CR>
 
