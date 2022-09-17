@@ -221,65 +221,11 @@ call plug#end()
 		autocmd TextYankPost * if v:event.operator is 'y' && (v:event.regname is '+' || v:event.regname is '*') | execute 'OSCYankReg +' | endif
 	end
 
-
-" -----------------------------------------------------------------------------
-" iTerm2 Touch Bar:
-" -----------------------------------------------------------------------------
-
-	function TouchBar()
-		TouchBarLabel F3 " "
-		TouchBarLabel F4 " "
-		TouchBarLabel F5 "Copy"
-		TouchBarLabel F6 "Save"
-		TouchBarLabel F7 " "
-		TouchBarLabel F8 "Undo"
-		TouchBarLabel F9 "Redo"
-		TouchBarLabel F10 " "
-
-		call s:Rebind()
-		if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
-			TouchBarLabel F1 "←"
-			TouchBarLabel F2 "→"
-		else
-			TouchBarLabel F1 "<<"
-			TouchBarLabel F2 ">>"
-		endif
-	endfunction
-
-	" Touch Bar key bindings.
-	function s:Rebind()
-		if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
-			" If there's multiple buffers, use F1 and F2 to swap buffers.
-			noremap <F1> :bprev<CR>
-			noremap <F2> :bnext<CR>
-		else
-			" If there's only one buffer, use F1 and F2 to jump between merge conflicts.
-			noremap <F1> <Nop>
-			noremap <F2> <Nop>
-			nnoremap <F1> :ConflictMarkerPrevHunk<CR>
-			nnoremap <F2> :ConflictMarkerNextHunk<CR>
-			inoremap <F1> <c-O>:ConflictMarkerPrevHunk<CR>
-			inoremap <F2> <c-O>:ConflictMarkerNextHunk<CR>
-		endif
-	endfunction
-
-	call s:Rebind()
-	noremap <F4> <Nop>
+	" F5: Yank to clipboard.
 	noremap <F5> <Nop>
 	vnoremap <F5> "*y
+
+	" F6: Save current buffer.
 	noremap <F6> <c-C>:w<CR>
 	inoremap <F6> <c-O>:w<CR>
-	noremap <F7> <Nop>
-
-	" F8: Undo
-		noremap <F8> <Nop>
-		nnoremap <F8> u
-		inoremap <F8> <Esc>ui
-
-	" F9: Redo
-		noremap <F9> <Nop>
-		nnoremap <F9> <C-r>
-		inoremap <F9> <Esc><C-r>i
-
-	noremap <F10> <Nop>
 
