@@ -8,6 +8,9 @@ call plug#begin()
 	Plug 'tpope/vim-sleuth'
 	Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
+	" LSP.
+	Plug 'dense-analysis/ale'
+
 	" Git stuff.
 	Plug 'rhysd/conflict-marker.vim'
 	Plug 'airblade/vim-gitgutter'
@@ -88,6 +91,13 @@ call plug#end()
 		return l:hostname
 	endfunction
 
+	" Configure ALE for better messages.
+	let g:ale_floating_preview = 1
+	let g:ale_floating_window_border = [
+	\   "\u2506", "\u2504", 
+	\   "\u250C", "\u2510", "\u2518", "\u2514",
+	\   "\u2506", "\u2504" 
+	\]
 
 	" Enable title.
 	set title
@@ -174,6 +184,11 @@ call plug#end()
 
 	" SHIFT+H: Toggle git change highlighting.
 	nnoremap H :GitGutterLineHighlightsToggle<CR>
+
+	" ALT+Slash: Show the ALE warning at the line.
+	nnoremap <silent> <A-/> :ALEDetail<CR>
+	inoremap <silent> <A-/> <C-c> :ALEDetail<CR>
+
 
 " -----------------------------------------------------------------------------
 " Integrations:

@@ -181,6 +181,7 @@ No special instructions, just copy the files.
 |Normal|<kbd>g</kbd><kbd>Left</kbd>/<kbd>Shift+Up</kbd>|Previous git change.|
 |Normal|<kbd>g</kbd><kbd>Right</kbd>/<kbd>Shift+Down</kbd>|Next git change.|
 |Normal|<kbd>h</kbd>|Toggle git change line highlighting.|
+|Normal|<kbd>Alt+/</kbd>|View the warning/error at the current line.|
 |Any, Multiple Buffers|<kbd>F1</kbd>|Previous buffer.|
 |Any, Multiple Buffers|<kbd>F2</kbd>|Next buffer.|
 |Any, Single Buffer|<kbd>F1</kbd>|Previous git conflict.|
