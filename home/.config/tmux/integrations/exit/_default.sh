@@ -66,11 +66,19 @@ done < <(children_of "$pane_pid" "$$")
 # Was there any unsafe program?
 # If so, prompt the user about killing the pane.
 if "$need_prompt"; then
+	cancelled=0
+
+	# Prompt the user.
 	tmux confirm-before \
 		-p "Pane is running '$need_prompt_command'. Close it?" \
-		"kill-pane -t '$INTEGRATION_PANE'" \
-		|| echo "User cancelled the operation."
-	exit 0
+		'display-message -p "this is needed"' >/dev/null \
+		|| cancelled=$?
+
+	# Exit if the user cancelled.
+	if [ "$cancelled" -ne 0 ]; then
+		echo "User cancelled the operation"
+		exit 0
+	fi
 fi
 
 # Otherwise, no prompt needed.
