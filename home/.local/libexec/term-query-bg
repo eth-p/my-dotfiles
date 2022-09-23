@@ -141,9 +141,16 @@ query_with_guesses() {
 	fi
 
 	# Alacritty -> Default #1d1f21
-	if [[ "$__CFBundleIdentifier" = "io.alacritty" ]]; then
+	if [[ "${__CFBundleIdentifier:-}" = "io.alacritty" ]]; then
 		BG_METHOD="guess # alacritty"
 		_set_rgb8_hex '1d' '1f' '21'
+		return 0
+	fi
+
+	# Termux -> Default Black
+	if [[ -n "${TERMUX_VERSION:-}" ]]; then
+		BG_METHOD="guess # termux"
+		_set_rgb8_hex '00' '00' '00'
 		return 0
 	fi
 
