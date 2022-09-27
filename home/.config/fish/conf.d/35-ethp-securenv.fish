@@ -15,7 +15,7 @@
 #
 # =============================================================================
 
-if functions -q securenv
+if functions -q securenv && securenv supported --quiet
 
 	set -l variables (securenv list --porcelain)
 
