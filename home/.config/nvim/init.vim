@@ -140,22 +140,31 @@ call plug#end()
 		colorscheme monokai
 		let g:lightline['colorscheme'] = 'powerline'
 
-		highlight CursorColumn ctermbg=235
-		highlight ColorColumn ctermbg=235
-		
-		if $TMUX != ''
-			au FocusGained * highlight LineNr ctermbg=235
-			au FocusGained * highlight CursorColumn ctermbg=235
-			au FocusGained * highlight ColorColumn ctermbg=235
+		let g:focus_text   = 'ctermbg=NONE'
+		let g:focus_number = 'ctermbg=235 ctermfg=243'
+		let g:focus_guide  = 'ctermbg=235'
 
-			au FocusLost * highlight LineNr ctermbg=234
-			au FocusLost * highlight CursorColumn ctermbg=233
-			au FocusLost * highlight ColorColumn ctermbg=233
-			
-			if $__CFBundleIdentifier == 'io.alacritty'
-				highlight Normal ctermbg=NONE
-			end
-		end
+		let g:lost_text    = 'ctermbg=NONE'
+		let g:lost_number  = 'ctermbg=234 ctermfg=240'
+		let g:lost_guide   = 'ctermbg=NONE'
+
+		"if $TMUX != ''
+		"endif
+
+		execute "au FocusGained * highlight Normal ".g:focus_text
+		execute "au FocusGained * highlight LineNr ".g:focus_number
+		execute "au FocusGained * highlight CursorColumn ".g:focus_guide
+		execute "au FocusGained * highlight ColorColumn ".g:focus_guide
+
+		execute "au FocusLost * highlight Normal ".g:lost_text
+		execute "au FocusLost * highlight LineNr ".g:lost_number
+		execute "au FocusLost * highlight CursorColumn ".g:lost_guide
+		execute "au FocusLost * highlight ColorColumn ".g:lost_guide
+
+		execute "highlight Normal ".g:focus_text
+		execute "highlight LineNr ".g:focus_number
+		execute "highlight CursorColumn ".g:focus_guide
+		execute "highlight ColorColumn ".g:focus_guide
 
 		" highlight SignColumn guibg=245
 	endif
