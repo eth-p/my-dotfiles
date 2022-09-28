@@ -88,27 +88,5 @@ if status is-interactive
 
 	end
 
-	# Tmux
-	if command -vq tmux
-		
-		function tmux
-			SHELL=(command -v fish) command tmux $argv || return $status
-		end
-
-	end
-
-	# Bat
-	if command -vq bat || command -vq batcat
-		set -l bat_executable batcat
-		if not command -vq "$bat_executable"; set bat_executable bat; end
-
-		function bat --wraps=bat --inherit-variable='bat_executable'
-			set -lx LESS "$LESS --quit-if-one-screen"
-			command "$bat_executable" $argv
-			return $status
-		end
-
-	end
-
 end
 
