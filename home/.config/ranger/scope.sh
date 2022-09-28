@@ -72,20 +72,38 @@ my_handle_mime() {
 # Find the real 'scope.sh' script.
 # We will be monkeypatching it to add our own overrides.
 RANGER_DATA_DIR=
-RANGER_SCOPE_SH=
+
+# Look for ranger in the Python site_packages.
+# This is where it will be found on Linux distros (or if installed through pip)
 while read -r site_packages; do
 	if [ -d "${site_packages}/ranger" ]; then
 		RANGER_DATA_DIR="${site_packages}/ranger"
-		RANGER_SCOPE_SH="${RANGER_DATA_DIR}/data/scope.sh"
 		break
 	fi
-done < <(python -c 'import site; print("\n".join(site.getsitepackages()))')
+done < <({
+	python -c 'import site; print("\n".join(site.getsitepackages()))'
+	python3 -c 'import site; print("\n".join(site.getsitepackages()))'
+} 2>/dev/null)
+
+# Look for ranger from its symlink.
+# This is where it will be found when installed through Homebrew.
+if test -z "$RANGER_DATA_DIR" && test -L "$(command -v ranger)"; then
+	RANGER_DATA_DIR="$({
+		cd "$(dirname -- "$(command -v ranger)")"
+		cd "$(dirname -- "$(readlink ranger)")"
+		cd "../libexec/ranger"
+		pwd
+	})"
+fi
 
 if test -z "$RANGER_DATA_DIR"; then
 	echo "error: Unable to find the real scope.sh script"
 	echo "       Fix within ~/.config/ranger/scope.sh" 
 	exit 0
 fi
+
+RANGER_SCOPE_SH="${RANGER_DATA_DIR}/data/scope.sh"
+
 
 # Find the line where 'scope.sh' starts performing its main purpose.
 # This starts when it checks the mimetype of the file. 
