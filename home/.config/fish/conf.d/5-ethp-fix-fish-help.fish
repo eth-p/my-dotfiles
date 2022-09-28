@@ -16,6 +16,11 @@
 #
 #   Fixes fish `help` on SteamOS.
 #
+# Requirements
+# ------------
+#
+#   * Config: 3-ethp-query-distro.fish
+#
 # =============================================================================
 
 switch "$ethp_sys_distro"
