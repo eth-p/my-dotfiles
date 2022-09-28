@@ -18,5 +18,5 @@ menu:item "Edit" --key="e" "$(keys: F4)"
 
 menu:separator
 menu:header "ranger options"
-menu:item "Hidden Files" --key="h" "$(keys: "${CMCFG_RANGE_TOGGLE_HIDDEN_BINDING[@]}")"
+menu:item "Hidden Files" --key="h" "$(keys: "${CMCFG_RANGER_TOGGLE_HIDDEN_BINDING[@]}")"
 
