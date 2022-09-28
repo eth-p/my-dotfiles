@@ -1,5 +1,5 @@
 --tabs 4
---pager='less --RAW-CONTROL-CHARS --quit-if-one-screen'
+--pager 'less --RAW-CONTROL-CHARS'
 
 # Syntaxes
 #--map-syntax From:to
