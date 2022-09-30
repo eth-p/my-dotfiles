@@ -195,6 +195,8 @@ call plug#end()
 	nnoremap <silent> <A-/> :ALEDetail<CR>
 	inoremap <silent> <A-/> <C-c> :ALEDetail<CR>
 
+	" RETURN: Clear search highlighting in normal mode.
+	nnoremap <silent> <CR> :noh<CR><CR>
 
 " -----------------------------------------------------------------------------
 " Integrations:
