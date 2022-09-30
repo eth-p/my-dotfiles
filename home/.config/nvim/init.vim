@@ -247,3 +247,7 @@ call plug#end()
 	Integration no s <c-C>:w<CR>
 	Integration ino s <c-O>:w<CR>
 
+	" Integration: find
+	Integration no f <c-C>/
+	Integration ino f <c-C>/
+
