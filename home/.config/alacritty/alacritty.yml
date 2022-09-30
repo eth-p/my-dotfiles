@@ -94,12 +94,11 @@ key_bindings:
 
   # Integrations that get forwarded to tmux.
   - { key: C, mods: Command, chars: "\x1B[24;6~c" }
+  - { key: F, mods: Command, chars: "\x1B[24;6~f" }
   - { key: J, mods: Command, chars: "\x1B[24;6~j" }
   - { key: K, mods: Command, chars: "\x1B[24;6~k" }
   - { key: O, mods: Command, chars: "\x1B[24;6~o" }
   - { key: S, mods: Command, chars: "\x1B[24;6~s" }
-
-  # Rebind CMD+C to enter tmux copy mode.
 
   # Rebind CMD+N/CMD+W to use tmux.
   - { key: N, mods: Command, action: CreateNewWindow }
