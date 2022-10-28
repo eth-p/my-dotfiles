@@ -1,7 +1,9 @@
 files := \
 		 $(wildcard home/.config/fish/**/*) \
 		 $(wildcard home/.config/fish/*) \
-		 home/.local/libexec/term-query-bg
+		 home/.local/libexec/term-query-bg \
+		 home/.local/bin/java \
+		 home/.local/bin/javac
 
 install//home/%: home/%
 	@ bash .install/copy.sh "$<" "${HOME}/$*"
