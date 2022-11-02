@@ -43,7 +43,7 @@ my_handle_extension() {
 	case "$FILE_EXTENSION_LOWER" in
 		md|markdown)
 			command -v glow &>/dev/null \
-				&& glow "$FILE_PATH" --width="$PV_WIDTH" --style="${TERM_BG:-dark}" \
+				&& GLOW_UNPADDED=true glow "$FILE_PATH" --width="$PV_WIDTH" --style="${TERM_BG:-dark}" \
 				&& exit 0
 			;;
 	esac
