@@ -20,6 +20,7 @@ Recommended:
 - [bat](https://github.com/sharkdp/bat) as a syntax-highlighted alternative to `cat`.
 - [exa](https://github.com/ogham/exa) as an improved version of `ls`.
 - [git-delta](https://github.com/dandavison/delta) for better `git diff` and `git blame`.
+- [glow](https://github.com/charmbracelet/glow) for better Markdown previews in the terminal.
 
 
 
@@ -64,6 +65,7 @@ Environment
 Tools
 
 - [bat](#bat)
+- [glow](#glow)
 - [nvim](#nvim)
 - [ranger](#ranger)
 
@@ -160,10 +162,24 @@ No special instructions, just copy the files.
 
 ---
 
+### glow
+
+**Install**  
+No special instructions, just copy the files.
+
+
+
+---
+
+
 ### ranger
 
 **Install**  
 No special instructions, just copy the files.
+
+**Extras**  
+
+- [glow](https://github.com/charmbracelet/glow) for better Markdown previews.
 
 ---
 
