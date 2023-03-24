@@ -25,7 +25,7 @@ install/%: .install/%.make
 	@cd "${REPO_ROOT}" && make -f "$<" _install
 
 .PHONY: install
-install: $(patsubst .install/%.make,install/%,$(wildcard .install/*.make))
+install: $(patsubst .install/%.make,install/%,$(filter-out .install/steamos-%,$(wildcard .install/*.make)))
 	@true
 
 # -----------------------------------------------------------------------------
@@ -39,7 +39,8 @@ requirements/%: .install/%.make
 	  case "$$system" in                                                    \
 	      Darwin)      system='mac';;                                       \
 	      Linux|linux) case "`sh -c '. /etc/os-release && echo "$$ID"'`" in \
-	          arch) system='arch';;                                         \
+	          arch)    system='arch';;                                      \
+			  steamos) system='steamos';;                                   \
 	      esac;;                                                            \
 	  esac;                                                                 \
 	  make -f "$<" _requirements_"$$system";                                \
