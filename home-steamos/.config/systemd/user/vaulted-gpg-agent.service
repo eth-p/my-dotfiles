@@ -1,0 +1,18 @@
+[Unit]
+Description=GnuPG agent stored inside a Plasma Vault
+Documentation=man:gpg-agent(1)
+Requires=gpg-agent.socket home-deck-.identity.mount
+
+[Service]
+Sockets=gpg-agent.socket gpg-agent-extra.socket gpg-agent-browser.socket gpg-agent-ssh.socket
+ExecStart=/usr/bin/gpg-agent --supervised --disable-check-own-socket --options=/home/deck/.identity/gnupg/gpg-agent.conf --homedir=/home/deck/.identity/gnupg
+ExecReload=/usr/bin/gpgconf --reload gpg-agent
+
+# Disable the original gpg-agent service while this is running.
+ExecStartPre=systemctl --user stop gpg-agent.service
+ExecStartPre=systemctl --user mask gpg-agent.service
+ExecStopPost=systemctl --user unmask gpg-agent.service
+ExecStopPost=systemctl --user start gpg-agent.service
+
+[Install]
+WantedBy=home-deck-.identity.mount

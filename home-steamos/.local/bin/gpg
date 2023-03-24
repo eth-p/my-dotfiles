@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2023 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Warning
+# -------
+#
+#    This script is meant to run on a Steam Deck!
+#    DO NOT INSTALL IT ON OTHER SYSTEMS.
+#
+# Summary
+# -------
+#
+#    A wrapper around 'gpg', setting the GNUPG home directory to a KDE Plasma
+#    Vault at ~/.identity if it's unlocked, or showing a warning otherwise.
+#
+#
+# =============================================================================
+set -euo pipefail
+
+# Use an alternate GNUPGHOME if it's unlocked.
+LOCKED_GNUPGHOME="$HOME/.identity/gnupg"
+if [[ -d "$LOCKED_GNUPGHOME" ]]; then
+	export GNUPGHOME="$LOCKED_GNUPGHOME"
+else
+	printf "\x1B[33mWarning: Not using the vaulted GPG keyring.\x1B[0m\n"
+	printf "\x1B[33mIf this is not intentional, unlock it through Plasma.\x1B[0m\n"
+    printf "\n"
+    printf "%s " \
+        "If this is the first time seeing this message, please create a Vault" \
+        "at ~/.identity with a folder named 'gnupg' inside it. This will be" \
+        "where your keychain will be securely stored."
+fi
+
+# Run the real gpg command.
+COMMAND_GPG="$(which -a gpg | sed '1d' | head -n1)"
+exec "$COMMAND_GPG" "$@"
+
