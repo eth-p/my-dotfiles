@@ -31,6 +31,7 @@ call plug#begin()
 	if has('nvim') | Plug 'rbgrouleff/bclose.vim' | endif
 call plug#end()
 
+call ale_commitlint#register()
 
 " -----------------------------------------------------------------------------
 " Overrides:
