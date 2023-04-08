@@ -123,6 +123,8 @@ call ale_commitlint#register()
 	\   "\u2506", "\u2504" 
 	\]
 
+	let g:ale_virtualtext_prefix = '   %comment% %type%: '
+
 	" Enable title.
 	set title
 	set titlestring=vim\ %F
@@ -194,6 +196,11 @@ call ale_commitlint#register()
 		execute "highlight ColorColumn ".g:focus_guide
 
 		" highlight SignColumn guibg=245
+
+		" Configure ALE's virtual text.
+		execute "highlight ALEVirtualTextError ctermfg=124 cterm=italic"
+		execute "highlight ALEVirtualTextWarning ctermfg=172 cterm=italic"
+		execute "highlight ALEVirtualTextInfo ctermfg=237 cterm=italic"
 	endif
 
 
