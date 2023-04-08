@@ -7,6 +7,7 @@ call plug#begin()
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-sleuth'
 	Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+	Plug 'maximbaz/lightline-ale'
 
 	" LSP.
 	Plug 'dense-analysis/ale'
@@ -66,7 +67,16 @@ call ale_commitlint#register()
 	let g:hostname = trim(system("{ command -v hostname >/dev/null && hostname; } || cat /etc/hostname"))
 	let g:lightline = {
 	\	'active': {
-	\		'left': [[ 'mode', 'paste' ], ['readonly', 'hostname', 'filename', 'modified'], [ 'git_status' ]]
+	\		'left': [
+	\			[ 'mode', 'paste' ],
+	\			['readonly', 'hostname', 'filename', 'modified'],
+	\			[ 'git_status' ],
+	\		],
+	\		'right': [
+	\			[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'percent' ],
+	\			[ 'lineinfo' ],
+	\			[ 'fileformat', 'fileencoding', 'filetype'],
+	\		],
 	\	},
 	\	'component_function': {
 	\		'git_status': 'LLCustom_GitStatus',
@@ -74,6 +84,22 @@ call ale_commitlint#register()
 	\	},
 	\	'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
 	\	'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+	\}
+
+	let g:lightline.component_type = {
+	\	'linter_checking': 'right',
+	\	'linter_infos': 'right',
+	\	'linter_warnings': 'warning',
+	\	'linter_errors': 'error',
+	\	'linter_ok': 'right',
+	\}
+
+	let g:lightline.component_expand = {
+	\	'linter_checking': 'lightline#ale#checking',
+	\	'linter_infos': 'lightline#ale#infos',
+	\	'linter_warnings': 'lightline#ale#warnings',
+	\	'linter_errors': 'lightline#ale#errors',
+	\	'linter_ok': 'lightline#ale#ok',
 	\}
 
 	function! LLCustom_GitStatus()
