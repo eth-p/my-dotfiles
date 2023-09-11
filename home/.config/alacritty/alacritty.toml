@@ -1,0 +1,243 @@
+# my-dotfiles | Copyright (C) 2021 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+
+# -----------------------------------------------------------------------------
+# Disable Scrolling
+# (Prefer tmux)
+# -----------------------------------------------------------------------------
+[scrolling]
+history = 0
+
+# -----------------------------------------------------------------------------
+# Initialization
+# -----------------------------------------------------------------------------
+[env]
+USER_SHELL = "fish"
+
+[shell]
+args = ["bash", "-c", """
+# Append to the PATH.
+PATH=\"/usr/local/bin:$PATH\"
+if [ -d \"/opt/homebrew/bin\" ]; then PATH=\"/opt/homebrew/bin:$PATH\"; fi
+
+# Switch the SHELL environment variable to the user's desired shell.
+export SHELL=\"$USER_SHELL\"
+unset USER_SHELL
+SHELL_PATH=\"$(printf '%q' \"$(which \"$SHELL\" 2>&1 || echo bash)\")\"
+SHELL_NAME=\"$(printf '%q' \"$(basename -- \"$SHELL_PATH\")\")\"
+
+detached_session_count=\"$(tmux list-sessions -f '#{?session_attached,,1}' | wc -l)\"
+if [ \"${detached_session_count}\" -eq 1 ]; then
+  tmux attach -t \"$(tmux list-sessions -f '#{?session_attached,,1}' -F '#{session_id}')\" || bash
+  exit 0
+fi
+
+# Start a new tmux session for tab and split support.
+SHLVL= SHELL=\"/bin/sh\" tmux new-session \"
+  tmux unbind d;
+  tmux set-option default-shell $SHELL_PATH;
+  exec -a -$SHELL_NAME $SHELL_PATH
+\" || bash"""]
+program = "/usr/bin/env"
+
+# -----------------------------------------------------------------------------
+# Monokai Color Scheme
+# -----------------------------------------------------------------------------
+[colors.bright]
+black = "#666666"
+blue = "#6b6dff"
+cyan = "#38efff"
+green = "#79ec46"
+magenta = "#ffb837"
+red = "#ff3158"
+white = "#eaeaea"
+yellow = "#fff836"
+
+[colors.normal]
+black = "#1d1f21"
+blue = "#ab9df2"
+cyan = "#78dce8"
+green = "#a9dc76"
+magenta = "#fc9867"
+red = "#ff6188"
+white = "#c5c5c5"
+yellow = "#ffd866"
+
+[colors.primary]
+background = "#1c1c1c"
+foreground = "#c8c8c8"
+
+[window]
+decorations_theme_variant = "Dark"
+option_as_alt = "Both"
+
+[window.padding]
+x = 4
+y = 2
+
+# -----------------------------------------------------------------------------
+# Font Config
+# -----------------------------------------------------------------------------
+[font]
+size = 11
+
+[font.bold]
+family = "JetBrains Mono NL"
+
+[font.bold_italic]
+family = "JetBrains Mono NL"
+
+[font.italic]
+family = "JetBrains Mono NL"
+
+[font.normal]
+family = "JetBrains Mono NL"
+
+# -----------------------------------------------------------------------------
+# Keybindings:
+# Escape Key
+# -----------------------------------------------------------------------------
+[[keyboard.bindings]]
+chars = "\u001B\u001B"
+key = "Escape"
+
+# -----------------------------------------------------------------------------
+# Keybindings:
+# Tmux Integrations
+# -----------------------------------------------------------------------------
+[[keyboard.bindings]]
+chars = "\u0011"
+key = "Q"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~c"
+key = "C"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~f"
+key = "F"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~j"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~k"
+key = "K"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~o"
+key = "O"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~s"
+key = "S"
+mods = "Command"
+
+# -----------------------------------------------------------------------------
+# Keybindings:
+# Tmux Windows
+# -----------------------------------------------------------------------------
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001x"
+key = "W"
+mods = "Command"
+
+# -----------------------------------------------------------------------------
+# Keybindings:
+# Tmux Splits
+# -----------------------------------------------------------------------------
+[[keyboard.bindings]]
+chars = "\u0001|"
+key = "D"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0001-"
+key = "D"
+mods = "Command|Shift"
+
+# -----------------------------------------------------------------------------
+# Keybindings:
+# Tmux Tab Hotkeys
+# -----------------------------------------------------------------------------
+[[keyboard.bindings]]
+chars = "\u00011"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00012"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00013"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00014"
+key = "Key4"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00015"
+key = "Key5"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00016"
+key = "Key6"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00017"
+key = "Key7"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00018"
+key = "Key8"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00019"
+key = "Key9"
+mods = "Command"
+
+#[[keyboard.bindings]]
+#chars = "\u0001n"
+#key = "Grave"
+#mods = "Command"
+
+#[[keyboard.bindings]]
+#chars = "\u0001p"
+#key = "Grave"
+#mods = "Command|Shift"
+
+#[[keyboard.bindings]]
+#chars = "\u0001n"
+#key = "Grave"
+#mods = "Alt|Command"
+
+#[[keyboard.bindings]]
+#chars = "\u0001p"
+#key = "Grave"
+#mods = "Alt|Command|Shift"
