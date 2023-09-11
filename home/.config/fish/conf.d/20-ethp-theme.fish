@@ -47,11 +47,16 @@ end
 # would actually use them.
 # -----------------------------------------------------------------------------
 
-if command -vq exa
-	function exa --wraps="exa"
-		LS_COLORS="$THEME_LS_COLORS" EXA_COLORS="$THEME_EXA_COLORS" \
-		command exa $argv
-		return $status
+set -l _command
+for _command in eza exa
+	if command -vq $_command
+		function $_command --wraps="$_command" -V _command
+			LS_COLORS="$THEME_LS_COLORS" \
+			EXA_COLORS="$THEME_EXA_COLORS" \
+			EZA_COLORS="$THEME_EZA_COLORS" \
+			command $_command $argv
+			return $status
+		end
 	end
 end
 

@@ -18,7 +18,7 @@ My setup is designed around using [tmux](https://github.com/tmux/tmux/wiki) and 
 Recommended:
 
 - [bat](https://github.com/sharkdp/bat) as a syntax-highlighted alternative to `cat`.
-- [exa](https://github.com/ogham/exa) as an improved version of `ls`.
+- [eza](https://github.com/eza-community/eza) as an improved version of `ls`.
 - [git-delta](https://github.com/dandavison/delta) for better `git diff` and `git blame`.
 - [glow](https://github.com/charmbracelet/glow) for better Markdown previews in the terminal.
 
@@ -148,9 +148,9 @@ No special instructions, just copy the files.
 |:--|---|---|
 |**Command Line**|||
 |`cdun`|`bettercd`|Undo the last `cd` command.|
-|`ls`|`exa`|List files using exa.|
-|`ll`|`exa`|List files in long format, including git status.|
-|`la`|`exa`|List all files in long format, including git status.|
+|`ls`|`eza`|List files using eza.|
+|`ll`|`eza`|List files in long format, including git status.|
+|`la`|`eza`|List all files in long format, including git status.|
 |`pbcopy`|`xclip`|Copy STDIN to the clipboard.|
 |`pbpaste`|`xclip`|Paste the clipboard to STDOUT.|
 |`top`|`gotop`||

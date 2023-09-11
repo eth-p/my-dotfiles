@@ -17,11 +17,15 @@
 
 if status is-interactive
 
-	# Exa
-	if command -vq exa
-		alias ls "exa"
-		alias ll "exa --git -l"
-		alias la "exa --git -la"
+	# Exa/eza
+	set -l _command
+	for _command in eza exa
+		if command -vq $_command
+			alias ls "$_command"
+			alias ll "$_command --git -l"
+			alias la "$_command --git -la"
+			break
+		end
 	end
 
 	# Vim
