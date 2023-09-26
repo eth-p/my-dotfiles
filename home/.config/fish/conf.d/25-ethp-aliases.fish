@@ -73,9 +73,13 @@ if status is-interactive
 		function fdtree --wraps="fd"; fd $argv | as-tree; end
 	end
 
-	# Gotop
+	# Gotop / btop
 	if command -vq gotop
 		alias top "gotop"
+	end
+
+	if command -vq btop
+		alias top "btop"
 	end
 
 	# Git
