@@ -44,8 +44,9 @@ end
 
 function __ethp_theme_dark
 
-	# ls/exa
+	# ls/exa/eza
 	set -g THEME_EXA_COLORS "da=39:uu=37:un=33:ur=97:uw=39:ux=1;32:ue=39:tw=31:tr=33:tx=2;39:gr=2;39:gw=2;39:gx=2;39;"
+	set -g THEME_EZA_COLORS $THEME_EXA_COLORS
 	if command -vq vivid
 		set -g THEME_LS_COLORS (vivid generate molokai)
 	end
@@ -64,8 +65,9 @@ end
 
 function __ethp_theme_light
 
-	# ls/exa
+	# ls/exa/eza
 	set -g THEME_EXA_COLORS "da=39:uu=37:un=33:ur=97:uw=39:ux=1;32:ue=39:tw=31:tr=33:tx=2;39:gr=2;39:gw=2;39:gx=2;39;"
+	set -g THEME_EZA_COLORS $THEME_EXA_COLORS
 	if command -vq vivid
 		set -g THEME_LS_COLORS (vivid generate molokai)
 	end
