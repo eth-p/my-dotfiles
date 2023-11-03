@@ -1,7 +1,8 @@
-files := home/.tmux.conf \
+files := home/.config/tmux/tmux.conf \
 	$(wildcard home/.config/tmux/**/*) \
 	$(wildcard home/.config/tmux/integrations/*/*) \
-	$(wildcard home/.local/libexec/tmux-*)
+	$(wildcard home/.local/libexec/tmux-*) \
+	home/.local/libexec/term-ansi-to-tmux
 
 install//home/%: home/%
 	@ bash .install/copy.sh "$<" "${HOME}/$*"
