@@ -1,5 +1,6 @@
 files := \
 		 $(wildcard home-steamos/.local/bin/gpg) \
+		 $(wildcard home-steamos/.local/libexec/vault-tools) \
 		 $(wildcard home-steamos/.config/systemd/user/gpg-agent.service/*)
 
 install//home-steamos/%: home-steamos/%
