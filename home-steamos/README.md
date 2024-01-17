@@ -26,3 +26,24 @@ A couple executable scripts that fix issues with running third-party software un
 - `/home/deck/.local/steam-shortcuts/gamemode-discord`  
   Starts Flatpak Discord and also closes it properly.  
   Create a non-Steam shortcut for Discord and replace it to point to this script.
+
+### steamos-vscode
+
+Install Visual Studio Code's flatpak and (with a little bit of configuration) enables running the user's unsandboxed shell.
+
+Please add the following terminal profile to Visual Studio Code's configuration:
+
+```jsonc
+// ...
+"terminal.integrated.profiles.linux": {
+  "Host": {
+    "overrideName": true,
+    "icon": "terminal-linux",
+    "path": "/bin/bash",
+    "args": [
+      "-c",
+      "export FLATPAK_INSTANCE=$(grep 'instance-id=' /run/user/1000/.flatpak/*/info | cut -d'=' -f2); host-spawn -env TERM,FLATPAK_ID,FLATPAK_INSTANCE fish -l",
+    ]
+  }
+}
+```
