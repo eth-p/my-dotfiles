@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2024 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+# =============================================================================
+#
+# Warning
+# -------
+#
+#    This script is meant to run on a Steam Deck!
+#    DO NOT INSTALL IT ON OTHER SYSTEMS.
+#
+# Summary
+# -------
+#
+#    A wrapper around 'steam', enabling UI scaling based on the current KDE
+#    plasma setting.
+#
+#
+# =============================================================================
+set -euo pipefail
+STEAM_DESKTOP_FILE="/usr/share/applications/steam.desktop"
+STEAM_DESKTOP_FILE_LOCAL="${HOME}/.local/share/applications/steam.desktop"
+
+# Function to replace the process with the real steam command.
+# This does not return.
+steam() {
+	COMMAND_STEAM="/usr/bin/steam"
+	exec "$COMMAND_STEAM" "$@"
+}
+
+# Generate a patched .desktop file that points to this wrapper.
+WRAPPER="$(readlink -f "${BASH_SOURCE[0]}")"
+sed "s#/usr/bin/steam#${WRAPPER}#" "$STEAM_DESKTOP_FILE" > "$STEAM_DESKTOP_FILE_LOCAL"
+
+# Read the Plasma UI scaling parameter.
+read_kde_global() {
+	if ! { grep "^${1}=" "${HOME}/.config/kdeglobals" | cut -d'=' -f2-; } 2>/dev/null; then
+		echo "$2"
+	fi
+}
+
+SCALE_FACTOR="$(read_kde_global 'ScaleFactor' '1')"
+
+# Export variable to change Steam UI scaling.
+export STEAM_FORCE_DESKTOPUI_SCALING="${SCALE_FACTOR}"
+
+# Export variables that affect other applications.
+export GDK_SCALE="${SCALE_FACTOR}"
+export QT_SCREEN_SCALE_FACTORS="${QT_SCREEN_SCALE_FACTORS:-$(read_kde_global 'ScreenScaleFactors' '')}"
+
+# Run the real steam.
+steam "$@"
+exit $?

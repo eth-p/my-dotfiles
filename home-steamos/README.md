@@ -27,6 +27,13 @@ A couple executable scripts that fix issues with running third-party software un
   Starts Flatpak Discord and also closes it properly.  
   Create a non-Steam shortcut for Discord and replace it to point to this script.
 
+### steamos-steam-scaling
+
+A wrapper script which enables UI scaling for Steam in Desktop mode.
+This reads the KDE Plasma configuration to determine the correct scaling factor.
+
+The script must be run manually at least once to patch the `.desktop` entry.
+
 ### steamos-vscode
 
 Install Visual Studio Code's flatpak and (with a little bit of configuration) enables running the user's unsandboxed shell.
