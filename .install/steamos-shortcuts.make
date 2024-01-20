@@ -1,4 +1,5 @@
 files := \
+		 home-steamos/.local/lib/ethp-flatpak-utils.sh \
 		 $(wildcard home-steamos/.local/steam-shortcuts/*)
 
 install//home-steamos/%: home-steamos/%
