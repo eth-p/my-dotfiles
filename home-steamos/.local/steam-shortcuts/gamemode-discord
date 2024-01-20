@@ -24,6 +24,9 @@
 #      2. It sets the window bounds of Discord to match the Steam Deck's
 #         resolution, allowing it to use the full viewport under game mode.
 #
+#      3. It changes the process priority (niceness) of various Discord
+#         processes to optimize resource consumption when playing games.
+#
 # =============================================================================
 set -euo pipefail
 source "${HOME}/.local/lib/ethp-flatpak-utils.sh"
@@ -33,6 +36,9 @@ FLATPAK_ID="com.discordapp.Discord"
 DISCORD_CONFIG_DIR="$HOME/.var/app/${FLATPAK_ID}/config/discord"
 DISCORD_SETTINGS_JSON="${DISCORD_CONFIG_DIR}/settings.json"
 DISCORD_BOUNDS=0,0,1280,800
+
+NICENESS=-2
+UNNICENESS=5
 
 # Functions
 discord_pids() {
@@ -87,6 +93,64 @@ discord_exit() {
 	flatpak kill "$FLATPAK_ID"
 }
 
+discord_renice() {
+	echo "==> Updating niceness of Discord to prevent crackling."
+	local nice_pids=()
+	local unnice_pids=()
+
+	# Get the PIDs for the child bwrap process.
+	local pids
+	readarray -t pids < <(flatpak:pids "$FLATPAK_ID" --child)
+
+	# Find the entry point process.
+	local entry_pid pid line
+	for pid in "${pids[@]}"; do
+		while read -r pid line; do
+			if [[ "$line" = "/bin/bash /app/bin/com.discordapp.Discord" ]]; then
+				entry_pid="$pid"
+				break 2
+			fi
+		done < <(ps --ppid="$pid" -o "pid,cmd" --no-headers)
+	done
+
+	if [[ -z "$entry_pid" ]]; then
+		return 1
+	fi
+
+	# Find the Electron process.
+	local electron_pid
+	while read -r pid line; do
+		if [[ "$line" =~ ^/app/discord/Discord ]]; then
+			electron_pid="$pid"
+			nice_pids+=("$pid")
+			break 2
+		fi
+	done < <(ps --ppid="$entry_pid" -o "pid,cmd" --no-headers)
+
+	if [[ -z "$electron_pid" ]]; then
+		return 1
+	fi
+
+	# Find the utility processes spawned by Discord.
+	while read -r pid line; do
+		# Renderer should be lower priority.
+		if [[ "$line" =~ --type=renderer ]]; then
+			unnice_pids+=("$pid")
+			continue
+		fi
+
+		# Utility should be higher priority.
+		if [[ "$line" =~ --type=utility ]]; then
+			nice_pids+=("$pid")
+			continue
+		fi
+	done < <(ps --ppid="$electron_pid" -o "pid,cmd" --no-headers)
+
+	# Attempt to re-nice the processes.
+	renice "$UNNICENESS" --pid "${unnice_pids[@]}"
+	renice "$NICENESS" --pid "${nice_pids[@]}"
+}
+
 cleanup() {
 	if [[ -f "${DISCORD_SETTINGS_JSON}.old" ]]; then
 		mv "${DISCORD_SETTINGS_JSON}.old" "${DISCORD_SETTINGS_JSON}"
@@ -102,4 +166,5 @@ fi
 trap 'cleanup' EXIT
 trap 'discord_exit' INT HUP TERM
 discord_launch && sleep 5
+{ sleep 30; discord_renice || echo "==> Failed to update niceness."; } &
 discord_wait
