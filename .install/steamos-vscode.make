@@ -1,4 +1,5 @@
 files := \
+	home-steamos/.local/lib/ethp-flatpak-utils.sh \
 	home-steamos/.config/fish/conf.d/2-vscode-path.fish \
 	$(wildcard home-steamos/.local/share/vscodebin/*)
 
