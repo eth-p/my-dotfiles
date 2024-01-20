@@ -41,7 +41,6 @@ discord_running() {
 
 discord_pids() {
 	flatpak ps --columns=application,pid \
-		| sed '1d' \
 		| awk -v id="$FLATPAK_ID" '$1==id { print $2 }' \
 		| sort -u
 }
