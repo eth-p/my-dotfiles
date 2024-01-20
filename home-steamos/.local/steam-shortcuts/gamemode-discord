@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# my-dotfiles | Copyright (C) 2023 eth-p
+# my-dotfiles | Copyright (C) 2023-2024 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 # =============================================================================
 #
@@ -14,9 +14,15 @@
 #
 #    A wrapper around the Flatpak version of Discord.
 #
-#    When this script is told to close, it ensures Discord actually closes
-#    and doesn't get stuck "exiting" under gamemode.
+#    This script aims to achieve a couple of different goals:
 #
+#      1. It prevents Steam from becoming stuck when trying to exit Discord.
+#         This is achieved by both disabling the "minimize to tray" option
+#         before launching Discord, and by propagating the SIGINT signal
+#         to ALL Discord processes.
+#
+#      2. It sets the window bounds of Discord to match the Steam Deck's
+#         resolution, allowing it to use the full viewport under game mode.
 #
 # =============================================================================
 set -euo pipefail
@@ -58,12 +64,14 @@ discord_launch() {
 	IFS=',' read -r bound_x bound_y bound_width bound_height <<< "$DISCORD_BOUNDS"
 
 	echo "==> Rewriting Discord window size to Steam Deck resolution."
+	echo "==> Also disabling minimize to tray option."
 	mv "${DISCORD_SETTINGS_JSON}" "${DISCORD_SETTINGS_JSON}.old"
 	jq '.WINDOW_BOUNDS.x = ($BOUND_X | tonumber)
 		| .WINDOW_BOUNDS.y = ($BOUND_Y | tonumber)
 		| .WINDOW_BOUNDS.width = ($BOUND_WIDTH | tonumber)
 		| .WINDOW_BOUNDS.height = ($BOUND_HEIGHT | tonumber)
-		| .IS_MAXIMIZED = true' \
+		| .IS_MAXIMIZED = true
+		| .MINIMIZE_TO_TRAY = false' \
 		"${DISCORD_SETTINGS_JSON}.old" \
 		--arg BOUND_X "$bound_x" \
 		--arg BOUND_Y "$bound_y" \
