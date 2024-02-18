@@ -15,6 +15,7 @@ history = 0
 USER_SHELL = "fish"
 
 [shell]
+program = "/usr/bin/env"
 args = ["bash", "-c", """
 # Append to the PATH.
 PATH=\"/usr/local/bin:$PATH\"
@@ -35,10 +36,9 @@ fi
 # Start a new tmux session for tab and split support.
 SHLVL= SHELL=\"/bin/sh\" tmux new-session \"
   tmux unbind d;
-  tmux set-option default-shell $SHELL_PATH;
-  exec -a -$SHELL_NAME $SHELL_PATH
-\" || bash"""]
-program = "/usr/bin/env"
+  exec -a -$SHELL_NAME $SHELL_PATH;
+\" || bash
+"""]
 
 # -----------------------------------------------------------------------------
 # Monokai Color Scheme
