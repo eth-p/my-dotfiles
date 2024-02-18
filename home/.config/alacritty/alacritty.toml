@@ -21,6 +21,9 @@ args = ["bash", "-c", """
 PATH=\"/usr/local/bin:$PATH\"
 if [ -d \"/opt/homebrew/bin\" ]; then PATH=\"/opt/homebrew/bin:$PATH\"; fi
 
+# Set the tmux client features supported by Alacritty.
+ALACRITTY_FEATURES=\"hyperlinks\"
+
 # Switch the SHELL environment variable to the user's desired shell.
 export SHELL=\"$USER_SHELL\"
 unset USER_SHELL
@@ -29,12 +32,12 @@ SHELL_NAME=\"$(printf '%q' \"$(basename -- \"$SHELL_PATH\")\")\"
 
 detached_session_count=\"$(tmux list-sessions -f '#{?session_attached,,1}' | wc -l)\"
 if [ \"${detached_session_count}\" -eq 1 ]; then
-  tmux attach -t \"$(tmux list-sessions -f '#{?session_attached,,1}' -F '#{session_id}')\" || bash
+  tmux attach -T "$ALACRITTY_FEATURES" -t \"$(tmux list-sessions -f '#{?session_attached,,1}' -F '#{session_id}')\" || bash
   exit 0
 fi
 
 # Start a new tmux session for tab and split support.
-SHLVL= SHELL=\"/bin/sh\" tmux new-session \"
+SHLVL= SHELL=\"/bin/sh\" tmux -f \"$ALACRITTY_FEATURES\" new-session \"
   tmux unbind d;
   exec -a -$SHELL_NAME $SHELL_PATH;
 \" || bash
