@@ -37,7 +37,7 @@ if [ \"${detached_session_count}\" -eq 1 ]; then
 fi
 
 # Start a new tmux session for tab and split support.
-SHLVL= SHELL=\"/bin/sh\" tmux -f \"$ALACRITTY_FEATURES\" new-session \"
+SHLVL= SHELL=\"/bin/sh\" tmux new-session -f \"$ALACRITTY_FEATURES\" \"
   tmux unbind d;
   exec -a -$SHELL_NAME $SHELL_PATH;
 \" || bash
