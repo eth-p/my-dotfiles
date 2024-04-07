@@ -39,6 +39,8 @@ fi
 # Start a new tmux session for tab and split support.
 SHLVL= SHELL=\"/bin/sh\" tmux new-session -f \"$ALACRITTY_FEATURES\" \"
   tmux unbind d;
+  tmux setenv SHELL \"$SHELL_PATH\";
+  tmux set default-command \"$SHELL_PATH\";
   exec -a -$SHELL_NAME $SHELL_PATH;
 \" || bash
 """]
