@@ -35,7 +35,7 @@ install: $(patsubst .install/%.make,install/%,$(filter-out .install/steamos-%,$(
 requirements/%: .install/%.make
 	@ cd "${REPO_ROOT}";                                                    \
 	  system=`uname -s`;                                                    \
-	  if [ -n "$TERMUX_APP_PID" ]; then system="termux"; fi;                \
+	  if [ -n "$$TERMUX_APP_PID" ]; then system="termux"; fi;               \
 	  case "$$system" in                                                    \
 	      Darwin)      system='mac';;                                       \
 	      Linux|linux) case "`sh -c '. /etc/os-release && echo "$$ID"'`" in \
