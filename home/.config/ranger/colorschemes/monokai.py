@@ -1,4 +1,4 @@
-# my-dotfiles | Copyright (C) 2021 eth-p
+# my-dotfiles | Copyright (C) 2021-2024 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 
 from ranger.gui.colorscheme import ColorScheme
@@ -118,8 +118,12 @@ class Monokai(ColorScheme):
             elif context.directory:
                 fg = 247
             elif context.tab:
+                fg = 246
+                bg = 237
                 if context.good:
-                    bg = 180
+                    fg = 253
+                    bg = 240
+                    attr |= bold
             elif context.link:
                 fg = 116
 
