@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# my-dotfiles | Copyright (C) 2021 eth-p
+# my-dotfiles | Copyright (C) 2021-2024 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 # =============================================================================
 #
@@ -41,6 +41,7 @@ set -euo pipefail
 # OSC 11: Query background color.
 # Used in xterm to report the background color.
 query_with_osc11() {
+	ANSI_QUERY_DA1=$'\x1B[c'
 	ANSI_QUERY_BG=$'\x1B]11;?\a'
 
 	# If we're running inside tmux, tmux won't respond to OSC 11 queries even
@@ -48,20 +49,31 @@ query_with_osc11() {
 	# https://github.com/tmux/tmux/issues/1919
 	#
 	# We need to ask tmux to query the terminal on our behalf.
-	if [[ -n "${TMUX:-}" ]]; then
+	if [[ -n "${TMUX:-}" ]] && _tmux_version_is_older_than 3.1; then
+		ANSI_QUERY_DA1=$'\x1BPtmux;\x1B\x1B[c\x1B\\'
 		ANSI_QUERY_BG=$'\x1BPtmux;\x1B\x1B]11;?\a\x1B\\'
 	fi
 
-	# Enter no-echo terminal mode and try to read the response within 50ms.
+	# Enter no-echo terminal mode and send OSC11 followed by DA1.
+	# https://github.com/bash/terminal-colorsaurus
+	_echo_off
+	printf "%s" "$ANSI_QUERY_BG" >>/dev/tty
+	printf "%s" "$ANSI_QUERY_DA1" >>/dev/tty
+
+	# Attempt to read back the response within 2 seconds.
+	# The terminal will send OSC11 response (if supported), then DA1.
 	{
-		printf "%s" "$ANSI_QUERY_BG" >>/dev/tty
-		read -s -r -t 0.2 -d$'\a' response 2>/dev/null # Won't work in Bash 3.
-	} </dev/tty
+		read -r -t1 -d'?' upto_da1_start
+		read -r -t1 -d'c' upto_da1_end
+	} < /dev/tty
+
+	response="${upto_da1_start}?${upto_da1_end}c"
+	_echo_on
 
 	# Did we get a response that matches the pattern:
 	#   ^[]11;rgb:RRRR:GGGG:BBBB
 	#   ^[]11;rgba:RRRR:GGGG:BBBB:AAAA
-	if [[ "$response" =~ ^$'\x1B']11\;rgba?:([a-fA-F0-9]{2,4})/([a-fA-F0-9]{2,4})/([a-fA-F0-9]{2,4})(/[a-fA-F0-9]{2,4})?$ ]]; then
+	if [[ "$response" =~ ^$'\x1B']11\;rgba?:([a-fA-F0-9]{2,4})/([a-fA-F0-9]{2,4})/([a-fA-F0-9]{2,4})(/[a-fA-F0-9]{2,4})? ]]; then
 		BG_METHOD=osc11
 
 		local set_fn=
@@ -75,7 +87,7 @@ query_with_osc11() {
 		"$set_fn" "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
 		return 0
 	fi
-	
+
 	# Didn't get a response.
 	return 1
 }
@@ -173,10 +185,34 @@ _set_rgb12_hex() {
 }
 
 # Small utility to set the BG_* variables from 3 16-bit RGB hex numbers.
-_set_rgb16_hex() {	
+_set_rgb16_hex() {
 	BG_RED="$((16#$1))"
 	BG_GREEN="$((16#$2))"
 	BG_BLUE="$((16#$3))"
+}
+
+# Small utility to enable/disable input echo.
+if command -v stty &>/dev/null; then
+	_echo_off() { stty -echo; }
+	_echo_on()  { stty echo;  }
+else
+	_echo_off() { :; }
+	_echo_on()  { :; }
+fi
+
+# Small utility to check tmux version.
+_tmux_version() {
+	if [[ -z "${TMUX_VERSION:-}" ]]; then
+		TMUX_VERSION="$(tmux -V | cut -d' ' -f2)"
+	fi
+
+	printf "%s\n" "$TMUX_VERSION"
+}
+
+_tmux_version_is_older_than() {
+	local vers="$(printf "%s\n%s\n" "$1" "$(_tmux_version)" | sort -V | head -n1)"
+	[[ "$vers" == "$1" ]] || return 0
+	return 1
 }
 
 # -----------------------------------------------------------------------------
