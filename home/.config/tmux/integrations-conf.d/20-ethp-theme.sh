@@ -17,8 +17,8 @@
 # shellcheck disable=SC2034
 case "${TERM_BG:-dark}" in
 dark) {
-	INTEGRATION_ERROR_STYLE='bg=colour52 fg=colour252'
-	ICFG_EXIT_PROMPT_STYLE='bg=colour94 fg=colour254'
+	INTEGRATION_ERROR_STYLE='bg=colour52 fill=colour52 fg=colour252'
+	ICFG_EXIT_PROMPT_STYLE='bg=colour94 filll=colour94 fg=colour254'
 } ;;
 
 light) {

@@ -79,7 +79,7 @@ set -euo pipefail
 # These can be overridden in an integration config file.
 # -----------------------------------------------------------------------------
 
-INTEGRATION_ERROR_STYLE="bg=red fg=black"
+INTEGRATION_ERROR_STYLE="bg=red fill=red fg=black"
 
 INTEGRATION_CONTEXT_MENU_HEADER_STYLE="fg=colour147, bold"
 INTEGRATION_CONTEXT_MENU_PASSTHROUGH_NAME="Ctrl+X"
@@ -312,48 +312,6 @@ printf "\x1B[33m-----\x1B[0m\n"
 
 
 # -----------------------------------------------------------------------------
-# Internal Functions:
-# These are used internally and should not be used by integrations.
-# -----------------------------------------------------------------------------
-
-# Get the tmux `display-time` option in a `sleep`-friendly value.
-# This is the value that determines how long `display-message` is shown for.
-__ethp_get_tmux_display_time() {
-	local scope
-	local delay
-
-	# Get the tmux `display-time` option.
-	for scope in '' -w -g -s; do
-		if delay="$(tmux show-options -v $scope display-time)" && [ -n "$delay" ]; then
-			break
-		fi
-	done 2>/dev/null
-
-	# If there isn't a display time, use the default of `0.75s`.
-	if [ -z "$delay" ]; then
-		delay=750
-	fi
-
-	# Add `0.25s` to the display time.
-	delay="$((delay + 250))"
-
-	# If `$1` is "ms", print the milliseconds.
-	if [ "${1:-s}" = "ms" ]; then
-		echo "$delay"
-		return 0
-	fi
-	
-	# Calculate a `sleep` friendly value.
-	# This is needed for the modified style to persist.
-	local secs="$((delay / 1000))"
-	local msecs="0000$((delay % 1000))"
-	msecs="${msecs:(-4)}"
-
-	echo "${secs}.${msecs}"
-}
-
-
-# -----------------------------------------------------------------------------
 # Library Functions:
 # These are intended to be used within integrations.
 # -----------------------------------------------------------------------------
@@ -404,22 +362,7 @@ __ethp_get_tmux_display_time() {
 #   $1  -- The message to display.
 #
 error:() {
-	# Get the old message style and set the new one.
-	local message_style
-	message_style="$(tmux show-options -v message-style)"
-	tmux set-option message-style "$INTEGRATION_ERROR_STYLE" || true
-
-	# Display the message.
-	tmux display-message -F "$1" || true
-	sleep "$(__ethp_get_tmux_display_time s)" || true
-	
-	# Reset the message style.
-	# If it was unset before, remove it. If it was set, set it to previous value.
-	if [ -z "$message_style" ]; then
-		tmux set-option -u message-style
-	else
-		tmux set-option message-style "$message_style"
-	fi
+	tmux display-message "#[${INTEGRATION_ERROR_STYLE}]${1/\#\[default\]/\#\[nobold $INTEGRATION_ERROR_STYLE\]}" || true
 }
 
 keys:() {
