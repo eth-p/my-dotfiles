@@ -91,7 +91,7 @@ if test -z "$RANGER_DATA_DIR" && test -L "$(command -v ranger)"; then
 	RANGER_DATA_DIR="$({
 		cd "$(dirname -- "$(command -v ranger)")"
 		cd "$(dirname -- "$(readlink ranger)")"
-		cd "../libexec/ranger"
+		cd "../lib/python"*/"site-packages/ranger"
 		pwd
 	})"
 fi
