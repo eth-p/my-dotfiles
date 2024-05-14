@@ -444,6 +444,12 @@ if "$__integration_is_contextmenu"; then
 		__write_to_menu_section "$__menu_section" ""
 	}
 
+	# Function: menu:suppress_program_hedaer
+	# Suppresses the header for the program section.
+	menu:suppress_program_header() {
+		__menu_program_noheader=true
+	}
+
 	# Function: :keys:
 	# (when used in a context menu)
 	#
@@ -516,6 +522,8 @@ export INTEGRATION_DIR
 # shellcheck disable=SC2030
 if "$__integration_is_contextmenu"; then
 	({
+		__menu_program_noheader=false
+
 		for INTEGRATION_SCRIPT in "${__integration_script_candidates[@]}"; do
 			if ! [ -f "$INTEGRATION_SCRIPT" ]; then continue; fi
 			if [[ "$INTEGRATION_SCRIPT" =~ .*/_default.sh ]]; then
@@ -523,7 +531,7 @@ if "$__integration_is_contextmenu"; then
 			else
 				__menu_section=program
 			fi
-		
+
 			# shellcheck disable=SC1090
 			source "$INTEGRATION_SCRIPT"
 		done
@@ -545,7 +553,7 @@ if "$__integration_is_contextmenu"; then
 			menu:separator
 
 			# Add a header for the section if it's the program section.
-			if [ "$section" = program ]; then
+			if [[ "$section" = program ]] && ! "$__menu_program_noheader"; then
 				menu:header "$INTEGRATION_PROGRAM"
 			fi
 
