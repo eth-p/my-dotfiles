@@ -52,7 +52,7 @@ use_custom_style() {
 
 			# If we're supposed to be using an unpadded theme, copy the style
 			# and strip away the document margin.
-			if [[ "$opt_unpadded" = "true" ]]; then
+			if [[ "$opt_unpadded" = "true" ]] && command -v jq &>/dev/null; then
 				stylefile_up="${dir}/${name}.unpadded.json"
 
 				if ! [[ -f "$stylefile_up" ]]; then
@@ -73,7 +73,7 @@ use_custom_style() {
 }
 
 if [[ -z "$opt_style" || "$opt_style" = "auto" || "$opt_style" = "color" ]]; then
-	if [[ "$opt_style" = "color" || -t 0 ]]; then
+	if [[ "$opt_style" = "color" || -t 0 || -t 1 ]]; then
 		case "${TERM_BG:-dark}" in
 			dark) opt_style="dark";;
 			light) opt_style="light";;
