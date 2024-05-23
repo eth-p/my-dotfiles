@@ -1,5 +1,7 @@
 function fish_prompt
-	promptfessional enable arrow
+	if [ "$TERM_PROGRAM" != "WarpTerminal" ]
+		promptfessional enable arrow
+	end
 
 	promptfessional section hostname
 		promptfessional show hostname --only-remote
