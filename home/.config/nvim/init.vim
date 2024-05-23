@@ -39,10 +39,10 @@ call ale_commitlint#register()
 " -----------------------------------------------------------------------------
 
 	" If the TERM_BG environment variable is set, we should trust
-	" that over what non-neo vim guesses the background color as.
-"	if $TERM_BG != "" && &background != $TERM_BG
-"		let &background=$TERM_BG
-"	end
+	" that over what neo vim guesses the background color as.
+	if has('nvim') && $TERM_BG != "" && &background != $TERM_BG
+		let &background=$TERM_BG
+	end
 
 	" File type overrides.
 	au BufRead,BufNewFile $HOME/.config/tmux/*.conf setfiletype tmux
