@@ -86,6 +86,11 @@ call ale_commitlint#register()
 	\	'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
 	\}
 
+	if $TERM_PROGRAM == "WarpTerminal"
+		" Don't use arrows with Warp.
+		let g:lightline.separator    = { 'left': '', 'right': '' }
+	endif
+
 	let g:lightline.component_type = {
 	\	'linter_checking': 'right',
 	\	'linter_infos': 'right',
@@ -170,15 +175,17 @@ call ale_commitlint#register()
 		let g:lightline['colorscheme'] = 'powerline'
 
 		let g:focus_text   = 'ctermbg=NONE'
-		let g:focus_number = 'ctermbg=235 ctermfg=243'
-		let g:focus_guide  = 'ctermbg=235'
+		let g:focus_number = 'ctermbg=235 ctermfg=243 guibg=#353337'
+		let g:focus_guide  = 'ctermbg=235 guibg=#353337'
 
 		let g:lost_text    = 'ctermbg=NONE'
 		let g:lost_number  = 'ctermbg=234 ctermfg=240'
 		let g:lost_guide   = 'ctermbg=NONE'
 
-		"if $TMUX != ''
-		"endif
+		if $TERM_PROGRAM == 'WarpTerminal'
+			highlight Normal guibg=NONE
+			highlight ErrorMsg guifg=red guibg=NONE gui=NONE
+		endif
 
 		execute "au FocusGained * highlight Normal ".g:focus_text
 		execute "au FocusGained * highlight LineNr ".g:focus_number
