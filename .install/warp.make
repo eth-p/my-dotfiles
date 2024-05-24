@@ -1,4 +1,5 @@
 files := \
+		 $(wildcard home/.warp/*) \
 		 $(wildcard home/.warp/**/*)
 
 install//home/%: home/%
