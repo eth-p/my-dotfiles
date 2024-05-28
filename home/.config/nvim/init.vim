@@ -174,13 +174,13 @@ call ale_commitlint#register()
 		colorscheme monokai
 		let g:lightline['colorscheme'] = 'powerline'
 
-		let g:focus_text   = 'ctermbg=NONE'
-		let g:focus_number = 'ctermbg=235 ctermfg=243 guibg=#353337'
+		let g:focus_text   = 'ctermbg=NONE guibg=NONE'
+		let g:focus_number = 'ctermbg=235 ctermfg=243 guibg=#353337 guifg=#777777'
 		let g:focus_guide  = 'ctermbg=235 guibg=#353337'
 
-		let g:lost_text    = 'ctermbg=NONE'
-		let g:lost_number  = 'ctermbg=234 ctermfg=240'
-		let g:lost_guide   = 'ctermbg=NONE'
+		let g:lost_text    = 'ctermbg=NONE guibg=NONE'
+		let g:lost_number  = 'ctermbg=234 ctermfg=240 guibg=#252227 guifg=#454447'
+		let g:lost_guide   = 'ctermbg=NONE guibg=#252227'
 
 		if $TERM_PROGRAM == 'WarpTerminal'
 			highlight Normal guibg=NONE
