@@ -100,6 +100,9 @@ family = "JetBrains Mono NL"
 [font.normal]
 family = "JetBrains Mono NL"
 
+[font.offset]
+y = 2
+
 # -----------------------------------------------------------------------------
 # Keybindings:
 # Escape Key
