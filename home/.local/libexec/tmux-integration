@@ -362,7 +362,27 @@ printf "\x1B[33m-----\x1B[0m\n"
 #   $1  -- The message to display.
 #
 error:() {
-	tmux display-message "#[${INTEGRATION_ERROR_STYLE}]${1/\#\[default\]/\#\[nobold $INTEGRATION_ERROR_STYLE\]}" || true
+	tmux display-message "#{E:@ethp-fmt-status-left-padding}#[${INTEGRATION_ERROR_STYLE}]${1/\#\[default\]/\#\[nobold $INTEGRATION_ERROR_STYLE\]}" || true
+}
+
+# Function: confirm:
+#
+# Prompts the user to confirm an action.
+#
+# Arguments:
+#   $1  -- The message to display.
+#
+confirm:() {
+	local message="$1"
+	local style=""
+	if [[ "$#" -gt 1 ]] && [[ "${2:0:8}" = "--style=" ]]; then
+		style="${2:8}"
+		message="${message/\#\[default\]/\#\[$style\]}"
+	fi
+
+	tmux confirm-before \
+		-p "#{E:@ethp-fmt-status-left-padding}$message" \
+		'display-message -p "this is needed"' >/dev/null
 }
 
 keys:() {

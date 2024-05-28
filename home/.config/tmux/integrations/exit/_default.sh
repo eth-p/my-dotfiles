@@ -69,26 +69,9 @@ done < <(children_of "$pane_pid" "$$")
 # Was there any unsafe program?
 # If so, prompt the user about killing the pane.
 if "$need_prompt"; then
-	cancelled=0
-
-	# Get the original style.
-	message_style="$(tmux show-options -v message-style || true)"
-	if [ "${#ICFG_EXIT_PROMPT_STYLE}" -gt 0 ]; then
-		tmux set-option message-style "$ICFG_EXIT_PROMPT_STYLE"
-	fi
-
-	# Prompt the user.
-	tmux confirm-before \
-		-p "Pane is running '$need_prompt_command'. Close it?" \
-		'display-message -p "this is needed"' >/dev/null \
+	confirm: "Pane is running '$need_prompt_command'. Close it?" \
+		--style="$ICFG_EXIT_PROMPT_STYLE" \
 		|| cancelled=$?
-
-	# Reset the style.
-	if [ -n "$message_style" ]; then
-		tmux set-option message-style "${message_style}"
-	else
-		tmux set-option -u message-style
-	fi
 
 	# Exit if the user cancelled.
 	if [ "$cancelled" -ne 0 ]; then
