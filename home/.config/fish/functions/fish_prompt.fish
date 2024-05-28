@@ -1,4 +1,5 @@
 function fish_prompt
+	[ "$ethp_prompt_inline" = "false" ] && printf "\n"
 	is_warp --not && promptfessional enable arrow
 
 	promptfessional section hostname
@@ -48,4 +49,5 @@ function fish_prompt
 
 	set_color (string replace -- "--background=" "" (promptfessional color section.path --or=component.path --only-background --print))
 	promptfessional literal "{arrow}\x1B[0m "
+	[ "$ethp_prompt_inline" = "false" ] && printf "\n"
 end

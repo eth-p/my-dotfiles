@@ -69,6 +69,7 @@ done < <(children_of "$pane_pid" "$$")
 # Was there any unsafe program?
 # If so, prompt the user about killing the pane.
 if "$need_prompt"; then
+	cancelled=0
 	confirm: "Pane is running '$need_prompt_command'. Close it?" \
 		--style="$ICFG_EXIT_PROMPT_STYLE" \
 		|| cancelled=$?
