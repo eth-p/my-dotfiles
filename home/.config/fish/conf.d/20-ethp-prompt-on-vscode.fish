@@ -17,7 +17,9 @@ if status is-interactive && test -n "$VSCODE_INJECTION"
 		--description="Draws a newline before the prompt" \
 		--on-event fish_prompt
 
-		printf "\n"
+		if [ "$ethp_prompt_inline" != "false" ]
+			printf "\n"
+		end
 	end
 
 end

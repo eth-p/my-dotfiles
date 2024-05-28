@@ -48,6 +48,6 @@ function fish_prompt
 	promptfessional end
 
 	set_color (string replace -- "--background=" "" (promptfessional color section.path --or=component.path --only-background --print))
+	[ "$ethp_prompt_inline" = "false" ] && [ -z "$VSCODE_INJECTION" ] && printf "\n"
 	promptfessional literal "{arrow}\x1B[0m "
-	[ "$ethp_prompt_inline" = "false" ] && printf "\n"
 end
