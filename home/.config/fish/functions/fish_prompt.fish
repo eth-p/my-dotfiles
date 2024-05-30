@@ -1,18 +1,18 @@
 function fish_prompt
 	[ "$ethp_prompt_inline" = "false" ] && printf "\n"
-	is_warp --not && promptfessional enable arrow
+	promptfessional enable arrow
 
 	promptfessional section hostname
 		promptfessional show hostname --only-remote
 
 	promptfessional section status --delimiter=' '
-		is_warp --not && promptfessional show status
+		promptfessional show status
 		promptfessional show private
 		promptfessional show jobs
 		promptfessional show sudo
 
 	promptfessional section cmdtime
-		is_warp --not && promptfessional show cmdtime \
+		promptfessional show cmdtime \
 				--min-time=1000 \
 				--min-slow=30000
 
