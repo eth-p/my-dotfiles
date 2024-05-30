@@ -236,12 +236,12 @@ No special instructions, just copy the files.
 |<kbd>Ctrl+A</kbd><kbd>R</kbd>|Reload the tmux config.|
 |<kbd>Ctrl+A</kbd><kbd>F6</kbd>|Attempt to save the vim buffer in the current pane. \*|
 |<kbd>Ctrl+X</kbd>|Open the pane context menu. \*|
-|<kbd>Alt+Left</kbd>|Select the pane to the left of the current pane.|
-|<kbd>Alt+Right</kbd>|Select the pane to the right of the current pane.|
-|<kbd>Alt+Up</kbd>|Select the pane above the current pane.|
-|<kbd>Alt+Down</kbd>|Select the pane below the current pane.|
-|<kbd>Alt+Shift+Left</kbd>|Select the previous window.|
-|<kbd>Alt+Shift+Right</kbd>|Select the next window.|
+|<kbd>Ctrl+Alt+Left</kbd>|Select the pane to the left of the current pane.|
+|<kbd>Ctrl+Alt+Right</kbd>|Select the pane to the right of the current pane.|
+|<kbd>Ctrl+Alt+Up</kbd>|Select the pane above the current pane.|
+|<kbd>Ctrl+Alt+Down</kbd>|Select the pane below the current pane.|
+|kbd>Ctrl+A</kbd><kbd>Shift+Left</kbd>|Select the previous window.|
+|kbd>Ctrl+A</kbd><kbd>Shift+Right</kbd>|Select the next window.|
 |<kbd>Ctrl+A</kbd><kbd>\ </kbd><kbd>s</kbd>|Save the active pane. *|
 
 \* Requires an integration script.  
