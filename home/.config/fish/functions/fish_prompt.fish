@@ -1,5 +1,4 @@
 function fish_prompt
-	[ "$ethp_prompt_inline" = "false" ] && printf "\n"
 	promptfessional enable arrow
 
 	promptfessional section hostname
@@ -48,6 +47,13 @@ function fish_prompt
 	promptfessional end
 
 	set_color (string replace -- "--background=" "" (promptfessional color section.path --or=component.path --only-background --print))
-	[ "$ethp_prompt_inline" = "false" ] && [ -z "$VSCODE_INJECTION" ] && printf "\n"
 	promptfessional literal "{arrow}\x1B[0m "
+
+	# If using a multi-line prompt, draw a newline.
+	if [ "$ethp_prompt_inline" = "false" ] || [ -n "$VSCODE_INJECTION" ]
+		printf "\n"
+		if [ -z "$VSCODE_INJECTION" ]
+			printf ' \u2218 '
+		end
+	end
 end
