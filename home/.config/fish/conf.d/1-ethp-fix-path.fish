@@ -50,6 +50,11 @@ if command -vq brew
 	if [ -d "$openjdk_path" ]; prepend_path "$openjdk_path"; end
 end
 
+# Add krew to the path, if it's installed.
+if command -vq kubectl && test -d "$HOME/.krew"
+	fish_add_path --path --append "$HOME/.krew/bin"
+end
+
 # Remove the prepend_path utility.
 functions -e prepend_path
 
