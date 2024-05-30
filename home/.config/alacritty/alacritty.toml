@@ -32,7 +32,7 @@ SHELL_NAME=\"$(printf '%q' \"$(basename -- \"$SHELL_PATH\")\")\"
 
 detached_session_count=\"$(tmux list-sessions -f '#{?session_attached,,1}' | wc -l)\"
 if [ \"${detached_session_count}\" -eq 1 ]; then
-  tmux attach -T "$ALACRITTY_FEATURES" -t \"$(tmux list-sessions -f '#{?session_attached,,1}' -F '#{session_id}')\" || bash
+  tmux attach -f "$ALACRITTY_FEATURES" -t \"$(tmux list-sessions -f '#{?session_attached,,1}' -F '#{session_id}')\" || bash
   exit 0
 fi
 
