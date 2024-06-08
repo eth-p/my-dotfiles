@@ -4,6 +4,7 @@ eth-p/fish-promptfessional
 eth-p/fish-cd-ranger
 eth-p/fish-plugin-sudo
 eth-p/fish-kubeswitch
+eth-p/fish-kubecompletions
 eth-p/fish-securenv
 eth-p/fish-contextual-greeting
 jethrokuan/z
