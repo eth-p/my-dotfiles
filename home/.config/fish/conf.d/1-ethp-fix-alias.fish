@@ -1,4 +1,4 @@
-# my-dotfiles | Copyright (C) 2021 eth-p
+# my-dotfiles | Copyright (C) 2021-2024 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 # =============================================================================
 #
@@ -20,8 +20,15 @@
 if status is-interactive
 	functions alias | while read line
 		switch (string trim "$line")
+		# Older fish versions
 		case 'echo "function $name $wraps --description $cmd_string; $prefix $body \$argv; end" | source'
 			echo 'echo "function $name $wraps --description $cmd_string; eval (printf \"%s%s\" \"$prefix $body \" (printf \"%s \" (string escape -- \$argv))); end" | source'
+
+		# fish 3.7.1
+		case 'echo "function $name $wraps --description $cmd_string; $prefix $body \$argv'
+			echo 'echo "function $name $wraps --description $cmd_string; eval (printf \"%s%s\" \"$prefix $body \" (printf \"%s \" (string escape -- \$argv)))'
+
+		# Do not patch this line.
 		case '*'
 			echo "$line"
 		end
