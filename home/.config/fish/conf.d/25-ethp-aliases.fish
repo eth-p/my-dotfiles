@@ -60,6 +60,8 @@ if status is-interactive
 		alias kg "kubectl get"
 		alias kd "kubectl describe"
 		alias klog "kubectl logs"
+
+		function kgo --wraps="kubectl get -oyaml"; kubectl get -oyaml $argv | yq . ; end
 	end
 
 	# Xclip
