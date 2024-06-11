@@ -26,7 +26,10 @@ end
 set -gx EDITOR $VISUAL
 
 # Less
-set -gx LESS '-R --mouse --wheel-lines=2'
+set -gx LESS '-R'
+if test -n "$TMUX"
+	set -gx LESS "$LESS --mouse --wheel-lines=2"
+end
 
 # Man
 if command -vq batman
