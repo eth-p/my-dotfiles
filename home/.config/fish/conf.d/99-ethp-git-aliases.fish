@@ -17,6 +17,7 @@
 #   git unstage -- Unstage files.
 #   git web     -- Open the repo in GitHub.
 #   git pr      -- Alias for `gh pr`.
+#   git cdiff   -- View the changes made in a commit.
 #
 # =============================================================================
 
@@ -25,7 +26,7 @@ if not status is-interactive
 end
 
 # Only update when necessary.
-set -l aliases_version 2
+set -l aliases_version 3
 if test "$__ethp_git_aliases_version" = "$aliases_version"
 	return
 end
@@ -41,3 +42,5 @@ git config --global alias.unstage 'reset HEAD --'
 
 git config --global alias.web '!gh browse'
 git config --global alias.pr '!gh pr'
+
+git config --global alias.cdiff '!bash -c "git diff \"${1:-HEAD}~1\" \"${1:-HEAD}\""'
