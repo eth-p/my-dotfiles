@@ -1,0 +1,33 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p bash nixpkgs-fmt fd shfmt
+#
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+# ==============================================================================
+set -euo pipefail
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.."
+
+source "lib/bash/bootstrap-utils.sh"
+
+# ------------------------------------------------------------------------------
+@section "reformatting nix files"
+
+fd --glob '**/*.nix' \
+	--exec-batch 'nixpkgs-fmt' '{}'
+
+# ------------------------------------------------------------------------------
+@section "reformatting shell scripts"
+
+declare -a scripts
+readarray -t scripts < <({
+	fd --glob '*' --type=executable scripts/
+	fd --glob '*.sh' --hidden lib/bash/
+})
+
+shfmt --write \
+	--language-dialect bash \
+	--indent 0 \
+	--space-redirects \
+	"${scripts[@]}"
+
+echo done
