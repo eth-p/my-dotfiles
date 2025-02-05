@@ -20,14 +20,19 @@ in
       enable = true;
       viAlias = true; # Symlink `vi` to `nvim`
       defaultEditor = true; # Use neovim as $EDITOR
-      extraLuaConfig = builtins.readFile ./init-security.lua;
+      extraLuaConfig = (builtins.readFile ./init.lua);
     };
 
     # Add neovim configuration.
     home.file = {
-      # "${nvimHome}/test.txt" = {
-      #   text = "test";
-      # };
+      "${nvimHome}/lua/eth-p" = {
+        source = ./lua/eth-p;
+        recursive = true;
+      };
+
+      "${nvimHome}/managed-by-nix.lua" = {
+        text = "return {}";
+      };
     };
 
   };
