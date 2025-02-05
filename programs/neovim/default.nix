@@ -25,6 +25,12 @@ in
       default = true;
     };
 
+    ui.transparent_background = mkOption {
+      type = types.bool;
+      description = "Use a transparent background.";
+      default = false;
+    };
+
     integrations.git = mkOption {
       type = types.bool;
       description = "Enable git integrations.";
@@ -55,6 +61,7 @@ in
             ui = {
               nerdfonts = ${tolua.bool cfg.ui.nerdfonts},
               focus_dimming = ${tolua.bool cfg.ui.focus_dimming},
+              transparent_background = ${tolua.bool cfg.ui.transparent_background},
             },
             integrations = {
               git = ${tolua.bool cfg.integrations.git}, 
