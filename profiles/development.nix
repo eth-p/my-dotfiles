@@ -8,6 +8,8 @@
 { ... }:
 {
 
+  my-dotfiles.eza.enable = true;
+
   my-dotfiles.neovim = {
     enable = true;
     integrations.git = true;
