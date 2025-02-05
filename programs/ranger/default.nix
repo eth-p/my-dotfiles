@@ -15,6 +15,7 @@ in
 
     glow = {
       forOpen = mkEnableOption "use glow to open markdown files";
+      forPreview = mkEnableOption "use glow to preview markdown files";
     };
   };
 
@@ -34,8 +35,9 @@ in
           # Previews.
           preview_files = true;
           preview_directories = true;
-          use_preview_script = true; # enable bat preview
           collapse_preview = false;
+
+          use_preview_script = true;
 
           # UI.
           tilde_in_titlebar = true;
@@ -74,6 +76,18 @@ in
         {
           condition = "ext (md|markdown), has glow";
           command = "LESS=-R LESSCHARSET=utf-8 glow --pager \"$@\"";
+        }
+      ];
+    })
+
+    (mkIf cfg.glow.forPreview {
+      home.packages = [ pkgs.glow ];
+      programs.ranger.scope.extension = [
+        {
+          case = "md|markdown";
+          command = ''
+            CLICOLOR_FORCE=1 glow "$FILE_PATH" --style=dark --width="$PV_WIDTH" && exit 0
+          '';
         }
       ];
     })

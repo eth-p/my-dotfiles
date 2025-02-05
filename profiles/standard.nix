@@ -25,6 +25,7 @@
   my-dotfiles.ranger = {
     enable = true;
     glow.forOpen = true;
+    glow.forPreview = true;
   };
 
 }

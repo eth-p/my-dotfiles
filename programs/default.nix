@@ -13,4 +13,5 @@
   ./git
   ./neovim
   ./ranger
+  ./ranger/patch-scope-options.nix
 ]
