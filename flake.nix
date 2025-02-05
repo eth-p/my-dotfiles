@@ -57,6 +57,7 @@
           profiles = {
             minimal = ./profiles/minimal.nix;
             standard = ./profiles/standard.nix;
+            development = ./profiles/development.nix;
           };
         in
 
