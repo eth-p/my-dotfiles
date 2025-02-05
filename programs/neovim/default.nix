@@ -19,6 +19,12 @@ in
       default = false;
     };
 
+    ui.focus_dimming = mkOption {
+      type = types.bool;
+      description = "Dim unfocused panes.";
+      default = true;
+    };
+
     integrations.git = mkOption {
       type = types.bool;
       description = "Enable git integrations.";
@@ -48,6 +54,7 @@ in
           return {
             ui = {
               nerdfonts = ${tolua.bool cfg.ui.nerdfonts},
+              focus_dimming = ${tolua.bool cfg.ui.focus_dimming},
             },
             integrations = {
               git = ${tolua.bool cfg.integrations.git}, 
