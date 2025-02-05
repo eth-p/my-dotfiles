@@ -3,14 +3,21 @@
 #
 # My neovim configuration.
 # ==============================================================================
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... } @ inputs:
 let
+  tolua = (import ./tolua.nix inputs);
   cfg = config.my-dotfiles.neovim;
   nvimHome = "${config.xdg.configHome}/nvim";
 in
 {
   options.my-dotfiles.neovim = with lib; {
     enable = mkEnableOption "neovim";
+
+    ui.nerdfonts = mkOption {
+      type = types.bool;
+      description = "Enable support for using Nerdfonts.";
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,7 +38,13 @@ in
       };
 
       "${nvimHome}/managed-by-nix.lua" = {
-        text = "return {}";
+        text = ''
+          return {
+            ui = {
+              nerdfonts = ${tolua.bool cfg.ui.nerdfonts},
+            },
+          }
+        '';
       };
     };
 
