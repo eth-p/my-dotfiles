@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p bash nixpkgs-fmt fd shfmt
+#! nix-shell -i bash -p bash nixpkgs-fmt fd shfmt stylua
 #
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
@@ -30,4 +30,10 @@ shfmt --write \
 	--space-redirects \
 	"${scripts[@]}"
 
+echo done
+
+# ------------------------------------------------------------------------------
+@section "reformatting neovim config"
+
+stylua programs/neovim
 echo done
