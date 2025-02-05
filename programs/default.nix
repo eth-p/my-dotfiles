@@ -12,4 +12,5 @@
   ./eza
   ./git
   ./neovim
+  ./ranger
 ]
