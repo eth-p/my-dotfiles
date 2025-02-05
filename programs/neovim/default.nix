@@ -18,6 +18,12 @@ in
       description = "Enable support for using Nerdfonts.";
       default = false;
     };
+
+    integrations.git = mkOption {
+      type = types.bool;
+      description = "Enable git integrations.";
+      default = config.programs.git.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,6 +48,9 @@ in
           return {
             ui = {
               nerdfonts = ${tolua.bool cfg.ui.nerdfonts},
+            },
+            integrations = {
+              git = ${tolua.bool cfg.integrations.git}, 
             },
           }
         '';

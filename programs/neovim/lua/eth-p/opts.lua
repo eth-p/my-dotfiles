@@ -27,6 +27,11 @@ defaults = {
 		},
 	},
 
+	-- integration describes integrations with external tools
+	integration = {
+		git = true,
+	},
+
 	-- gutter describes options related to the sidebar
 	gutter = {
 		numbers = {

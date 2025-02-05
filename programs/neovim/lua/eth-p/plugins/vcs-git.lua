@@ -14,6 +14,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		version = "^0.9.0",
+		cond = opts.integration.git,
 
 		event = "VeryLazy",
 		lazy = true,
