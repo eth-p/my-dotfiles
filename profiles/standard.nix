@@ -10,7 +10,6 @@
 
   my-dotfiles.eza.enable = true;
   my-dotfiles.bat.enable = true;
-  my-dotfiles.ranger.enable = true;
 
   my-dotfiles.neovim = {
     enable = true;
@@ -21,6 +20,11 @@
     enable = true;
     useDelta = true;
     useDyff = true;
+  };
+
+  my-dotfiles.ranger = {
+    enable = true;
+    glow.forOpen = true;
   };
 
 }

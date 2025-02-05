@@ -12,6 +12,10 @@ in
 {
   options.my-dotfiles.ranger = with lib; {
     enable = mkEnableOption "install and configure ranger";
+
+    glow = {
+      forOpen = mkEnableOption "use glow to open markdown files";
+    };
   };
 
   config = mkIf cfg.enable (lib.mkMerge [
@@ -63,6 +67,16 @@ in
       };
     })
 
+    # Add glow support.
+    (mkIf cfg.glow.forOpen {
+      home.packages = [ pkgs.glow ];
+      programs.ranger.rifle = [
+        {
+          condition = "ext (md|markdown), has glow";
+          command = "LESS=-R LESSCHARSET=utf-8 glow --pager \"$@\"";
+        }
+      ];
+    })
 
   ]);
 }
