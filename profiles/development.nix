@@ -10,6 +10,7 @@
 
   my-dotfiles.eza.enable = true;
   my-dotfiles.bat.enable = true;
+  my-dotfiles.glow.enable = true;
 
   my-dotfiles.neovim = {
     enable = true;

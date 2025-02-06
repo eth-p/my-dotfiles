@@ -11,6 +11,7 @@
   ./bat
   ./eza
   ./git
+  ./glow
   ./neovim
   ./ranger
   ./ranger/patch-scope-options.nix
