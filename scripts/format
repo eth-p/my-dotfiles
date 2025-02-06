@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p bash nixpkgs-fmt fd shfmt stylua
+#! nix-shell -i bash -p bash nixpkgs-fmt fd shfmt stylua nodePackages.prettier
 #
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
@@ -37,3 +37,9 @@ echo done
 
 stylua programs/neovim
 echo done
+
+# ------------------------------------------------------------------------------
+@section "reformatting json files"
+
+fd --glob '**/*.json' programs \
+	--exec-batch 'prettier' '--write' '{}'
