@@ -27,12 +27,17 @@
     let
       inherit (home-manager.lib) homeManagerConfiguration;
 
+      # Load any lib nix files defined in this repo.
+      lib = (import ./lib/nix) { lib = nixpkgs.lib; } // inputs;
+
       # Read information from the bootstrap data.
       bootstrap = builtins.fromJSON (builtins.readFile ./bootstrap.json);
       system = bootstrap.system;
 
     in
     {
+      inherit lib;
+
       # homeConfigurations declares the home-manager profiles.
       # 
       # This performs a map operation over each profile declared in
@@ -48,6 +53,10 @@
           ctx = {
             inherit bootstrap;
             isDarwin = (builtins.elem system nixpkgs.lib.platforms.darwin);
+          };
+
+          my-dotfiles = {
+            inherit lib;
           };
 
           # Get program modules.
@@ -70,6 +79,7 @@
               extraSpecialArgs = {
                 inherit ctx;
                 inherit pkgs-unstable;
+                inherit my-dotfiles;
               };
             }
           )

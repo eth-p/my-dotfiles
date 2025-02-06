@@ -3,9 +3,9 @@
 #
 # Program: https://github.com/neovim/neovim
 # ==============================================================================
-{ lib, pkgs, config, ... } @ inputs:
+{ lib, pkgs, config, my-dotfiles, ... } @ inputs:
 let
-  tolua = (import ./tolua.nix inputs);
+  inherit (my-dotfiles.lib) tolua;
   cfg = config.my-dotfiles.neovim;
   nvimHome = "${config.xdg.configHome}/nvim";
 in
