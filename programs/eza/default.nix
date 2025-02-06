@@ -1,7 +1,7 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# My eza configuration.
+# Program: https://github.com/eza-community/eza
 # ==============================================================================
 { lib, pkgs, config, ctx, ... }:
 let

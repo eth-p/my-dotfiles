@@ -1,7 +1,7 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# My git configuration.
+# Program: https://git-scm.com/
 # ==============================================================================
 { lib, pkgs, config, ctx, ... }:
 let

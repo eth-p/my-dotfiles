@@ -1,7 +1,7 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# My neovim configuration.
+# Program: https://github.com/neovim/neovim
 # ==============================================================================
 { lib, pkgs, config, ... } @ inputs:
 let

@@ -1,7 +1,7 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# My ranger configuration.
+# Program: https://github.com/ranger/ranger
 # ==============================================================================
 { lib, pkgs, config, ctx, ... }:
 let

@@ -1,7 +1,7 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# My bat configuration.
+# Program: https://github.com/sharkdp/bat
 # ==============================================================================
 { lib, pkgs, config, ctx, ... }:
 let
