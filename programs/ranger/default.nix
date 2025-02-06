@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/ranger/ranger
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, pkgs, config, ctx, ... } @ inputs:
 let
   inherit (lib) mkIf;
   rangerHome = "${config.xdg.configHome}/ranger";
@@ -80,17 +80,27 @@ in
       ];
     })
 
-    (mkIf cfg.glow.forPreview {
-      home.packages = [ pkgs.glow ];
-      programs.ranger.scope.extension = [
-        {
-          case = "md|markdown";
-          command = ''
-            CLICOLOR_FORCE=1 glow "$FILE_PATH" --style=dark --width="$PV_WIDTH" && exit 0
-          '';
-        }
-      ];
-    })
+    (mkIf cfg.glow.forPreview (
+      let
+        glowStyles = (import ../glow/styles.nix inputs);
+        glowStyle = config.my-dotfiles.glow.style;
+        styleFlag =
+          if config.my-dotfiles.glow.enable
+          then "--style=${builtins.toJSON (glowStyles.toFlag glowStyle)}"
+          else "--style=dark";
+      in
+      {
+        home.packages = [ pkgs.glow ];
+        programs.ranger.scope.extension = [
+          {
+            case = "md|markdown";
+            command = ''
+              CLICOLOR_FORCE=1 glow "$FILE_PATH" ${styleFlag} --width="$PV_WIDTH" && exit 0
+            '';
+          }
+        ];
+      }
+    ))
 
   ]);
 }
