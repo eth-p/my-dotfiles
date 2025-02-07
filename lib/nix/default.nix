@@ -5,4 +5,5 @@
 # ==============================================================================
 { ... } @ inputs: {
   tolua = (import ./tolua.nix) inputs;
+  theming = (import ./theming.nix) inputs;
 }
