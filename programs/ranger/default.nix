@@ -56,7 +56,7 @@ in
 
       home.file = {
         "${rangerHome}/colorschemes/monokai.py" = {
-          source = ./colorschemes/monokai.py;
+          source = ./themes/monokai.py;
         };
       };
     }
@@ -82,11 +82,11 @@ in
 
     (mkIf cfg.glow.forPreview (
       let
-        glowStyles = (import ../glow/styles.nix inputs);
-        glowStyle = config.my-dotfiles.glow.style;
+        glowThemes = (import ../glow/themes.nix inputs);
+        glowTheme = config.my-dotfiles.glow.theme;
         styleFlag =
           if config.my-dotfiles.glow.enable
-          then "--style=${builtins.toJSON (glowStyles.toFlag glowStyle)}"
+          then "--style=${builtins.toJSON (glowThemes.toFlag glowTheme)}"
           else "--style=dark";
       in
       {

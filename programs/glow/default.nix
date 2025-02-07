@@ -8,15 +8,15 @@ let
   inherit (lib) mkIf strings attrsets;
   cfg = config.my-dotfiles.glow;
   glowHome = "${config.xdg.configHome}/glow";
-  styles = (import ./styles.nix inputs);
+  themes = (import ./themes.nix inputs);
 in
 {
   options.my-dotfiles.glow = with lib; {
     enable = mkEnableOption "install glow";
 
-    style = mkOption {
-      type = types.enum (styles.all);
-      description = "the style to use";
+    theme = mkOption {
+      type = types.enum (themes.all);
+      description = "the theme to use";
       default = "base16";
     };
   };
@@ -33,23 +33,23 @@ in
       "${glowHome}/glow.yml" =
         {
           text = ''
-            style: ${builtins.toJSON (styles.toFlag cfg.style)}
+            style: ${builtins.toJSON (themes.toFlag cfg.theme)}
             mouse: true
             pager: true
           '';
         };
     }
 
-    # Add the custom style files.
+    # Add the custom theme files.
     // (builtins.listToAttrs (
       builtins.map
-        (style: {
-          name = "${glowHome}/styles/${style}.json";
+        (theme: {
+          name = "${glowHome}/themes/${theme}.json";
           value = {
-            source = ./styles + "/${style}.json";
+            source = ./themes + "/${theme}.json";
           };
         })
-        styles.custom)
+        themes.custom)
     );
 
   };

@@ -3,29 +3,21 @@
 #
 # Program: https://github.com/eza-community/eza
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, pkgs, config, ctx, my-dotfiles, ... } @ inputs:
 let
-  inherit (lib) mkIf strings attrsets;
+  inherit (lib) mkIf;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  ezaHome = "${config.xdg.configHome}/eza";
   cfg = config.my-dotfiles.eza;
-
-  # Read the available custom styles (themes).
-  # These are the YAML files under `./styles` without the file extension.
-  customStyles = builtins.map
-    (strings.removeSuffix ".yaml")
-    (builtins.attrNames (attrsets.filterAttrs
-      (name: kind: kind == "regular" && (strings.hasSuffix ".yaml" name))
-      (builtins.readDir ./styles)
-    ));
+  ezaHome = "${config.xdg.configHome}/eza";
+  themes = (import ./themes.nix inputs);
 in
 {
   options.my-dotfiles.eza = with lib; {
     enable = mkEnableOption "install and configure eza as a replacement for ls";
 
-    style = mkOption {
-      type = types.enum ([ "default" ] ++ customStyles);
-      description = "the style to use";
+    theme = mkOption {
+      type = types.enum themes.all;
+      description = "the theme to use";
       default = "base16";
     };
 
@@ -52,10 +44,10 @@ in
       };
     }
 
-    # Set style.
-    (mkIf (cfg.style != "default") {
+    # Set eza's theme file.
+    (mkIf (cfg.theme != "default") {
       home.file."${ezaHome}/theme.yml" = {
-        source = ./styles + "/${cfg.style}.yaml";
+        source = ./themes + "/${cfg.theme}.yaml";
       };
     })
 
