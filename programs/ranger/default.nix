@@ -28,7 +28,7 @@ in
         enable = true;
         settings = {
           # Theme.
-          colorscheme = "monokai";
+          colorscheme = "base16";
           status_bar_on_top = false;
           draw_progress_bar_in_status_bar = true;
           draw_borders = "separators";
