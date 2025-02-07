@@ -43,3 +43,9 @@ echo done
 
 fd --glob '**/*.json' programs \
 	--exec-batch 'prettier' '--write' '{}'
+
+# ------------------------------------------------------------------------------
+@section "reformatting yaml files"
+
+fd --glob '**/*.{yml,yaml}' programs \
+	--exec-batch 'prettier' '--write' '{}'
