@@ -8,6 +8,7 @@ let
   inherit (lib) mkIf;
   rangerHome = "${config.xdg.configHome}/ranger";
   cfg = config.my-dotfiles.ranger;
+  themes = (import ./themes.nix inputs);
 in
 {
   options.my-dotfiles.ranger = with lib; {
@@ -53,12 +54,20 @@ in
           zg = "set vcs_aware!";
         };
       };
+    }
 
-      home.file = {
-        "${rangerHome}/colorschemes/monokai.py" = {
-          source = ./themes/monokai.py;
-        };
-      };
+    # Add ranger themes.
+    {
+      home.file = builtins.listToAttrs (
+        builtins.map
+          (theme: {
+            name = "${rangerHome}/colorschemes/${theme}.py";
+            value = {
+              source = ./themes + "/${theme}.py";
+            };
+          })
+          themes.custom
+      );
     }
 
     # Add git integration.
