@@ -42,6 +42,9 @@ in
 
         aliases = {
           ss = "status --short";
+          lg = "log --oneline --graph";
+          r = "rebase --interactive --autosquash";
+          rc = "rebase --continue";
         };
       };
     }
