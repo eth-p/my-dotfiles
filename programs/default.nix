@@ -10,6 +10,7 @@
 [
   ./bat
   ./eza
+  ./fzf
   ./git
   ./glow
   ./neovim
