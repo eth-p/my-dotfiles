@@ -47,6 +47,11 @@ in
           rc = "rebase --continue";
         };
       };
+
+      # Configure aliases for shells.
+      programs.fish.shellAliases = {
+        g = "git";
+      };
     }
 
     # Configure ignore rules for Mac.
