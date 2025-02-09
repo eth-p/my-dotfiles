@@ -14,6 +14,10 @@
   my-dotfiles.glow.enable = true;
   my-dotfiles.ripgrep.enable = true;
 
+  my-dotfiles.fish = {
+    enable = true;
+  };
+
   my-dotfiles.neovim = {
     enable = true;
     integrations.git = false;

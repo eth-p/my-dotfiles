@@ -10,6 +10,7 @@
 [
   ./bat
   ./eza
+  ./fish
   ./fzf
   ./git
   ./glow
