@@ -61,6 +61,10 @@ EOF
 {
   my-dotfiles.nerdfonts = false;
 
+  # Fix locale errors when using programs installed through Nix. 
+# home.language.base = "C.UTF-8";
+# home.sessionVariables.LANG = "C.UTF-8";
+
   # Put device-specific config here.
 
   programs.git = {
