@@ -75,7 +75,12 @@
           (profileName: profileFile:
             homeManagerConfiguration {
               inherit pkgs;
-              modules = modules ++ [ profileFile ./bootstrap.nix ./config.nix ];
+              modules = modules ++ [
+                ./programs/globals.nix
+                profileFile
+                ./bootstrap.nix
+                ./config.nix
+              ];
               extraSpecialArgs = {
                 inherit ctx;
                 inherit pkgs-unstable;

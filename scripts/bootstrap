@@ -59,6 +59,8 @@ EOF
 @create-if-missing config.nix << EOF
 { lib, pkgs, config, ... }:
 {
+  my-dotfiles.nerdfonts = false;
+
   # Put device-specific config here.
 
   programs.git = {
