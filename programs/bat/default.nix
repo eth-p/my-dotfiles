@@ -37,7 +37,9 @@ in
     (mkIf cfg.enableBatman {
       programs.bat.extraPackages = with pkgs.bat-extras; [ batman ];
 
-      # TODO: shell alias from `man` -> `batman`
+      programs.fish.shellAliases = {
+        man = "batman";
+      };
     })
 
   ]);
