@@ -2,10 +2,21 @@
 # Repository: https://github.com/eth-p/my-dotfiles
 #
 # Program: https://github.com/JanDeDobbeleer/oh-my-posh
-# Type: Blocks (https://ohmyposh.dev/docs/configuration/block)
+# Type: Block (https://ohmyposh.dev/docs/configuration/block)
 # ==============================================================================
 { config, cfg, generator, ... } @ inputs: {
-  main = (import ./block_main.nix inputs);
-  newline_leading = (import ./block_newline_leading.nix inputs);
-  newline_trailing = (import ./block_newline_trailing.nix inputs);
+  enable = cfg.newline;
+  priority = 1000;
+
+  type = "prompt";
+  alignment = "left";
+
+  force = true;
+  segments = [
+    {
+      type = "text";
+      style = "plain";
+      template = "\n ∘ ";
+    }
+  ];
 }

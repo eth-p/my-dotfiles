@@ -6,17 +6,17 @@
 # ==============================================================================
 { config, cfg, generator, ... } @ inputs: {
   enable = cfg.newline;
-  priority = 1000;
+  priority = -1000;
 
   type = "prompt";
   alignment = "left";
 
+  force = true;
   segments = [
     {
-      enable = true;
-      priority = 0;
       type = "text";
-      template = "\n";
+      style = "plain";
+      template = " \n";
     }
   ];
 }
