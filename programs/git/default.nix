@@ -129,7 +129,18 @@ in
         properties = {
           fetch_status = true;
           source = "cli";
-        };
+        } // (
+          let
+            nerdOr = nfCodepoint: txtIcon:
+              if config.my-dotfiles.nerdfonts
+              then builtins.fromJSON (''"\u${nfCodepoint}'')
+              else txtIcon;
+          in
+          {
+            rebase_icon = nerdOr "E728" "rebase ";
+            commit_icon = nerdOr "F417" "@";
+          }
+        );
       };
     })
   ]);
