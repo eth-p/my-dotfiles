@@ -15,6 +15,7 @@
   ./git
   ./glow
   ./neovim
+  ./oh-my-posh
   ./ranger
   ./ranger/patch-scope-options.nix
   ./ripgrep

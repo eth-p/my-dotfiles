@@ -18,6 +18,10 @@
     enable = true;
   };
 
+  my-dotfiles.oh-my-posh = {
+    enable = true;
+  };
+
   my-dotfiles.neovim = {
     enable = true;
     integrations.git = true;
