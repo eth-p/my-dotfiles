@@ -12,6 +12,7 @@ in
 {
   options.my-dotfiles.git = with lib; {
     enable = mkEnableOption "install and configure git";
+    inPrompt = mkEnableOption "show git info in the shell prompt";
 
     useDelta = mkOption {
       type = types.bool;
@@ -94,5 +95,42 @@ in
       }
     ))
 
+    # Configure oh-my-posh to show git info.
+    (mkIf cfg.inPrompt {
+      my-dotfiles.oh-my-posh.pathAnnotations.git = {
+        priority = 50;
+        type = "git";
+
+        background = "p:vcs_unknown";
+
+        style = "diamond";
+        leading_diamond = " ";
+        trailing_diamond = "";
+
+        template = (builtins.concatStringsSep "" [
+          # Set the colors based on staged/unstaged/synced.
+          "{{ $unstaged := (add .Working.Deleted .Working.Added .Working.Modified .Working.Unmerged) }}"
+          "{{ if (gt $unstaged 0) }}<p:vcs_fg,p:vcs_modified>"
+          "{{ else }}{{ if .Staging.Changed }}<p:vcs_fg,p:vcs_staged>"
+          "{{ else }}<p:vcs_fg,p:vcs_synced>"
+          "{{ end }}{{ end }} "
+
+          # Show the rebase info.
+          # TODO: Need v24.19.0 or later
+
+          # Otherwise, show the current HEAD.
+          "{{ .HEAD }}"
+
+          # Show a marker there are untracked files.
+          "{{ if gt .Working.Untracked 0 }} *{{ end }}"
+          " </>"
+        ]);
+
+        properties = {
+          fetch_status = true;
+          source = "cli";
+        };
+      };
+    })
   ]);
 }

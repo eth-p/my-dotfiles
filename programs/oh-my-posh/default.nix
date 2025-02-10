@@ -4,7 +4,7 @@
 # Program: https://github.com/JanDeDobbeleer/oh-my-posh
 # (This is used for my shell prompts)
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... } @ inputs:
+{ lib, pkgs, pkgs-unstable, config, ctx, ... } @ inputs:
 let
   inherit (lib) mkIf;
   cfg = config.my-dotfiles.oh-my-posh;
@@ -42,6 +42,7 @@ in
     {
       programs.oh-my-posh = {
         enable = true;
+        package = pkgs-unstable.oh-my-posh;
         settings = {
           version = 3;
           final_space = !cfg.newline;
@@ -59,6 +60,11 @@ in
             path_bg = "238";
             flags_bg = "249";
             flags_exitcode_color = "160";
+            vcs_fg = "254";
+            vcs_modified = "124";
+            vcs_staged = "166";
+            vcs_synced = "70";
+            vcs_unknown = "241";
           };
         };
       };

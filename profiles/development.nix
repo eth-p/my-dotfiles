@@ -29,6 +29,8 @@
 
   my-dotfiles.git = {
     enable = true;
+    inPrompt = true;
+
     useDelta = true;
     useDyff = true;
   };
