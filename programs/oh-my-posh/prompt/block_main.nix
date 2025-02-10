@@ -11,6 +11,14 @@
   type = "prompt";
   alignment = "left";
 
-  segments =
-    (import ./seg_path.nix inputs);
+  segments = [
+    {
+      priority = 10;
+      segments = (import ./seg_flags.nix inputs);
+    }
+    {
+      priority = 20;
+      segments = (import ./seg_path.nix inputs);
+    }
+  ];
 }

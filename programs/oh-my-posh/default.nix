@@ -56,6 +56,8 @@ in
             path_parent = "242";
             path_curdir = "default";
             path_bg = "238";
+            flags_bg = "249";
+            flags_exitcode_color = "160";
           };
         };
       };
