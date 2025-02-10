@@ -45,6 +45,7 @@ in
         settings = {
           version = 3;
           final_space = !cfg.newline;
+          shell_integration = true;
           blocks = generator.mkBlocks (
             import ./prompt
               (inputs // {
