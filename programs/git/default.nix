@@ -14,6 +14,8 @@ in
     enable = mkEnableOption "install and configure git";
     inPrompt = mkEnableOption "show git info in the shell prompt";
 
+    github = mkEnableOption "install the gh command-line tool";
+
     useDelta = mkOption {
       type = types.bool;
       description = "Use delta to show diffs.";
@@ -54,6 +56,23 @@ in
         g = "git";
       };
     }
+
+    # Configure gh command.
+    (mkIf cfg.github {
+      programs.gh = {
+        enable = true;
+        settings = {
+          git_protocol = "ssh";
+          aliases = {
+            prv = "pr view --web";
+          };
+        };
+      };
+
+      programs.git.aliases = {
+        gh = "!gh";
+      };
+    })
 
     # Configure ignore rules for Mac.
     (mkIf cfg.ignoreMacFiles {

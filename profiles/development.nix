@@ -31,6 +31,8 @@
     enable = true;
     inPrompt = true;
 
+    github = true;
+
     useDelta = true;
     useDyff = true;
   };
