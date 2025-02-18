@@ -111,5 +111,29 @@ in
       }
     ))
 
+    # Config for opening files.
+    {
+      programs.ranger.rifle = [
+        # Edit any text in the editor.
+        {
+          condition = "mime ^text, label editor";
+          command = "\${VISUAL:-$EDITOR} -- $@";
+        }
+        {
+          condition = "!mime ^text, label editor, ext json";
+          command = "\${VISUAL:-$EDITOR} -- $@";
+        }
+        # Open any text in the pager.
+        {
+          condition = "mime ^text, label pager";
+          command = "\${PAGER} -- $@";
+        }
+        {
+          condition = "!mime ^text, label pager, ext json";
+          command = "\${PAGER} -- $@";
+        }
+      ];
+    }
+
   ]);
 }
