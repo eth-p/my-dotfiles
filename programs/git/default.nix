@@ -16,6 +16,14 @@ in
 
     github = mkEnableOption "install the gh command-line tool";
 
+    fzf = {
+      fixup = mkOption {
+        type = types.bool;
+        description = "Add `git fixup` command";
+        default = false;
+      };
+    };
+
     useDelta = mkOption {
       type = types.bool;
       description = "Use delta to show diffs.";
@@ -113,6 +121,27 @@ in
         };
       }
     ))
+
+    # Install fzf.
+    (mkIf cfg.fzf.fixup ({
+      home.packages = [
+        (pkgs.writeShellApplication {
+          name = "git-fzf-fixup";
+
+          runtimeInputs = [ pkgs.git pkgs.fzf ] ++
+            (if cfg.useDelta then [ pkgs.delta ] else [ ]);
+
+          text = ''
+            useDelta=${toString cfg.useDelta}
+            ${builtins.readFile ./git-fzf-fixup.sh}
+          '';
+        })
+      ];
+      programs.git.aliases = {
+        fixup = "fzf-fixup";
+      };
+    }))
+
 
     # Configure oh-my-posh to show git info.
     (mkIf cfg.inPrompt {

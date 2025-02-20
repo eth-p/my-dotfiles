@@ -36,6 +36,7 @@
     inPrompt = true;
 
     github = true;
+    fzf.fixup = true;
 
     useDelta = true;
     useDyff = true;
