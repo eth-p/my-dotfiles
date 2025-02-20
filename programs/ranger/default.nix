@@ -70,6 +70,19 @@ in
       );
     }
 
+    # Add zoxide integration.
+    (mkIf config.my-dotfiles.zoxide.enable {
+      programs.ranger.plugins = [
+        {
+          name = "ranger-zoxide";
+          src = builtins.fetchGit {
+            url = "https://github.com/jchook/ranger-zoxide";
+            rev = "281828de060299f73fe0b02fcabf4f2f2bd78ab3";
+          };
+        }
+      ];
+    })
+
     # Add git integration.
     (mkIf config.my-dotfiles.git.enable {
       programs.ranger = {
