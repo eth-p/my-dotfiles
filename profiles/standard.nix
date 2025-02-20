@@ -10,6 +10,7 @@
 
   my-dotfiles.btop.enable = true;
   my-dotfiles.eza.enable = true;
+  my-dotfiles.fd.enable = true;
   my-dotfiles.fzf.enable = true;
   my-dotfiles.bat.enable = true;
   my-dotfiles.glow.enable = true;

@@ -11,6 +11,7 @@
   ./bat
   ./btop
   ./eza
+  ./fd
   ./fish
   ./fzf
   ./git
