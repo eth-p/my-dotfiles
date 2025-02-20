@@ -15,6 +15,7 @@
   my-dotfiles.bat.enable = true;
   my-dotfiles.glow.enable = true;
   my-dotfiles.ripgrep.enable = true;
+  my-dotfiles.zoxide.enable = true;
 
   my-dotfiles.fish = {
     enable = true;
