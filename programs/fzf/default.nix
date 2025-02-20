@@ -14,6 +14,18 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.fzf.enable = true;
+    programs.fzf = {
+      enable = true;
+
+      enableFishIntegration = false;
+      enableBashIntegration = false;
+      enableZshIntegration = false;
+    };
+
+    xdg.configFile."fish/conf.d/load-fzf-key-bindings.fish" = {
+      text = ''
+        # This disables fzf's force-installed key bindings.
+      '';
+    };
   };
 }
