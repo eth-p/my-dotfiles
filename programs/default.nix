@@ -10,6 +10,7 @@
 [
   ./bat
   ./btop
+  ./carapace
   ./eza
   ./fd
   ./fish

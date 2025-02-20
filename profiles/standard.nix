@@ -9,6 +9,7 @@
 {
 
   my-dotfiles.btop.enable = true;
+  my-dotfiles.carapace.enable = true;
   my-dotfiles.eza.enable = true;
   my-dotfiles.fd.enable = true;
   my-dotfiles.fzf.enable = true;
