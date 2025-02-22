@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/sharkdp/bat
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, pkgs, pkgs-unstable, config, ctx, ... }:
 let
   inherit (lib) mkIf;
   inherit (config.lib.file) mkOutOfStoreSymlink;
@@ -26,6 +26,7 @@ in
     {
       programs.bat = {
         enable = true;
+        package = pkgs-unstable.bat;
         config = {
           tabs = "4";
           pager = "less --RAW-CONTROL-CHARS";
@@ -35,7 +36,7 @@ in
 
     # Configure batman.
     (mkIf cfg.enableBatman {
-      programs.bat.extraPackages = with pkgs.bat-extras; [ batman ];
+      programs.bat.extraPackages = with pkgs-unstable.bat-extras; [ batman ];
 
       programs.fish.shellAliases = {
         man = "batman";
