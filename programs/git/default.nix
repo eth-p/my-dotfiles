@@ -57,6 +57,31 @@ in
           r = "rebase --interactive --autosquash";
           rc = "rebase --continue";
         };
+
+        extraConfig = {
+          # Show the line(s) of parent commit
+          merge.conflictstyle = "zdiff3";
+
+          # Show the changes in `git commit`
+          commit.verbose = true;
+
+          # Better diff algorithm, show moved lines differently from changes.
+          diff.algorithm = "histogram";
+          diff.renames = true;
+          diff.colorMoved = true;
+
+          # Sort tags by version.
+          tag.sort = "version:refname";
+
+          # Automatically set remote branch if none exists.
+          push.autoSetupRemote = true;
+
+          # Update refs in stacked branches when rebasing.
+          rebase.updateRefs = true;
+
+          # Prefer rebase over merge when pulling.
+          pull.rebase = true;
+        };
       };
 
       # Configure aliases for shells.
