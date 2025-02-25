@@ -175,7 +175,7 @@ in
         type = "git";
 
         foreground = "p:vcs_fg";
-        background = "p:vcs_unknown";
+        background = "p:path_bg";
 
         style = "diamond";
         leading_diamond = " ";

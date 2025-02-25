@@ -10,6 +10,7 @@
   #  ~/P/g/
   {
     type = "path";
+    style = "diamond";
     foreground = "p:path_parent";
     background = "p:path_bg";
     template = " {{ if and (ne .Path \"/\") (ne .Path \"~\") }}{{ dir .Path }}/{{ end }}";
@@ -35,18 +36,6 @@
   {
     enable = true;
     segments = generator.mkSegments cfg.pathAnnotations;
-  }
-
-  # Closing arrow:
-  #  
-  {
-    type = "text";
-    style = "diamond";
-    leading_diamond = "";
-    trailing_diamond = "";
-    foreground = "p:path_bg";
-    background = "p:path_bg";
-    template = "<,p:path_bg> </>";
   }
 
 ]

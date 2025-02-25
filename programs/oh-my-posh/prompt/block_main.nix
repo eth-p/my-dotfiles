@@ -10,6 +10,7 @@
 
   type = "prompt";
   alignment = "left";
+  trailing_diamond = "█";
 
   segments = [
     {

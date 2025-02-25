@@ -9,11 +9,11 @@
   # Exit code segment:
   {
     type = "status";
+    style = "diamond";
+    trailing_diamond = "";
 
     foreground = "p:flags_exitcode_color";
     background = "p:flags_bg";
-
-    style = "plain";
 
     template = " <b>{{ .String }}</b> ";
 
