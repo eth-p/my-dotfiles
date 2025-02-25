@@ -6,20 +6,28 @@
 # ==============================================================================
 { config, cfg, generator, ... } @ inputs: {
   enable = true;
-  priority = 10;
+  priority = 7;
 
   type = "prompt";
   alignment = "left";
-  trailing_diamond = "█";
+  leading_diamond = "█";
+  trailing_diamond = "█";
 
   segments = [
+    # Time segment:
     {
-      priority = 10;
-      segments = (import ./seg_flags.nix inputs);
-    }
-    {
-      priority = 20;
-      segments = (import ./seg_path.nix inputs);
+      type = "executiontime";
+      style = "diamond";
+
+      foreground = "p:time_color";
+      background = "p:time_bg";
+
+      template = "{{ .FormattedMs }}";
+
+      properties = {
+        threshold = 500;
+        style = "austin";
+      };
     }
   ];
 }

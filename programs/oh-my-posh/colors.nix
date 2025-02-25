@@ -5,6 +5,9 @@
     path_bg = "#444444";
     flags_bg = "#ffffff";
     flags_exitcode_color = "#ff0000";
+    flags_sudo_color = "#009900";
+    time_bg = "#dddddd";
+    time_color = "#666666";
     vcs_fg = "#ffffff";
     vcs_modified = "#882211";
     vcs_staged = "#995500";

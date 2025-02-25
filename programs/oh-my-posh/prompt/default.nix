@@ -5,7 +5,9 @@
 # Type: Blocks (https://ohmyposh.dev/docs/configuration/block)
 # ==============================================================================
 { config, cfg, generator, ... } @ inputs: {
-  main = (import ./block_main.nix inputs);
+  flags = (import ./flags.nix inputs);
+  path = (import ./path.nix inputs);
+  time = (import ./time.nix inputs);
   newline_leading = (import ./block_newline_leading.nix inputs);
   newline_trailing = (import ./block_newline_trailing.nix inputs);
 }
