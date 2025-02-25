@@ -12,7 +12,7 @@
     type = "path";
     foreground = "p:path_parent";
     background = "p:path_bg";
-    template = " {{ if ne .Path \"/\" }}{{ dir .Path }}/{{ end }}";
+    template = " {{ if and (ne .Path \"/\") (ne .Path \"~\") }}{{ dir .Path }}/{{ end }}";
     properties = {
       style = "letter";
     };
@@ -25,7 +25,7 @@
     style = "diamond";
     foreground = "p:path_curdir";
     background = "p:path_bg";
-    template = "{{ if eq .Path \"/\" }} {{ end }}<b>{{ .Path }}</b>";
+    template = "{{ if or (eq .Path \"/\") (eq .Path \"~\") }} {{ end }}<b>{{ .Path }}</b>";
     properties = {
       style = "folder";
     };
