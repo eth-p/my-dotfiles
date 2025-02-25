@@ -55,16 +55,16 @@ in
               })
           );
           palette = {
-            path_parent = "244";
-            path_curdir = "251";
-            path_bg = "238";
-            flags_bg = "249";
-            flags_exitcode_color = "160";
-            vcs_fg = "254";
-            vcs_modified = "124";
-            vcs_staged = "166";
-            vcs_synced = "70";
-            vcs_unknown = "241";
+            path_parent = "#99999";
+            path_curdir = "#ffffff";
+            path_bg = "#444444";
+            flags_bg = "#ffffff";
+            flags_exitcode_color = "#ff0000";
+            vcs_fg = "#ffffff";
+            vcs_modified = "#882211";
+            vcs_staged = "#995500";
+            vcs_synced = "#447711";
+            vcs_unknown = "#774444";
           };
         };
       };

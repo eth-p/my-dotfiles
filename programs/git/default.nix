@@ -174,6 +174,7 @@ in
         priority = 50;
         type = "git";
 
+        foreground = "p:vcs_fg";
         background = "p:vcs_unknown";
 
         style = "diamond";
