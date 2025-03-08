@@ -18,6 +18,10 @@
   my-dotfiles.ripgrep.enable = true;
   my-dotfiles.zoxide.enable = true;
 
+  my-dotfiles.devenv = {
+    enable = true;
+  };
+
   my-dotfiles.fish = {
     enable = true;
   };

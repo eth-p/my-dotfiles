@@ -11,6 +11,7 @@
   ./bat
   ./btop
   ./carapace
+  ./devenv
   ./eza
   ./fd
   ./fish
