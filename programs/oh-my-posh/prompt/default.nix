@@ -9,6 +9,5 @@
   flags = (import ./flags.nix inputs);
   path = (import ./path.nix inputs);
   time = (import ./time.nix inputs);
-  newline_leading = (import ./block_newline_leading.nix inputs);
   newline_trailing = (import ./block_newline_trailing.nix inputs);
 }
