@@ -3,14 +3,11 @@
 #
 # Program: https://devenv.sh/
 # ==============================================================================
-{ lib, pkgs, pkgs-unstable, config, ctx, ... }:
+{ lib, pkgs, pkgs-unstable, config, ctx, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf;
+  inherit (my-dotfiles.lib.withConfig inputs) nerdglyphOr;
   cfg = config.my-dotfiles.devenv;
-            nerdOr = nfCodepoint: txtIcon:
-              if config.my-dotfiles.nerdfonts
-              then builtins.fromJSON (''"\u${nfCodepoint}'')
-              else txtIcon;
 in
 {
   options.my-dotfiles.devenv = with lib; {
@@ -42,7 +39,7 @@ in
 
         template = (builtins.concatStringsSep "" [
           "{{ if .Env.DEVENV_ROOT }}"
-          (nerdOr "EEF4" "devenv")
+          (nerdglyphOr "EEF4" "devenv")
           "{{ end }}"
         ]);
       };

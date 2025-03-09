@@ -3,10 +3,11 @@
 #
 # Program: https://git-scm.com/
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, pkgs, config, ctx, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf;
   inherit (config.lib.file) mkOutOfStoreSymlink;
+  inherit (my-dotfiles.lib.withConfig inputs) nerdglyphOr;
   cfg = config.my-dotfiles.git;
 in
 {
@@ -203,18 +204,10 @@ in
         properties = {
           fetch_status = true;
           source = "cli";
-        } // (
-          let
-            nerdOr = nfCodepoint: txtIcon:
-              if config.my-dotfiles.nerdfonts
-              then builtins.fromJSON (''"\u${nfCodepoint}'')
-              else txtIcon;
-          in
-          {
-            rebase_icon = nerdOr "E728" "rebase ";
-            commit_icon = nerdOr "F417" "@";
-          }
-        );
+
+          rebase_icon = nerdglyphOr "E728" "rebase ";
+          commit_icon = nerdglyphOr "F417" "@";
+        };
       };
     })
   ]);
