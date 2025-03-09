@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/eza-community/eza
 # ==============================================================================
-{ lib, pkgs, config, ctx, my-dotfiles, ... } @ inputs:
+{ lib, pkgs, pkgs-unstable, config, ctx, ... } @ inputs:
 let
   inherit (lib) mkIf;
   inherit (config.lib.file) mkOutOfStoreSymlink;
@@ -34,6 +34,7 @@ in
     {
       programs.eza = {
         enable = true;
+        package = pkgs-unstable.eza;
         git = true; # uses libgit2
 
         enableBashIntegration = cfg.enableAliases;
