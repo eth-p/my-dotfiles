@@ -50,6 +50,9 @@ in
       home.file."${ezaHome}/theme.yml" = {
         source = ./themes + "/${cfg.theme}.yaml";
       };
+
+      # Tell eza to look for config under ~/.config on MacOS.
+      home.sessionVariables.EZA_CONFIG_DIR = ezaHome;
     })
 
   ]);
