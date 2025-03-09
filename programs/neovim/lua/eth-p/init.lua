@@ -59,6 +59,24 @@ function InitConfig(opts)
 		vim.o.foldlevel = 99 -- Needed for `ufo` plugin
 		vim.o.foldlevelstart = 99 -- Needed for `ufo` plugin
 	end
+
+	--
+	-- Configure Clipboard
+	--
+
+	if vim.env.WSL_INTEROP ~= nil and vim.env.SSH_TTY == nil then
+		vim.g.clipboard = {
+			name = "WSL",
+			copy = {
+				["+"] = "clip.exe",
+				["*"] = "clip.exe",
+			},
+			paste = {
+				["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+				["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			},
+		}
+	end
 end
 
 function InitCommands(opts)
