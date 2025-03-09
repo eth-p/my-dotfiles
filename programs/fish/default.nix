@@ -24,6 +24,20 @@ in
       };
     }
 
+    # Prevent `profile.d/nix-daemon.{fish,sh}` from being sourced in nested
+    # shells.
+    {
+      programs.fish = {
+        shellInit = ''
+          # Prevent nix from prepending to the PATH multiple times.
+          set -x __ETC_PROFILE_NIX_SOURCED
+          if test -n "$NIX_PROFILES"
+            set __ETC_PROFILE_NIX_SOURCED 1
+          end
+        '';
+      };
+    }
+
     # Use as $SHELL.
     (mkIf cfg.isSHELL {
       home.sessionVariables.SHELL = config.programs.fish.package + "/bin/fish";
