@@ -20,6 +20,7 @@
 
   my-dotfiles.direnv = {
     enable = true; # Used to activate devenv automatically.
+    hideDiff = true;
   };
 
   my-dotfiles.devenv = {

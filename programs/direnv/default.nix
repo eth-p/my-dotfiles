@@ -12,6 +12,8 @@ in
 {
   options.my-dotfiles.direnv = with lib; {
     enable = mkEnableOption "install direnv";
+
+    hideDiff = mkEnableOption "hide the environment variable diff";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [
@@ -22,6 +24,13 @@ in
         enable = true;
       };
     }
+
+    # Hide the env var diff.
+    (mkIf cfg.hideDiff {
+      programs.direnv.config = {
+        global.hide_env_diff = true;
+      };
+    })
 
   ]);
 }
