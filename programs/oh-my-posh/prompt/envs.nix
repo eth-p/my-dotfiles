@@ -5,10 +5,13 @@
 # Type: Blocks (https://ohmyposh.dev/docs/configuration/block)
 # ==============================================================================
 { config, cfg, generator, ... } @ inputs: {
-  envs = (import ./envs.nix inputs);
-  flags = (import ./flags.nix inputs);
-  path = (import ./path.nix inputs);
-  time = (import ./time.nix inputs);
-  newline_leading = (import ./block_newline_leading.nix inputs);
-  newline_trailing = (import ./block_newline_trailing.nix inputs);
+  enable = true;
+  priority = 2;
+
+  type = "prompt";
+  alignment = "left";
+  leading_diamond = "█";
+  trailing_diamond = "█";
+
+  segments = generator.mkSegments cfg.envAnnotations;
 }

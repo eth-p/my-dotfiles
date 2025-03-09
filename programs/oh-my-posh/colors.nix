@@ -13,5 +13,6 @@
     vcs_staged = "#995500";
     vcs_synced = "#447711";
     vcs_unknown = "#774444";
+    envs_bg = "#666666";
   };
 }

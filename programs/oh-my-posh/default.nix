@@ -21,6 +21,21 @@ in
       description = "user text is entered on a new line";
     };
 
+    envAnnotations = mkOption {
+      type = types.attrsOf types.attrs; # TODO: Proper typing.
+      default = { };
+      example = {
+        something = {
+          style = "diamond";
+          leading_diamond = " ";
+          trailing_diamond = "";
+          type = "text";
+          background = "red";
+          template = " foo ";
+        };
+      };
+    };
+
     pathAnnotations = mkOption {
       type = types.attrsOf types.attrs; # TODO: Proper typing.
       default = { };
