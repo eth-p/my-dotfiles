@@ -12,6 +12,7 @@
   ./btop
   ./carapace
   ./devenv
+  ./direnv
   ./eza
   ./fd
   ./fish

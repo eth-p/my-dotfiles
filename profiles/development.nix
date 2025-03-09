@@ -18,6 +18,10 @@
   my-dotfiles.ripgrep.enable = true;
   my-dotfiles.zoxide.enable = true;
 
+  my-dotfiles.direnv = {
+    enable = true; # Used to activate devenv automatically.
+  };
+
   my-dotfiles.devenv = {
     enable = true;
     inPrompt = true;
