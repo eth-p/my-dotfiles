@@ -20,6 +20,7 @@
 
   my-dotfiles.devenv = {
     enable = true;
+    inPrompt = true;
   };
 
   my-dotfiles.fish = {

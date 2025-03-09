@@ -14,5 +14,6 @@
     vcs_synced = "#447711";
     vcs_unknown = "#774444";
     envs_bg = "#666666";
+    envs_fg_devenv = "#c1abff";
   };
 }
