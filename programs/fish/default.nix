@@ -11,6 +11,8 @@ in
 {
   options.my-dotfiles.fish = with lib; {
     enable = mkEnableOption "install and configure fish";
+
+    isSHELL = mkEnableOption "use as `$SHELL`";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [
@@ -21,6 +23,11 @@ in
         enable = true;
       };
     }
+
+    # Use as $SHELL.
+    (mkIf cfg.isSHELL {
+      home.sessionVariables.SHELL = config.programs.fish.package + "/bin/fish";
+    })
 
   ]);
 }

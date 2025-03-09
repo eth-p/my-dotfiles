@@ -25,6 +25,7 @@
 
   my-dotfiles.fish = {
     enable = true;
+    isSHELL = true;
   };
 
   my-dotfiles.oh-my-posh = {
