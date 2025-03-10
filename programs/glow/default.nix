@@ -11,11 +11,11 @@ let
   themes = (import ./themes.nix inputs);
 in
 {
-  options.my-dotfiles.glow = with lib; {
-    enable = mkEnableOption "install glow";
+  options.my-dotfiles.glow = {
+    enable = lib.mkEnableOption "install glow";
 
-    theme = mkOption {
-      type = types.enum (themes.all);
+    theme = lib.mkOption {
+      type = lib.types.enum (themes.all);
       description = "the theme to use";
       default = "base16";
     };

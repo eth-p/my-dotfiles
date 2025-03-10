@@ -12,17 +12,17 @@ let
 
 in
 {
-  options.my-dotfiles.oh-my-posh = with lib; rec {
-    enable = mkEnableOption "install and configure oh-my-posh";
+  options.my-dotfiles.oh-my-posh = {
+    enable = lib.mkEnableOption "install and configure oh-my-posh";
 
-    newline = mkOption {
-      type = types.bool;
+    newline = lib.mkOption {
+      type = lib.types.bool;
       default = true;
       description = "user text is entered on a new line";
     };
 
-    envAnnotations = mkOption {
-      type = types.attrsOf types.attrs; # TODO: Proper typing.
+    envAnnotations = lib.mkOption {
+      type = lib.types.attrsOf lib.types.attrs; # TODO: Proper typing.
       default = { };
       example = {
         something = {
@@ -36,8 +36,8 @@ in
       };
     };
 
-    pathAnnotations = mkOption {
-      type = types.attrsOf types.attrs; # TODO: Proper typing.
+    pathAnnotations = lib.mkOption {
+      type = lib.types.attrsOf lib.types.attrs; # TODO: Proper typing.
       default = { };
       example = {
         something = {

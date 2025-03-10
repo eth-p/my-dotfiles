@@ -12,17 +12,17 @@ let
   themes = (import ./themes.nix inputs);
 in
 {
-  options.my-dotfiles.eza = with lib; {
-    enable = mkEnableOption "install and configure eza as a replacement for ls";
+  options.my-dotfiles.eza = {
+    enable = lib.mkEnableOption "install and configure eza as a replacement for ls";
 
-    theme = mkOption {
-      type = types.enum themes.all;
+    theme = lib.mkOption {
+      type = lib.types.enum themes.all;
       description = "the theme to use";
       default = "base16";
     };
 
-    enableAliases = mkOption {
-      type = types.bool;
+    enableAliases = lib.mkOption {
+      type = lib.types.bool;
       description = "Enable shell aliases.";
       default = true;
     };

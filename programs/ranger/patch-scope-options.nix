@@ -26,18 +26,18 @@ let
   };
 in
 {
-  options.programs.ranger = with lib; {
+  options.programs.ranger = {
     scope = {
-      extension = mkOption {
-        type = types.listOf bashCase;
+      extension = lib.mkOption {
+        type = lib.types.listOf bashCase;
         default = [ ];
       };
-      mimeType = mkOption {
-        type = types.listOf bashCase;
+      mimeType = lib.mkOption {
+        type = lib.types.listOf bashCase;
         default = [ ];
       };
-      imageType = mkOption {
-        type = types.listOf bashCase;
+      imageType = lib.mkOption {
+        type = lib.types.listOf bashCase;
         default = [ ];
       };
     };
