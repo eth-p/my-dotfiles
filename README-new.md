@@ -34,3 +34,8 @@ nix shell 'home-manager' --command 'home-manager' switch --flake "path:.#${profi
 ```
 
 </details>
+
+
+## Options
+
+See [OPTIONS.md](./OPTIONS.md).

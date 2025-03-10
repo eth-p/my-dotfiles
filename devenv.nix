@@ -64,5 +64,16 @@
         "my-dotfiles:format-sh"
       ];
     };
+
+    "my-dotfiles:docs" = {
+      exec = ''
+        "${inputs.nix-options-doc.packages."${pkgs.system}".default}/bin/nix-options-doc" \
+          --path "." \
+          --out OPTIONS.md \
+          --exclude-dir "lib" \
+          --exclude-dir "profiles" \
+          --sort
+      '';
+    };
   };
 }
