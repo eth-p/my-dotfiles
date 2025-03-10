@@ -10,29 +10,29 @@ let
   nvimHome = "${config.xdg.configHome}/nvim";
 in
 {
-  options.my-dotfiles.neovim = with lib; {
-    enable = mkEnableOption "neovim";
+  options.my-dotfiles.neovim = {
+    enable = lib.mkEnableOption "neovim";
 
-    ui.nerdfonts = mkOption {
-      type = types.bool;
+    ui.nerdfonts = lib.mkOption {
+      type = lib.types.bool;
       description = "Enable support for using Nerdfonts.";
       default = false;
     };
 
-    ui.focus_dimming = mkOption {
-      type = types.bool;
+    ui.focus_dimming = lib.mkOption {
+      type = lib.types.bool;
       description = "Dim unfocused panes.";
       default = true;
     };
 
-    ui.transparent_background = mkOption {
-      type = types.bool;
+    ui.transparent_background = lib.mkOption {
+      type = lib.types.bool;
       description = "Use a transparent background.";
       default = false;
     };
 
-    integrations.git = mkOption {
-      type = types.bool;
+    integrations.git = lib.mkOption {
+      type = lib.types.bool;
       description = "Enable git integrations.";
       default = config.programs.git.enable;
     };

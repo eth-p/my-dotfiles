@@ -9,8 +9,8 @@ let
   cfg = config.my-dotfiles.fzf;
 in
 {
-  options.my-dotfiles.fzf = with lib; {
-    enable = mkEnableOption "install and configure fzf";
+  options.my-dotfiles.fzf = {
+    enable = lib.mkEnableOption "install and configure fzf";
   };
 
   config = mkIf cfg.enable {

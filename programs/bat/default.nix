@@ -10,11 +10,11 @@ let
   cfg = config.my-dotfiles.bat;
 in
 {
-  options.my-dotfiles.bat = with lib; {
-    enable = mkEnableOption "install and configure bat";
+  options.my-dotfiles.bat = {
+    enable = lib.mkEnableOption "install and configure bat";
 
-    enableBatman = mkOption {
-      type = types.bool;
+    enableBatman = lib.mkOption {
+      type = lib.types.bool;
       description = "Enable batman for reading manpages.";
       default = true;
     };

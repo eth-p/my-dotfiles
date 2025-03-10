@@ -11,12 +11,12 @@ let
   themes = (import ./themes.nix inputs);
 in
 {
-  options.my-dotfiles.ranger = with lib; {
-    enable = mkEnableOption "install and configure ranger";
+  options.my-dotfiles.ranger = {
+    enable = lib.mkEnableOption "install and configure ranger";
 
     glow = {
-      forOpen = mkEnableOption "use glow to open markdown files";
-      forPreview = mkEnableOption "use glow to preview markdown files";
+      forOpen = lib.mkEnableOption "use glow to open markdown files";
+      forPreview = lib.mkEnableOption "use glow to preview markdown files";
     };
   };
 

@@ -9,10 +9,10 @@ let
   cfg = config.my-dotfiles.fish;
 in
 {
-  options.my-dotfiles.fish = with lib; {
-    enable = mkEnableOption "install and configure fish";
+  options.my-dotfiles.fish = {
+    enable = lib.mkEnableOption "install and configure fish";
 
-    isSHELL = mkEnableOption "use as `$SHELL`";
+    isSHELL = lib.mkEnableOption "use as `$SHELL`";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [

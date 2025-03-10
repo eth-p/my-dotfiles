@@ -10,9 +10,9 @@ let
   cfg = config.my-dotfiles.devenv;
 in
 {
-  options.my-dotfiles.devenv = with lib; {
-    enable = mkEnableOption "install devenv";
-    inPrompt = mkEnableOption "show git info in the shell prompt";
+  options.my-dotfiles.devenv = {
+    enable = lib.mkEnableOption "install devenv";
+    inPrompt = lib.mkEnableOption "show git info in the shell prompt";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [

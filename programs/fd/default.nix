@@ -9,17 +9,17 @@ let
   cfg = config.my-dotfiles.fd;
 in
 {
-  options.my-dotfiles.fd = with lib; {
-    enable = mkEnableOption "install and configure fd";
+  options.my-dotfiles.fd = {
+    enable = lib.mkEnableOption "install and configure fd";
 
-    ignoreMacFiles = mkOption {
-      type = types.bool;
+    ignoreMacFiles = lib.mkOption {
+      type = lib.types.bool;
       description = "Ignore system files created by MacOS.";
       default = ctx.isDarwin;
     };
 
-    ignoreGitRepoFiles = mkOption {
-      type = types.bool;
+    ignoreGitRepoFiles = lib.mkOption {
+      type = lib.types.bool;
       description = "Ignore files inside .git";
       default = true;
     };

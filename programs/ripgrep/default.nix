@@ -9,8 +9,8 @@ let
   cfg = config.my-dotfiles.ripgrep;
 in
 {
-  options.my-dotfiles.ripgrep = with lib; {
-    enable = mkEnableOption "install ripgrep";
+  options.my-dotfiles.ripgrep = {
+    enable = lib.mkEnableOption "install ripgrep";
   };
 
   config = mkIf cfg.enable {

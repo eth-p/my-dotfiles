@@ -9,8 +9,8 @@ let
   cfg = config.my-dotfiles.zoxide;
 in
 {
-  options.my-dotfiles.zoxide = with lib; {
-    enable = mkEnableOption "install and configure zoxide";
+  options.my-dotfiles.zoxide = {
+    enable = lib.mkEnableOption "install and configure zoxide";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [

@@ -11,34 +11,34 @@ let
   cfg = config.my-dotfiles.git;
 in
 {
-  options.my-dotfiles.git = with lib; {
-    enable = mkEnableOption "install and configure git";
-    inPrompt = mkEnableOption "show git info in the shell prompt";
+  options.my-dotfiles.git = {
+    enable = lib.mkEnableOption "install and configure git";
+    inPrompt = lib.mkEnableOption "show git info in the shell prompt";
 
-    github = mkEnableOption "install the gh command-line tool";
+    github = lib.mkEnableOption "install the gh command-line tool";
 
     fzf = {
-      fixup = mkOption {
-        type = types.bool;
+      fixup = lib.mkOption {
+        type = lib.types.bool;
         description = "Add `git fixup` command";
         default = false;
       };
     };
 
-    useDelta = mkOption {
-      type = types.bool;
+    useDelta = lib.mkOption {
+      type = lib.types.bool;
       description = "Use delta to show diffs.";
       default = true;
     };
 
-    useDyff = mkOption {
-      type = types.bool;
+    useDyff = lib.mkOption {
+      type = lib.types.bool;
       description = "Use dyff to show diffs between YAML files.";
       default = true;
     };
 
-    ignoreMacFiles = mkOption {
-      type = types.bool;
+    ignoreMacFiles = lib.mkOption {
+      type = lib.types.bool;
       description = "Ignore system files created by MacOS.";
       default = ctx.isDarwin;
     };

@@ -9,8 +9,8 @@ let
   cfg = config.my-dotfiles.carapace;
 in
 {
-  options.my-dotfiles.carapace = with lib; {
-    enable = mkEnableOption "install and configure carapace";
+  options.my-dotfiles.carapace = {
+    enable = lib.mkEnableOption "install and configure carapace";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [

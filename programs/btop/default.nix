@@ -9,8 +9,8 @@ let
   cfg = config.my-dotfiles.btop;
 in
 {
-  options.my-dotfiles.btop = with lib; {
-    enable = mkEnableOption "install and configure btop";
+  options.my-dotfiles.btop = {
+    enable = lib.mkEnableOption "install and configure btop";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [

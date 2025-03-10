@@ -10,10 +10,10 @@ let
   cfg = config.my-dotfiles.direnv;
 in
 {
-  options.my-dotfiles.direnv = with lib; {
-    enable = mkEnableOption "install direnv";
+  options.my-dotfiles.direnv = {
+    enable = lib.mkEnableOption "install direnv";
 
-    hideDiff = mkEnableOption "hide the environment variable diff";
+    hideDiff = lib.mkEnableOption "hide the environment variable diff";
   };
 
   config = mkIf cfg.enable (lib.mkMerge [
