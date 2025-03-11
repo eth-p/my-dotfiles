@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/BurntSushi/ripgrep
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkIf;
   cfg = config.my-dotfiles.ripgrep;

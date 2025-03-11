@@ -3,9 +3,9 @@
 #
 # Program: https://github.com/sharkdp/fd
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, config, pkgs, ... }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.fd;
 in
 {
@@ -15,7 +15,7 @@ in
     ignoreMacFiles = lib.mkOption {
       type = lib.types.bool;
       description = "Ignore system files created by MacOS.";
-      default = ctx.isDarwin;
+      default = pkgs.stdenv.isDarwin;
     };
 
     ignoreGitRepoFiles = lib.mkOption {
@@ -25,7 +25,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure fd.
     {

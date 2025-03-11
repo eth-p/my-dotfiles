@@ -3,8 +3,9 @@
 #
 # Program: https://github.com/neovim/neovim
 # ==============================================================================
-{ lib, pkgs, config, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
+  inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) tolua;
   cfg = config.my-dotfiles.neovim;
   nvimHome = "${config.xdg.configHome}/nvim";
@@ -38,7 +39,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
 
     # Configure neovim.
     programs.neovim = {

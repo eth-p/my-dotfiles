@@ -4,9 +4,9 @@
 # Program: https://github.com/JanDeDobbeleer/oh-my-posh
 # (This is used for my shell prompts)
 # ==============================================================================
-{ lib, pkgs, pkgs-unstable, config, ctx, ... } @ inputs:
+{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.oh-my-posh;
   generator = (import ./generator.nix) inputs;
 

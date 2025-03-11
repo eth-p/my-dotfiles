@@ -3,9 +3,9 @@
 #
 # Program: https://github.com/ajeetdsouza/zoxide
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, config, pkgs, ... }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.zoxide;
 in
 {
@@ -13,7 +13,7 @@ in
     enable = lib.mkEnableOption "install and configure zoxide";
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure zoxide.
     {

@@ -3,10 +3,9 @@
 #
 # Program: https://github.com/eza-community/eza
 # ==============================================================================
-{ lib, pkgs, pkgs-unstable, config, ctx, ... } @ inputs:
+{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
 let
-  inherit (lib) mkIf;
-  inherit (config.lib.file) mkOutOfStoreSymlink;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.eza;
   ezaHome = "${config.xdg.configHome}/eza";
   themes = (import ./themes.nix inputs);
@@ -28,7 +27,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure eza.
     {

@@ -3,10 +3,9 @@
 #
 # Program: https://git-scm.com/
 # ==============================================================================
-{ lib, pkgs, config, ctx, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
-  inherit (lib) mkIf;
-  inherit (config.lib.file) mkOutOfStoreSymlink;
+  inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib.withConfig inputs) nerdglyphOr;
   cfg = config.my-dotfiles.git;
 in
@@ -40,11 +39,11 @@ in
     ignoreMacFiles = lib.mkOption {
       type = lib.types.bool;
       description = "Ignore system files created by MacOS.";
-      default = ctx.isDarwin;
+      default = pkgs.stdenv.isDarwin;
     };
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure git.
     {

@@ -3,9 +3,9 @@
 #
 # Program: https://github.com/ranger/ranger
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... } @ inputs:
+{ lib, config, pkgs, ... } @ inputs:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkMerge;
   rangerHome = "${config.xdg.configHome}/ranger";
   cfg = config.my-dotfiles.ranger;
   themes = (import ./themes.nix inputs);
@@ -20,7 +20,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure ranger.
     {

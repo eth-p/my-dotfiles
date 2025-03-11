@@ -3,10 +3,9 @@
 #
 # Program: https://github.com/sharkdp/bat
 # ==============================================================================
-{ lib, pkgs, pkgs-unstable, config, ctx, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 let
-  inherit (lib) mkIf;
-  inherit (config.lib.file) mkOutOfStoreSymlink;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.bat;
 in
 {
@@ -20,7 +19,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure bat.
     {

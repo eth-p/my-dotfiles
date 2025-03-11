@@ -3,10 +3,9 @@
 #
 # Program: https://direnv.net/
 # ==============================================================================
-{ lib, pkgs, pkgs-unstable, config, ctx, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, ... } @ inputs:
 let
-  inherit (lib) mkIf;
-  inherit (my-dotfiles.lib.withConfig inputs) nerdglyphOr;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.direnv;
 in
 {
@@ -16,7 +15,7 @@ in
     hideDiff = lib.mkEnableOption "hide the environment variable diff";
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure direnv.
     {

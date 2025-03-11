@@ -3,9 +3,9 @@
 #
 # Program: https://github.com/charmbracelet/glow
 # ==============================================================================
-{ lib, pkgs, config, ctx, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
-  inherit (lib) mkIf strings attrsets;
+  inherit (lib) mkIf;
   cfg = config.my-dotfiles.glow;
   glowHome = "${config.xdg.configHome}/glow";
   themes = (import ./themes.nix inputs);

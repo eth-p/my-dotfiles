@@ -3,9 +3,9 @@
 #
 # Program: https://github.com/fish-shell/fish-shell
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{ lib, config, pkgs, ... }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.fish;
 in
 {
@@ -15,7 +15,7 @@ in
     isSHELL = lib.mkEnableOption "use as `$SHELL`";
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure fish.
     {

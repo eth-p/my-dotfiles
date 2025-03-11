@@ -3,9 +3,9 @@
 #
 # Program: https://devenv.sh/
 # ==============================================================================
-{ lib, pkgs, pkgs-unstable, config, ctx, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib.withConfig inputs) nerdglyphOr;
   cfg = config.my-dotfiles.devenv;
 in
@@ -15,7 +15,7 @@ in
     inPrompt = lib.mkEnableOption "show git info in the shell prompt";
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (mkMerge [
 
     # Configure devenv.
     {

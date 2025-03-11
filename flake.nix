@@ -41,16 +41,6 @@
         pkgs = import nixpkgs { inherit system; };
         pkgs-unstable = import nixpkgs-unstable { inherit system; };
 
-        # Utilities to pass around.
-        ctx = {
-          inherit bootstrap;
-          inherit (pkgs.stdenv) isDarwin isLinux;
-        };
-
-        my-dotfiles = {
-          inherit (self) lib;
-        };
-
         # Get program modules.
         modules = import ./programs;
 
@@ -75,9 +65,10 @@
               ./config.nix
             ];
             extraSpecialArgs = {
-              inherit ctx;
               inherit pkgs-unstable;
-              inherit my-dotfiles;
+              my-dotfiles = self // {
+                inherit bootstrap;
+              };
             };
           }
         )
