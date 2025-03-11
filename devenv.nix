@@ -67,7 +67,7 @@
 
     "my-dotfiles:docs" = {
       exec = ''
-        "${inputs.nix-options-doc.packages."${pkgs.system}".default}/bin/nix-options-doc" \
+        nix run github:Thunderbottom/nix-options-doc?rev=144d36b6e8f01acedeef83bcc5fac46f911e71c9 -- \
           --path "." \
           --out OPTIONS.md \
           --exclude-dir "lib" \
