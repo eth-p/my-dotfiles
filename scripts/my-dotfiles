@@ -12,6 +12,12 @@ else
 	printf "%s\n" "$profile" > config.profile
 fi
 
-nix shell 'home-manager' \
-	--command 'home-manager' switch \
-	--flake "path:.#${profile}"
+# If home-manager is not installed, shim it with nix shell.
+if ! command -v home-manager &> /dev/null; then
+	home-manager() {
+		nix shell 'home-manager' --command 'home-manager' "$@" || return $?
+	}
+fi
+
+# Run home-manager.
+home-manager switch --flake "path:.#${profile}"
