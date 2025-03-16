@@ -15,6 +15,20 @@ in
   options.my-dotfiles.neovim = {
     enable = lib.mkEnableOption "neovim";
 
+    colorschemes = {
+      dark = lib.mkOption {
+        type = lib.types.str;
+        description = "The colorscheme used for dark mode.";
+        default = "monokai-pro";
+      };
+
+      light = lib.mkOption {
+        type = lib.types.str;
+        description = "The colorscheme used for light mode.";
+        default = "catppuccin-latte";
+      };
+    };
+
     ui.nerdfonts = lib.mkOption {
       type = lib.types.bool;
       description = "Enable support for using Nerdfonts.";
@@ -60,7 +74,9 @@ in
       "${nvimHome}/managed-by-nix.lua" = {
         text = ''
           return ${tolua.attrs {
-            ui = cfg.ui;
+            ui = cfg.ui // {
+              colorscheme = cfg.colorschemes."${cfgGlobal.theme}";              
+            };
             integrations = cfg.integrations;
           }}
         '';
