@@ -8,5 +8,13 @@
 
     nerdfonts = mkEnableOption "NerdFonts are supported and installed";
 
+    theme = mkOption {
+      type = types.enum [ "dark" "light" ];
+      default = "dark";
+      description = ''
+        The general theme used throughout various programs.
+      '';
+    };
+
   };
 }
