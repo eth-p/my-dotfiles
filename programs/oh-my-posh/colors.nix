@@ -16,4 +16,22 @@
     envs_bg = "#666666";
     envs_fg_devenv = "#c1abff";
   };
+
+  light = {
+    path_parent = "#666666";
+    path_curdir = "#333333";
+    path_bg = "#dddddd";
+    flags_bg = "#bbbbbb";
+    flags_exitcode_color = "#f25757";
+    flags_sudo_color = "#009900";
+    time_bg = "#cccccc";
+    time_color = "#333333";
+    vcs_fg = "#000000";
+    vcs_modified = "#e64c4c";
+    vcs_staged = "#ed9c3e";
+    vcs_synced = "#61d145";
+    vcs_unknown = "#e64c4c";
+    envs_bg = "#999999";
+    envs_fg_devenv = "#382078";
+  };
 }

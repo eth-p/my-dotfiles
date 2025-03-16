@@ -70,7 +70,7 @@ in
               })
           );
           palettes = {
-            template = "dark";
+            template = config.my-dotfiles.theme;
             list = (import ./colors.nix);
           };
         };
