@@ -10,7 +10,7 @@
   # 
   # nerdglyphOr :: string string -> string
   nerdglyphOr =
-    if config.my-dotfiles.nerdfonts
+    if config.my-dotfiles.global.nerdfonts
     then nfCodepoint: txtIcon: builtins.fromJSON (''"\u${nfCodepoint}'')
     else nfCodepoint: txtIcon: txtIcon;
 }

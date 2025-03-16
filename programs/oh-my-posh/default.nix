@@ -70,7 +70,7 @@ in
               })
           );
           palettes = {
-            template = config.my-dotfiles.theme;
+            template = config.my-dotfiles.global.theme;
             list = (import ./colors.nix);
           };
         };

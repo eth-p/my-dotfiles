@@ -4,7 +4,7 @@
 # This contains global options used throughout my home-manager modules.
 # ==============================================================================
 { lib, ... }: with lib; {
-  options.my-dotfiles = {
+  options.my-dotfiles.global = {
 
     nerdfonts = mkEnableOption "NerdFonts are supported and installed";
 
