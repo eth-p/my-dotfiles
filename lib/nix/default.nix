@@ -6,5 +6,5 @@
 { ... } @ inputs: {
   tolua = (import ./tolua.nix) inputs;
   theming = (import ./theming.nix) inputs;
-  withConfig = (import ./with-config.nix);
+  text = (import ./text.nix) inputs;
 }

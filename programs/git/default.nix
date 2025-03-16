@@ -6,8 +6,9 @@
 { lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (my-dotfiles.lib.withConfig inputs) nerdglyphOr;
   cfg = config.my-dotfiles.git;
+  cfgGlobal = config.my-dotfiles.global;
+  nerdglyphOr = my-dotfiles.lib.text.nerdglyphOr cfgGlobal.nerdfonts;
 in
 {
   options.my-dotfiles.git = {
