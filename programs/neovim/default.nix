@@ -8,6 +8,7 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) tolua;
   cfg = config.my-dotfiles.neovim;
+  cfgGlobal = config.my-dotfiles.global;
   nvimHome = "${config.xdg.configHome}/nvim";
 in
 {
@@ -17,7 +18,7 @@ in
     ui.nerdfonts = lib.mkOption {
       type = lib.types.bool;
       description = "Enable support for using Nerdfonts.";
-      default = false;
+      default = cfgGlobal.nerdfonts;
     };
 
     ui.focus_dimming = lib.mkOption {
