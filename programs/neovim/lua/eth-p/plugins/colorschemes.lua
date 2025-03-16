@@ -84,6 +84,21 @@ return {
 		end,
 	},
 
+	-- Catppuccin
+	--
+	-- Repo: https://github.com/catppuccin/nvim
+	-- Docs: https://github.com/catppuccin/nvim
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false,
+		priority = 1000,
+	},
+
+	-- VimFade
+	--
+	-- Repo: https://github.com/TaDaa/vimade
+	-- Docs: https://github.com/TaDaa/vimade
 	{
 		"tadaa/vimade",
 
