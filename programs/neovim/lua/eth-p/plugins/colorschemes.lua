@@ -94,26 +94,4 @@ return {
 		lazy = false,
 		priority = 1000,
 	},
-
-	-- VimFade
-	--
-	-- Repo: https://github.com/TaDaa/vimade
-	-- Docs: https://github.com/TaDaa/vimade
-	{
-		"tadaa/vimade",
-
-		lazy = true,
-		event = "VeryLazy",
-
-		opts = {
-			recipe = { "default", { animate = false } },
-			ncmode = "windows",
-			fadelevel = 0.75,
-			basebg = { 0, 0, 0 },
-
-			groupdiff = true,
-			groupscrollbind = true,
-			enablefocusfading = true,
-		},
-	},
 }
