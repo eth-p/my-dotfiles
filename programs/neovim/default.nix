@@ -12,6 +12,10 @@ let
   nvimHome = "${config.xdg.configHome}/nvim";
 in
 {
+  imports = [
+    ./plugins-treesitter.nix
+  ];
+
   options.my-dotfiles.neovim = {
     enable = lib.mkEnableOption "neovim";
 
@@ -100,6 +104,7 @@ in
           mkLazyNvimSpecForManagedPlugin = name: {
             name = name + " (via nix)";
             dir = builtPluginsPath + "/" + name;
+            lazy = false;
           };
 
         in

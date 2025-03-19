@@ -40,6 +40,10 @@
   my-dotfiles.neovim = {
     enable = true;
     integrations.git = true;
+
+    syntax = {
+      yaml = true;
+    };
   };
 
   my-dotfiles.git = {
