@@ -1,23 +1,7 @@
 # NixOS Module Options
 
 
-## [`bashCase.options.case`](programs/ranger/patch-scope-options.nix#L13)
-
-
-The case expression.
-
-
-**Type:** `types.str`
-
-## [`bashCase.options.command`](programs/ranger/patch-scope-options.nix#L19)
-
-
-The command to run if this branch is taken.
-
-
-**Type:** `types.lines`
-
-## [`options.my-dotfiles.bat.enable`](programs/bat/default.nix#L13)
+## [`my-dotfiles.bat.enable`](programs/bat/default.nix#L13)
 
 install and configure bat
 
@@ -27,7 +11,7 @@ install and configure bat
 
 **Example:** `true`
 
-## [`options.my-dotfiles.bat.enableBatman`](programs/bat/default.nix#L15)
+## [`my-dotfiles.bat.enableBatman`](programs/bat/default.nix#L15)
 
 Enable batman for reading manpages.
 
@@ -35,7 +19,7 @@ Enable batman for reading manpages.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.btop.enable`](programs/btop/default.nix#L13)
+## [`my-dotfiles.btop.enable`](programs/btop/default.nix#L13)
 
 install and configure btop
 
@@ -45,7 +29,7 @@ install and configure btop
 
 **Example:** `true`
 
-## [`options.my-dotfiles.carapace.enable`](programs/carapace/default.nix#L13)
+## [`my-dotfiles.carapace.enable`](programs/carapace/default.nix#L13)
 
 install and configure carapace
 
@@ -55,7 +39,7 @@ install and configure carapace
 
 **Example:** `true`
 
-## [`options.my-dotfiles.devenv.enable`](programs/devenv/default.nix#L15)
+## [`my-dotfiles.devenv.enable`](programs/devenv/default.nix#L15)
 
 install devenv
 
@@ -65,7 +49,7 @@ install devenv
 
 **Example:** `true`
 
-## [`options.my-dotfiles.devenv.inPrompt`](programs/devenv/default.nix#L16)
+## [`my-dotfiles.devenv.inPrompt`](programs/devenv/default.nix#L16)
 
 show git info in the shell prompt
 
@@ -75,7 +59,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`options.my-dotfiles.direnv.enable`](programs/direnv/default.nix#L13)
+## [`my-dotfiles.direnv.enable`](programs/direnv/default.nix#L13)
 
 install direnv
 
@@ -85,7 +69,7 @@ install direnv
 
 **Example:** `true`
 
-## [`options.my-dotfiles.direnv.hideDiff`](programs/direnv/default.nix#L15)
+## [`my-dotfiles.direnv.hideDiff`](programs/direnv/default.nix#L15)
 
 hide the environment variable diff
 
@@ -95,7 +79,7 @@ hide the environment variable diff
 
 **Example:** `true`
 
-## [`options.my-dotfiles.eza.enable`](programs/eza/default.nix#L15)
+## [`my-dotfiles.eza.enable`](programs/eza/default.nix#L15)
 
 install and configure eza as a replacement for ls
 
@@ -105,7 +89,7 @@ install and configure eza as a replacement for ls
 
 **Example:** `true`
 
-## [`options.my-dotfiles.eza.enableAliases`](programs/eza/default.nix#L23)
+## [`my-dotfiles.eza.enableAliases`](programs/eza/default.nix#L23)
 
 Enable shell aliases.
 
@@ -113,7 +97,7 @@ Enable shell aliases.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.eza.theme`](programs/eza/default.nix#L17)
+## [`my-dotfiles.eza.theme`](programs/eza/default.nix#L17)
 
 the theme to use
 
@@ -121,7 +105,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`options.my-dotfiles.fd.enable`](programs/fd/default.nix#L13)
+## [`my-dotfiles.fd.enable`](programs/fd/default.nix#L13)
 
 install and configure fd
 
@@ -131,7 +115,7 @@ install and configure fd
 
 **Example:** `true`
 
-## [`options.my-dotfiles.fd.ignoreGitRepoFiles`](programs/fd/default.nix#L21)
+## [`my-dotfiles.fd.ignoreGitRepoFiles`](programs/fd/default.nix#L21)
 
 Ignore files inside .git
 
@@ -139,7 +123,7 @@ Ignore files inside .git
 
 **Default:** `true`
 
-## [`options.my-dotfiles.fd.ignoreMacFiles`](programs/fd/default.nix#L15)
+## [`my-dotfiles.fd.ignoreMacFiles`](programs/fd/default.nix#L15)
 
 Ignore system files created by MacOS.
 
@@ -147,7 +131,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`options.my-dotfiles.fish.enable`](programs/fish/default.nix#L13)
+## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L13)
 
 install and configure fish
 
@@ -157,7 +141,7 @@ install and configure fish
 
 **Example:** `true`
 
-## [`options.my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L15)
+## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L15)
 
 use as `$SHELL`
 
@@ -167,7 +151,7 @@ use as `$SHELL`
 
 **Example:** `true`
 
-## [`options.my-dotfiles.fzf.enable`](programs/fzf/default.nix#L13)
+## [`my-dotfiles.fzf.enable`](programs/fzf/default.nix#L13)
 
 install and configure fzf
 
@@ -177,7 +161,7 @@ install and configure fzf
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.enable`](programs/git/default.nix#L15)
+## [`my-dotfiles.git.enable`](programs/git/default.nix#L15)
 
 install and configure git
 
@@ -187,7 +171,7 @@ install and configure git
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L21)
+## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L21)
 
 Add `git fixup` command
 
@@ -195,7 +179,7 @@ Add `git fixup` command
 
 **Default:** `false`
 
-## [`options.my-dotfiles.git.github`](programs/git/default.nix#L18)
+## [`my-dotfiles.git.github`](programs/git/default.nix#L18)
 
 install the gh command-line tool
 
@@ -205,7 +189,7 @@ install the gh command-line tool
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L40)
+## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L40)
 
 Ignore system files created by MacOS.
 
@@ -213,7 +197,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`options.my-dotfiles.git.inPrompt`](programs/git/default.nix#L16)
+## [`my-dotfiles.git.inPrompt`](programs/git/default.nix#L16)
 
 show git info in the shell prompt
 
@@ -223,7 +207,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.useDelta`](programs/git/default.nix#L28)
+## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L28)
 
 Use delta to show diffs.
 
@@ -231,7 +215,7 @@ Use delta to show diffs.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.git.useDyff`](programs/git/default.nix#L34)
+## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L34)
 
 Use dyff to show diffs between YAML files.
 
@@ -239,7 +223,7 @@ Use dyff to show diffs between YAML files.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.global.nerdfonts`](programs/globals.nix#L9)
+## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L9)
 
 NerdFonts are supported and installed
 
@@ -249,7 +233,7 @@ NerdFonts are supported and installed
 
 **Example:** `true`
 
-## [`options.my-dotfiles.global.theme`](programs/globals.nix#L11)
+## [`my-dotfiles.global.theme`](programs/globals.nix#L11)
 
 
 The general theme used throughout various programs.
@@ -259,7 +243,7 @@ The general theme used throughout various programs.
 
 **Default:** `"dark"`
 
-## [`options.my-dotfiles.glow.enable`](programs/glow/default.nix#L15)
+## [`my-dotfiles.glow.enable`](programs/glow/default.nix#L15)
 
 install glow
 
@@ -269,7 +253,7 @@ install glow
 
 **Example:** `true`
 
-## [`options.my-dotfiles.glow.theme`](programs/glow/default.nix#L17)
+## [`my-dotfiles.glow.theme`](programs/glow/default.nix#L17)
 
 the theme to use
 
@@ -277,7 +261,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`options.my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
+## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
 
 The colorscheme used for dark mode.
 
@@ -285,7 +269,7 @@ The colorscheme used for dark mode.
 
 **Default:** `"monokai-pro"`
 
-## [`options.my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L29)
+## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L29)
 
 The colorscheme used for light mode.
 
@@ -293,7 +277,7 @@ The colorscheme used for light mode.
 
 **Default:** `"catppuccin-latte"`
 
-## [`options.my-dotfiles.neovim.enable`](programs/neovim/default.nix#L20)
+## [`my-dotfiles.neovim.enable`](programs/neovim/default.nix#L20)
 
 neovim
 
@@ -303,7 +287,7 @@ neovim
 
 **Example:** `true`
 
-## [`options.my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L54)
+## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L54)
 
 Enable git integrations.
 
@@ -311,7 +295,7 @@ Enable git integrations.
 
 **Default:** `config.programs.git.enable`
 
-## [`options.my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L16)
+## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L16)
 
 Enable yaml syntax support (treesitter).
 
@@ -319,7 +303,7 @@ Enable yaml syntax support (treesitter).
 
 **Default:** `false`
 
-## [`options.my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L42)
+## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L42)
 
 Dim unfocused panes.
 
@@ -327,7 +311,7 @@ Dim unfocused panes.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L36)
+## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L36)
 
 Enable support for using Nerdfonts.
 
@@ -335,7 +319,7 @@ Enable support for using Nerdfonts.
 
 **Default:** `cfgGlobal.nerdfonts`
 
-## [`options.my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L48)
+## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L48)
 
 Use a transparent background.
 
@@ -343,7 +327,7 @@ Use a transparent background.
 
 **Default:** `false`
 
-## [`options.my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L16)
+## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L16)
 
 install and configure oh-my-posh
 
@@ -353,7 +337,7 @@ install and configure oh-my-posh
 
 **Example:** `true`
 
-## [`options.my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L24)
+## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L24)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -374,7 +358,7 @@ install and configure oh-my-posh
 }
 ```
 
-## [`options.my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L18)
+## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L18)
 
 user text is entered on a new line
 
@@ -382,7 +366,7 @@ user text is entered on a new line
 
 **Default:** `true`
 
-## [`options.my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L39)
+## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L39)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -403,7 +387,7 @@ user text is entered on a new line
 }
 ```
 
-## [`options.my-dotfiles.ranger.enable`](programs/ranger/default.nix#L15)
+## [`my-dotfiles.ranger.enable`](programs/ranger/default.nix#L15)
 
 install and configure ranger
 
@@ -413,7 +397,7 @@ install and configure ranger
 
 **Example:** `true`
 
-## [`options.my-dotfiles.ranger.glow.forOpen`](programs/ranger/default.nix#L18)
+## [`my-dotfiles.ranger.glow.forOpen`](programs/ranger/default.nix#L18)
 
 use glow to open markdown files
 
@@ -423,7 +407,7 @@ use glow to open markdown files
 
 **Example:** `true`
 
-## [`options.my-dotfiles.ranger.glow.forPreview`](programs/ranger/default.nix#L19)
+## [`my-dotfiles.ranger.glow.forPreview`](programs/ranger/default.nix#L19)
 
 use glow to preview markdown files
 
@@ -433,7 +417,7 @@ use glow to preview markdown files
 
 **Example:** `true`
 
-## [`options.my-dotfiles.ripgrep.enable`](programs/ripgrep/default.nix#L13)
+## [`my-dotfiles.ripgrep.enable`](programs/ripgrep/default.nix#L13)
 
 install ripgrep
 
@@ -443,7 +427,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`options.my-dotfiles.zoxide.enable`](programs/zoxide/default.nix#L13)
+## [`my-dotfiles.zoxide.enable`](programs/zoxide/default.nix#L13)
 
 install and configure zoxide
 
@@ -452,24 +436,6 @@ install and configure zoxide
 **Default:** `false`
 
 **Example:** `true`
-
-## [`options.programs.ranger.scope.extension`](programs/ranger/patch-scope-options.nix#L31)
-
-**Type:** `lib.types.listOf bashCase`
-
-**Default:** `[ ]`
-
-## [`options.programs.ranger.scope.imageType`](programs/ranger/patch-scope-options.nix#L39)
-
-**Type:** `lib.types.listOf bashCase`
-
-**Default:** `[ ]`
-
-## [`options.programs.ranger.scope.mimeType`](programs/ranger/patch-scope-options.nix#L35)
-
-**Type:** `lib.types.listOf bashCase`
-
-**Default:** `[ ]`
 
 ---
 *Generated with [nix-options-doc](https://github.com/Thunderbottom/nix-options-doc)*

@@ -72,6 +72,8 @@
           --out OPTIONS.md \
           --exclude-dir "lib" \
           --exclude-dir "profiles" \
+          --filter-by-prefix "options.my-dotfiles" \
+          --strip-prefix "options." \
           --sort
       '';
     };
