@@ -21,6 +21,7 @@ return {
 		event = {
 			"BufNewFile",
 			"BufRead",
+			"StdinReadPost",
 		},
 
 		opts = {
