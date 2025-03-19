@@ -77,6 +77,12 @@ in
       # lazy loading, except when plugins rely on native binaries or libraries.
       "${nvimHome}/managed-by-nix.lua" =
         let
+          managedOptions = {
+            integrations = cfg.integrations;
+            ui = cfg.ui // {
+              colorscheme = cfg.colorschemes."${cfgGlobal.theme}";
+            };
+          };
 
           # home-manager neovim adds plugins the `finalPackage.packpathDirs`.
           packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
@@ -101,12 +107,7 @@ in
           text = ''
             return ${tolua.attrs {
               plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
-              opts = {
-                ui = cfg.ui // {
-                  colorscheme = cfg.colorschemes."${cfgGlobal.theme}";              
-                };
-                integrations = cfg.integrations;
-              };
+              opts = managedOptions;
             }}
           '';
         };
