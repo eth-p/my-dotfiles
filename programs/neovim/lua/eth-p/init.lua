@@ -126,7 +126,7 @@ end
 --============================================================================--
 --=== Plugin Manager Initialization ===--
 
-function InitPlugins(opts)
+function InitPlugins(opts, extra_plugins)
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not (vim.uv or vim.loop).fs_stat(lazypath) then
 		local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -153,6 +153,7 @@ function InitPlugins(opts)
 	require("lazy").setup {
 		spec = {
 			{ import = "eth-p/plugins" },
+			extra_plugins,
 		},
 		install = { colorscheme = { opts.ui.colorscheme } },
 		checker = { enabled = true },
@@ -172,7 +173,7 @@ return function(spec)
 	vim.g.colors_name = opts.ui.colorscheme
 	InitConfig(opts)
 	InitKeymaps(opts)
-	InitPlugins(opts)
+	InitPlugins(opts, spec.plugins)
 	InitCommands(opts)
 
 	-- Apply the colorscheme.

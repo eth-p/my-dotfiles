@@ -74,10 +74,12 @@ in
       "${nvimHome}/managed-by-nix.lua" = {
         text = ''
           return ${tolua.attrs {
-            ui = cfg.ui // {
-              colorscheme = cfg.colorschemes."${cfgGlobal.theme}";              
+            opts = {
+              ui = cfg.ui // {
+                colorscheme = cfg.colorschemes."${cfgGlobal.theme}";              
+              };
+              integrations = cfg.integrations;
             };
-            integrations = cfg.integrations;
           }}
         '';
       };

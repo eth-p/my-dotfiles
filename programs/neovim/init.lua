@@ -43,5 +43,6 @@ end
 --=== Initialize ===--
 
 require("eth-p") {
-	opts = config,
+	opts = config.opts,
+	plugins = config.plugins,
 }
