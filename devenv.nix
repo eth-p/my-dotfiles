@@ -67,7 +67,7 @@
 
     "my-dotfiles:docs" = {
       exec = ''
-        nix run github:Thunderbottom/nix-options-doc?rev=d23c8051d7eeedd0fd736c76af9f2d2ae1971086 -- \
+        nix run github:Thunderbottom/nix-options-doc?rev=2caa4b5756a8666d65d70122f413e295f56886e7 -- \
           --path "." \
           --out OPTIONS.md \
           --exclude-dir "lib" \

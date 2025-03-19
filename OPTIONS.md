@@ -1,6 +1,22 @@
 # NixOS Module Options
 
 
+## [`bashCase.options.case`](programs/ranger/patch-scope-options.nix#L13)
+
+
+The case expression.
+
+
+**Type:** `types.str`
+
+## [`bashCase.options.command`](programs/ranger/patch-scope-options.nix#L19)
+
+
+The command to run if this branch is taken.
+
+
+**Type:** `types.lines`
+
 ## [`options.my-dotfiles.bat.enable`](programs/bat/default.nix#L13)
 
 install and configure bat
@@ -39,7 +55,7 @@ install and configure carapace
 
 **Example:** `true`
 
-## [`options.my-dotfiles.devenv.enable`](programs/devenv/default.nix#L14)
+## [`options.my-dotfiles.devenv.enable`](programs/devenv/default.nix#L15)
 
 install devenv
 
@@ -49,7 +65,7 @@ install devenv
 
 **Example:** `true`
 
-## [`options.my-dotfiles.devenv.inPrompt`](programs/devenv/default.nix#L15)
+## [`options.my-dotfiles.devenv.inPrompt`](programs/devenv/default.nix#L16)
 
 show git info in the shell prompt
 
@@ -161,7 +177,7 @@ install and configure fzf
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.enable`](programs/git/default.nix#L14)
+## [`options.my-dotfiles.git.enable`](programs/git/default.nix#L15)
 
 install and configure git
 
@@ -171,7 +187,7 @@ install and configure git
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L20)
+## [`options.my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L21)
 
 Add `git fixup` command
 
@@ -179,7 +195,7 @@ Add `git fixup` command
 
 **Default:** `false`
 
-## [`options.my-dotfiles.git.github`](programs/git/default.nix#L17)
+## [`options.my-dotfiles.git.github`](programs/git/default.nix#L18)
 
 install the gh command-line tool
 
@@ -189,7 +205,7 @@ install the gh command-line tool
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L39)
+## [`options.my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L40)
 
 Ignore system files created by MacOS.
 
@@ -197,7 +213,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`options.my-dotfiles.git.inPrompt`](programs/git/default.nix#L15)
+## [`options.my-dotfiles.git.inPrompt`](programs/git/default.nix#L16)
 
 show git info in the shell prompt
 
@@ -207,7 +223,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`options.my-dotfiles.git.useDelta`](programs/git/default.nix#L27)
+## [`options.my-dotfiles.git.useDelta`](programs/git/default.nix#L28)
 
 Use delta to show diffs.
 
@@ -215,13 +231,33 @@ Use delta to show diffs.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.git.useDyff`](programs/git/default.nix#L33)
+## [`options.my-dotfiles.git.useDyff`](programs/git/default.nix#L34)
 
 Use dyff to show diffs between YAML files.
 
 **Type:** `lib.types.bool`
 
 **Default:** `true`
+
+## [`options.my-dotfiles.global.nerdfonts`](programs/globals.nix#L9)
+
+NerdFonts are supported and installed
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`options.my-dotfiles.global.theme`](programs/globals.nix#L11)
+
+
+The general theme used throughout various programs.
+
+
+**Type:** `types.enum [ "dark" "light" ]`
+
+**Default:** `"dark"`
 
 ## [`options.my-dotfiles.glow.enable`](programs/glow/default.nix#L15)
 
@@ -241,7 +277,23 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`options.my-dotfiles.neovim.enable`](programs/neovim/default.nix#L15)
+## [`options.my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
+
+The colorscheme used for dark mode.
+
+**Type:** `lib.types.str`
+
+**Default:** `"monokai-pro"`
+
+## [`options.my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L29)
+
+The colorscheme used for light mode.
+
+**Type:** `lib.types.str`
+
+**Default:** `"catppuccin-latte"`
+
+## [`options.my-dotfiles.neovim.enable`](programs/neovim/default.nix#L20)
 
 neovim
 
@@ -251,7 +303,7 @@ neovim
 
 **Example:** `true`
 
-## [`options.my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L35)
+## [`options.my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L54)
 
 Enable git integrations.
 
@@ -259,7 +311,15 @@ Enable git integrations.
 
 **Default:** `config.programs.git.enable`
 
-## [`options.my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L23)
+## [`options.my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L16)
+
+Enable yaml syntax support (treesitter).
+
+**Type:** `lib.types.bool`
+
+**Default:** `false`
+
+## [`options.my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L42)
 
 Dim unfocused panes.
 
@@ -267,15 +327,15 @@ Dim unfocused panes.
 
 **Default:** `true`
 
-## [`options.my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L17)
+## [`options.my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L36)
 
 Enable support for using Nerdfonts.
 
 **Type:** `lib.types.bool`
 
-**Default:** `false`
+**Default:** `cfgGlobal.nerdfonts`
 
-## [`options.my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L29)
+## [`options.my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L48)
 
 Use a transparent background.
 
