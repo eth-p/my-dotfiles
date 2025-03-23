@@ -30,13 +30,14 @@ defaults = {
 		},
 		whitespace = {
 			show_always = false,
+			show_on_highlight = true,
 			show_on_filetypes = {
 				"make",
 			},
 
 			chars = {
 				tab = "→",
-				space = " ",
+				space = nil,
 				lead = "•",
 				trail = "•",
 				eol = nil,
