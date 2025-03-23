@@ -38,12 +38,12 @@ function set_listchars(vim_opts, listchars_map)
 end
 
 function setup_auto_list(filetypes)
-	vim.api.nvim_clear_autocmds({ group = augroup_auto_list })
+	vim.api.nvim_clear_autocmds { group = augroup_auto_list }
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetypes,
 		callback = function()
 			vim.opt_local.list = true
-		end
+		end,
 	})
 end
 

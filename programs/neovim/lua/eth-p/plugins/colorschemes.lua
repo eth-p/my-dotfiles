@@ -64,6 +64,10 @@ return {
 							ctermfg = 243,
 						},
 
+						-- Listchars
+						NonText = { fg = "#525152", ctermfg = 234 },
+						Whitespace = { fg = "#525152", ctermfg = 234 },
+
 						-- Columns
 						CursorColumn = { bg = "#353333", ctermbg = 235 },
 						ColorColumn = { bg = "#533333", ctermbg = 235 },
