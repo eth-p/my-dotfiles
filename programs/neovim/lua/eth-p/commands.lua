@@ -44,4 +44,9 @@ cmds.ShowSidebar = function()
 	vim.b.ethp_sidebar_hidden_prev = nil
 end
 
+--=== :ToggleVisualWhitespace ===--
+cmds.ToggleVisualWhitespace = function()
+	require("visual-whitespace").toggle()
+end
+
 return cmds

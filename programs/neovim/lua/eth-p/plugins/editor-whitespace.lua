@@ -25,12 +25,15 @@ return {
 		"mcauley-penney/visual-whitespace.nvim",
 
 		lazy = true,
-		cond = opts.editor.whitespace.show_on_highlight,
 		event = {
 			"ModeChanged",
 		},
+		cmds = {
+			"ToggleVisualWhitespace",
+		},
 
 		opts = {
+			enabled = opts.editor.whitespace.show_on_highlight,
 			tab_char = not_empty(listchars_map.tab) or " ",
 			nl_char = not_empty(listchars_map.eol) or " ",
 			cr_char = " ",

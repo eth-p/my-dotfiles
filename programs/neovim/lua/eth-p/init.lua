@@ -96,6 +96,11 @@ function InitCommands(opts)
 	local new_command = vim.api.nvim_create_user_command
 
 	new_command(prefix .. "ToggleSidebar", commands.ToggleSidebar, {})
+	new_command(
+		prefix .. "ToggleVisualWhitespace",
+		commands.ToggleVisualWhitespace,
+		{}
+	)
 	new_command(prefix .. "HideSidebar", commands.HideSidebar, {})
 	new_command(prefix .. "ShowSidebar", commands.ShowSidebar, {})
 end
