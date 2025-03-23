@@ -28,6 +28,18 @@ defaults = {
 		indents = {
 			detect = true,
 		},
+		whitespace = {
+			show_always = false,
+
+			chars = {
+				tab = "→",
+				space = " ",
+				lead = "•",
+				trail = "•",
+				eol = nil,
+				nbsp = "␣",
+			},
+		},
 	},
 
 	-- integration describes integrations with external tools

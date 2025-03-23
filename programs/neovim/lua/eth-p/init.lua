@@ -10,6 +10,7 @@ package.cpath = package.cpath:gsub("./%?.so;", "")
 --=== Load Modules ===--
 local commands = require("eth-p.commands")
 local opts = require("eth-p.opts")
+local whitespace = require("eth-p.whitespace")
 
 --============================================================================--
 --=== Neovim Config ===--
@@ -58,6 +59,15 @@ function InitConfig(opts)
 		vim.o.foldcolumn = foldwidth --  -> Width in gutter
 		vim.o.foldlevel = 99 -- Needed for `ufo` plugin
 		vim.o.foldlevelstart = 99 -- Needed for `ufo` plugin
+	end
+
+	-- Show whitespace chars.
+	if opts.editor.whitespace.show_always == true then
+		vim.o.list = true
+	end
+
+	if opts.editor.whitespace.chars ~= nil then
+		whitespace.set_listchars(vim.o, opts.editor.whitespace.chars)
 	end
 
 	--
