@@ -62,6 +62,8 @@ function InitConfig(opts)
 	end
 
 	-- Show whitespace chars.
+	whitespace.setup_auto_list(opts.editor.whitespace.show_on_filetypes)
+
 	if opts.editor.whitespace.show_always == true then
 		vim.o.list = true
 	end

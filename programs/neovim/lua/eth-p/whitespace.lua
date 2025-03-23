@@ -1,6 +1,7 @@
 -- my-dotfiles | Copyright (C) 2025 eth-p
 -- Repository: https://github.com/eth-p/my-dotfiles
 -- =============================================================================
+local augroup_auto_list = vim.api.nvim_create_augroup("", {})
 
 -- build_listchar converts a key-value pair from a map into a value used in
 -- vim's `listchars` option.
@@ -36,6 +37,17 @@ function set_listchars(vim_opts, listchars_map)
 	vim_opts.listchars = table.concat(listchars_to_set, ",")
 end
 
+function setup_auto_list(filetypes)
+	vim.api.nvim_clear_autocmds({ group = augroup_auto_list })
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = filetypes,
+		callback = function()
+			vim.opt_local.list = true
+		end
+	})
+end
+
 return {
 	set_listchars = set_listchars,
+	setup_auto_list = setup_auto_list,
 }

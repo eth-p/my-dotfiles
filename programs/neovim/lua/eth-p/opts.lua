@@ -30,6 +30,9 @@ defaults = {
 		},
 		whitespace = {
 			show_always = false,
+			show_on_filetypes = {
+				"make",
+			},
 
 			chars = {
 				tab = "→",
