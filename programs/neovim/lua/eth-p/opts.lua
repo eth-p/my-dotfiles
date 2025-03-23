@@ -25,6 +25,9 @@ defaults = {
 		fold = {
 			enabled = true,
 		},
+		indents = {
+			detect = true,
+		},
 	},
 
 	-- integration describes integrations with external tools
