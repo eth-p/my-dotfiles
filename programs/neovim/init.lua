@@ -20,29 +20,28 @@ package.cpath = package.cpath:gsub("./%?.so;", "")
 --============================================================================--
 --=== Config Loading ===--
 
-local config = { opts = {} }
 local config_home = vim.fn.stdpath("config")
 
 -- Load home-manager managed config.
-config = vim.tbl_deep_extend(
-	"force",
-	config,
-	dofile(config_home .. "/managed-by-nix.lua")
-)
+local nix_config = dofile(config_home .. "/managed-by-nix.lua")
 
 -- Load mutable config from config.lua
+local user_config = {}
 if vim.uv.fs_stat(config_home .. "/config.lua") then
-	config = vim.tbl_deep_extend(
-		"force",
-		config,
-		dofile(config_home .. "/config.lua") or {}
-	)
+	user_config = dofile(config_home .. "/config.lua") or {}
 end
 
 --============================================================================--
 --=== Initialize ===--
 
 require("eth-p") {
-	opts = config.opts,
-	plugins = config.plugins,
+	opts = vim.tbl_deep_extend(
+		"force",
+		nix_config.opts or {},
+		user_config.opts or {}
+	),
+	plugins = {
+		(nix_config.plugins or {}),
+		(user_config.plugins or {}),
+	},
 }
