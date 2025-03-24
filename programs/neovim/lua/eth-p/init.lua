@@ -117,9 +117,13 @@ function InitKeymaps(opts)
 	vim.keymap.del("n", "<C-W><C-D>")
 
 	-- Window management.
-	set("n", "<C-W>s", "<Cmd>vsplit<CR>", { desc = "New vertical split" })
+	set("n", "<C-W>s", "<Cmd>vsplit<CR><C-W>w", {
+		desc = "New vertical split",
+	})
 
-	set("n", "<C-W>S", "<Cmd>split<CR>", { desc = "New horizontal split" })
+	set("n", "<C-W>S", "<Cmd>split<CR><C-W>w", {
+		desc = "New horizontal split",
+	})
 
 	set(
 		"n",
