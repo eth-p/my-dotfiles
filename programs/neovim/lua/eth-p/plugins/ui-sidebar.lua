@@ -42,6 +42,30 @@ return {
 			source_selector = {
 				statusline = true,
 			},
+			default_component_configs = {
+				indent = {
+					expander_collapsed = "",
+					expander_expanded = "",
+				},
+				icon = {
+					folder_closed = utils.ternary(opts.ui.nerdfont, "", ">"),
+					folder_open = utils.ternary(opts.ui.nerdfont, "", "↘"),
+					folder_empty = utils.ternary(opts.ui.nerdfont, "󰜌", " "),
+				},
+				git_status = {
+					symbols = {
+						added = utils.ternary(opts.ui.nerdfont, "✚", "A"),
+						modified = utils.ternary(opts.ui.nerdfont, "", "M"),
+						deleted = utils.ternary(opts.ui.nerdfont, "✖", "D"),
+						renamed = utils.ternary(opts.ui.nerdfont, "󰁕", "R"),
+						untracked = utils.ternary(opts.ui.nerdfont, "", "?"),
+						ignored = utils.ternary(opts.ui.nerdfont, "", "I"),
+						unstaged = utils.ternary(opts.ui.nerdfont, "󰄱", "-"),
+						staged = utils.ternary(opts.ui.nerdfont, "", "+"),
+						conflict = utils.ternary(opts.ui.nerdfont, "", "!"),
+					},
+				},
+			},
 		},
 	},
 }
