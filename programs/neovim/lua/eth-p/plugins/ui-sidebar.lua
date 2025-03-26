@@ -23,6 +23,20 @@ return {
 
 		lazy = false,
 
+		keys = {
+			{
+				"<C-W><Tab>",
+				function()
+					if vim.bo.filetype == "neo-tree" then
+						vim.api.nvim_input("<C-W>p") -- go to previous window
+					else
+						vim.cmd("Neotree source=last")
+					end
+				end,
+				desc = "Toggle focus on neo-tree",
+			},
+		},
+
 		opts = {
 			source_selector = {
 				winbar = true,
