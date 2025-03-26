@@ -23,9 +23,9 @@ return {
 
 		keys = {
 			{
-				"<C-W><Tab>",
+				"<C-W><C-B>",
 				"<Cmd>Telescope buffers<CR>",
-				desc = "Switch buffers",
+				desc = "Switch active window buffer",
 			},
 		},
 	},
