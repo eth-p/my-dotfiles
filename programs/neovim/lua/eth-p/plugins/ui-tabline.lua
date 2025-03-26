@@ -34,6 +34,10 @@ return {
 					enabled = opts.ui.nerdfont,
 				},
 			},
+
+			sidebar_filetypes = {
+				["neo-tree"] = { event = "WinClosed" }, -- neo-tree sidebar
+			},
 		},
 	},
 }
