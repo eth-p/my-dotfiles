@@ -95,19 +95,33 @@ function InitCommands(opts)
 	local prefix = opts.commands.prefix
 	local new_command = vim.api.nvim_create_user_command
 
-	new_command(prefix .. "ToggleSidebar", commands.ToggleSidebar, {})
+	new_command(prefix .. "ToggleSidebar", commands.ToggleSidebar, {
+		desc = "Toggle line numbers and fold guide",
+	})
+
+	new_command(prefix .. "HideSidebar", commands.HideSidebar, {
+		desc = "Hide line numbers and fold guide",
+	})
+
+	new_command(prefix .. "ShowSidebar", commands.ShowSidebar, {
+		desc = "Show line numbers and fold guide",
+	})
+
 	new_command(
 		prefix .. "ToggleVisualWhitespace",
 		commands.ToggleVisualWhitespace,
-		{}
+		{
+			desc = "Toggle whitespace chars in visual mode",
+		}
 	)
+
 	new_command(
 		prefix .. "ToggleCenteredCursor",
 		commands.ToggleCenteredCursor,
-		{}
+		{
+			desc = "Toggle cursor centering",
+		}
 	)
-	new_command(prefix .. "HideSidebar", commands.HideSidebar, {})
-	new_command(prefix .. "ShowSidebar", commands.ShowSidebar, {})
 end
 
 function InitKeymaps(opts)
