@@ -19,6 +19,7 @@ return {
 			opts.ui.nerdfont and "nvim-tree/nvim-web-devicons",
 		},
 
+		cond = opts.ui.tabline.enabled,
 		lazy = false,
 		priority = 900,
 

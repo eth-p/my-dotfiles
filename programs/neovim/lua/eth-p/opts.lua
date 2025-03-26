@@ -13,6 +13,10 @@ defaults = {
 		focus_dimming = true, -- dim when neovim not focused
 		transparent_background = true, -- use transparent background
 		nerdfont = false, -- nerdfonts enabled
+
+		tabline = {
+			enabled = true,
+		},
 	},
 
 	keymap = {
