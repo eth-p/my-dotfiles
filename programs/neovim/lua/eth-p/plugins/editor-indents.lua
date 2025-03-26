@@ -2,6 +2,7 @@
 -- Repository: https://github.com/eth-p/my-dotfiles
 -- =============================================================================
 local opts = require("eth-p.opts")
+local utils = require("eth-p.utils")
 return {
 
 	-- guess-indent
@@ -59,10 +60,14 @@ return {
 		},
 
 		init = function(self)
+			local augroup = utils.augroup("editor-indents.indent-blankline")
 			vim.api.nvim_create_autocmd("FileType", {
+				group = augroup,
 				pattern = "*",
 				callback = function(evt)
-					for _, item in ipairs(opts.editor.indents.guides_on_filetypes) do
+					for _, item in
+						ipairs(opts.editor.indents.guides_on_filetypes)
+					do
 						if item == evt.match then
 							require("ibl").setup_buffer(0, { enabled = true })
 							return

@@ -14,6 +14,15 @@ function optional_deps(a, b)
 	return result
 end
 
+-- augroup creates (or clears) an autogroup.
+-- This should be used for registering autocmds in plugin initialization.
+function augroup(name)
+	return vim.api.nvim_create_augroup("eth-p." .. name, {
+		clear = true,
+	})
+end
+
 return {
 	optional_deps = optional_deps,
+	augroup = augroup,
 }
