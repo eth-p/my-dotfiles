@@ -59,20 +59,18 @@ return {
 			},
 		},
 
-		init = function(self)
+		config = function(self)
 			local augroup = utils.augroup("editor-indents.indent-blankline")
-			vim.api.nvim_create_autocmd("FileType", {
+			local ibl = require("ibl")
+
+			-- Setup.
+			ibl.setup(self.opts)
+
+			-- Enable for configured filetypes.
+			utils.on_filetypes(opts.editor.indents.guides_on_filetypes, {
 				group = augroup,
-				pattern = "*",
 				callback = function(evt)
-					for _, item in
-						ipairs(opts.editor.indents.guides_on_filetypes)
-					do
-						if item == evt.match then
-							require("ibl").setup_buffer(0, { enabled = true })
-							return
-						end
-					end
+					ibl.setup_buffer(evt.buf, { enabled = true })
 				end,
 			})
 		end,
