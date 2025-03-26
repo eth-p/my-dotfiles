@@ -28,6 +28,14 @@ return {
 
 			groupdiff = true,
 			groupscrollbind = true,
+
+			blocklist = {
+				neo_tree = {
+					buf_opts = {
+						filetype = { "neo-tree" },
+					},
+				},
+			},
 		},
 	},
 }
