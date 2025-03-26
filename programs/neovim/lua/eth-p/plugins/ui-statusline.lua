@@ -16,7 +16,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = utils.optional_deps {
-			opts.ui.nerdfont and "nvim-tree/nvim-web-devicons",
+			opts.ui.nerdfonts and "nvim-tree/nvim-web-devicons",
 		},
 
 		lazy = false,
@@ -25,7 +25,7 @@ return {
 		opts = {
 			options = {
 				theme = "auto",
-				icons_enabled = opts.ui.nerdfont,
+				icons_enabled = opts.ui.nerdfonts,
 
 				disabled_filetypes = {
 					"neo-tree", -- neo-tree sidebar

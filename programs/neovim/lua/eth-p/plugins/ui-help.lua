@@ -27,7 +27,7 @@ return {
 				},
 			},
 			icons = {
-				mappings = opts.ui.nerdfont,
+				mappings = opts.ui.nerdfonts,
 			},
 			replace = {
 				key = {}, -- forces labels

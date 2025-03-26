@@ -18,7 +18,7 @@ return {
 		dependencies = utils.optional_deps {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			opts.ui.nerdfont and "nvim-tree/nvim-web-devicons",
+			opts.ui.nerdfonts and "nvim-tree/nvim-web-devicons",
 		},
 
 		lazy = false,
@@ -48,21 +48,41 @@ return {
 					expander_expanded = "",
 				},
 				icon = {
-					folder_closed = utils.ternary(opts.ui.nerdfont, "", ">"),
-					folder_open = utils.ternary(opts.ui.nerdfont, "", "↘"),
-					folder_empty = utils.ternary(opts.ui.nerdfont, "󰜌", " "),
+					folder_closed = utils.ternary(
+						opts.ui.nerdfonts,
+						"",
+						">"
+					),
+					folder_open = utils.ternary(
+						opts.ui.nerdfonts,
+						"",
+						"↘"
+					),
+					folder_empty = utils.ternary(
+						opts.ui.nerdfonts,
+						"󰜌",
+						" "
+					),
 				},
 				git_status = {
 					symbols = {
-						added = utils.ternary(opts.ui.nerdfont, "✚", "A"),
-						modified = utils.ternary(opts.ui.nerdfont, "", "M"),
-						deleted = utils.ternary(opts.ui.nerdfont, "✖", "D"),
-						renamed = utils.ternary(opts.ui.nerdfont, "󰁕", "R"),
-						untracked = utils.ternary(opts.ui.nerdfont, "", "?"),
-						ignored = utils.ternary(opts.ui.nerdfont, "", "I"),
-						unstaged = utils.ternary(opts.ui.nerdfont, "󰄱", "-"),
-						staged = utils.ternary(opts.ui.nerdfont, "", "+"),
-						conflict = utils.ternary(opts.ui.nerdfont, "", "!"),
+						added = utils.ternary(opts.ui.nerdfonts, "✚", "A"),
+						modified = utils.ternary(opts.ui.nerdfonts, "", "M"),
+						deleted = utils.ternary(opts.ui.nerdfonts, "✖", "D"),
+						renamed = utils.ternary(opts.ui.nerdfonts, "󰁕", "R"),
+						untracked = utils.ternary(
+							opts.ui.nerdfonts,
+							"",
+							"?"
+						),
+						ignored = utils.ternary(opts.ui.nerdfonts, "", "I"),
+						unstaged = utils.ternary(
+							opts.ui.nerdfonts,
+							"󰄱",
+							"-"
+						),
+						staged = utils.ternary(opts.ui.nerdfonts, "", "+"),
+						conflict = utils.ternary(opts.ui.nerdfonts, "", "!"),
 					},
 				},
 			},

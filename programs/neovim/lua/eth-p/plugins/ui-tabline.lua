@@ -16,7 +16,7 @@ return {
 		"romgrk/barbar.nvim",
 		version = "^1.0.0",
 		dependencies = utils.optional_deps {
-			opts.ui.nerdfont and "nvim-tree/nvim-web-devicons",
+			opts.ui.nerdfonts and "nvim-tree/nvim-web-devicons",
 		},
 
 		cond = opts.ui.tabline.enabled,
@@ -32,7 +32,7 @@ return {
 			auto_hide = 0, -- 1,
 			icons = {
 				filetype = {
-					enabled = opts.ui.nerdfont,
+					enabled = opts.ui.nerdfonts,
 				},
 			},
 
