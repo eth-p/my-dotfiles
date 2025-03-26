@@ -3,6 +3,7 @@
 -- =============================================================================
 local opts = require("eth-p.opts")
 local theme = require("eth-p.theme")
+local utils = require("eth-p.utils")
 return {
 
 	-- Monokai-Pro
@@ -17,6 +18,9 @@ return {
 
 		opts = {
 			transparent_background = opts.ui.transparent_background,
+			background_clear = utils.ternary(opts.ui.focus_dimming, {
+				"neo-tree",
+			}, {}),
 		},
 
 		config = function(self)
