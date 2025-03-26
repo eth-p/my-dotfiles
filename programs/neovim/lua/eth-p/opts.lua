@@ -17,6 +17,10 @@ defaults = {
 		tabline = {
 			enabled = true,
 		},
+
+		sidebar = {
+			ignores_focus_dimming = false,
+		},
 	},
 
 	keymap = {

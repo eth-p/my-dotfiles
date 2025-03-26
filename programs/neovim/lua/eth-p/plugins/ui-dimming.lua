@@ -2,6 +2,7 @@
 -- Repository: https://github.com/eth-p/my-dotfiles
 -- =============================================================================
 local opts = require("eth-p.opts")
+local utils = require("eth-p.utils")
 return {
 
 	-- vimade
@@ -30,11 +31,15 @@ return {
 			groupscrollbind = true,
 
 			blocklist = {
-				neo_tree = {
-					buf_opts = {
-						filetype = { "neo-tree" },
+				neo_tree = utils.ternary(
+					opts.ui.sidebar.ignores_focus_dimming,
+					{
+						buf_opts = {
+							filetype = { "neo-tree" },
+						},
 					},
-				},
+					{}
+				),
 			},
 		},
 	},

@@ -74,8 +74,18 @@ function on_filetypes(filetypes, opts)
 	return aucmd_id
 end
 
+-- ternary is a function acting as a replacement for the ternary operator.
+function ternary(cond, when_true, when_false)
+	if cond then
+		return when_true
+	else
+		return when_false
+	end
+end
+
 return {
 	optional_deps = optional_deps,
 	augroup = augroup,
 	on_filetypes = on_filetypes,
+	ternary = ternary,
 }
