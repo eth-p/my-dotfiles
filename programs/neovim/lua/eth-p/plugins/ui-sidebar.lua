@@ -66,6 +66,20 @@ return {
 					},
 				},
 			},
+			filesystem = {
+				window = {
+					mappings = utils.ternary(not opts.keymap.preserve, {
+						["H"] = "none", -- old: toggle_hidden
+						["z"] = { -- old: close_all_nodes
+							"show_help",
+							nowait = false,
+							config = { prefix_key = "z" },
+						},
+						["zM"] = "close_all_nodes", -- consistent with neovim
+						["zh"] = "toggle_hidden", -- consistent with ranger
+					}, {}),
+				},
+			},
 		},
 	},
 }
