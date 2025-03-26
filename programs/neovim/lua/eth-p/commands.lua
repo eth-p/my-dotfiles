@@ -49,4 +49,9 @@ cmds.ToggleVisualWhitespace = function()
 	require("visual-whitespace").toggle()
 end
 
+--=== :ToggleCenteredCursor ===--
+cmds.ToggleCenteredCursor = function()
+	require("stay-centered").toggle()
+end
+
 return cmds

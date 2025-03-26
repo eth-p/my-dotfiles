@@ -101,6 +101,11 @@ function InitCommands(opts)
 		commands.ToggleVisualWhitespace,
 		{}
 	)
+	new_command(
+		prefix .. "ToggleCenteredCursor",
+		commands.ToggleCenteredCursor,
+		{}
+	)
 	new_command(prefix .. "HideSidebar", commands.HideSidebar, {})
 	new_command(prefix .. "ShowSidebar", commands.ShowSidebar, {})
 end

@@ -44,6 +44,9 @@ defaults = {
 				nbsp = "␣",
 			},
 		},
+		cursor = {
+			keep_centered = true,
+		},
 	},
 
 	-- integration describes integrations with external tools
