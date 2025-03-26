@@ -11,6 +11,6 @@
   # nerdglyphOr :: bool string string -> string
   nerdglyphOr = enabled:
     if enabled
-    then nfCodepoint: txtIcon: builtins.fromJSON (''"\u${nfCodepoint}'')
+    then nfCodepoint: txtIcon: builtins.fromJSON (''"\u${nfCodepoint}"'')
     else nfCodepoint: txtIcon: txtIcon;
 }
