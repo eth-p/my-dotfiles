@@ -39,8 +39,7 @@ return {
 
 		opts = {
 			source_selector = {
-				winbar = true,
-				statusline = false,
+				statusline = true,
 			},
 		},
 	},

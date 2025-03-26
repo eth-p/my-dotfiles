@@ -26,6 +26,10 @@ return {
 			options = {
 				theme = "auto",
 				icons_enabled = opts.ui.nerdfont,
+
+				disabled_filetypes = {
+					"neo-tree", -- neo-tree sidebar
+				},
 			},
 		},
 
