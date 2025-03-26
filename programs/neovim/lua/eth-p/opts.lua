@@ -39,6 +39,7 @@ defaults = {
 			guides_always = false,
 			guides_on_filetypes = {
 				"yaml",
+				"nix",
 			},
 		},
 		whitespace = {
