@@ -34,4 +34,42 @@ return {
 			},
 		},
 	},
+
+	-- indent-blankline
+	--
+	-- Repo: https://github.com/lukas-reineke/indent-blankline.nvim
+	-- Docs: https://github.com/lukas-reineke/indent-blankline.nvim
+	--
+	-- Shows identation guides.
+	--
+	{
+		"lukas-reineke/indent-blankline.nvim",
+
+		lazy = true,
+		event = {
+			"VeryLazy",
+		},
+
+		main = "ibl",
+		opts = {
+			enabled = opts.editor.indents.guides_always,
+			scope = {
+				enabled = false,
+			},
+		},
+
+		init = function(self)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "*",
+				callback = function(evt)
+					for _, item in ipairs(opts.editor.indents.guides_on_filetypes) do
+						if item == evt.match then
+							require("ibl").setup_buffer(0, { enabled = true })
+							return
+						end
+					end
+				end,
+			})
+		end,
+	},
 }

@@ -27,6 +27,11 @@ defaults = {
 		},
 		indents = {
 			detect = true,
+
+			guides_always = false,
+			guides_on_filetypes = {
+				"yaml",
+			},
 		},
 		whitespace = {
 			show_always = false,
