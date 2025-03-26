@@ -29,19 +29,21 @@ return {
 			},
 		},
 
-		init = function(self)
+		config = function(self)
 			local augroup = utils.augroup("ui-statusline.lualine")
+			local lualine = require("lualine")
+
+			-- Setup.
+			lualine.setup(self.opts)
 
 			-- Reapply the theme when the colorscheme changes.
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				group = augroup,
 				pattern = "*",
 				callback = function()
-					require("lualine").setup(
-						vim.tbl_deep_extend("force", {}, self.opts, {
-							theme = theme.get().lualine or "auto",
-						})
-					)
+					lualine.setup(vim.tbl_deep_extend("force", {}, self.opts, {
+						theme = theme.get().lualine or "auto",
+					}))
 				end,
 			})
 		end,
