@@ -38,6 +38,7 @@ return {
 		},
 
 		opts = {
+			close_if_last_window = true,
 			source_selector = {
 				statusline = true,
 			},
