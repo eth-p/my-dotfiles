@@ -44,7 +44,10 @@ defaults = {
 		},
 		whitespace = {
 			show_always = false,
+
 			show_on_highlight = true,
+			show_on_highlight_excludes_filetypes = {},
+
 			show_on_filetypes = {
 				"make",
 			},

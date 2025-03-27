@@ -44,9 +44,9 @@ return {
 			) or not_empty(listchars_map.trail) or " "),
 
 			excluded = {
-				filetypes = {
+				filetypes = vim.list_extend({
 					"neo-tree",
-				},
+				}, opts.editor.whitespace.show_on_highlight_excludes_filetypes),
 			},
 		},
 
