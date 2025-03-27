@@ -42,6 +42,12 @@ return {
 			space_char = (not_empty(listchars_map.space) or not_empty(
 				listchars_map.lead
 			) or not_empty(listchars_map.trail) or " "),
+
+			excluded = {
+				filetypes = {
+					"neo-tree",
+				},
+			},
 		},
 
 		init = function(self)
