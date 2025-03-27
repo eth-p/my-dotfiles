@@ -23,7 +23,7 @@ return {
 
 		keys = {
 			{
-				"<C-W><C-B>",
+				"<C-W>a",
 				"<Cmd>Telescope buffers<CR>",
 				desc = "Switch active window buffer",
 			},
