@@ -5,12 +5,17 @@ local opts = require("eth-p.opts")
 local utils = require("eth-p.utils")
 local listchars_map = opts.editor.whitespace.chars
 
-local function not_empty(v)
-	if v == nil or v == "" or v == " " then
-		return nil
-	else
-		return v
+local function first_not_empty(...)
+	local args = { ... }
+	local n = select("#", ...)
+	for i = 1, n do
+		local val = args[i]
+		if val ~= nil and val ~= "" and val ~= " " then
+			return val
+		end
 	end
+
+	return args[#args]
 end
 
 return {
@@ -35,13 +40,16 @@ return {
 
 		opts = {
 			enabled = opts.editor.whitespace.show_on_highlight,
-			tab_char = not_empty(listchars_map.tab) or " ",
-			nl_char = not_empty(listchars_map.eol) or " ",
+			tab_char = first_not_empty(listchars_map.tab, " "),
+			nl_char = first_not_empty(listchars_map.eol, " "),
 			cr_char = " ",
-			nbsp_char = not_empty(listchars_map.nbsp) or "",
-			space_char = (not_empty(listchars_map.space) or not_empty(
-				listchars_map.lead
-			) or not_empty(listchars_map.trail) or " "),
+			nbsp_char = first_not_empty(listchars_map.nbsp, ""),
+			space_char = first_not_empty(
+				listchars_map.space,
+				listchars_map.lead,
+				listchars_map.trail,
+				" "
+			),
 
 			excluded = {
 				filetypes = vim.list_extend({
