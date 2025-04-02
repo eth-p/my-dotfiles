@@ -8,6 +8,7 @@
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.oh-my-posh;
+  cfgGlobal = config.my-dotfiles.global;
   generator = (import ./generator.nix) inputs;
 
 in
@@ -70,7 +71,10 @@ in
               })
           );
           palettes = {
-            template = config.my-dotfiles.global.colorscheme;
+            template =
+              if cfgGlobal.colorscheme == "auto"
+              then "{{ .Env.PREFERRED_COLORSCHEME | default \"dark\" }}"
+              else cfgGlobal.colorscheme;
             list = (import ./colors.nix);
           };
         };
