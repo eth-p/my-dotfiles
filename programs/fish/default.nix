@@ -3,10 +3,12 @@
 #
 # Program: https://github.com/fish-shell/fish-shell
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, my-dotfiles, ... }:
 let
   inherit (lib) mkIf mkMerge;
+  my-pkgs = my-dotfiles.packages."${pkgs.system}";
   cfg = config.my-dotfiles.fish;
+  cfgGlobal = config.my-dotfiles.global;
 in
 {
   options.my-dotfiles.fish = {
@@ -37,6 +39,16 @@ in
         '';
       };
     }
+
+    # Detect color scheme.
+    (mkIf (cfgGlobal.colorscheme == "auto") {
+      programs.fish.shellInit = ''
+        # Use terminal background color to set preferred colorscheme.
+        if test -z "$PREFERRED_COLORSCHEME"
+          set -x PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
+        end
+      '';
+    })
 
     # Use as $SHELL.
     (mkIf cfg.isSHELL {
