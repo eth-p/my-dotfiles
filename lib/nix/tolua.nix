@@ -16,6 +16,9 @@ let
   # int converts an int into its Lua equivalent.
   int = builtins.toString;
 
+  # nul converts a null value into its Lua equivalent.
+  nul = v: "nil";
+
   # attrs converts an attribute set into its Lua equivalent.
   attrs = v:
     if builtins.length (builtins.attrNames v) == 0
@@ -47,6 +50,7 @@ let
     string = string;
     list = list;
     set = attrs;
+    null = nul;
   };
 
 
