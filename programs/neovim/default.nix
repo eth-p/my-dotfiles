@@ -84,7 +84,7 @@ in
           managedOptions = {
             integrations = cfg.integrations;
             ui = cfg.ui // {
-              colorscheme = cfg.colorschemes."${cfgGlobal.theme}";
+              colorscheme = cfg.colorschemes."${cfgGlobal.colorscheme}";
             };
           };
 
