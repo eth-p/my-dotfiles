@@ -9,8 +9,8 @@
     nerdfonts = mkEnableOption "NerdFonts are supported and installed";
 
     colorscheme = mkOption {
-      type = types.enum [ "dark" "light" ];
-      default = "dark";
+      type = types.enum [ "dark" "light" "auto" ];
+      default = "auto";
       description = ''
         The general color scheme used throughout various programs.
       '';
