@@ -58,73 +58,74 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (lib.mkMerge [
 
     # Configure neovim.
-    programs.neovim = {
-      enable = true;
-      viAlias = true; # Symlink `vi` to `nvim`
-      defaultEditor = true; # Use neovim as $EDITOR
-      extraLuaConfig = (builtins.readFile ./init.lua);
-    };
-
-    home.file = {
-      # Add neovim configuration.
-      "${nvimHome}/lua/eth-p" = {
-        source = ./lua/eth-p;
-        recursive = true;
+    {
+      programs.neovim = {
+        enable = true;
+        viAlias = true; # Symlink `vi` to `nvim`
+        defaultEditor = true; # Use neovim as $EDITOR
+        extraLuaConfig = (builtins.readFile ./init.lua);
       };
 
-      # Generate config for options/plugins managed by nix.
-      #
-      # Prefer adding plugins through Lazy.nvim configuration to support
-      # lazy loading, except when plugins rely on native binaries or libraries.
-      "${nvimHome}/managed-by-nix.lua" =
-        let
-          managedOptions = {
-            integrations = cfg.integrations;
-            ui = cfg.ui // {
-              colorscheme =
-                if cfgGlobal.colorscheme != "auto"
-                then cfg.colorschemes."${cfgGlobal.colorscheme}"
-                else null;
+      home.file = {
+        # Add neovim configuration.
+        "${nvimHome}/lua/eth-p" = {
+          source = ./lua/eth-p;
+          recursive = true;
+        };
 
-              colorschemes = {
-                dark = cfg.colorschemes.dark;
-                light = cfg.colorschemes.light;
+        # Generate config for options/plugins managed by nix.
+        #
+        # Prefer adding plugins through Lazy.nvim configuration to support
+        # lazy loading, except when plugins rely on native binaries or libraries.
+        "${nvimHome}/managed-by-nix.lua" =
+          let
+            managedOptions = {
+              integrations = cfg.integrations;
+              ui = cfg.ui // {
+                colorscheme =
+                  if cfgGlobal.colorscheme != "auto"
+                  then cfg.colorschemes."${cfgGlobal.colorscheme}"
+                  else null;
+
+                colorschemes = {
+                  dark = cfg.colorschemes.dark;
+                  light = cfg.colorschemes.light;
+                };
               };
             };
+
+            # home-manager neovim adds plugins the `finalPackage.packpathDirs`.
+            packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
+            packpathInStore = pkgs.neovimUtils.packDir packpathDirs;
+
+            # Reading the output dir gives us the list of loadable plugins.
+            builtPluginsPath = packpathInStore + "/pack/myNeovimPackages/start";
+            builtPluginNames = builtins.attrNames (builtins.readDir builtPluginsPath);
+
+            managedPlugins =
+              if (builtins.length packpathDirs.myNeovimPackages.start > 0)
+              then builtPluginNames
+              else [ ];
+
+            mkLazyNvimSpecForManagedPlugin = name: {
+              name = name + " (via nix)";
+              dir = builtPluginsPath + "/" + name;
+              lazy = false;
+            };
+
+          in
+          {
+            text = ''
+              return ${tolua.attrs {
+                plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
+                opts = managedOptions;
+              }}
+            '';
           };
-
-          # home-manager neovim adds plugins the `finalPackage.packpathDirs`.
-          packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
-          packpathInStore = pkgs.neovimUtils.packDir packpathDirs;
-
-          # Reading the output dir gives us the list of loadable plugins.
-          builtPluginsPath = packpathInStore + "/pack/myNeovimPackages/start";
-          builtPluginNames = builtins.attrNames (builtins.readDir builtPluginsPath);
-
-          managedPlugins =
-            if (builtins.length packpathDirs.myNeovimPackages.start > 0)
-            then builtPluginNames
-            else [ ];
-
-          mkLazyNvimSpecForManagedPlugin = name: {
-            name = name + " (via nix)";
-            dir = builtPluginsPath + "/" + name;
-            lazy = false;
-          };
-
-        in
-        {
-          text = ''
-            return ${tolua.attrs {
-              plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
-              opts = managedOptions;
-            }}
-          '';
-        };
-    };
-
-  };
+      };
+    }
+  ]);
 }
