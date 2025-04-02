@@ -56,6 +56,12 @@ in
       description = "Enable git integrations.";
       default = config.programs.git.enable;
     };
+
+    shellAliases.yvim = lib.mkOption {
+      type = lib.types.bool;
+      description = "Create yvim alias for using neovim as YAML pager.";
+      default = false;
+    };
   };
 
   config = mkIf cfg.enable (lib.mkMerge [
@@ -127,5 +133,10 @@ in
           };
       };
     }
+
+    # Create yvim shell alias.
+    (lib.mkIf cfg.shellAliases.yvim {
+      programs.fish.shellAliases.yvim = "nvim '+set ft=yaml | set nomodified'";
+    })
   ]);
 }

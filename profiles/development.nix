@@ -40,6 +40,7 @@
   my-dotfiles.neovim = {
     enable = true;
     integrations.git = true;
+    shellAliases.yvim = true;
 
     syntax = {
       yaml = true;
