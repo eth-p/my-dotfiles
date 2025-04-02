@@ -84,7 +84,15 @@ in
           managedOptions = {
             integrations = cfg.integrations;
             ui = cfg.ui // {
-              colorscheme = cfg.colorschemes."${cfgGlobal.colorscheme}";
+              colorscheme =
+                if cfgGlobal.colorscheme != "auto"
+                then cfg.colorschemes."${cfgGlobal.colorscheme}"
+                else null;
+
+              colorschemes = {
+                dark = cfg.colorschemes.dark;
+                light = cfg.colorschemes.light;
+              };
             };
           };
 

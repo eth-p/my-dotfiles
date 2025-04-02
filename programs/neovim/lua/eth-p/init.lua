@@ -195,7 +195,7 @@ function InitPlugins(opts, extra_plugins)
 			{ import = "eth-p/plugins" },
 			extra_plugins,
 		},
-		install = { colorscheme = { opts.ui.colorscheme } },
+		install = { colorscheme = { vim.g.preferred_colors_name } },
 		checker = { enabled = true },
 		change_detection = { notify = false },
 	}
@@ -210,14 +210,23 @@ return function(spec)
 		opts(spec.opts) -- update options singleton
 	end
 
-	vim.g.colors_name = opts.ui.colorscheme
+	-- Determine preferred color scheme.
+	if opts.ui.colorscheme ~= nil then
+		vim.g.preferred_colors_name = opts.ui.colorscheme
+	else
+		local term_bg = vim.env.PREFERRED_COLORSCHEME or vim.o.background
+		vim.g.preferred_colors_name = opts.ui.colorschemes[term_bg]
+	end
+
+	-- Initialization.
 	InitConfig(opts)
 	InitKeymaps(opts)
 	InitPlugins(opts, spec.plugins)
 	InitCommands(opts)
 
 	-- Apply the colorscheme.
-	vim.cmd.colorscheme(opts.ui.colorscheme)
+	vim.g.colors_name = vim.g.preferred_colors_name
+	vim.cmd.colorscheme(vim.g.preferred_colors_name)
 
 	if spec.ready ~= nil then
 		spec.ready(spec)

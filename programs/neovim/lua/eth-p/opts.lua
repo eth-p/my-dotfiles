@@ -9,10 +9,15 @@ local utils = require("eth-p.utils")
 defaults = {
 	-- ui describes options related to the user interface
 	ui = {
-		colorscheme = "monokai-pro", -- interface/editor colorscheme
 		focus_dimming = true, -- dim when neovim not focused
 		transparent_background = true, -- use transparent background
 		nerdfonts = false, -- nerdfonts enabled
+
+		colorscheme = nil, -- auto detect
+		colorschemes = {
+			light = "catppuccin-latte",
+			dark = "monokai-pro",
+		},
 
 		tabline = {
 			enabled = true,

@@ -14,7 +14,6 @@ return {
 		"loctvl842/monokai-pro.nvim",
 		lazy = false,
 		priority = 1000,
-		--cond     = vim.o.background == "dark",
 
 		opts = {
 			transparent_background = opts.ui.transparent_background,
