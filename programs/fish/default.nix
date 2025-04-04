@@ -45,9 +45,27 @@ in
       programs.fish.shellInit = ''
         # Use terminal background color to set preferred colorscheme.
         if test -z "$PREFERRED_COLORSCHEME"
-          set -x PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
+          __mydotfiles_detect_colorscheme
+        end
+
+        if not functions --query reset
+          function reset
+            command reset
+          end
+        end
+        
+        functions -c reset __mydotfiles_original_reset
+        function reset
+          __mydotfiles_original_reset
+          __mydotfiles_detect_colorscheme
         end
       '';
+
+      programs.fish.functions."__mydotfiles_detect_colorscheme" = {
+        body = ''
+          set -x PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
+        '';
+      };
     })
 
     # Use as $SHELL.
