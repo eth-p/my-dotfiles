@@ -22,24 +22,47 @@ function augroup(name)
 	})
 end
 
+-- create_enablemap creates a boolean map from either a list or a map with
+-- boolean values.
+function create_enablemap(filetypes)
+	local enablemap = {}
+	for key, val in pairs(filetypes) do
+		if type(val) == "boolean" and val == true then
+			-- { ft = enabled }
+			enablemap[key] = val
+		else
+			-- { ft, ft2, ... }
+			enablemap[val] = true
+		end
+	end
+
+	return enablemap
+end
+
+-- create_enablelist creates a list from either a list or a map with
+-- boolean values.
+function create_enablelist(filetypes)
+	local enablelist = {}
+	for key, val in pairs(filetypes) do
+		if type(val) == "boolean" and val == true then
+			-- { ft = enabled }
+			table.insert(enablelist, key)
+		else
+			-- { ft, ft2, ... }
+			table.insert(enablelist, val)
+		end
+	end
+
+	return enablelist
+end
+
 -- on_filetypes creates an autocommand that executes the callback for
 -- buffers of the specified filetype. The opts parameter uses the same
 -- format as `nvim_create_autocmd`, with the exception of `pattern` being
 -- overridden to `*`.
 function on_filetypes(filetypes, opts)
 	local callback = opts.callback
-
-	-- Convert the filetypes list to a map.
-	local filetypes_map = {}
-	for key, val in pairs(filetypes) do
-		if type(val) == "boolean" and val == true then
-			-- { ft = enabled }
-			filetypes_map[key] = val
-		else
-			-- { ft, ft2, ... }
-			filetypes_map[val] = true
-		end
-	end
+	local filetypes_map = create_enablemap(filetypes)
 
 	-- Create the autocmd.
 	local aucmd_id = vim.api.nvim_create_autocmd(
@@ -122,4 +145,6 @@ return {
 	on_filetypes = on_filetypes,
 	ternary = ternary,
 	set_hl = set_hl,
+	create_enablelist = create_enablelist,
+	create_enablemap = create_enablemap,
 }
