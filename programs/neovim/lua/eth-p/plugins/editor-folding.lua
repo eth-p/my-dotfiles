@@ -13,7 +13,8 @@ return {
 	--
 	{
 		"kevinhwang91/nvim-ufo",
-		tag = "v1.4.0",
+		-- tag = "v1.4.0",
+		commit = "c15fed422506a130a62e5e79c2d754392231d7d8",
 		dependencies = { "kevinhwang91/promise-async" },
 		cond = opts.editor.fold.enabled,
 
