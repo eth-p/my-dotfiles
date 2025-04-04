@@ -57,6 +57,12 @@ in
           lg = "log --oneline --graph";
           r = "rebase --interactive --autosquash";
           rc = "rebase --continue";
+
+          # Aliases to get diffs:
+          sdiff = "diff --staged";
+          cdiff = ''
+            !bash -c "git diff \"''${1:-HEAD}~1\" \"''${1:-HEAD}\""
+          '';
         };
 
         extraConfig = {
