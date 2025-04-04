@@ -72,4 +72,40 @@ return {
 			}
 		end,
 	},
+
+	-- whitespace.nvim
+	--
+	-- Repo: https://github.com/johnfrankmorgan/whitespace.nvim
+	-- Docs: https://github.com/johnfrankmorgan/whitespace.nvim
+	--
+	-- Highlights trailing whitespace.
+	--
+	{
+		"johnfrankmorgan/whitespace.nvim",
+
+		cond = opts.editor.whitespace.show_trailing,
+		lazy = true,
+		event = {
+			"BufNewFile",
+			"BufRead",
+			"StdinReadPost",
+		},
+
+		opts = {
+			highlight = "TrailingWhitespace",
+			ignored_filetypes = utils.create_enablelist(
+				opts.editor.whitespace.show_trailing_excludes_filetypes
+			),
+		},
+
+		init = function()
+			theme.addHighlights {
+				TrailingWhitespace = {
+					default = true,
+					link = "ExtraWhitespace",
+				},
+				ExtraWhitespace = { default = true, link = "DiffDelete" },
+			}
+		end,
+	},
 }

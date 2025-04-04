@@ -50,6 +50,11 @@ defaults = {
 		whitespace = {
 			show_always = false,
 
+			show_trailing = true,
+			show_trailing_excludes_filetypes = {
+				markdown = true,
+			},
+
 			show_on_highlight = true,
 			show_on_highlight_excludes_filetypes = {},
 

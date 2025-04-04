@@ -70,6 +70,7 @@ return {
 						-- Listchars
 						NonText = { fg = "#525152", ctermfg = 234 },
 						Whitespace = { fg = "#525152", ctermfg = 234 },
+						TrailingWhitespace = { bg = "#5f1f78", ctermbg = 90 },
 
 						-- Columns
 						CursorColumn = { bg = "#353333", ctermbg = 235 },
