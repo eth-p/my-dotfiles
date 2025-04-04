@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/neovim/neovim
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) tolua;
@@ -73,6 +73,9 @@ in
         viAlias = true; # Symlink `vi` to `nvim`
         defaultEditor = true; # Use neovim as $EDITOR
         extraLuaConfig = (builtins.readFile ./init.lua);
+
+        # Use the latest neovim.
+        package = lib.mkDefault pkgs-unstable.neovim-unwrapped;
       };
 
       home.file = {
