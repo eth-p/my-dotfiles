@@ -74,6 +74,39 @@ function on_filetypes(filetypes, opts)
 	return aucmd_id
 end
 
+-- set_hl is an extension of neovim's `nvim_set_hl` function that
+-- supports creating linked highlights composed from multiple
+-- different highlights.
+--
+-- Caveats:
+--  * Linked highlights will be seen as regular highlights, and do not
+--    automatically update when the linked highlight changes.
+local function set_hl(ns, hl, opts)
+	local links = opts.link
+	if links == nil or type(links) ~= "table" then
+		vim.api.nvim_set_hl(ns, hl, opts)
+		return
+	end
+
+	-- Find the highlight groups referenced in the link.
+	local linked_hls = {}
+	for _, v in pairs(links) do
+		if linked_hls[v] == nil then
+			linked_hls[v] = vim.api.nvim_get_hl(0, { name = v })
+		end
+	end
+
+	-- Dynamically generate the "linked" highlight group.
+	local gen_hl = vim.tbl_deep_extend("force", {}, opts)
+	gen_hl.link = nil
+	for k, v in pairs(links) do
+		gen_hl[k] = linked_hls[v][k]
+	end
+
+	-- Apply the generated group.
+	vim.api.nvim_set_hl(ns, hl, gen_hl)
+end
+
 -- ternary is a function acting as a replacement for the ternary operator.
 function ternary(cond, when_true, when_false)
 	if cond then
@@ -88,4 +121,5 @@ return {
 	augroup = augroup,
 	on_filetypes = on_filetypes,
 	ternary = ternary,
+	set_hl = set_hl,
 }

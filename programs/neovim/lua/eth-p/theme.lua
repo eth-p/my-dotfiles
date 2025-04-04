@@ -39,17 +39,24 @@ local function reapply()
 	-- Change the colorscheme.
 	vim.cmd.colorscheme(vim.g.colors_name)
 
-	-- Apply default highlights.
+	-- Apply (non-linked) default highlights.
 	for k, v in pairs(highlights) do
-		if v ~= nil then
-			vim.api.nvim_set_hl(0, k, v)
+		if v ~= nil and v.link == nil then
+			utils.set_hl(0, k, v)
 		end
 	end
 
 	-- Apply the general overrides.
 	if overrides.general ~= nil then
 		for k, v in pairs(overrides.general) do
-			vim.api.nvim_set_hl(0, k, v)
+			utils.set_hl(0, k, v)
+		end
+	end
+
+	-- Apply (linked) default highlights.
+	for k, v in pairs(highlights) do
+		if v ~= nil and v.link ~= nil then
+			utils.set_hl(0, k, v)
 		end
 	end
 end

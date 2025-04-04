@@ -2,6 +2,7 @@
 -- Repository: https://github.com/eth-p/my-dotfiles
 -- =============================================================================
 local opts = require("eth-p.opts")
+local theme = require("eth-p.theme")
 local utils = require("eth-p.utils")
 local listchars_map = opts.editor.whitespace.chars
 
@@ -59,26 +60,16 @@ return {
 		},
 
 		init = function(self)
-			local augroup = utils.augroup("editor-whitespace.visual-whitespace")
-			local function regen_highlight()
-				local visual_hl = vim.api.nvim_get_hl(0, { name = "Visual" })
-				local nontext_hl = vim.api.nvim_get_hl(0, { name = "NonText" })
-
-				vim.api.nvim_set_hl(0, "VisualNonText", {
-					fg = nontext_hl.fg,
-					ctermfg = nontext_hl.ctermfg,
-					bg = visual_hl.bg,
-					ctermbg = visual_hl.ctermbg,
-				})
-			end
-
-			-- Generate the VisualNonText highlight when the colorscheme changes.
-			regen_highlight()
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				group = augroup,
-				pattern = "*",
-				callback = regen_highlight,
-			})
+			theme.addHighlights {
+				VisualNonText = {
+					link = {
+						fg = "NonText",
+						ctermfg = "NonText",
+						bg = "Visual",
+						ctermbg = "Visual",
+					},
+				},
+			}
 		end,
 	},
 }
