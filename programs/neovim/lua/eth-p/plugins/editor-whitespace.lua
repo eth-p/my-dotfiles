@@ -53,9 +53,14 @@ return {
 			),
 
 			excluded = {
-				filetypes = vim.list_extend({
-					"neo-tree",
-				}, opts.editor.whitespace.show_on_highlight_excludes_filetypes),
+				filetypes = vim.list_extend(
+					{
+						"neo-tree",
+					},
+					utils.create_enablelist(
+						opts.editor.whitespace.show_on_highlight_excludes_filetypes
+					)
+				),
 			},
 		},
 

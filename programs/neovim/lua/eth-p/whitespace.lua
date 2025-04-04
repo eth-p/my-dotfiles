@@ -1,6 +1,7 @@
 -- my-dotfiles | Copyright (C) 2025 eth-p
 -- Repository: https://github.com/eth-p/my-dotfiles
 -- =============================================================================
+local utils = require("eth-p.utils")
 local augroup_auto_list = vim.api.nvim_create_augroup("", {})
 
 -- build_listchar converts a key-value pair from a map into a value used in
@@ -39,8 +40,8 @@ end
 
 function setup_auto_list(filetypes)
 	vim.api.nvim_clear_autocmds { group = augroup_auto_list }
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = filetypes,
+	utils.on_filetypes(filetypes, {
+		group = augroup_auto_list,
 		callback = function()
 			vim.opt_local.list = true
 		end,

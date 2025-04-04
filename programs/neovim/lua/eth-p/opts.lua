@@ -43,8 +43,8 @@ defaults = {
 
 			guides_always = false,
 			guides_on_filetypes = {
-				"yaml",
-				"nix",
+				yaml = true,
+				nix = true,
 			},
 		},
 		whitespace = {
@@ -59,7 +59,7 @@ defaults = {
 			show_on_highlight_excludes_filetypes = {},
 
 			show_on_filetypes = {
-				"make",
+				make = true,
 			},
 
 			chars = {
