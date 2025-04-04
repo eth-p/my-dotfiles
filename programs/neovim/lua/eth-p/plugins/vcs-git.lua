@@ -21,4 +21,36 @@ return {
 
 		opts = {},
 	},
+
+	-- blame.nvim
+	--
+	-- Repo: https://github.com/FabijanZulj/blame.nvim
+	-- Docs: https://github.com/FabijanZulj/blame.nvim
+	--
+	-- Command to show a git blame.
+	--
+	{
+		"FabijanZulj/blame.nvim",
+		cond = opts.integration.git,
+
+		lazy = true,
+		cmd = {
+			"BlameToggle",
+		},
+		keys = {
+			{
+				"<Leader>gb",
+				"<Cmd>BlameToggle<CR>",
+				desc = "Toggle git blame",
+			},
+		},
+
+		opts = {
+			focus_blame = false,
+			mappings = {
+				show_commit = "d",
+				commit_info = { "<CR>", "i" },
+			},
+		},
+	},
 }
