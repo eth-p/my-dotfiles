@@ -7,6 +7,10 @@ local utils = require("eth-p.utils")
 --============================================================================--
 --=== Functions ===--
 
+local highlights = {
+	-- "MyHighlight" = { link = "Other" },
+}
+
 local colorschemes = {
 	-- [colorscheme_name] = {
 	--    config = function(self),
@@ -35,6 +39,13 @@ local function reapply()
 	-- Change the colorscheme.
 	vim.cmd.colorscheme(vim.g.colors_name)
 
+	-- Apply default highlights.
+	for k, v in pairs(highlights) do
+		if v ~= nil then
+			vim.api.nvim_set_hl(0, k, v)
+		end
+	end
+
 	-- Apply the general overrides.
 	if overrides.general ~= nil then
 		for k, v in pairs(overrides.general) do
@@ -45,6 +56,10 @@ end
 
 local function register(spec)
 	colorschemes[spec.colorscheme] = spec
+end
+
+local function addHighlights(hls)
+	highlights = vim.tbl_deep_extend("force", highlights, hls)
 end
 
 --============================================================================--
@@ -64,4 +79,5 @@ return {
 	get = get, -- returns the current theme
 	reapply = reapply,
 	register = register,
+	addHighlights = addHighlights,
 }
