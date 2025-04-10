@@ -131,7 +131,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L13)
+## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L15)
 
 install and configure fish
 
@@ -141,7 +141,7 @@ install and configure fish
 
 **Example:** `true`
 
-## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L15)
+## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L17)
 
 use as `$SHELL`
 
@@ -223,6 +223,16 @@ Use dyff to show diffs between YAML files.
 
 **Default:** `true`
 
+## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L11)
+
+
+The general color scheme used throughout various programs.
+
+
+**Type:** `types.enum [ "dark" "light" "auto" ]`
+
+**Default:** `"auto"`
+
 ## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L9)
 
 NerdFonts are supported and installed
@@ -232,16 +242,6 @@ NerdFonts are supported and installed
 **Default:** `false`
 
 **Example:** `true`
-
-## [`my-dotfiles.global.theme`](programs/globals.nix#L11)
-
-
-The general theme used throughout various programs.
-
-
-**Type:** `types.enum [ "dark" "light" ]`
-
-**Default:** `"dark"`
 
 ## [`my-dotfiles.glow.enable`](programs/glow/default.nix#L15)
 
@@ -287,13 +287,37 @@ neovim
 
 **Example:** `true`
 
-## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L54)
+## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L66)
 
 Enable git integrations.
 
 **Type:** `lib.types.bool`
 
 **Default:** `config.programs.git.enable`
+
+## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L54)
+
+Display the keymap after a short delay.
+
+**Type:** `lib.types.nullOr lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L60)
+
+Change the <Leader> key.
+
+**Type:** `lib.types.nullOr lib.types.str`
+
+**Default:** `"<Space>"`
+
+## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L72)
+
+Create yvim alias for using neovim as YAML pager.
+
+**Type:** `lib.types.bool`
+
+**Default:** `false`
 
 ## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L16)
 
@@ -327,7 +351,7 @@ Use a transparent background.
 
 **Default:** `false`
 
-## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L16)
+## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L17)
 
 install and configure oh-my-posh
 
@@ -337,7 +361,7 @@ install and configure oh-my-posh
 
 **Example:** `true`
 
-## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L24)
+## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L25)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -358,7 +382,7 @@ install and configure oh-my-posh
 }
 ```
 
-## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L18)
+## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L19)
 
 user text is entered on a new line
 
@@ -366,7 +390,7 @@ user text is entered on a new line
 
 **Default:** `true`
 
-## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L39)
+## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L40)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
