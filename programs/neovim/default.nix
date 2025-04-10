@@ -155,7 +155,13 @@ in
 
     # Create yvim shell alias.
     (lib.mkIf cfg.shellAliases.yvim {
-      programs.fish.shellAliases.yvim = "nvim '+set ft=yaml | set nomodified'";
+      home.packages = [
+        (
+          pkgs.writeShellScriptBin "yvim" ''
+            nvim '+set ft=yaml | set nomodified' "$@"
+          ''
+        )
+      ];
     })
   ]);
 }
