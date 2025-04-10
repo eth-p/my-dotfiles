@@ -51,6 +51,12 @@ in
       default = false;
     };
 
+    keymap.help = lib.mkOption {
+      type = lib.types.nullOr lib.types.bool;
+      description = "Display the keymap after a short delay.";
+      default = true;
+    };
+
     keymap.leader = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "Change the <Leader> key.";
@@ -100,6 +106,7 @@ in
             managedOptions = {
               integrations = cfg.integrations;
               keymap = {
+                help = cfg.keymap.help;
                 leader = cfg.keymap.leader;
               };
               ui = cfg.ui // {
