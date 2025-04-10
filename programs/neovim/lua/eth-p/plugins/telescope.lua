@@ -27,6 +27,21 @@ return {
 				"<Cmd>Telescope buffers<CR>",
 				desc = "Switch active window buffer",
 			},
+			{
+				"<Leader>tg",
+				"<Cmd>Telescope live_grep<CR>",
+				desc = "Grep through the working directory",
+			},
+			{
+				"<Leader>tf",
+				"<Cmd>Telescope find_files<CR>",
+				desc = "Find files in the working directory",
+			},
+			{
+				"<Leader>tr",
+				"<Cmd>Telescope resume<CR>",
+				desc = "Resume search",
+			},
 		},
 	},
 }
