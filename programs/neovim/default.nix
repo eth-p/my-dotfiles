@@ -51,6 +51,12 @@ in
       default = false;
     };
 
+    keymap.leader = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Change the <Leader> key.";
+      default = null;
+    };
+
     integrations.git = lib.mkOption {
       type = lib.types.bool;
       description = "Enable git integrations.";
@@ -93,6 +99,9 @@ in
           let
             managedOptions = {
               integrations = cfg.integrations;
+              keymap = {
+                leader = cfg.keymap.leader;
+              };
               ui = cfg.ui // {
                 colorscheme =
                   if cfgGlobal.colorscheme != "auto"

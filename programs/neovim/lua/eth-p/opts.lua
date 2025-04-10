@@ -29,6 +29,7 @@ defaults = {
 	},
 
 	keymap = {
+		leader = nil, -- change leader key
 		help = true, -- display keymap
 		preserve = false, -- preserve the builtin keymap
 	},

@@ -20,8 +20,14 @@ function InitConfig(opts)
 	-- Configure Keymap
 	--
 
-	vim.g.mapleader = "\\"
-	vim.g.maplocalleader = "\\"
+	local mapleader = opts.keymap.leader
+	if string.lower(mapleader) == "<space>" then
+		vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
+		mapleader = " "
+	end
+
+	vim.g.mapleader = mapleader
+	vim.g.maplocalleader = mapleader
 
 	--
 	-- Configure Gutter
