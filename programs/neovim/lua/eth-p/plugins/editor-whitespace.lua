@@ -56,6 +56,7 @@ return {
 				filetypes = vim.list_extend(
 					{
 						"neo-tree",
+						"TelescopePrompt",
 					},
 					utils.create_enablelist(
 						opts.editor.whitespace.show_on_highlight_excludes_filetypes
@@ -98,8 +99,13 @@ return {
 
 		opts = {
 			highlight = "TrailingWhitespace",
-			ignored_filetypes = utils.create_enablelist(
-				opts.editor.whitespace.show_trailing_excludes_filetypes
+			ignored_filetypes = vim.list_extend(
+				{
+					"TelescopePrompt",
+				},
+				utils.create_enablelist(
+					opts.editor.whitespace.show_trailing_excludes_filetypes
+				)
 			),
 		},
 
