@@ -54,7 +54,7 @@ in
     keymap.leader = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "Change the <Leader> key.";
-      default = null;
+      default = "<Space>";
     };
 
     integrations.git = lib.mkOption {
