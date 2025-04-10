@@ -30,6 +30,14 @@ return {
 			local gutter_bg = "#353337"
 			local gutter_bg_uf = "#252227"
 
+			local telescope_his = utils.ternary(opts.ui.focus_dimming, {
+				bg = "#2d2a2e",
+				border_fg = "#403e41",
+			}, {
+				bg = "#403e41",
+				border_fg = "#646166",
+			})
+
 			-- Register the theme.
 			theme.register {
 				colorscheme = "monokai-pro",
@@ -65,6 +73,40 @@ return {
 							fg = "#777777",
 							ctermbg = 236,
 							ctermfg = 243,
+						},
+
+						-- Telescope
+						TelescopeResultsNormal = {
+							bg = telescope_his.bg,
+						},
+						TelescopePreviewNormal = {
+							bg = telescope_his.bg,
+						},
+						TelescopePromptNormal = {
+							bg = telescope_his.bg,
+						},
+						TelescopeNormal = {
+							bg = telescope_his.bg,
+						},
+						TelescopePromptPrefix = {
+							bg = telescope_his.bg,
+							fg = "#78dce8",
+						},
+						TelescopeResultsBorder = {
+							bg = telescope_his.bg,
+							fg = telescope_his.border_fg,
+						},
+						TelescopePreviewBorder = {
+							bg = telescope_his.bg,
+							fg = telescope_his.border_fg,
+						},
+						TelescopePromptBorder = {
+							bg = telescope_his.bg,
+							fg = telescope_his.border_fg,
+						},
+						TelescopeBorder = {
+							bg = telescope_his.bg,
+							fg = telescope_his.border_fg,
 						},
 
 						-- Listchars
