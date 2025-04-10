@@ -69,6 +69,12 @@ in
       default = config.programs.git.enable;
     };
 
+    shellAliases.cvim = lib.mkOption {
+      type = lib.types.bool;
+      description = "Create cvim alias for using neovim as a pager.";
+      default = false;
+    };
+
     shellAliases.yvim = lib.mkOption {
       type = lib.types.bool;
       description = "Create yvim alias for using neovim as YAML pager.";
@@ -152,6 +158,21 @@ in
           };
       };
     }
+
+    # Create cvim shell alias.
+    (lib.mkIf cfg.shellAliases.cvim {
+      home.packages = [
+        (
+          pkgs.writeShellScriptBin "cvim" ''
+            if [ $# -eq 0 ]; then
+              nvim '+set nomodified'
+            else
+              nvim "+set ft=$1 | set nomodified" "''${@:2}"
+            fi
+          ''
+        )
+      ];
+    })
 
     # Create yvim shell alias.
     (lib.mkIf cfg.shellAliases.yvim {

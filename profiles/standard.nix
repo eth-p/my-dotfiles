@@ -30,6 +30,7 @@
   my-dotfiles.neovim = {
     enable = true;
     integrations.git = false;
+    shellAliases.cvim = true;
   };
 
   my-dotfiles.git = {

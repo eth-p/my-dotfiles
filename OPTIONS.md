@@ -311,7 +311,15 @@ Change the <Leader> key.
 
 **Default:** `"<Space>"`
 
-## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L72)
+## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L72)
+
+Create cvim alias for using neovim as a pager.
+
+**Type:** `lib.types.bool`
+
+**Default:** `false`
+
+## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L78)
 
 Create yvim alias for using neovim as YAML pager.
 

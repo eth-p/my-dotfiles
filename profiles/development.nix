@@ -41,6 +41,7 @@
     enable = true;
     integrations.git = true;
     shellAliases.yvim = true;
+    shellAliases.cvim = true;
 
     syntax = {
       yaml = true;
