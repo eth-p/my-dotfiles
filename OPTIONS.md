@@ -261,6 +261,16 @@ the theme to use
 
 **Default:** `"base16"`
 
+## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L15)
+
+install kubesel
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
 
 The colorscheme used for dark mode.

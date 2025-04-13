@@ -7,4 +7,5 @@
   tolua = (import ./tolua.nix) inputs;
   theming = (import ./theming.nix) inputs;
   text = (import ./text.nix) inputs;
+  util = (import ./util.nix) inputs;
 }

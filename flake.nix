@@ -18,6 +18,9 @@
     # nixpkgs is for installing packages.
     nixpkgs.url = "nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+
+    # My own packages:
+    kubesel.url = "github:eth-p/kubesel";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... } @ inputs: {
@@ -98,8 +101,8 @@
 
     );
 
-    # packages exports my various utility scripts as packages, making them
-    # easier to reuse between programs.
+    # packages exports my various utility scripts (or flake-installed programs)
+    # as packages, making them easier to reuse between programs.
     packages =
       let
         defaultSystems = [
@@ -153,14 +156,22 @@
           );
 
       in
-      builtins.listToAttrs (
-        map
-          (sys: {
-            name = sys;
-            value = collectPackagesForSystem sys;
-          })
-          defaultSystems
-      );
+      self.lib.util.mergeSystemKeyedExports defaultSystems [
+        # Packages declared in this repo.
+        (
+          builtins.listToAttrs (
+            map
+              (sys: {
+                name = sys;
+                value = collectPackagesForSystem sys;
+              })
+              defaultSystems
+          )
+        )
+
+        # Packages from flakes.
+        inputs.kubesel.packages
+      ];
 
 
   };

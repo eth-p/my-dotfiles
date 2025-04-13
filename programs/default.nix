@@ -19,6 +19,7 @@
   ./fzf
   ./git
   ./glow
+  ./kubesel
   ./neovim
   ./oh-my-posh
   ./ranger
