@@ -51,6 +51,11 @@ in
         };
       };
     };
+
+    extraBlocks = lib.mkOption {
+      type = lib.types.attrsOf lib.types.attrs; # TODO: Proper typing.
+      default = { };
+    };
   };
 
   # Configure oh-my-posh.
@@ -64,11 +69,13 @@ in
           final_space = !cfg.newline;
           shell_integration = true;
           blocks = generator.mkBlocks (
-            import ./prompt
-              (inputs // {
-                inherit cfg;
-                inherit generator;
-              })
+            (
+              import ./prompt
+                (inputs // {
+                  inherit cfg;
+                  inherit generator;
+                })
+            ) // cfg.extraBlocks
           );
           palettes = {
             template =

@@ -261,7 +261,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L15)
+## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L16)
 
 install kubesel
 
@@ -270,6 +270,36 @@ install kubesel
 **Default:** `false`
 
 **Example:** `true`
+
+## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L17)
+
+show kubesel info in the shell prompt
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L19)
+
+override the name or color for specific clusters
+
+**Type:** `lib.types.attrs`
+
+**Default:** `{ }`
+
+**Example:**
+
+```nix
+{
+  "docker-desktop" = {
+    name = "docker";
+    fg = "#FFFFFF";
+    bg = "#1D63ED";
+  };
+}
+```
 
 ## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
 
@@ -399,6 +429,12 @@ install and configure oh-my-posh
   };
 }
 ```
+
+## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L55)
+
+**Type:** `lib.types.attrsOf lib.types.attrs`
+
+**Default:** `{ }`
 
 ## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L19)
 

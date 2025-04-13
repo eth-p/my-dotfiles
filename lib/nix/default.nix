@@ -5,6 +5,7 @@
 # ==============================================================================
 { ... } @ inputs: {
   tolua = (import ./tolua.nix) inputs;
+  togotemplate = (import ./togotemplate.nix) inputs;
   theming = (import ./theming.nix) inputs;
   text = (import ./text.nix) inputs;
   util = (import ./util.nix) inputs;
