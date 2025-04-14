@@ -53,7 +53,7 @@ in
             command reset
           end
         end
-        
+
         functions -c reset __mydotfiles_original_reset
         function reset
           __mydotfiles_original_reset
@@ -63,7 +63,7 @@ in
 
       programs.fish.functions."__mydotfiles_detect_colorscheme" = {
         body = ''
-          set -x PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
+          set -gx PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
         '';
       };
     })
