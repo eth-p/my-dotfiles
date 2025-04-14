@@ -88,11 +88,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1744534718,
-        "narHash": "sha256-P54LZKg4Y0XLpfQsGT+BeIqurdCTWQSVsZfhaMe/M+k=",
+        "lastModified": 1744621748,
+        "narHash": "sha256-NhiSXclZFJQJ/TBBPBfbdnhoU6lPMVGR3bFb4p3grMg=",
         "owner": "eth-p",
         "repo": "kubesel",
-        "rev": "7a94a288953aab8218d3897d6831745af8d13ce6",
+        "rev": "e7d6ee9c8fa87165425a3789fa137a0248bda9df",
         "type": "github"
       },
       "original": {
