@@ -14,6 +14,14 @@ in
 {
   options.my-dotfiles.kubesel = {
     enable = lib.mkEnableOption "install kubesel";
+
+    kubeconfigs = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "glob pattern matching kubeconfig files";
+      example = "~/.kube/configs/*.yaml";
+    };
+
     inPrompt = lib.mkEnableOption "show kubesel info in the shell prompt";
 
     inPromptClusterOverrides = lib.mkOption {
@@ -38,11 +46,9 @@ in
         my-dotfiles.packages.${pkgs.stdenv.system}.kubesel
       ];
 
-      programs.fish.shellInit = ''
+      programs.fish.interactiveShellInit = ''
         # Initialize kubesel.
-        status is-interactive; and begin
-          kubesel init fish | source
-        end
+        kubesel init fish ${if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"} | source
       '';
     }
 
