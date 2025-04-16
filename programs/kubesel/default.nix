@@ -41,16 +41,20 @@ in
   config = mkIf cfg.enable (mkMerge [
 
     # Install kubesel.
-    {
-      home.packages = [
-        my-dotfiles.packages.${pkgs.stdenv.system}.kubesel
-      ];
+    (
+      let kubesel = my-dotfiles.packages.${pkgs.stdenv.system}.kubesel;
+      in
+      {
+        home.packages = [
+          kubesel
+        ];
 
-      programs.fish.interactiveShellInit = ''
-        # Initialize kubesel.
-        kubesel init fish ${if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"} | source
-      '';
-    }
+        programs.fish.interactiveShellInit = ''
+          # Initialize kubesel.
+          ${kubesel.out + /bin/kubesel} init fish ${if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"} | source
+        '';
+      }
+    )
 
     # Configure oh-my-posh to show kubernetes info.
     (mkIf cfg.inPrompt {
