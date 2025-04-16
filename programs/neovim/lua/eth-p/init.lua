@@ -10,6 +10,7 @@ package.cpath = package.cpath:gsub("./%?.so;", "")
 --=== Load Modules ===--
 local commands = require("eth-p.commands")
 local opts = require("eth-p.opts")
+local utils = require("eth-p.utils")
 local whitespace = require("eth-p.whitespace")
 
 --============================================================================--
@@ -65,6 +66,14 @@ function InitConfig(opts)
 		vim.o.foldcolumn = foldwidth --  -> Width in gutter
 		vim.o.foldlevel = 99 -- Needed for `ufo` plugin
 		vim.o.foldlevelstart = 99 -- Needed for `ufo` plugin
+	end
+
+	if opts.integration.git then
+		utils.on_filetypes({ "gitcommit" }, {
+			callback = function(evt)
+				vim.opt_local.colorcolumn = "72"
+			end,
+		})
 	end
 
 	-- Show whitespace chars.
