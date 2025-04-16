@@ -141,6 +141,14 @@ install and configure fish
 
 **Example:** `true`
 
+## [`my-dotfiles.fish.fixPATH`](programs/fish/default.nix#L18)
+
+fix the PATH variable on login
+
+**Type:** `lib.types.bool`
+
+**Default:** `pkgs.stdenv.isDarwin`
+
 ## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L17)
 
 use as `$SHELL`
@@ -271,7 +279,7 @@ install kubesel
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L17)
+## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L25)
 
 show kubesel info in the shell prompt
 
@@ -281,7 +289,7 @@ show kubesel info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L19)
+## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L27)
 
 override the name or color for specific clusters
 
@@ -300,6 +308,16 @@ override the name or color for specific clusters
   };
 }
 ```
+
+## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L18)
+
+glob pattern matching kubeconfig files
+
+**Type:** `lib.types.nullOr lib.types.str`
+
+**Default:** `null`
+
+**Example:** `"~/.kube/configs/*.yaml"`
 
 ## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
 
