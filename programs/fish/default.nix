@@ -15,6 +15,11 @@ in
     enable = lib.mkEnableOption "install and configure fish";
 
     isSHELL = lib.mkEnableOption "use as `$SHELL`";
+    fixPATH = lib.mkOption {
+      type = lib.types.bool;
+      description = "fix the PATH variable on login";
+      default = pkgs.stdenv.isDarwin;
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -66,11 +71,21 @@ in
           set -gx PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
         '';
       };
+
+      programs.fish.functions."__mydotfiles_fix_path" = {
+        description = "reconstructs the PATH variable";
+        body = (builtins.readFile ./fix_path.fish);
+      };
     })
 
     # Use as $SHELL.
     (mkIf cfg.isSHELL {
       home.sessionVariables.SHELL = config.programs.fish.package + "/bin/fish";
+    })
+
+    # Fix the PATH variable on login.
+    (mkIf cfg.isSHELL {
+      programs.fish.loginShellInit = (lib.mkOrder 0 "__mydotfiles_fix_path");
     })
 
   ]);
