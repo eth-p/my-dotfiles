@@ -84,7 +84,7 @@ in
     })
 
     # Fix the PATH variable on login.
-    (mkIf cfg.isSHELL {
+    (mkIf cfg.fixPATH {
       programs.fish.loginShellInit = (lib.mkOrder 0 "__mydotfiles_fix_path");
     })
 
