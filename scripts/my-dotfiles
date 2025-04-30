@@ -21,3 +21,7 @@ fi
 
 # Run home-manager.
 home-manager switch --flake "path:.#${profile}"
+
+# Delete neovim's Luajit cache.
+# It has trouble detecting when home-manager changes a file and needs some help.
+find "$HOME/.cache/nvim/luac" -iname "*%2f.config%2f*.luac" | xargs rm
