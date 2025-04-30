@@ -41,18 +41,25 @@ return {
 
 		opts = {
 			enabled = opts.editor.whitespace.show_on_highlight,
-			tab_char = first_not_empty(listchars_map.tab, " "),
-			nl_char = first_not_empty(listchars_map.eol, " "),
-			cr_char = " ",
-			nbsp_char = first_not_empty(listchars_map.nbsp, ""),
-			space_char = first_not_empty(
-				listchars_map.space,
-				listchars_map.lead,
-				listchars_map.trail,
-				" "
-			),
 
-			excluded = {
+			list_chars = {
+				tab = first_not_empty(listchars_map.tab, " "),
+				nbsp = first_not_empty(listchars_map.nbsp, ""),
+				space = first_not_empty(
+					listchars_map.space,
+					listchars_map.lead,
+					listchars_map.trail,
+					" "
+				),
+			},
+
+			fileformat_chars = {
+				mac = first_not_empty(listchars_map.eol, " "),
+				unix = first_not_empty(listchars_map.eol, " "),
+				dos = first_not_empty(listchars_map.eol, " "),
+			},
+
+			ignore = {
 				filetypes = vim.list_extend(
 					{
 						"neo-tree",
