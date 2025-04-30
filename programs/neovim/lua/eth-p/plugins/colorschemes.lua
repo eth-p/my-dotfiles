@@ -116,7 +116,7 @@ return {
 
 						-- Columns
 						CursorColumn = { bg = "#353333", ctermbg = 235 },
-						ColorColumn = { bg = "#533333", ctermbg = 235 },
+						ColorColumn = { bg = "#353333", ctermbg = 235 },
 
 						-- Git
 						GitSignsAdd = { bg = gutter_bg, fg = palette.accent4 },
