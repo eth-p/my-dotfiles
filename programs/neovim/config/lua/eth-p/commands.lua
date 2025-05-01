@@ -54,4 +54,29 @@ cmds.ToggleCenteredCursor = function()
 	require("stay-centered").toggle()
 end
 
+--=== :GitBlame ===--
+cmds.GitBlame = function()
+	local gitsigns = require("gitsigns")
+
+	-- Check if there's a blame window open already.
+	-- If there is, close it.
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		if vim.bo[buf].filetype == "gitsigns-blame" then
+			vim.api.nvim_win_close(win, {})
+			return
+		end
+	end
+
+	-- Show the blame, adding a mapping to close it with `q`.
+	local cur_win = vim.api.nvim_get_current_win()
+	gitsigns.blame(function()
+		vim.api.nvim_buf_set_keymap(0, "n", "q", "<Cmd>:q<CR>", {
+			noremap = true,
+			nowait = true,
+		})
+		vim.api.nvim_set_current_win(cur_win)
+	end)
+end
+
 return cmds

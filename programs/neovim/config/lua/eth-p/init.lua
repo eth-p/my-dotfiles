@@ -137,6 +137,10 @@ function InitCommands(opts)
 			desc = "Toggle cursor centering",
 		}
 	)
+
+	new_command(prefix .. "GitBlame", commands.GitBlame, {
+		desc = "Show the git blame for the current file",
+	})
 end
 
 function InitKeymaps(opts)
