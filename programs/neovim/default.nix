@@ -92,17 +92,20 @@ in
         defaultEditor = true; # Use neovim as $EDITOR
         extraLuaConfig = (builtins.readFile ./init.lua);
 
+        # Add my base config as a plugin.
+        plugins = [
+          (pkgs.vimUtils.buildVimPlugin {
+            pname = "my-neovim-config";
+            version = "0.0.0";
+            src = ./config;
+          })
+        ];
+
         # Use the latest neovim.
         package = lib.mkDefault pkgs-unstable.neovim-unwrapped;
       };
 
       home.file = {
-        # Add neovim configuration.
-        "${nvimHome}/lua/eth-p" = {
-          source = ./config/lua/eth-p;
-          recursive = true;
-        };
-
         # Generate config for options/plugins managed by nix.
         #
         # Prefer adding plugins through Lazy.nvim configuration to support
