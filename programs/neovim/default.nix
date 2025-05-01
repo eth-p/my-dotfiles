@@ -99,7 +99,7 @@ in
       home.file = {
         # Add neovim configuration.
         "${nvimHome}/lua/eth-p" = {
-          source = ./lua/eth-p;
+          source = ./config/lua/eth-p;
           recursive = true;
         };
 
