@@ -18,12 +18,35 @@ package.path = package.path:gsub("./%?.lua;", "")
 package.cpath = package.cpath:gsub("./%?.so;", "")
 
 --============================================================================--
+--=== Utility Functions ===--
+
+local function read_json_file(path)
+	local uv = vim.uv
+	local stat = uv.fs_stat(path)
+	if not stat then
+		return nil
+	end
+
+	local fd = assert(uv.fs_open(path, "r", 448))
+	local raw = assert(uv.fs_read(fd, stat.size, 0))
+	assert(uv.fs_close(fd))
+	return vim.json.decode(raw, {
+		luanil = {
+			object = true,
+			array = true,
+		},
+	})
+end
+
+--============================================================================--
 --=== Config Loading ===--
 
 local config_home = vim.fn.stdpath("config")
 
--- Load home-manager managed config.
-local nix_config = dofile(config_home .. "/managed-by-nix.lua")
+-- Load options managed by home-manager.
+local managed_config = read_json_file(
+	config_home .. "/managed-by-home-manager.json"
+) or {}
 
 -- Load mutable config from config.lua
 local user_config = {}
@@ -37,11 +60,19 @@ end
 require("eth-p") {
 	opts = vim.tbl_deep_extend(
 		"force",
-		nix_config.opts or {},
+		managed_config.opts or {},
 		user_config.opts or {}
 	),
 	plugins = {
-		(nix_config.plugins or {}),
+		(managed_config.plugins or {}),
 		(user_config.plugins or {}),
+	},
+}
+
+-- Set up nvim-treesitter plugin.
+require("nvim-treesitter.configs").setup {
+	auto_install = false,
+	highlight = {
+		enable = true,
 	},
 }

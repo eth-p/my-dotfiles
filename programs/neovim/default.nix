@@ -107,7 +107,7 @@ in
         #
         # Prefer adding plugins through Lazy.nvim configuration to support
         # lazy loading, except when plugins rely on native binaries or libraries.
-        "${nvimHome}/managed-by-nix.lua" =
+        "${nvimHome}/managed-by-home-manager.json" =
           let
             managedOptions = {
               integrations = cfg.integrations;
@@ -149,12 +149,10 @@ in
 
           in
           {
-            text = ''
-              return ${tolua.attrs {
-                plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
-                opts = managedOptions;
-              }}
-            '';
+            text = builtins.toJSON {
+              plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
+              opts = managedOptions;
+            };
           };
       };
     }
