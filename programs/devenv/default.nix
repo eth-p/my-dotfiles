@@ -40,7 +40,7 @@ in
 
         template = (builtins.concatStringsSep "" [
           "{{ if .Env.DEVENV_ROOT }}"
-          (nerdOr /* EEF4 */ "" "devenv")
+          (nerdOr /* F1064 */ "󱁤 " "devenv")
           "{{ end }}"
         ]);
       };
