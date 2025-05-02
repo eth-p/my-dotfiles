@@ -66,4 +66,8 @@
     glow.forPreview = lib.mkDefault true;
   };
 
+  my-dotfiles.yq = {
+    enable = lib.mkDefault true;
+  };
+
 }
