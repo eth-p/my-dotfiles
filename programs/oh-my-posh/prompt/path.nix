@@ -45,5 +45,14 @@
       enable = true;
       segments = generator.mkSegments cfg.pathAnnotations;
     }
+
+    # An empty template to coerce the trailing diamond color.
+    {
+      type = "text";
+      style = "diamond";
+      foreground = "p:path_curdir";
+      background = "p:path_bg";
+      template = "<><>";
+    }
   ];
 }

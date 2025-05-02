@@ -177,44 +177,83 @@ in
 
     # Configure oh-my-posh to show git info.
     (mkIf cfg.inPrompt {
-      my-dotfiles.oh-my-posh.pathAnnotations.git = {
-        priority = 50;
-        type = "git";
-
-        foreground = "p:vcs_fg";
-        background = "p:path_bg";
-
-        style = "diamond";
-        leading_diamond = " ";
-        trailing_diamond = "";
-
-        template = (builtins.concatStringsSep "" [
-          # Set the colors based on staged/unstaged/synced.
-          "{{ $unstaged := (add .Working.Deleted .Working.Added .Working.Modified .Working.Unmerged) }}"
-          "{{ if (gt $unstaged 0) }}<p:vcs_fg,p:vcs_modified>"
-          "{{ else }}{{ if .Staging.Changed }}<p:vcs_fg,p:vcs_staged>"
-          "{{ else }}<p:vcs_fg,p:vcs_synced>"
-          "{{ end }}{{ end }} "
-
-          # Show the rebase info.
-          # TODO: Need v24.19.0 or later
-
-          # Otherwise, show the current HEAD.
-          "{{ .HEAD }}"
-
-          # Show a marker there are untracked files.
-          "{{ if gt .Working.Untracked 0 }} *{{ end }}"
-          " </>"
-        ]);
-
-        properties = {
-          fetch_status = true;
-          source = "cli";
-
-          rebase_icon = nerdglyphOr "E728" "rebase ";
+      my-dotfiles.oh-my-posh.pathAnnotations.git =
+        let
+          rebase_icon = nerdglyphOr "E728" "rebase";
           commit_icon = nerdglyphOr "F417" "@";
+          tag_icon = "${nerdglyphOr "F412" "tag"} ";
+          onto_icon = nerdglyphOr "2B9E" "onto";
+          git-segment = {
+            type = "git";
+
+            foreground = "p:vcs_fg";
+            background = "p:path_bg";
+
+            style = "diamond";
+
+            background_templates = [
+              # If any unstaged changes.
+              ''
+                {{- if gt (add .Working.Deleted .Working.Added .Working.Modified .Working.Unmerged) 0 -}}
+                  p:vcs_modified
+                {{- end -}}
+              ''
+
+              # If any staged changes.
+              ''
+                {{- if .Staging.Changed -}}
+                  p:vcs_staged
+                {{- end -}}
+              ''
+
+              # Synced.
+              "p:vcs_synced"
+            ];
+
+            templates_logic = "first_match";
+
+            properties = {
+              fetch_status = true;
+              source = "cli";
+
+              inherit rebase_icon commit_icon tag_icon;
+            };
+          };
+        in
+        {
+          priority = 50;
+          segments = [
+
+            # Current git status:
+            (git-segment // {
+              leading_diamond = " ";
+              templates = [
+
+                # Rebase.
+                ''
+                  {{- if .Rebase }}{{` ` -}}
+                    ${rebase_icon} [{{ add 1 (sub .Rebase.Total .Rebase.Current) }}] {{``}}
+                    {{- .Rebase.HEAD }} ${onto_icon} {{``}}
+                    {{- if eq .Rebase.Onto "undefined" }}(root)
+                    {{- else }}{{ .Rebase.Onto }}{{- end -}}
+                  {{` `}}{{ end -}}
+                ''
+
+                # Other.
+                ''
+                  {{- ` `}}{{ .HEAD }}{{` ` -}}
+                ''
+
+              ];
+            })
+
+            # Untracked status:
+            (git-segment // {
+              template = "{{- if gt .Working.Untracked 0 -}}*{{` `}}{{- end -}}";
+            })
+
+          ];
         };
-      };
     })
   ]);
 }
