@@ -65,8 +65,9 @@
         system = bootstrap.system;
 
         # Get the nixpkgs for the current platform.
-        pkgs = import nixpkgs { inherit system; };
-        pkgs-unstable = import nixpkgs-unstable { inherit system; };
+        overlays = [ self.overlay ];
+        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs-unstable = import nixpkgs-unstable { inherit system overlays; };
 
         # Get the declarative profiles.
         profiles = {
@@ -100,6 +101,9 @@
         profiles
 
     );
+
+    # overlay exports the overlays I use to update certain packages.
+    overlay = (import ./overlays inputs);
 
     # packages exports my various utility scripts (or flake-installed programs)
     # as packages, making them easier to reuse between programs.

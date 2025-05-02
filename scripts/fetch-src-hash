@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+# ==============================================================================
+set -euo pipefail
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.."
+
+nix-hash --type sha256 --base32 --sri --flat <(curl "$1" -fsL -o-)
