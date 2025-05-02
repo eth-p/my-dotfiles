@@ -63,7 +63,7 @@ in
     {
       programs.oh-my-posh = {
         enable = true;
-        package = pkgs-unstable.oh-my-posh;
+        package = lib.mkDefault pkgs-unstable.oh-my-posh;
         settings = {
           version = 3;
           final_space = !cfg.newline;
