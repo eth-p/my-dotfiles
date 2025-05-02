@@ -5,44 +5,44 @@
 # It tries to be light, only containing quality of life programs
 # and settings.
 # ==============================================================================
-{ ... }:
+{ lib, ... }:
 {
 
-  my-dotfiles.btop.enable = true;
-  my-dotfiles.carapace.enable = true;
-  my-dotfiles.eza.enable = true;
-  my-dotfiles.fd.enable = true;
-  my-dotfiles.fzf.enable = true;
-  my-dotfiles.bat.enable = true;
-  my-dotfiles.glow.enable = true;
-  my-dotfiles.ripgrep.enable = true;
-  my-dotfiles.zoxide.enable = true;
+  my-dotfiles.btop.enable = lib.mkDefault true;
+  my-dotfiles.carapace.enable = lib.mkDefault true;
+  my-dotfiles.eza.enable = lib.mkDefault true;
+  my-dotfiles.fd.enable = lib.mkDefault true;
+  my-dotfiles.fzf.enable = lib.mkDefault true;
+  my-dotfiles.bat.enable = lib.mkDefault true;
+  my-dotfiles.glow.enable = lib.mkDefault true;
+  my-dotfiles.ripgrep.enable = lib.mkDefault true;
+  my-dotfiles.zoxide.enable = lib.mkDefault true;
 
   my-dotfiles.fish = {
-    enable = true;
-    isSHELL = true;
+    enable = lib.mkDefault true;
+    isSHELL = lib.mkDefault true;
   };
 
   my-dotfiles.oh-my-posh = {
-    enable = true;
+    enable = lib.mkDefault true;
   };
 
   my-dotfiles.neovim = {
-    enable = true;
-    integrations.git = false;
-    shellAliases.cvim = true;
+    enable = lib.mkDefault true;
+    integrations.git = lib.mkDefault false;
+    shellAliases.cvim = lib.mkDefault true;
   };
 
   my-dotfiles.git = {
-    enable = true;
-    useDelta = true;
-    useDyff = true;
+    enable = lib.mkDefault true;
+    useDelta = lib.mkDefault true;
+    useDyff = lib.mkDefault true;
   };
 
   my-dotfiles.ranger = {
-    enable = true;
-    glow.forOpen = true;
-    glow.forPreview = true;
+    enable = lib.mkDefault true;
+    glow.forOpen = lib.mkDefault true;
+    glow.forPreview = lib.mkDefault true;
   };
 
 }
