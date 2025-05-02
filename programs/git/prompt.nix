@@ -16,6 +16,7 @@ let
   # Icons.
   rebase_icon = nerdglyphOr "E728" "rebase";
   commit_icon = nerdglyphOr "F417" "@";
+  branch_icon = nerdglyphOr "E0A0" "";
   tag_icon = "${nerdglyphOr "F412" "tag"} ";
   onto_icon = nerdglyphOr "2B9E" "onto";
 
@@ -55,7 +56,7 @@ let
       fetch_status = true;
       source = "cli";
 
-      inherit rebase_icon commit_icon tag_icon;
+      inherit rebase_icon commit_icon tag_icon branch_icon;
     };
   };
 
