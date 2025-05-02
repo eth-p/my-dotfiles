@@ -3,7 +3,7 @@
 #
 # Program: https://carapace.sh/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.carapace;
@@ -20,6 +20,8 @@ in
       programs.carapace = {
         enable = true;
         enableFishIntegration = true;
+
+        package = lib.mkDefault pkgs-unstable.carapace;
       };
     }
 
