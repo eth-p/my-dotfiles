@@ -9,7 +9,6 @@ let
   inherit (my-dotfiles.lib) togotemplate;
   cfg = config.my-dotfiles.kubesel;
   cfgGlobal = config.my-dotfiles.global;
-  nerdglyphOr = my-dotfiles.lib.text.nerdglyphOr cfgGlobal.nerdfonts;
 in
 {
   options.my-dotfiles.kubesel = {

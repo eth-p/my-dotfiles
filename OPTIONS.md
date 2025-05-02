@@ -169,7 +169,7 @@ install and configure fzf
 
 **Example:** `true`
 
-## [`my-dotfiles.git.enable`](programs/git/default.nix#L15)
+## [`my-dotfiles.git.enable`](programs/git/default.nix#L14)
 
 install and configure git
 
@@ -179,7 +179,7 @@ install and configure git
 
 **Example:** `true`
 
-## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L21)
+## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L20)
 
 Add `git fixup` command
 
@@ -187,7 +187,7 @@ Add `git fixup` command
 
 **Default:** `false`
 
-## [`my-dotfiles.git.github`](programs/git/default.nix#L18)
+## [`my-dotfiles.git.github`](programs/git/default.nix#L17)
 
 install the gh command-line tool
 
@@ -197,7 +197,7 @@ install the gh command-line tool
 
 **Example:** `true`
 
-## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L40)
+## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L39)
 
 Ignore system files created by MacOS.
 
@@ -205,7 +205,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.git.inPrompt`](programs/git/default.nix#L16)
+## [`my-dotfiles.git.inPrompt`](programs/git/default.nix#L15)
 
 show git info in the shell prompt
 
@@ -215,7 +215,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L28)
+## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L27)
 
 Use delta to show diffs.
 
@@ -223,7 +223,7 @@ Use delta to show diffs.
 
 **Default:** `true`
 
-## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L34)
+## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L33)
 
 Use dyff to show diffs between YAML files.
 
@@ -269,7 +269,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L16)
+## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L15)
 
 install kubesel
 
@@ -279,7 +279,7 @@ install kubesel
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L25)
+## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L24)
 
 show kubesel info in the shell prompt
 
@@ -289,7 +289,7 @@ show kubesel info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L27)
+## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L26)
 
 override the name or color for specific clusters
 
@@ -309,7 +309,7 @@ override the name or color for specific clusters
 }
 ```
 
-## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L18)
+## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L17)
 
 glob pattern matching kubeconfig files
 
@@ -524,6 +524,16 @@ use glow to preview markdown files
 ## [`my-dotfiles.ripgrep.enable`](programs/ripgrep/default.nix#L13)
 
 install ripgrep
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.yq.enable`](programs/yq/default.nix#L13)
+
+install and configure yq
 
 **Type:** `boolean`
 

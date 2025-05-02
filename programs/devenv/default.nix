@@ -8,7 +8,7 @@ let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.devenv;
   cfgGlobal = config.my-dotfiles.global;
-  nerdglyphOr = my-dotfiles.lib.text.nerdglyphOr cfgGlobal.nerdfonts;
+  nerdOr = my-dotfiles.lib.text.nerdOr cfgGlobal.nerdfonts;
 in
 {
   options.my-dotfiles.devenv = {
@@ -40,7 +40,7 @@ in
 
         template = (builtins.concatStringsSep "" [
           "{{ if .Env.DEVENV_ROOT }}"
-          (nerdglyphOr "EEF4" "devenv")
+          (nerdOr /* EEF4 */ "" "devenv")
           "{{ end }}"
         ]);
       };

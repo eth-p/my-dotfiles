@@ -11,14 +11,14 @@ let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.git;
   cfgGlobal = config.my-dotfiles.global;
-  nerdglyphOr = my-dotfiles.lib.text.nerdglyphOr cfgGlobal.nerdfonts;
+  nerdOr = my-dotfiles.lib.text.nerdOr cfgGlobal.nerdfonts;
 
   # Icons.
-  rebase_icon = nerdglyphOr "E728" "rebase";
-  commit_icon = nerdglyphOr "F417" "@";
-  branch_icon = nerdglyphOr "E0A0" "";
-  tag_icon = "${nerdglyphOr "F412" "tag"} ";
-  onto_icon = nerdglyphOr "2B9E" "onto";
+  rebase_icon = nerdOr /* E728 */ "" "rebase";
+  commit_icon = nerdOr /* F417 */ " " "@";
+  branch_icon = nerdOr /* E0A0 */ "" "";
+  tag_icon = nerdOr /* F412 */ " " "tag ";
+  onto_icon = nerdOr /* 2B9E */ "⮞" "onto";
 
   # Color templates.
   background_templates = [

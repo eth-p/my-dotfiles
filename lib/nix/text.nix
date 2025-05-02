@@ -5,12 +5,12 @@
 # ==============================================================================
 { lib, ... }:
 {
-  # nerdglyphOr returns the specified glyph if the first argument is true,
-  # or the specified textual replacement otherwise. 
+  # nerdOr returns the first string (glyph) if the first argument is true,
+  # or the second string (textual replacement) otherwise. 
   # 
-  # nerdglyphOr :: bool string string -> string
-  nerdglyphOr = enabled:
+  # nerdOr :: bool string string -> string
+  nerdOr = enabled:
     if enabled
-    then nfCodepoint: txtIcon: builtins.fromJSON (''"\u${nfCodepoint}"'')
-    else nfCodepoint: txtIcon: txtIcon;
+    then nfIcon: txtIcon: nfIcon
+    else nfIcon: txtIcon: txtIcon;
 }

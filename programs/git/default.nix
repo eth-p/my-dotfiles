@@ -8,7 +8,6 @@ let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.git;
   cfgGlobal = config.my-dotfiles.global;
-  nerdglyphOr = my-dotfiles.lib.text.nerdglyphOr cfgGlobal.nerdfonts;
 in
 {
   options.my-dotfiles.git = {
