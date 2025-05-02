@@ -45,6 +45,7 @@
 
     syntax = {
       yaml = true;
+      nix = true;
     };
   };
 

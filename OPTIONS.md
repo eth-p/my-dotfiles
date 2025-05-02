@@ -385,6 +385,14 @@ Create yvim alias for using neovim as YAML pager.
 
 **Default:** `false`
 
+## [`my-dotfiles.neovim.syntax.nix`](programs/neovim/plugins-treesitter.nix#L22)
+
+Enable nix syntax support (treesitter).
+
+**Type:** `lib.types.bool`
+
+**Default:** `false`
+
 ## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L16)
 
 Enable yaml syntax support (treesitter).

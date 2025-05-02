@@ -18,6 +18,12 @@ in
       description = "Enable yaml syntax support (treesitter).";
       default = false;
     };
+
+    nix = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enable nix syntax support (treesitter).";
+      default = false;
+    };
   };
 
   config =
@@ -25,6 +31,7 @@ in
       # Mapping of syntax enable options to function adding the syntax plugin.
       syntaxes = {
         yaml = p: p.yaml;
+        nix = p: p.nix;
       };
 
       # List of keys under `syntaxes` variable, including only enabled ones.
