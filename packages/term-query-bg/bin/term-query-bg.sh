@@ -56,7 +56,7 @@ query_with_osc11() {
 	{
 		read -r -t1 -d'?' upto_da1_start
 		read -r -t1 -d'c' upto_da1_end
-	} < /dev/tty
+	} </dev/tty
 
 	response="${upto_da1_start}?${upto_da1_end}c"
 	_echo_on
@@ -69,10 +69,10 @@ query_with_osc11() {
 
 		local set_fn=
 		case "${#BASH_REMATCH[1]}" in
-			4) set_fn=_set_rgb16_hex ;;
-			3) set_fn=_set_rgb12_hex ;;
-			2) set_fn=_set_rgb8_hex ;;
-			*) return 1 ;;
+		4) set_fn=_set_rgb16_hex ;;
+		3) set_fn=_set_rgb12_hex ;;
+		2) set_fn=_set_rgb8_hex ;;
+		*) return 1 ;;
 		esac
 
 		"$set_fn" "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
@@ -94,27 +94,27 @@ query_with_colorfgbg() {
 		# local TEXT_FG="${BASH_REMATCH[1]}"
 		local TEXT_BG="${BASH_REMATCH[2]}"
 
-
 		case "$TEXT_BG" in
-			0)  _set_rgb8_hex '00' '00' '00';; # Black
-			1)  _set_rgb8_hex '80' '00' '00';; # Red
-			2)  _set_rgb8_hex '00' '80' '00';; # Green
-			3)  _set_rgb8_hex '80' '80' '00';; # Yellow
-			4)  _set_rgb8_hex '00' '00' '80';; # Blue
-			5)  _set_rgb8_hex '80' '00' '80';; # Magenta
-			6)  _set_rgb8_hex '00' '80' '80';; # Cyan
-			7)  _set_rgb8_hex 'c0' 'c0' 'c0';; # White
-			8)  _set_rgb8_hex '80' '80' '80';; # Bright Black
-			9)  _set_rgb8_hex 'ff' '00' '00';; # Bright Red
-			10) _set_rgb8_hex '00' 'ff' '00';; # Bright Green
-			11) _set_rgb8_hex 'ff' 'ff' '00';; # Bright Yellow
-			12) _set_rgb8_hex '00' '00' 'ff';; # Bright Blue
-			13) _set_rgb8_hex 'ff' '00' 'ff';; # Bright Magenta
-			14) _set_rgb8_hex '00' 'ff' 'ff';; # Bright Cyan
-			15) _set_rgb8_hex 'ff' 'ff' 'ff';; # Bright White
-			*)
-				printf "unknown background color: %s\n" "$TEXT_BG" 1>&2
-				return 1
+		0) _set_rgb8_hex '00' '00' '00' ;;  # Black
+		1) _set_rgb8_hex '80' '00' '00' ;;  # Red
+		2) _set_rgb8_hex '00' '80' '00' ;;  # Green
+		3) _set_rgb8_hex '80' '80' '00' ;;  # Yellow
+		4) _set_rgb8_hex '00' '00' '80' ;;  # Blue
+		5) _set_rgb8_hex '80' '00' '80' ;;  # Magenta
+		6) _set_rgb8_hex '00' '80' '80' ;;  # Cyan
+		7) _set_rgb8_hex 'c0' 'c0' 'c0' ;;  # White
+		8) _set_rgb8_hex '80' '80' '80' ;;  # Bright Black
+		9) _set_rgb8_hex 'ff' '00' '00' ;;  # Bright Red
+		10) _set_rgb8_hex '00' 'ff' '00' ;; # Bright Green
+		11) _set_rgb8_hex 'ff' 'ff' '00' ;; # Bright Yellow
+		12) _set_rgb8_hex '00' '00' 'ff' ;; # Bright Blue
+		13) _set_rgb8_hex 'ff' '00' 'ff' ;; # Bright Magenta
+		14) _set_rgb8_hex '00' 'ff' 'ff' ;; # Bright Cyan
+		15) _set_rgb8_hex 'ff' 'ff' 'ff' ;; # Bright White
+		*)
+			printf "unknown background color: %s\n" "$TEXT_BG" 1>&2
+			return 1
+			;;
 		esac
 
 		BG_METHOD="colorfgbg # ansi ${TEXT_BG}"
@@ -164,17 +164,17 @@ query_with_guesses() {
 # Small utility to set the BG_* variables from 3 8-bit RGB hex numbers.
 # shellcheck disable=SC2317
 _set_rgb8_hex() {
-	BG_RED="$(((16#$1)*257))"
-	BG_GREEN="$(((16#$2)*257))"
-	BG_BLUE="$(((16#$3)*257))"
+	BG_RED="$(((16#$1) * 257))"
+	BG_GREEN="$(((16#$2) * 257))"
+	BG_BLUE="$(((16#$3) * 257))"
 }
 
 # Small utility to set the BG_* variables from 3 12-bit RGB hex numbers.
 # shellcheck disable=SC2317
 _set_rgb12_hex() {
-	BG_RED="$(((16#$1)*16 + (16#$1)/256))"
-	BG_GREEN="$(((16#$2)*16 + (16#$2)/256))"
-	BG_BLUE="$(((16#$3)*16 + (16#$3)/256))"
+	BG_RED="$(((16#$1) * 16 + (16#$1) / 256))"
+	BG_GREEN="$(((16#$2) * 16 + (16#$2) / 256))"
+	BG_BLUE="$(((16#$3) * 16 + (16#$3) / 256))"
 }
 
 # Small utility to set the BG_* variables from 3 16-bit RGB hex numbers.
@@ -188,10 +188,10 @@ _set_rgb16_hex() {
 # Small utility to enable/disable input echo.
 if command -v stty &>/dev/null; then
 	_echo_off() { stty -echo; }
-	_echo_on()  { stty echo;  }
+	_echo_on() { stty echo; }
 else
 	_echo_off() { :; }
-	_echo_on()  { :; }
+	_echo_on() { :; }
 fi
 
 # Small utility to check tmux version.
@@ -220,10 +220,10 @@ BG_GREEN=0
 BG_BLUE=0
 
 # Get the color shorts.
-query_with_osc11 \
-	|| query_with_colorfgbg \
-	|| query_with_guesses \
-	|| true
+query_with_osc11 ||
+	query_with_colorfgbg ||
+	query_with_guesses ||
+	true
 
 # If $1 is '--dump', just dump the info for the consumer.
 if [[ "$#" -eq 1 ]] && [[ "$1" = "--dump" ]]; then
@@ -248,12 +248,12 @@ fi
 #   0.2126*R =~ R/(1/0.2126)  # Simplified to: R/4.7037
 #   0.7152*G =~ G/(1/0.7152)  # Simplified to: G/1.3982
 #   0.0722*B =~ B/(1/0.0722)  # Simplified to: G/13.8504
-# 
+#
 # Sum < 32767 ? black : white
 FPMUL=10000
-LUM_R="$(((BG_RED*FPMUL) / 47037))"
-LUM_G="$(((BG_GREEN*FPMUL) / 13982))"
-LUM_B="$(((BG_BLUE*FPMUL) / 138504))"
+LUM_R="$(((BG_RED * FPMUL) / 47037))"
+LUM_G="$(((BG_GREEN * FPMUL) / 13982))"
+LUM_B="$(((BG_BLUE * FPMUL) / 138504))"
 
 if [[ "$((LUM_R + LUM_G + LUM_B))" -ge 32767 ]]; then
 	echo "light"

@@ -9,11 +9,11 @@ if [[ "$#" -lt 1 ]]; then
 	profile="$(cat config.profile)"
 else
 	profile="$1"
-	printf "%s\n" "$profile" > config.profile
+	printf "%s\n" "$profile" >config.profile
 fi
 
 # If home-manager is not installed, shim it with nix shell.
-if ! command -v home-manager &> /dev/null; then
+if ! command -v home-manager &>/dev/null; then
 	home-manager() {
 		nix shell 'home-manager' --command 'home-manager' "$@" || return $?
 	}

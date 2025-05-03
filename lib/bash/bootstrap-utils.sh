@@ -26,10 +26,10 @@ __first_section=true
 @create-and-overwrite() {
 	if test -f "$1"; then
 		@notice "updating $1"
-		cat > "$1"
+		cat >"$1"
 	else
 		@notice "creating $1"
-		cat > "$1"
+		cat >"$1"
 	fi
 }
 
@@ -40,7 +40,7 @@ __first_section=true
 	fi
 
 	@notice "creating $1"
-	cat > "$1"
+	cat >"$1"
 }
 
 @link-if-missing() {

@@ -10,7 +10,7 @@ source "lib/bash/bootstrap-utils.sh"
 # ------------------------------------------------------------------------------
 @section "installing Nix package manager"
 
-if command -v nix &> /dev/null; then
+if command -v nix &>/dev/null; then
 	@notice "nix is already installed"
 
 else
@@ -28,7 +28,7 @@ fi
 sys_arch="$(uname -m | sed 's/arm64/aarch64/')"
 sys_os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
-@create-and-overwrite bootstrap.json << EOF
+@create-and-overwrite bootstrap.json <<EOF
 {
   "username": "$(id -un)",
   "homeDirectory": "${HOME}",
@@ -36,7 +36,7 @@ sys_os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 }
 EOF
 
-@create-if-missing config.nix << EOF
+@create-if-missing config.nix <<EOF
 { lib, pkgs, config, ... }:
 {
   my-dotfiles.global = {
@@ -57,7 +57,7 @@ EOF
 }
 EOF
 
-@create-if-missing config.profile <<< "minimal"
+@create-if-missing config.profile <<<"minimal"
 
 # ------------------------------------------------------------------------------
 @section "installing utilities"
