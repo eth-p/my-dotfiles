@@ -5,7 +5,7 @@
 # It won't install any compilers, but it will install support tools and
 # command-line programs.
 # ==============================================================================
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
 
   my-dotfiles.btop.enable = lib.mkDefault true;
@@ -69,5 +69,10 @@
   my-dotfiles.yq = {
     enable = lib.mkDefault true;
   };
+
+  home.packages = [
+    # Nix Language Server
+    pkgs.nil
+  ];
 
 }
