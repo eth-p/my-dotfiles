@@ -1,0 +1,60 @@
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+#
+# Configuration for treefmt.
+# To be run within devenv shell.
+#
+# Program: https://treefmt.com/latest/
+# ==============================================================================
+excludes = [
+    "*.md",
+    "*.png",
+    "*.lock",
+    "Makefile",
+
+    # unsupported
+    ".envrc",
+    ".editorconfig",
+    ".git*",
+
+    # old files
+    "home/**",
+    "home-steamos/**",
+    "extra/**",
+    ".install/**",
+]
+
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+excludes = []
+includes = [
+    "*.json",
+    "*.json5",
+    "*.yaml",
+    "*.yml",
+]
+
+[formatter.shfmt]
+command = "shfmt"
+options = ["-w", "--indent=0", "--language-dialect=bash"]
+excludes = []
+includes = [
+    "scripts/*",
+    "*.sh",
+    "*.bash",
+    "*.envrc",
+    "*.envrc.*",
+]
+
+[formatter.nixpkgs-fmt]
+command = "nixpkgs-fmt"
+options = []
+excludes = []
+includes = ["*.nix"]
+
+[formatter.stylua]
+command = "stylua"
+excludes = []
+includes = ["*.lua"]
+options = []
