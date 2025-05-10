@@ -3,9 +3,10 @@
 #
 # Program: https://github.com/fish-shell/fish-shell
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... }:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
+  inherit (import ./generator.nix inputs) mkPrivateFishFunction privateIdent;
   my-pkgs = my-dotfiles.packages."${pkgs.system}";
   cfg = config.my-dotfiles.fish;
   cfgGlobal = config.my-dotfiles.global;
@@ -50,7 +51,7 @@ in
       programs.fish.shellInit = ''
         # Use terminal background color to set preferred colorscheme.
         if test -z "$PREFERRED_COLORSCHEME"
-          __mydotfiles_detect_colorscheme
+          ${privateIdent "detect_colorscheme"}
         end
 
         if not functions --query reset
@@ -59,23 +60,16 @@ in
           end
         end
 
-        functions -c reset __mydotfiles_original_reset
+        functions -c reset ${privateIdent "original_reset"}
         function reset
-          __mydotfiles_original_reset
-          __mydotfiles_detect_colorscheme
+          ${privateIdent "original_reset"}
+          ${privateIdent "detect_colorscheme"}
         end
       '';
 
-      programs.fish.functions."__mydotfiles_detect_colorscheme" = {
-        body = ''
-          set -gx PREFERRED_COLORSCHEME (${my-pkgs.term-query-bg}/bin/term-query-bg)
-        '';
-      };
-
-      programs.fish.functions."__mydotfiles_fix_path" = {
-        description = "reconstructs the PATH variable";
-        body = (builtins.readFile ./fix_path.fish);
-      };
+      xdg.configFile = builtins.listToAttrs [
+        (mkPrivateFishFunction "detect_colorscheme" (import ./functions/detect_colorscheme.nix) { inherit my-pkgs; })
+      ];
     })
 
     # Use as $SHELL.
@@ -85,7 +79,14 @@ in
 
     # Fix the PATH variable on login.
     (mkIf cfg.fixPATH {
-      programs.fish.loginShellInit = (lib.mkOrder 0 "__mydotfiles_fix_path");
+      programs.fish.loginShellInit = (lib.mkOrder 0 ''
+        # Fix the PATH
+        ${privateIdent "fix_path"}
+      '');
+
+      xdg.configFile = builtins.listToAttrs [
+        (mkPrivateFishFunction "fix_path" (import ./functions/fix_path.nix) { })
+      ];
     })
 
   ]);
