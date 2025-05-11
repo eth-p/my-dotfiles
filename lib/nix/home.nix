@@ -4,13 +4,22 @@
 # Helpers for creating a home-manager flake using my-dotfiles.
 # ==============================================================================
 { lib, my-dotfiles, home-manager, nixpkgs, nixpkgs-unstable, ... }:
-{
+let inherit (my-dotfiles.lib.util) getOrDefault;
+in rec {
+
+  # profileModules maps my-dotfiles profile names to home-manager modules.
+  profileModules = {
+    minimal = [ ../../profiles/minimal.nix ];
+    standard = [ ../../profiles/standard.nix ];
+    development = [ ../../profiles/development.nix ];
+  };
 
   # mkHomeConfiguration provides a way to create a home-manager configuration
   # without having to set up all the manual boilerplate.
   mkHomeConfiguration =
     { system
     , modules
+    , profile ? null
     ,
     }:
     let
@@ -25,7 +34,10 @@
     in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = my-dotfiles.homeModules ++ modules;
+      modules =
+        my-dotfiles.homeModules
+        ++ (getOrDefault profileModules profile [ ])
+        ++ modules;
       extraSpecialArgs = {
         inherit my-dotfiles pkgs-unstable;
       };

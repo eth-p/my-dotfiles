@@ -23,7 +23,7 @@
     kubesel.url = "github:eth-p/kubesel";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... } @ inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... } @ inputs: rec {
 
     # lib provides reusable library functions.
     lib = (import ./lib/nix) ({ lib = nixpkgs.lib; my-dotfiles = self; } // inputs);
@@ -61,29 +61,21 @@
           home.stateVersion = "24.11";
 
         };
-
-        # Get the declarative profiles.
-        profiles = {
-          minimal = ./profiles/minimal.nix;
-          standard = ./profiles/standard.nix;
-          development = ./profiles/development.nix;
-        };
-
       in
 
       # profile -> homeManagerConfiguration { (defaults), ...profile }
-      builtins.mapAttrs
-        (profileName: profileFile:
+      lib.util.genAttrs
+        (profile:
           self.lib.home.mkHomeConfiguration {
+            inherit profile;
             system = bootstrap.system;
             modules = [
-              profileFile
               bootstrap-module
               ./config.nix
             ];
           }
         )
-        profiles
+        (builtins.attrNames lib.home.profileModules)
 
     );
 

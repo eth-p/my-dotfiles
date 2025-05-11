@@ -27,6 +27,12 @@ rec {
   # mergeAttrList :: [attrset] -> attrset
   mergeAttrsList = attrlist: builtins.foldl' (x: y: x // y) { } attrlist;
 
+  # genAttrs creates an attrset from a list of attribute names.
+  #
+  # genAttrs :: (string -> any) [string] -> attrset
+  genAttrs = fn: list: builtins.listToAttrs
+    (map (k: { name = k; value = (fn k); }) list);
+
   # getOrDefault gets an attribute from an attrset if it exists or returns
   # the default value if it does not.
   #
