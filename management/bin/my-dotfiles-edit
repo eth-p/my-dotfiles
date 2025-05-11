@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+#
+# Open the device-specific configuration file in an editor.
+# ==============================================================================
+set -euo pipefail
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
+REPO_DIR="$(pwd)"
+LIB_DIR="${REPO_DIR}/management/lib"
+# ==============================================================================
+source "management/lib/nix.sh"
+source "management/lib/print.sh"
+
+BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
+
+# ------------------------------------------------------------------------------
+
+# Find an editor.
+editor=""
+editors=(
+	"${VISUAL:-}"
+	"${EDITOR:-}"
+	"nvim"
+	"vim"
+	"vi"
+	"nano"
+	"emacs"
+	"code"
+)
+
+for candidate in "${editors[@]}"; do
+	if command -v "${candidate}" &>/dev/null; then
+		editor="$candidate"
+		break
+	fi
+done
+
+if test -z "$editor"; then
+	show_error "error: cannot determine editor"
+	exit 1
+fi
+
+# Open editor.
+"$editor" "${BOOTSTRAPPED_FLAKE_DIR}/config.nix"
+echo "Run 'my-dotfiles apply' to apply your changes."

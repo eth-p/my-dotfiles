@@ -145,4 +145,4 @@ EOF
 show_section "applying configuration"
 # ------------------------------------------------------------------------------
 
-source "${REPO_DIR}/management/bin/my-dotfiles"
+source "${REPO_DIR}/management/bin/my-dotfiles-apply"

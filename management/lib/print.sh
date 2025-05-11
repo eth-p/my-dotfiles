@@ -24,3 +24,8 @@ show_section() {
 show_notice() {
 	printf "\033[1;34m[!] \033[0;34m%s\033[m\n" "$1" 1>&2
 }
+
+# show_error prints an error message.
+show_error() {
+	printf "\033[31m$1\033[m\n" "${@:2}" 1>&2
+}

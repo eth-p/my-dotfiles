@@ -4,26 +4,59 @@
 # ==============================================================================
 set -euo pipefail
 cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
-BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
 REPO_DIR="$(pwd)"
 LIB_DIR="${REPO_DIR}/management/lib"
 # ==============================================================================
-source "management/lib/nix.sh"
-source "management/lib/files.sh"
 source "management/lib/print.sh"
-source "management/lib/system.sh"
 
 # ------------------------------------------------------------------------------
 
-# Apply config using home-manager.
-# Overriding the `my-dotfiles` allows it to ignore the lockfile for my-dotfiles.
-nix run "$(home_manager_flake)" -- switch \
-	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
-	--option "warn-dirty" false \
-	--option "commit-lock-file-summary" false \
-	--override-input 'my-dotfiles' "git+file:${REPO_DIR}"
-
-# Delete neovim's Luajit cache if it gets too large.
-if [[ "$(du -k "$HOME/.cache/nvim/luac" | awk '{ print $1 }')" -gt 65536 ]]; then
-	find "$HOME/.cache/nvim/luac" -iname "%2fnix%2fstore%2f*.luac" | xargs rm
+# Check that the BOOTSTRAPPED_FLAKE_DIR is set.
+if test -z "${BOOTSTRAPPED_FLAKE_DIR:-}"; then
+	show_error "error: unable to run %s directly" "$(basename -- "$0")"
+	exit 1
 fi
+
+# Determine the subcommand to run.
+subcommand="help"
+if test "$#" -eq 0; then
+	subcommand="help"
+elif [[ "$1" =~ ^([a-z-]+)$ ]]; then
+	subcommand="${BASH_REMATCH[1]}"
+else
+	show_error "error: unknown subcommand '%s'" "$1"
+	exit 1
+fi
+
+# Run the help subcommand.
+if [[ "$subcommand" = "help" ]]; then
+	printf "Manage my-dotfiles configuration.\n\n"
+	for file in "${REPO_DIR}/management/bin"/my-dotfiles-*; do
+		filename="$(basename -- "$file")"
+		printf "\033[1m%s\033[m\n" "${filename/my-dotfiles-/}"
+		awk '
+			BEGIN {
+				can_print = 0
+			}
+
+			/^#!/ { next }
+			/^# *=/ { exit }
+			/^# *$/ { can_print = 1; next }
+
+			can_print { print $0 }
+		' "$file" | sed 's/^# /    /'
+		printf "\n"
+	done
+	exit 0
+fi
+
+# Run the subcommand.
+subcommand_script="${REPO_DIR}/management/bin/my-dotfiles-${subcommand}"
+if ! test -f "${subcommand_script}"; then
+	show_error "error: unknown subcommand '%s'" "$subcommand"
+	exit 1
+fi
+
+shift
+source "${subcommand_script}"
+exit 0
