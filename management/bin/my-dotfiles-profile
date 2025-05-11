@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+#
+# Change the base configuration profile used for this device.
+# ==============================================================================
+set -euo pipefail
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
+REPO_DIR="$(pwd)"
+LIB_DIR="${REPO_DIR}/management/lib"
+# ==============================================================================
+source "management/lib/nix.sh"
+source "management/lib/print.sh"
+
+BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
+
+# ------------------------------------------------------------------------------
+
+current_profile="$({
+	export BOOTSTRAPPED_FLAKE_DIR
+	nix eval \
+		--no-update-lock-file \
+		--impure \
+		--raw \
+		--expr '
+			let
+				dir = builtins.getEnv "BOOTSTRAPPED_FLAKE_DIR";
+			in
+				builtins.fromJSON (builtins.readFile (dir + "/profile.json"))
+		'
+})"
+
+valid_profiles=()
+for file in "${REPO_DIR}/profiles"/*.nix; do
+	valid_profiles+=("$(basename -- "$file" .nix)")
+done
+
+# If no arguments, print the list of profiles.
+if [[ "$#" -eq 0 ]]; then
+	printf "Profiles:\n"
+	for profile in "${valid_profiles[@]}"; do
+		if [[ "$profile" = "$current_profile" ]]; then
+			printf " * %s \033[35m(selected)\033[m\n" "$profile"
+		else
+			printf " * %s\n" "$profile"
+		fi
+	done
+	exit 0
+fi
+
+# If argument, set the profile.
+new_profile="$1"
+new_profile_is_valid=false
+for profile in "${valid_profiles[@]}"; do
+	if [[ "$profile" = "$new_profile" ]]; then
+		new_profile_is_valid=true
+		break
+	fi
+done
+
+if ! "$new_profile_is_valid"; then
+	show_error "error: unknown profile '%s'" "$new_profile"
+	exit 1
+fi
+
+printf '"%s"' "$new_profile" >"${BOOTSTRAPPED_FLAKE_DIR}/profile.json"
+printf "Switched to %s profile.\n" "$new_profile"
+echo "Run 'my-dotfiles apply' to apply your changes."
