@@ -49,6 +49,35 @@ My dotfiles flake can also be used as a library, allowing for separate
 configurations in private repositories.
 
 ```nix
-# flake.nix
-# TODO
+{
+  description = "My config.";
+
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    my-dotfiles = {
+      url = "github:eth-p/my-dotfiles";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+    };
+  };
+
+  outputs = { self, my-dotfiles, ... }: {
+
+    homeConfigurations."me@machine" = my-dotfiles.lib.home.mkHomeConfiguration {
+      system = "aarch64-darwin";
+      modules = [
+        {
+          home.username = "me";
+          home.homeDirectory = "/home/me";
+          home.stateVersion = "24.11";
+
+          # Program config goes here.
+          my-dotfiles.fish.enable = true;
+        }
+      ];
+    };
+
+  };
+}
 ```

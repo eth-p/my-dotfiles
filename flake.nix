@@ -26,7 +26,7 @@
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... } @ inputs: {
 
     # lib provides reusable library functions.
-    lib = (import ./lib/nix) { lib = nixpkgs.lib; } // inputs;
+    lib = (import ./lib/nix) ({ lib = nixpkgs.lib; my-dotfiles = self; } // inputs);
 
     # homeModules declares reusable home-manager modules.
     #
