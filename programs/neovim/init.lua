@@ -70,9 +70,12 @@ require("eth-p") {
 }
 
 -- Set up nvim-treesitter plugin.
-require("nvim-treesitter.configs").setup {
-	auto_install = false,
-	highlight = {
-		enable = true,
-	},
-}
+local res = pcall(require, "nvim-treesitter.configs")
+if res then
+	require("nvim-treesitter.configs").setup {
+		auto_install = false,
+		highlight = {
+			enable = true,
+		},
+	}
+end
