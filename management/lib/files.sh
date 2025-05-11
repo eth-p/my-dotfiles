@@ -14,6 +14,7 @@ create_and_overwrite() {
 		cat >"$1"
 	else
 		show_notice "creating $1"
+		mkdir -p "$(dirname -- "$1")"
 		cat >"$1"
 	fi
 }
@@ -25,6 +26,7 @@ create_if_missing() {
 	fi
 
 	show_notice "creating $1"
+	mkdir -p "$(dirname -- "$1")"
 	cat >"$1"
 }
 

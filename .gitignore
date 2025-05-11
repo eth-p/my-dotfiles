@@ -1,12 +1,5 @@
 .DS_Store
 
-# Install.
-.install/cache
-/bootstrap.nix
-/bootstrap.json
-/config.nix
-/config.profile
-
 # IDE
 .vscode
 .idea

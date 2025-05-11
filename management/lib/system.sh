@@ -7,6 +7,7 @@
 if test -n "${__guard_lib_system:-}"; then return 0; fi
 __guard_lib_system="${BASH_SOURCE[0]}"
 # ==============================================================================
+source "$LIB_DIR/bash.sh"
 
 user_homedir() {
 	if test -n "$HOME"; then
@@ -18,6 +19,14 @@ user_homedir() {
 
 user_username() {
 	id -un
+}
+
+user_configdir() {
+	print_and_redefine "$FUNCNAME" "${XDG_CONFIG_HOME:-$(user_homedir)/.config}"
+}
+
+mydotfiles_configdir() {
+	print_and_redefine "$FUNCNAME" "$(user_configdir)/my-dotfiles"
 }
 
 is_steamos() {

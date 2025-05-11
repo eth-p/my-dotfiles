@@ -7,13 +7,15 @@
 { pkgs, bootstrap }: pkgs.writeShellApplication {
   name = "my-dotfiles";
   runtimeInputs = [ pkgs.bash ];
-  text = ''
-    #shellcheck disable=SC1091
-    source '${
-      builtins.replaceStrings
-        [ "'" ]
-        [ "'\"'\"'" ]
-        (bootstrap.repoDirectory + "/management/bin/my-dotfiles")
-    }'
-  '';
+  text =
+    let
+      shellquote = v: "'${builtins.replaceStrings [ "'" ] [ "'\"'\"'" ] v}'";
+    in
+    ''
+      #shellcheck disable=SC2034
+      BOOTSTRAPPED_FLAKE_DIR=${shellquote bootstrap.bootstrapDirectory}
+
+      #shellcheck disable=SC1091
+      source ${shellquote (bootstrap.repoDirectory + "/management/bin/my-dotfiles")}
+    '';
 }
