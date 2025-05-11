@@ -95,22 +95,14 @@
           );
 
       in
-      self.lib.util.mergeSystemKeyedExports defaultSystems [
-        # Packages declared in this repo.
-        (
-          builtins.listToAttrs (
-            map
-              (sys: {
-                name = sys;
-                value = collectPackagesForSystem sys;
-              })
-              defaultSystems
-          )
-        )
-
-        # Packages from flakes.
-        inputs.kubesel.packages
-      ];
+      builtins.listToAttrs (
+        map
+          (sys: {
+            name = sys;
+            value = collectPackagesForSystem sys;
+          })
+          defaultSystems
+      );
 
 
   };

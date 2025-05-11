@@ -41,7 +41,7 @@ in
 
     # Install kubesel.
     (
-      let kubesel = my-dotfiles.packages.${pkgs.stdenv.system}.kubesel;
+      let kubesel = my-dotfiles.inputs.kubesel.packages.${pkgs.stdenv.system}.kubesel;
       in
       {
         home.packages = [
