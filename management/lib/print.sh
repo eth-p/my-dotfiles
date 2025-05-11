@@ -15,7 +15,7 @@ show_section() {
 		printf "\n"
 	fi
 
-	printf "\033[1;36m==> %s\033[m\n" "$1" 1>&2
+	printf "\033[1;36m%s\033[m\n" "$1" 1>&2
 	__first_section=false
 }
 

@@ -13,7 +13,7 @@ source "management/lib/print.sh"
 source "management/lib/system.sh"
 
 # ------------------------------------------------------------------------------
-show_section "installing Nix package manager"
+show_section "Installing Nix package manager"
 # ------------------------------------------------------------------------------
 
 nix_install_script_url="https://nixos.org/nix/install"
@@ -42,7 +42,7 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-show_section "bootstrapping system configuration"
+show_section "Bootstrapping system configuration"
 # ------------------------------------------------------------------------------
 
 BOOTSTRAPPED_FLAKE_DIR="$(mydotfiles_configdir)"
@@ -142,7 +142,7 @@ create_if_missing "${BOOTSTRAPPED_FLAKE_DIR}/config.nix" <<EOF
 EOF
 
 # ------------------------------------------------------------------------------
-show_section "applying configuration"
+show_section "Applying configuration"
 # ------------------------------------------------------------------------------
 
 source "${REPO_DIR}/management/bin/my-dotfiles-apply"
