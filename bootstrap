@@ -3,7 +3,7 @@
 # Repository: https://github.com/eth-p/my-dotfiles
 # ==============================================================================
 set -euo pipefail
-cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 REPO_DIR="$(pwd)"
 LIB_DIR="${REPO_DIR}/management/lib"
 # ==============================================================================

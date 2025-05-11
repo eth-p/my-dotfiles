@@ -42,6 +42,7 @@ excludes = []
 includes = [
     "scripts/*",
     "management/bin/*",
+    "bootstrap",
     "*.sh",
     "*.bash",
     "*.envrc",

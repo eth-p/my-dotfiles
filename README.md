@@ -17,7 +17,7 @@ See [OPTIONS.md](./OPTIONS.md).
 **Installation:**
 
 ```bash
-./management/bin/bootstrap
+./bootstrap
 ```
 
 **Updates:**
