@@ -17,14 +17,14 @@ See [OPTIONS.md](./OPTIONS.md).
 **Installation:**
 
 ```bash
-./scripts/bootstrap
+./management/bin/bootstrap
 ```
 
 **Updates:**
 
 ```bash
 git pull
-./scripts/my-dotfiles
+my-dotfiles
 ```
 
 <details>

@@ -3,9 +3,9 @@
 # Repository: https://github.com/eth-p/my-dotfiles
 # ==============================================================================
 set -euo pipefail
-cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.."
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
 
-source "lib/bash/bootstrap-utils.sh"
+source "management/lib/bootstrap-utils.sh"
 
 # ------------------------------------------------------------------------------
 @section "installing Nix package manager"
@@ -32,7 +32,8 @@ sys_os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 {
   "username": "$(id -un)",
   "homeDirectory": "${HOME}",
-  "system": "${sys_arch}-${sys_os}"
+  "system": "${sys_arch}-${sys_os}",
+  "repoDirectory": "$(pwd)"
 }
 EOF
 
@@ -58,11 +59,6 @@ EOF
 EOF
 
 @create-if-missing config.profile <<<"minimal"
-
-# ------------------------------------------------------------------------------
-@section "installing utilities"
-
-@link-if-missing "${HOME}/.local/bin/my-dotfiles" "$(pwd)/scripts/my-dotfiles"
 
 # ------------------------------------------------------------------------------
 @section "installing configuration"
