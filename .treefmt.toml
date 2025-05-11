@@ -12,16 +12,17 @@ excludes = [
     "*.lock",
     "Makefile",
 
+    # system
+    ".DS_Store",
+
     # unsupported
     ".envrc",
     ".editorconfig",
     ".git*",
 
-    # old files
-    "home/**",
-    "home-steamos/**",
-    "extra/**",
-    ".install/**",
+    # ignored files
+    ".devenv/**",
+    ".idea/**",
 ]
 
 [formatter.prettier]
