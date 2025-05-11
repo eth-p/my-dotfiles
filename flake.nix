@@ -62,13 +62,6 @@
 
         };
 
-        system = bootstrap.system;
-
-        # Get the nixpkgs for the current platform.
-        overlays = [ self.overlay ];
-        pkgs = import nixpkgs { inherit system overlays; };
-        pkgs-unstable = import nixpkgs-unstable { inherit system overlays; };
-
         # Get the declarative profiles.
         profiles = {
           minimal = ./profiles/minimal.nix;
@@ -81,21 +74,13 @@
       # profile -> homeManagerConfiguration { (defaults), ...profile }
       builtins.mapAttrs
         (profileName: profileFile:
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-
-            modules = self.homeModules ++ [
+          self.lib.home.mkHomeConfiguration {
+            system = bootstrap.system;
+            modules = [
               profileFile
               bootstrap-module
               ./config.nix
             ];
-
-            extraSpecialArgs = {
-              inherit pkgs-unstable;
-              my-dotfiles = self // {
-                inherit bootstrap;
-              };
-            };
           }
         )
         profiles

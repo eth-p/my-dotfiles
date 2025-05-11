@@ -14,9 +14,14 @@
     ,
     }:
     let
+      # Add overlays.
+      overlays = [
+        my-dotfiles.overlay
+      ];
+
+      # Get the nixpkgs for the specified platform.
       pkgs = import nixpkgs { inherit system overlays; };
       pkgs-unstable = import nixpkgs-unstable { inherit system overlays; };
-      overlays = [ my-dotfiles.overlay ];
     in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
