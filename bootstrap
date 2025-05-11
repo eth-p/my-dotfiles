@@ -137,7 +137,7 @@ create_if_missing "${BOOTSTRAPPED_FLAKE_DIR}/config.nix" <<EOF
 
   programs.git = {
     userName = "$(user_username)";
-    userEmail = "$(user_username)@$(hostname)";
+    userEmail = "$(user_username)@$(system_hostname)";
   };
 }
 EOF

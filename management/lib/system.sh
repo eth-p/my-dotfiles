@@ -25,6 +25,14 @@ user_configdir() {
 	print_and_redefine "$FUNCNAME" "${XDG_CONFIG_HOME:-$(user_homedir)/.config}"
 }
 
+system_hostname() {
+	if command -v hostname &>/dev/null; then
+		hostname
+	else
+		cat /etc/hostname
+	fi
+}
+
 mydotfiles_configdir() {
 	print_and_redefine "$FUNCNAME" "$(user_configdir)/my-dotfiles"
 }
