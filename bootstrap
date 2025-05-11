@@ -38,7 +38,8 @@ if grep -Fx "$nix_experimental_features" "$nix_conf_file" &>/dev/null; then
 
 else
 	show_notice "nix experimental features need enabling"
-	sudo bash -c "$(printf 'printf "%%s\n" %q >>%q' "$nix_conf_file" "$nix_experimental_features")"
+	sudo mkdir -p "$(dirname -- "$nix_conf_file")"
+	sudo bash -c "$(printf 'printf "%%s\n" %q >>%q' "$nix_experimental_features" "$nix_conf_file")"
 fi
 
 # ------------------------------------------------------------------------------
