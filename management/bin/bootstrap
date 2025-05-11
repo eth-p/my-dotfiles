@@ -4,40 +4,60 @@
 # ==============================================================================
 set -euo pipefail
 cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
-
-source "management/lib/bootstrap-utils.sh"
+REPO_DIR="$(pwd)"
+LIB_DIR="${REPO_DIR}/management/lib"
+# ==============================================================================
+source "management/lib/nix.sh"
+source "management/lib/files.sh"
+source "management/lib/print.sh"
+source "management/lib/system.sh"
 
 # ------------------------------------------------------------------------------
-@section "installing Nix package manager"
+show_section "installing Nix package manager"
+# ------------------------------------------------------------------------------
 
-if command -v nix &>/dev/null; then
-	@notice "nix is already installed"
+nix_install_script_url="https://nixos.org/nix/install"
+nix_conf_file="/etc/nix/nix.conf"
+nix_experimental_features="experimental-features = nix-command flakes"
+
+if nix_installed &>/dev/null; then
+	show_notice "nix is already installed"
 
 else
 	tempdir="$(mktemp -d)"
-	@cleanup-file "$tempdir"
+	_cleanup_file "$tempdir"
 
-	curl -sSfL https://nixos.org/nix/install -o "$tempdir/nix-install.sh"
+	curl -sSfL "$nix_install_script_url" -o "$tempdir/nix-install.sh"
 	"$tempdir/nix-install.sh" --daemon
-	sudo bash -c 'echo "experimental-features = nix-command flakes" >>/etc/nix/nix.conf'
+	PATH="$(nix_install_dir):${PATH}"
+fi
+
+# Ensure nix-command and flakes are enabled.
+if grep -Fx "$nix_experimental_features" "$nix_conf_file" &>/dev/null; then
+	show_notice "nix is already configured"
+
+else
+	show_notice "nix experimental features need enabling"
+	sudo bash -c "$(printf 'printf "%%s\n" %q >>%q' "$nix_conf_file" "$nix_experimental_features")"
 fi
 
 # ------------------------------------------------------------------------------
-@section "bootstrapping configuration"
+show_section "bootstrapping configuration"
+# ------------------------------------------------------------------------------
 
 sys_arch="$(uname -m | sed 's/arm64/aarch64/')"
 sys_os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
-@create-and-overwrite bootstrap.json <<EOF
+create_and_overwrite bootstrap.json <<EOF
 {
-  "username": "$(id -un)",
-  "homeDirectory": "${HOME}",
-  "system": "${sys_arch}-${sys_os}",
-  "repoDirectory": "$(pwd)"
+  "username": "$(user_username)",
+  "homeDirectory": "$(user_homedir)",
+  "system": "$(nix_platform)",
+  "repoDirectory": "${REPO_DIR}"
 }
 EOF
 
-@create-if-missing config.nix <<EOF
+create_if_missing config.nix <<EOF
 { lib, pkgs, config, ... }:
 {
   my-dotfiles.global = {
@@ -58,14 +78,14 @@ EOF
 }
 EOF
 
-@create-if-missing config.profile <<<"minimal"
+create_if_missing config.profile <<<"minimal"
 
 # ------------------------------------------------------------------------------
-@section "installing configuration"
+show_section "installing configuration"
+# ------------------------------------------------------------------------------
 
 profile="$(cat config.profile)"
-@notice "using profile '${profile}'"
+show_notice "using profile '${profile}'"
 
-nix shell 'home-manager' \
-	--command 'home-manager' switch \
-	--flake "path:.#${profile}"
+nix run "$(home_manager_flake)" -- \
+	switch --flake "path:.#${profile}"

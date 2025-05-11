@@ -41,6 +41,7 @@ options = ["-w", "--indent=0", "--language-dialect=bash"]
 excludes = []
 includes = [
     "scripts/*",
+    "management/bin/*",
     "*.sh",
     "*.bash",
     "*.envrc",
