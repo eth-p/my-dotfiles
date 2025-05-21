@@ -21,7 +21,7 @@ in
         enable = true;
         enableFishIntegration = true;
 
-        package = lib.mkDefault pkgs-unstable.carapace;
+        package = lib.mkDefault pkgs.carapace;
       };
     }
 

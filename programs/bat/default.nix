@@ -25,7 +25,7 @@ in
     {
       programs.bat = {
         enable = true;
-        package = lib.mkDefault pkgs-unstable.bat;
+        package = lib.mkDefault pkgs.bat;
         config = {
           tabs = "4";
           pager = "less --RAW-CONTROL-CHARS";

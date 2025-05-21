@@ -102,7 +102,7 @@ in
         ];
 
         # Use the latest neovim.
-        package = lib.mkDefault pkgs-unstable.neovim-unwrapped;
+        package = lib.mkDefault pkgs.neovim-unwrapped;
       };
 
       home.file = {

@@ -33,7 +33,7 @@ in
     {
       programs.eza = {
         enable = true;
-        package = lib.mkDefault pkgs-unstable.eza;
+        package = lib.mkDefault pkgs.eza;
         git = true; # uses libgit2
 
         enableBashIntegration = cfg.enableAliases;

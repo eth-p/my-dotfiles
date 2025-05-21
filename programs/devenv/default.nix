@@ -21,7 +21,7 @@ in
     # Configure devenv.
     {
       home.packages = [
-        pkgs-unstable.devenv
+        pkgs.devenv
       ];
     }
 
