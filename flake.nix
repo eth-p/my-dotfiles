@@ -20,7 +20,10 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     # My own packages:
-    kubesel.url = "github:eth-p/kubesel";
+    kubesel = {
+      url = "github:eth-p/kubesel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... } @ inputs: rec {
