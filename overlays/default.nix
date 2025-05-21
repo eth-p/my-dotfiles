@@ -7,5 +7,4 @@
 # ==============================================================================
 { ... } @ inputs: (final: prev: {
   oh-my-posh = (import ./oh-my-posh.nix final prev);
-  neovim-unwrapped = (import ./HACK.neovim-unwrapped.nix final prev);
 })
