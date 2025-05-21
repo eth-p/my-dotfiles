@@ -31,12 +31,19 @@ in rec {
       # Get the nixpkgs for the specified platform.
       pkgs = import nixpkgs { inherit system overlays; };
       pkgs-unstable = import nixpkgs-unstable { inherit system overlays; };
+
+      # Get the profile module.
+      profileMod = (
+        if profile == null
+        then [ ]
+        else getOrDefault profileModules profile [ ]
+      );
     in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules =
         my-dotfiles.homeModules
-        ++ (getOrDefault profileModules profile [ ])
+        ++ profileMod
         ++ modules;
       extraSpecialArgs = {
         inherit pkgs-unstable;
