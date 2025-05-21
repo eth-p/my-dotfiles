@@ -16,6 +16,11 @@ BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
 
 # ------------------------------------------------------------------------------
 
+# Update lock file.
+nix flake update my-dotfiles \
+	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
+	--quiet
+
 # Apply config using home-manager.
 # Overriding the `my-dotfiles` allows it to ignore the lockfile for my-dotfiles.
 nix run "$(home_manager_flake)" -- switch \
