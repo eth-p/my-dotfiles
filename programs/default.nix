@@ -14,6 +14,7 @@
   ./devenv
   ./direnv
   ./discord
+  ./ets
   ./eza
   ./fd
   ./fish

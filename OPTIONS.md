@@ -115,6 +115,16 @@ whether Discord is supported on the current platform
 
 **Default:** `pkgs.stdenv.isLinux`
 
+## [`my-dotfiles.ets.enable`](programs/ets/default.nix#L13)
+
+install and configure ets
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.eza.enable`](programs/eza/default.nix#L15)
 
 install and configure eza as a replacement for ls

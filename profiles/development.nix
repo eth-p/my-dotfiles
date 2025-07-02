@@ -10,6 +10,7 @@
 
   my-dotfiles.btop.enable = lib.mkDefault true;
   my-dotfiles.carapace.enable = lib.mkDefault true;
+  my-dotfiles.ets.enable = lib.mkDefault true;
   my-dotfiles.eza.enable = lib.mkDefault true;
   my-dotfiles.fd.enable = lib.mkDefault true;
   my-dotfiles.fzf.enable = lib.mkDefault true;
