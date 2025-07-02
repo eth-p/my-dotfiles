@@ -69,5 +69,7 @@
         set --append PATH $system_path_entry
       end
     end
+
+    set -gx __ETHP_FIXED_PATH true
   end
 ''

@@ -84,6 +84,13 @@ in
         ${privateIdent "fix_path"}
       '');
 
+      programs.fish.shellInit = (lib.mkOrder 0 ''
+        # Fix the PATH
+        if test -n "$__ETHP_FIXED_PATH" && not status --is-interactive
+          ${privateIdent "fix_path"}
+        end
+      '');
+
       xdg.configFile = builtins.listToAttrs [
         (mkPrivateFishFunction "fix_path" (import ./functions/fix_path.nix) { })
       ];
