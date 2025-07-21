@@ -9,6 +9,8 @@ let
   cfg = config.my-dotfiles.vscode;
 in
 {
+  imports = [ ./language-nix.nix ];
+
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
   };

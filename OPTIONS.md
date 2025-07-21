@@ -531,7 +531,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L13)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L15)
 
 install and configure Visual Studio Code
 
@@ -540,6 +540,32 @@ install and configure Visual Studio Code
 **Default:** `false`
 
 **Example:** `true`
+
+## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L15)
+
+add Nix language support to Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.language.nix.formatter`](programs/vscode/language-nix.nix#L23)
+
+the formatter to use for Nix files
+
+**Type:** `lib.types.enum [ "nixfmt" ]`
+
+**Default:** `"nixfmt"`
+
+## [`my-dotfiles.vscode.language.nix.lsp.enable`](programs/vscode/language-nix.nix#L17)
+
+use a Language Server for Nix language support
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
 
 ## [`my-dotfiles.yq.enable`](programs/yq/default.nix#L13)
 
