@@ -25,6 +25,7 @@
   ./ranger
   ./ranger/patch-scope-options.nix
   ./ripgrep
+  ./vscode
   ./yq
   ./zoxide
 ]

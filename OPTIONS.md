@@ -531,6 +531,16 @@ install ripgrep
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L13)
+
+install and configure Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.yq.enable`](programs/yq/default.nix#L13)
 
 install and configure yq
