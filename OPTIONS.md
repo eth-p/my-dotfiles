@@ -279,6 +279,16 @@ install goldwarden
 
 **Example:** `true`
 
+## [`my-dotfiles.goldwarden.useForSSHAgent`](programs/goldwarden/default.nix#L14)
+
+use goldwarden as the ssh-agent
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L15)
 
 install kubesel

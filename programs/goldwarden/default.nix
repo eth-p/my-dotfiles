@@ -11,6 +11,7 @@ in
 {
   options.my-dotfiles.goldwarden = {
     enable = lib.mkEnableOption "install goldwarden";
+    useForSSHAgent = lib.mkEnableOption "use goldwarden as the ssh-agent";
   };
 
   config = mkMerge [
@@ -36,6 +37,11 @@ in
           ExecStart = "${pkgs.goldwarden + "/bin/goldwarden"} daemonize";
         };
       };
+    })
+
+    # Use goldwarden as the SSH Agent.
+    (mkIf (cfg.enable && cfg.useForSSHAgent) {
+      home.sessionVariables.SSH_AUTH_SOCK = config.home.homeDirectory + "/.goldwarden-ssh-agent.sock";
     })
 
   ];
