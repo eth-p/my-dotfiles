@@ -19,6 +19,7 @@
   ./fzf
   ./git
   ./glow
+  ./goldwarden
   ./kubesel
   ./neovim
   ./oh-my-posh
