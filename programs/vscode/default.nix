@@ -32,5 +32,20 @@ in
         builtins.elem (lib.getName pkg) [ "vscode" ];
     }
 
+    # Configure to use `fish` as the shell.
+    (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {
+      programs.vscode.profiles.default.userSettings =
+        let os = if pkgs.stdenv.isDarwin then "osx" else "linux";
+        in {
+          "terminal.integrated.defaultProfile.${os}" = "fish";
+          "terminal.integrated.profiles.${os}" = {
+            "fish" = {
+              "path" = pkgs.fish + "/bin/fish";
+              "icon" = "terminal-bash";
+            };
+          };
+        };
+    })
+
   ]);
 }
