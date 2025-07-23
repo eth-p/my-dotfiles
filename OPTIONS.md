@@ -551,7 +551,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L15)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L16)
 
 install and configure Visual Studio Code
 

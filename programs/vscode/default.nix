@@ -7,12 +7,14 @@
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.vscode;
+  extensions = pkgs-unstable.vscode-extensions;
 in
 {
   imports = [ ./language-nix.nix ];
 
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
+    editorconfig = lib.mkEnableOption "install the EditorConfig extension" // { default = true; };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -31,6 +33,15 @@ in
       nixpkgs.config.allowUnfreePredicate = pkg:
         builtins.elem (lib.getName pkg) [ "vscode" ];
     }
+
+    # Install EditorConfig extension.
+    # https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+    (mkIf cfg.editorconfig {
+      profiles.default.extensions = with extensions;
+        [
+          editorconfig.editorconfig
+        ];
+    })
 
     # Configure to use `fish` as the shell.
     (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {
