@@ -10,7 +10,7 @@ let
   extensions = pkgs-unstable.vscode-extensions;
 in
 {
-  imports = [ ./language-nix.nix ];
+  imports = [ ./language-bash.nix ./language-nix.nix ];
 
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
@@ -37,7 +37,7 @@ in
     # Install EditorConfig extension.
     # https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
     (mkIf cfg.editorconfig {
-      profiles.default.extensions = with extensions;
+      programs.vscode.profiles.default.extensions = with extensions;
         [
           editorconfig.editorconfig
         ];

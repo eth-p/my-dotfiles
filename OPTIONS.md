@@ -561,6 +561,16 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.language.bash.enable`](programs/vscode/language-bash.nix#L16)
+
+add Bash language support to Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L15)
 
 add Nix language support to Visual Studio Code
