@@ -13,6 +13,7 @@
   ./carapace
   ./devenv
   ./direnv
+  ./discord
   ./eza
   ./fd
   ./fish
