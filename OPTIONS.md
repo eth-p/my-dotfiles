@@ -79,6 +79,42 @@ hide the environment variable diff
 
 **Example:** `true`
 
+## [`my-dotfiles.discord.betterdiscord.enable`](programs/discord/default.nix#L28)
+
+install BetterDiscord
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.discord.enable`](programs/discord/default.nix#L13)
+
+enable Discord config
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.discord.source`](programs/discord/default.nix#L22)
+
+the installation source for Discord
+
+**Type:** `lib.types.enum [ "flatpak" ]`
+
+**Default:** `"flatpak"`
+
+## [`my-dotfiles.discord.supported`](programs/discord/default.nix#L15)
+
+whether Discord is supported on the current platform
+
+**Type:** `lib.types.bool`
+
+**Default:** `pkgs.stdenv.isLinux`
+
 ## [`my-dotfiles.eza.enable`](programs/eza/default.nix#L15)
 
 install and configure eza as a replacement for ls
@@ -551,7 +587,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L16)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L20)
 
 install and configure Visual Studio Code
 
@@ -570,6 +606,56 @@ add Bash language support to Visual Studio Code
 **Default:** `false`
 
 **Example:** `true`
+
+## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L18)
+
+the Go compiler package
+
+**Type:** `any`
+
+**Default:** `pkgs-unstable.go`
+
+## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L24)
+
+install the Go debugger, dlv
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go.nix#L29)
+
+the dlv package
+
+**Type:** `any`
+
+**Default:** `pkgs-unstable.delve`
+
+## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L16)
+
+add Go language support to Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L36)
+
+install the Go language server, gopls
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L42)
+
+the gopls package
+
+**Type:** `any`
+
+**Default:** `pkgs-unstable.gopls`
 
 ## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L15)
 

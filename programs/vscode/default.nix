@@ -10,7 +10,11 @@ let
   extensions = pkgs-unstable.vscode-extensions;
 in
 {
-  imports = [ ./language-bash.nix ./language-nix.nix ];
+  imports = [
+    ./language-bash.nix
+    ./language-go.nix
+    ./language-nix.nix
+  ];
 
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
