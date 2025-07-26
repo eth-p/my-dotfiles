@@ -13,6 +13,7 @@ in
   imports = [
     ./language-bash.nix
     ./language-go.nix
+    ./language-makefile.nix
     ./language-nix.nix
   ];
 
