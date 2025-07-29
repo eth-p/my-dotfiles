@@ -587,7 +587,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L20)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L22)
 
 install and configure Visual Studio Code
 
@@ -656,6 +656,16 @@ the gopls package
 **Type:** `any`
 
 **Default:** `pkgs-unstable.gopls`
+
+## [`my-dotfiles.vscode.language.makefile.enable`](programs/vscode/language-makefile.nix#L16)
+
+add Makefile language support to Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
 
 ## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L15)
 

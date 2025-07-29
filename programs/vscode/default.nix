@@ -3,7 +3,7 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.vscode;
@@ -14,6 +14,7 @@ in
     ./language-bash.nix
     ./language-go.nix
     ./language-makefile.nix
+    ./language-markdown.nix
     ./language-nix.nix
   ];
 
@@ -47,6 +48,14 @@ in
           editorconfig.editorconfig
         ];
     })
+
+    # Install Markdown Preview for Github Alerts
+    # https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert
+    {
+      programs.vscode.profiles.default.extensions = [
+        (import ./extensions/vscode-markdown-alert.nix inputs)
+      ];
+    }
 
     # Configure to use `fish` as the shell.
     (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {

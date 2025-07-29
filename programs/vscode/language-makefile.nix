@@ -27,8 +27,7 @@ in
             ms-vscode.makefile-tools
           ];
 
-        profiles.default.userSettings = {
-        };
+        profiles.default.userSettings = { };
       };
     }
   ]);
