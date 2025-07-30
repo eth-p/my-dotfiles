@@ -11,6 +11,7 @@ let
 in
 {
   imports = [
+    ./bindings-intellij.nix
     ./language-bash.nix
     ./language-go.nix
     ./language-makefile.nix
@@ -21,6 +22,12 @@ in
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
     editorconfig = lib.mkEnableOption "install the EditorConfig extension" // { default = true; };
+
+    keybindings = lib.mkOption {
+      type = lib.types.enum [ "default" "intellij" ];
+      description = "use alternate keybindings";
+      default = "default";
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -48,14 +55,6 @@ in
           editorconfig.editorconfig
         ];
     })
-
-    # Install Markdown Preview for Github Alerts
-    # https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert
-    {
-      programs.vscode.profiles.default.extensions = [
-        (import ./extensions/vscode-markdown-alert.nix inputs)
-      ];
-    }
 
     # Configure to use `fish` as the shell.
     (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {

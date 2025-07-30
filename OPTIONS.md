@@ -587,7 +587,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L22)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L23)
 
 install and configure Visual Studio Code
 
@@ -596,6 +596,14 @@ install and configure Visual Studio Code
 **Default:** `false`
 
 **Example:** `true`
+
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L26)
+
+use alternate keybindings
+
+**Type:** `lib.types.enum [ "default" "intellij" ]`
+
+**Default:** `"default"`
 
 ## [`my-dotfiles.vscode.language.bash.enable`](programs/vscode/language-bash.nix#L16)
 
