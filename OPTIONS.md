@@ -711,6 +711,16 @@ do not install Visual Studio Code, only configure it
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L16)
+
+improve TODO support
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.yq.enable`](programs/yq/default.nix#L13)
 
 install and configure yq

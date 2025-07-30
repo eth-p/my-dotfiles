@@ -18,6 +18,7 @@ in
     ./language-makefile.nix
     ./language-markdown.nix
     ./language-nix.nix
+    ./qol-todo.nix
   ];
 
   options.my-dotfiles.vscode = {
