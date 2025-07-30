@@ -3,7 +3,7 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }@inputs:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -42,7 +42,7 @@ in
       programs.vscode = {
         profiles.default.extensions = with extensions;
           [
-            mkhl.shfmt
+            (import ./extensions/shfmt.nix inputs)
           ];
 
         profiles.default.userSettings = {
