@@ -277,6 +277,16 @@ Use dyff to show diffs between YAML files.
 
 **Default:** `true`
 
+## [`my-dotfiles.github-act.containerArchitecture`](programs/github-act/default.nix#L29)
+
+the container architecture to use for runners
+
+**Type:** `lib.types.str`
+
+**Default:** `""`
+
+**Example:** `"linux/amd64"`
+
 ## [`my-dotfiles.github-act.enable`](programs/github-act/default.nix#L14)
 
 install and configure act, the local GitHub Actions runner
@@ -287,6 +297,24 @@ install and configure act, the local GitHub Actions runner
 
 **Example:** `true`
 
+## [`my-dotfiles.github-act.extraConfig`](programs/github-act/default.nix#L45)
+
+extra values to add to `.actrc`
+
+**Type:** `lib.types.lines`
+
+**Default:** `""`
+
+## [`my-dotfiles.github-act.githubEnterpriseHostname`](programs/github-act/default.nix#L22)
+
+the hostname of the GitHub Enterprise instance, if using one
+
+**Type:** `lib.types.str`
+
+**Default:** `""`
+
+**Example:** `"github.my-company.com"`
+
 ## [`my-dotfiles.github-act.package`](programs/github-act/default.nix#L16)
 
 the act package to install
@@ -294,6 +322,22 @@ the act package to install
 **Type:** `lib.types.package`
 
 **Default:** `pkgs-unstable.act`
+
+## [`my-dotfiles.github-act.runnerImages`](programs/github-act/default.nix#L36)
+
+the available runners (platforms) and their Docker images
+
+**Type:** `lib.types.attrsOf (lib.types.str)`
+
+**Default:** `{ }`
+
+**Example:**
+
+```nix
+{
+  "ubuntu-18.04" = "nektos/act-environments-ubuntu:18.04";
+}
+```
 
 ## [`my-dotfiles.github-cli.enable`](programs/github-cli/default.nix#L13)
 
