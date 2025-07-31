@@ -72,6 +72,7 @@
     language.markdown.enable = lib.mkDefault true;
     language.nix.enable = lib.mkDefault true;
     qol.todo.enable = true;
+    qol.github.enable = true;
   };
 
   my-dotfiles.yq = {

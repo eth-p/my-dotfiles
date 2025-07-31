@@ -630,7 +630,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L35)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L36)
 
 The color scheme used for Visual Studio Code.
 
@@ -638,7 +638,7 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L25)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L26)
 
 install and configure Visual Studio Code
 
@@ -648,7 +648,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L29)
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L30)
 
 use alternate keybindings
 
@@ -776,9 +776,19 @@ use a Language Server for Nix language support
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L26)
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L27)
 
 do not install Visual Studio Code, only configure it
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.qol.github.enable`](programs/vscode/qol-github.nix#L16)
+
+add GitHub-centric extensions
 
 **Type:** `boolean`
 
