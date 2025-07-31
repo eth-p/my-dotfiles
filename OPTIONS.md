@@ -225,7 +225,7 @@ install and configure git
 
 **Example:** `true`
 
-## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L22)
+## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L21)
 
 Add `git fixup` command
 
@@ -233,17 +233,7 @@ Add `git fixup` command
 
 **Default:** `false`
 
-## [`my-dotfiles.git.github`](programs/git/default.nix#L17)
-
-install the gh command-line tool
-
-**Type:** `boolean`
-
-**Default:** `false`
-
-**Example:** `true`
-
-## [`my-dotfiles.git.github-actions`](programs/git/default.nix#L18)
+## [`my-dotfiles.git.github-actions`](programs/git/default.nix#L17)
 
 install the act command-line tool for locally running GitHub Actions
 
@@ -253,7 +243,7 @@ install the act command-line tool for locally running GitHub Actions
 
 **Example:** `true`
 
-## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L41)
+## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L40)
 
 Ignore system files created by MacOS.
 
@@ -271,7 +261,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L29)
+## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L28)
 
 Use delta to show diffs.
 
@@ -279,13 +269,41 @@ Use delta to show diffs.
 
 **Default:** `true`
 
-## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L35)
+## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L34)
 
 Use dyff to show diffs between YAML files.
 
 **Type:** `lib.types.bool`
 
 **Default:** `true`
+
+## [`my-dotfiles.github-act.enable`](programs/github-act/default.nix#L14)
+
+install and configure act, the local GitHub Actions runner
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.github-act.package`](programs/github-act/default.nix#L16)
+
+the act package to install
+
+**Type:** `lib.types.package`
+
+**Default:** `pkgs-unstable.act`
+
+## [`my-dotfiles.github-cli.enable`](programs/github-cli/default.nix#L13)
+
+install and configure the github CLI tool
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
 
 ## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L43)
 

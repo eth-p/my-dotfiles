@@ -14,7 +14,6 @@ in
     enable = lib.mkEnableOption "install and configure git";
     inPrompt = lib.mkEnableOption "show git info in the shell prompt";
 
-    github = lib.mkEnableOption "install the gh command-line tool";
     github-actions = lib.mkEnableOption
       "install the act command-line tool for locally running GitHub Actions";
 
@@ -97,34 +96,6 @@ in
         g = "git";
       };
     }
-
-    # Configure gh command.
-    (mkIf cfg.github {
-      programs.gh = {
-        enable = true;
-        settings = {
-          git_protocol = "ssh";
-          aliases = {
-            prv = "pr view --web";
-          };
-        };
-      };
-
-      programs.git.aliases = {
-        gh = "!gh";
-      };
-    })
-
-    # Install the `act` command for running GitHub Actions locally.
-    (mkIf cfg.github-actions {
-      home.packages = [
-        pkgs.act
-      ];
-
-      programs.gh.settings.aliases = {
-        act = "!act";
-      };
-    })
 
     # Configure ignore rules for Mac.
     (mkIf cfg.ignoreMacFiles {

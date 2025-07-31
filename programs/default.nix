@@ -20,6 +20,8 @@
   ./fish
   ./fzf
   ./git
+  ./github-cli
+  ./github-act
   ./glow
   ./goldwarden
   ./kubesel

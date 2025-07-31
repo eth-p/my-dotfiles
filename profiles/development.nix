@@ -54,11 +54,14 @@
     enable = lib.mkDefault true;
     inPrompt = lib.mkDefault true;
 
-    github = lib.mkDefault true;
     fzf.fixup = lib.mkDefault true;
 
     useDelta = lib.mkDefault true;
     useDyff = lib.mkDefault true;
+  };
+
+  my-dotfiles.github-cli = {
+    enable = lib.mkDefault true;
   };
 
   my-dotfiles.ranger = {
