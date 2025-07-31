@@ -587,7 +587,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L24)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L25)
 
 install and configure Visual Studio Code
 
@@ -597,7 +597,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L28)
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L29)
 
 use alternate keybindings
 
@@ -701,7 +701,7 @@ use a Language Server for Nix language support
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L25)
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L26)
 
 do not install Visual Studio Code, only configure it
 
