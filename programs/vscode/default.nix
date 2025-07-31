@@ -122,6 +122,24 @@ in
       };
     })
 
+    # Set up fonts.
+    (
+      let inherit (config.my-dotfiles.global) font-category;
+        defaultFonts = "Menlo, Monaco, 'Courier New', monospace";
+      in
+      {
+        home.packages = [
+          font-category.code.package
+          font-category.terminal.package
+        ];
+
+        programs.vscode.profiles.default.userSettings = {
+          "editor.fontFamily" = "'${font-category.code.family-name}', ${defaultFonts}";
+          "terminal.integrated.fontFamily" = "'${font-category.terminal.family-name}', ${defaultFonts}";
+        };
+      }
+    )
+
     # Install EditorConfig extension.
     # https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
     (mkIf cfg.editorconfig {

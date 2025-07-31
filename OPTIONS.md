@@ -287,7 +287,7 @@ Use dyff to show diffs between YAML files.
 
 **Default:** `true`
 
-## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L11)
+## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L43)
 
 
 The general color scheme used throughout various programs.
@@ -297,7 +297,30 @@ The general color scheme used throughout various programs.
 
 **Default:** `"auto"`
 
-## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L9)
+## [`my-dotfiles.global.font-category.code`](programs/globals.nix#L28)
+
+the monospace font family used for displaying code.
+
+**Type:** `fontType`
+
+**Default:**
+
+```nix
+{
+  package = pkgs.nerd-fonts.jetbrains-mono;
+  family-name = "JetBrainsMonoNL Nerd Font";
+}
+```
+
+## [`my-dotfiles.global.font-category.terminal`](programs/globals.nix#L36)
+
+the monospace font family used for the terminal.
+
+**Type:** `fontType`
+
+**Default:** `config.my-dotfiles.global.font-category.code`
+
+## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L25)
 
 NerdFonts are supported and installed
 
