@@ -67,6 +67,13 @@
     glow.forPreview = lib.mkDefault true;
   };
 
+  my-dotfiles.vscode = {
+    language.bash.enable = lib.mkDefault true;
+    language.markdown.enable = lib.mkDefault true;
+    language.nix.enable = lib.mkDefault true;
+    qol.todo.enable = true;
+  };
+
   my-dotfiles.yq = {
     enable = lib.mkDefault true;
   };
