@@ -659,7 +659,23 @@ add Go language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L36)
+## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go.nix#L36)
+
+install golangci-lint for linting Go source code
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go.nix#L42)
+
+the golangci-lint package
+
+**Type:** `any`
+
+**Default:** `pkgs-unstable.golangci-lint`
+
+## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L49)
 
 install the Go language server, gopls
 
@@ -667,7 +683,7 @@ install the Go language server, gopls
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L42)
+## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L55)
 
 the gopls package
 

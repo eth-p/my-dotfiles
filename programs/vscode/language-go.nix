@@ -32,6 +32,19 @@ in
       };
     };
 
+    linter = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "install golangci-lint for linting Go source code";
+      };
+
+      package = lib.mkOption {
+        default = pkgs-unstable.golangci-lint;
+        description = "the golangci-lint package";
+      };
+    };
+
     lsp = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -82,6 +95,18 @@ in
         profiles.default.userSettings = {
           "go.alternateTools" = {
             "gopls" = cfg.lsp.package + "/bin/gopls";
+          };
+        };
+      };
+    })
+
+    # Install the Go linter, golangci-lint.
+    (mkIf cfg.lsp.enable {
+      programs.vscode = {
+        profiles.default.userSettings = {
+          "go.lintTool" = "golangci-lint-v2";
+          "go.alternateTools" = {
+            "golangci-lint-v2" = cfg.linter.package + "/bin/golangci-lint";
           };
         };
       };
