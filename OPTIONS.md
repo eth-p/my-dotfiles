@@ -607,6 +607,14 @@ install ripgrep
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L35)
+
+The color scheme used for Visual Studio Code.
+
+**Type:** `lib.types.enum [ "dark" "light" "auto" ]`
+
+**Default:** `config.my-dotfiles.global.colorscheme`
+
 ## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L25)
 
 install and configure Visual Studio Code
