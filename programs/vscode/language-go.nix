@@ -82,6 +82,8 @@ in
           "go.alternateTools" = {
             "go" = cfg.compiler.package + "/bin/go";
           };
+
+          "go.survey.prompt" = false;
         };
       };
     }
