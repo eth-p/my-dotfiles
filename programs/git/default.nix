@@ -15,6 +15,8 @@ in
     inPrompt = lib.mkEnableOption "show git info in the shell prompt";
 
     github = lib.mkEnableOption "install the gh command-line tool";
+    github-actions = lib.mkEnableOption
+      "install the act command-line tool for locally running GitHub Actions";
 
     fzf = {
       fixup = lib.mkOption {
@@ -110,6 +112,17 @@ in
 
       programs.git.aliases = {
         gh = "!gh";
+      };
+    })
+
+    # Install the `act` command for running GitHub Actions locally.
+    (mkIf cfg.github-actions {
+      home.packages = [
+        pkgs.act
+      ];
+
+      programs.gh.settings.aliases = {
+        act = "!act";
       };
     })
 

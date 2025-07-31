@@ -225,7 +225,7 @@ install and configure git
 
 **Example:** `true`
 
-## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L20)
+## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L22)
 
 Add `git fixup` command
 
@@ -243,7 +243,17 @@ install the gh command-line tool
 
 **Example:** `true`
 
-## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L39)
+## [`my-dotfiles.git.github-actions`](programs/git/default.nix#L18)
+
+install the act command-line tool for locally running GitHub Actions
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L41)
 
 Ignore system files created by MacOS.
 
@@ -261,7 +271,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L27)
+## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L29)
 
 Use delta to show diffs.
 
@@ -269,7 +279,7 @@ Use delta to show diffs.
 
 **Default:** `true`
 
-## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L33)
+## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L35)
 
 Use dyff to show diffs between YAML files.
 
