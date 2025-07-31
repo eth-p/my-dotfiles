@@ -701,6 +701,14 @@ the gopls package
 
 **Default:** `pkgs-unstable.gopls`
 
+## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L62)
+
+add snippets for general language features
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
 ## [`my-dotfiles.vscode.language.makefile.enable`](programs/vscode/language-makefile.nix#L16)
 
 add Makefile language support to Visual Studio Code

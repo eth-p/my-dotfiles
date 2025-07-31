@@ -57,6 +57,14 @@ in
         description = "the gopls package";
       };
     };
+
+    snippets = {
+      general = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "add snippets for general language features";
+      };
+    };
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -108,6 +116,49 @@ in
           "go.alternateTools" = {
             "golangci-lint-v2" = cfg.linter.package + "/bin/golangci-lint";
           };
+        };
+      };
+    })
+
+    # Add snippets for general language features.
+    (mkIf cfg.lsp.enable {
+      programs.vscode.profiles.default.languageSnippets.go = {
+        "New interface type" = {
+          "prefix" = "interface";
+          "description" = "Create an interface";
+          "body" = [
+            "type \${1:name} interface {"
+            "\t$0"
+            "}"
+          ];
+        };
+
+        "New struct type" = {
+          "prefix" = "struct";
+          "description" = "Create a struct";
+          "body" = [
+            "type \${1:name} struct {"
+            "\t$0"
+            "}"
+          ];
+        };
+
+        "Receiver function" = {
+          "prefix" = "impl";
+          "description" = "Create a receiver function";
+          "body" = [
+            "func (\${1:s} *\${2:ty}) \${3:name}(\${4:params}) \${5:returns} {"
+            "\t$0"
+            "}"
+          ];
+        };
+
+        "Assert implements" = {
+          "prefix" = "assert interface";
+          "description" = "Asserts that a type implements the given interface";
+          "body" = [
+            "var _ \${1:interface} = (*\${2:ty})(nil) // Asserts \${2} implements \${1}"
+          ];
         };
       };
     })
