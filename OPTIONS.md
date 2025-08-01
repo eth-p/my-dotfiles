@@ -700,6 +700,14 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L78)
+
+show the git blame as an inline hint
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
 ## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L26)
 
 install and configure Visual Studio Code

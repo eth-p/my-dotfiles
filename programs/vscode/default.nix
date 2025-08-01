@@ -73,6 +73,14 @@ in
           };
         };
       };
+
+    editor = {
+      inlineBlame = lib.mkOption {
+        type = lib.types.bool;
+        description = "show the git blame as an inline hint";
+        default = true;
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -85,6 +93,10 @@ in
         profiles.default = {
           enableUpdateCheck = false;
           enableExtensionUpdateCheck = false;
+
+          userSettings = {
+            "git.blame.editorDecoration.enabled" = cfg.editor.inlineBlame;
+          };
         };
       };
 
