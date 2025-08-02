@@ -55,7 +55,7 @@ in
                 runtimeInputs = [ pkgs.betterdiscordctl ];
 
                 text = ''
-                  if betterdiscordctl status | grep 'no$'; then
+                  if betterdiscordctl -i flatpak status | grep 'no$'; then
                     betterdiscordctl -i flatpak install
                   fi
 
