@@ -116,6 +116,7 @@ in
         profiles.default.userSettings = {
           "go.lintTool" = "golangci-lint-v2";
           "go.alternateTools" = {
+            "golangci-lint" = pkgs.golangci-lint-v1 + "/bin/golangci-lint-v1";
             "golangci-lint-v2" = cfg.linter.package + "/bin/golangci-lint";
           };
         };
