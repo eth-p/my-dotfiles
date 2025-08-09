@@ -139,6 +139,15 @@ function ternary(cond, when_true, when_false)
 	end
 end
 
+-- nil_coalesce returns the provided value, or a default value if nil.
+function nil_coalesce(val, when_nil)
+	if val == nil then
+		return when_nil
+	else
+		return val
+	end
+end
+
 return {
 	optional_deps = optional_deps,
 	augroup = augroup,
@@ -147,4 +156,5 @@ return {
 	set_hl = set_hl,
 	create_enablelist = create_enablelist,
 	create_enablemap = create_enablemap,
+	nil_coalesce = nil_coalesce,
 }

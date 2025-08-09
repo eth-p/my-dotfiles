@@ -80,6 +80,11 @@ defaults = {
 	-- integration describes integrations with external tools
 	integration = {
 		git = true,
+		xxd = true,
+	},
+
+	external_executables = {
+		xxd = "xxd",
 	},
 
 	-- gutter describes options related to the sidebar

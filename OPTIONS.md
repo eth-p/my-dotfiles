@@ -514,6 +514,14 @@ Enable git integrations.
 
 **Default:** `config.programs.git.enable`
 
+## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L72)
+
+Enable hex editing with xxd.
+
+**Type:** `lib.types.bool`
+
+**Default:** `false`
+
 ## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L54)
 
 Display the keymap after a short delay.
@@ -530,7 +538,7 @@ Change the <Leader> key.
 
 **Default:** `"<Space>"`
 
-## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L72)
+## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L78)
 
 Create cvim alias for using neovim as a pager.
 
@@ -538,7 +546,7 @@ Create cvim alias for using neovim as a pager.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L78)
+## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L84)
 
 Create yvim alias for using neovim as YAML pager.
 

@@ -69,6 +69,12 @@ in
       default = config.programs.git.enable;
     };
 
+    integrations.xxd = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enable hex editing with xxd.";
+      default = false;
+    };
+
     shellAliases.cvim = lib.mkOption {
       type = lib.types.bool;
       description = "Create cvim alias for using neovim as a pager.";
@@ -112,8 +118,12 @@ in
         # lazy loading, except when plugins rely on native binaries or libraries.
         "${nvimHome}/managed-by-home-manager.json" =
           let
+            external_executables = {
+              xxd = if cfg.integrations.xxd then pkgs.unixtools.xxd + "/bin/xxd" else null;
+            };
             managedOptions = {
-              integrations = cfg.integrations;
+              inherit external_executables;
+              integration = cfg.integrations;
               keymap = {
                 help = cfg.keymap.help;
                 leader = cfg.keymap.leader;
