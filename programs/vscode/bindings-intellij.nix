@@ -81,6 +81,12 @@ in
           "command" = "-workbench.action.showCommands";
         }
 
+        # "Configure Task Runner"
+        {
+          "key" = "cmd+;";
+          "command" = "-workbench.action.tasks.configureTaskRunner";
+        }
+
       ];
     })
 
