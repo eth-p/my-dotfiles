@@ -75,6 +75,11 @@ in
       };
 
     editor = {
+      rulers = lib.mkOption {
+        type = lib.types.listOf lib.types.int;
+        description = "Column numbers to draw a ruler at.";
+        default = [ 80 120 ];
+      };
       inlineBlame = lib.mkOption {
         type = lib.types.bool;
         description = "show the git blame as an inline hint";
@@ -96,6 +101,7 @@ in
 
           userSettings = {
             "git.blame.editorDecoration.enabled" = cfg.editor.inlineBlame;
+            "editor.rulers" = cfg.editor.rulers;
           };
         };
       };

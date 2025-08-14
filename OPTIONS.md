@@ -708,13 +708,21 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L78)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L83)
 
 show the git blame as an inline hint
 
 **Type:** `lib.types.bool`
 
 **Default:** `true`
+
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L78)
+
+Column numbers to draw a ruler at.
+
+**Type:** `lib.types.listOf lib.types.int`
+
+**Default:** `[ 80 120 ]`
 
 ## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L26)
 
