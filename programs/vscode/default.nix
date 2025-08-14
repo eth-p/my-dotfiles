@@ -85,6 +85,11 @@ in
         description = "show the git blame as an inline hint";
         default = true;
       };
+      whitespace.showTrailing = lib.mkOption {
+        type = lib.types.bool;
+        description = "Highlight trailing whitespace.";
+        default = true;
+      };
     };
   };
 
@@ -166,6 +171,20 @@ in
         [
           editorconfig.editorconfig
         ];
+    })
+
+    # Install Trailing Whitespace extension.
+    # https://marketplace.visualstudio.com/items?itemName=jkiviluoto.tws
+    (mkIf cfg.editor.whitespace.showTrailing {
+      programs.vscode.profiles.default.extensions =
+        with extensions; [
+          shardulm94.trailing-spaces
+        ];
+
+      programs.vscode.profiles.default.userSettings = {
+        "trailing-spaces.backgroundColor" = "rgba(255, 0, 179, 0.3)";
+        "trailing-spaces.borderColor" = "rgba(255, 88, 205, 0.15)";
+      };
     })
 
     # Configure to use `fish` as the shell.

@@ -732,6 +732,14 @@ Column numbers to draw a ruler at.
 
 **Default:** `[ 80 120 ]`
 
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L88)
+
+Highlight trailing whitespace.
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
 ## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L26)
 
 install and configure Visual Studio Code
