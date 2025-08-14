@@ -496,6 +496,14 @@ The colorscheme used for light mode.
 
 **Default:** `"catppuccin-latte"`
 
+## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L90)
+
+Column numbers to draw a ruler at.
+
+**Type:** `lib.types.listOf lib.types.int`
+
+**Default:** `[ 80 120 ]`
+
 ## [`my-dotfiles.neovim.enable`](programs/neovim/default.nix#L20)
 
 neovim

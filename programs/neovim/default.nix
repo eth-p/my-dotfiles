@@ -86,6 +86,12 @@ in
       description = "Create yvim alias for using neovim as YAML pager.";
       default = false;
     };
+
+    editor.rulers = lib.mkOption {
+      type = lib.types.listOf lib.types.int;
+      description = "Column numbers to draw a ruler at.";
+      default = [ 80 120 ];
+    };
   };
 
   config = mkIf cfg.enable (lib.mkMerge [
@@ -126,6 +132,7 @@ in
             managedOptions = {
               inherit external_executables;
               integration = cfg.integrations;
+              editor = cfg.editor;
               keymap = {
                 help = cfg.keymap.help;
                 leader = cfg.keymap.leader;

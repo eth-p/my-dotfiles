@@ -68,6 +68,8 @@ function InitConfig(opts)
 		vim.o.foldlevelstart = 99 -- Needed for `ufo` plugin
 	end
 
+	vim.o.colorcolumn = table.concat(opts.editor.rulers, ",")
+
 	if opts.integration.git then
 		utils.on_filetypes({ "gitcommit" }, {
 			callback = function(evt)

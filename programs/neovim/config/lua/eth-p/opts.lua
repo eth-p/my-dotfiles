@@ -48,6 +48,7 @@ defaults = {
 				nix = true,
 			},
 		},
+		rulers = {},
 		whitespace = {
 			show_always = false,
 
