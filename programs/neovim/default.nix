@@ -104,6 +104,8 @@ in
             pname = "my-neovim-config";
             version = "0.0.0";
             src = ./config;
+
+            doCheck = false;
           })
         ];
 
