@@ -91,33 +91,60 @@ in
         default = true;
       };
     };
+
+    fhs = {
+      enabled = lib.mkOption {
+        type = lib.types.bool;
+        description = "Use a FHS environment for VS Code.";
+        default = pkgs.stdenv.isLinux;
+        readOnly = ! pkgs.stdenv.isLinux;
+      };
+
+      packages = lib.mkOption {
+        type = lib.types.listOf lib.types.anything;
+        description = "Extra packages to install in the VS Code FHS. If FHS is disabled, this will install them to the user profile.";
+        example = [ (pkgs: with pkgs; [ gcc rustc ]) ];
+        default = [ ];
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
 
     # Install Visual Studio Code.
-    {
-      programs.vscode = {
-        enable = true;
-        mutableExtensionsDir = false;
-        profiles.default = {
-          enableUpdateCheck = false;
-          enableExtensionUpdateCheck = false;
+    (
+      let mkPkgList = pkgs: builtins.foldl' (a: b: a ++ (b pkgs)) [ ] cfg.fhs.packages;
 
-          userSettings = {
-            "git.blame.editorDecoration.enabled" = cfg.editor.inlineBlame;
-            "editor.rulers" = cfg.editor.rulers;
+      in {
+        programs.vscode = {
+          enable = true;
+          package =
+            if cfg.fhs.enabled
+            then (pkgs.vscode.fhsWithPackages mkPkgList)
+            else (pkgs.vscode);
+
+          mutableExtensionsDir = false;
+          profiles.default = {
+            enableUpdateCheck = false;
+            enableExtensionUpdateCheck = false;
+
+            userSettings = {
+              "git.blame.editorDecoration.enabled" = cfg.editor.inlineBlame;
+              "editor.rulers" = cfg.editor.rulers;
+            };
           };
         };
-      };
 
-      nixpkgs.config.allowUnfreePredicate = pkg:
-        builtins.elem (lib.getName pkg) [ "vscode" ];
-    }
+        home.packages = if cfg.fhs.enabled then [ ] else (mkPkgList pkgs);
+
+        nixpkgs.config.allowUnfreePredicate = pkg:
+          builtins.elem (lib.getName pkg) [ "vscode" "code" ];
+      }
+    )
 
     # Optionally set the Visual Studio Code package to an empty package.
     (mkIf cfg.onlyConfigure {
-      programs.vscode.package = pkgs.stdenv.mkDerivation {
+      programs.vscode.package = lib.mkOrder 1100 (pkgs.stdenv.mkDerivation {
         pname = "vscode";
         name = "vscode";
         version = "1.74.0"; # must be at least 1.74.0 for extensions.json to be generated
@@ -125,7 +152,7 @@ in
         buildPhase = ''
           mkdir $out
         '';
-      };
+      });
     })
 
     # Set up colorschemes.
