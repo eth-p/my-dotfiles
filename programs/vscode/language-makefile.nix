@@ -14,6 +14,12 @@ in
   options.my-dotfiles.vscode.language.makefile = {
     enable =
       lib.mkEnableOption "add Makefile language support to Visual Studio Code";
+
+    showWhitespace = lib.mkOption {
+      type = lib.types.bool;
+      description = "Show boundary whitespace in Makefiles.";
+      default = true;
+    };
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -27,7 +33,11 @@ in
             ms-vscode.makefile-tools
           ];
 
-        profiles.default.userSettings = { };
+        profiles.default.userSettings = {
+          "[makefile]" = {
+            "editor.renderWhitespace" = "boundary";
+          };
+        };
       };
     }
   ]);

@@ -868,6 +868,14 @@ add Makefile language support to Visual Studio Code
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.language.makefile.showWhitespace`](programs/vscode/language-makefile.nix#L18)
+
+Show boundary whitespace in Makefiles.
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
 ## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L15)
 
 add Nix language support to Visual Studio Code
