@@ -93,19 +93,17 @@ in
       };
     };
 
-    fhs = {
-      enabled = lib.mkOption {
-        type = lib.types.bool;
-        description = "Use a FHS environment for VS Code.";
-        default = pkgs.stdenv.isLinux;
-        readOnly = ! pkgs.stdenv.isLinux;
-      };
+    fhs.enabled = lib.mkOption {
+      type = lib.types.bool;
+      description = "Use a FHS environment for VS Code.";
+      default = pkgs.stdenv.isLinux;
+      readOnly = ! pkgs.stdenv.isLinux;
+    };
 
-      packages = lib.mkOption {
-        type = my-dotfiles.lib.types.functionListTo lib.types.package;
-        description = "Extra packages to install in the VS Code FHS. If FHS is disabled, this will install them to the user profile.";
-        example = (pkgs: with pkgs; [ gcc rustc ]);
-      };
+    dependencies.packages = lib.mkOption {
+      type = my-dotfiles.lib.types.functionListTo lib.types.package;
+      description = "Extra packages to install. This will either install them to the FHS or user profile, depending on whether the FHS is enabled.";
+      example = (pkgs: with pkgs; [ gcc rustc ]);
     };
   };
 
@@ -113,7 +111,7 @@ in
 
     # Install Visual Studio Code.
     (
-      let mkPkgList = pkgs: builtins.foldl' (a: b: a ++ (b pkgs)) [ ] cfg.fhs.packages;
+      let mkPkgList = pkgs: builtins.foldl' (a: b: a ++ (b pkgs)) [ ] cfg.dependencies.packages;
 
       in {
         programs.vscode = {

@@ -40,7 +40,7 @@ in
       };
 
       # In the VS Code FHS, install dependencies for compiling Rust.
-      my-dotfiles.vscode.fhs.packages =
+      my-dotfiles.vscode.dependencies.packages =
         (pkgs: with pkgs; [
           # Compilers
           rustc

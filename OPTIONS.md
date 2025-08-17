@@ -716,6 +716,14 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L103)
+
+Extra packages to install. This will either install them to the FHS or user profile, depending on whether the FHS is enabled.
+
+**Type:** `my-dotfiles.lib.types.functionListTo lib.types.package`
+
+**Example:** `(pkgs: with pkgs; [ gcc rustc ])`
+
 ## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L84)
 
 show the git blame as an inline hint
@@ -750,21 +758,13 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L97)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L96)
 
 Use a FHS environment for VS Code.
 
 **Type:** `lib.types.bool`
 
 **Default:** `pkgs.stdenv.isLinux`
-
-## [`my-dotfiles.vscode.fhs.packages`](programs/vscode/default.nix#L104)
-
-Extra packages to install in the VS Code FHS. If FHS is disabled, this will install them to the user profile.
-
-**Type:** `my-dotfiles.lib.types.functionListTo lib.types.package`
-
-**Example:** `(pkgs: with pkgs; [ gcc rustc ])`
 
 ## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L31)
 
