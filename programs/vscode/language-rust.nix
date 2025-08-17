@@ -40,7 +40,7 @@ in
       };
 
       # In the VS Code FHS, install dependencies for compiling Rust.
-      my-dotfiles.vscode.fhs.packages = [
+      my-dotfiles.vscode.fhs.packages =
         (pkgs: with pkgs; [
           # Compilers
           rustc
@@ -50,7 +50,7 @@ in
           cargo
           rustfmt
         ])
-      ];
+      ;
     }
 
     # Install the Rust language server, rust-analyzer.

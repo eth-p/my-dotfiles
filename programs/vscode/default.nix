@@ -3,7 +3,7 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
+{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.vscode;
@@ -102,10 +102,9 @@ in
       };
 
       packages = lib.mkOption {
-        type = lib.types.listOf lib.types.anything;
+        type = my-dotfiles.lib.types.functionListTo lib.types.package;
         description = "Extra packages to install in the VS Code FHS. If FHS is disabled, this will install them to the user profile.";
-        example = [ (pkgs: with pkgs; [ gcc rustc ]) ];
-        default = [ ];
+        example = (pkgs: with pkgs; [ gcc rustc ]);
       };
     };
   };

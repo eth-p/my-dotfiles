@@ -762,11 +762,9 @@ Use a FHS environment for VS Code.
 
 Extra packages to install in the VS Code FHS. If FHS is disabled, this will install them to the user profile.
 
-**Type:** `lib.types.listOf lib.types.anything`
+**Type:** `my-dotfiles.lib.types.functionListTo lib.types.package`
 
-**Default:** `[ ]`
-
-**Example:** `[ (pkgs: with pkgs; [ gcc rustc ]) ]`
+**Example:** `(pkgs: with pkgs; [ gcc rustc ])`
 
 ## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L31)
 
