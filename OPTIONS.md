@@ -708,7 +708,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L36)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L37)
 
 The color scheme used for Visual Studio Code.
 
@@ -716,7 +716,7 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L83)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L84)
 
 show the git blame as an inline hint
 
@@ -724,7 +724,7 @@ show the git blame as an inline hint
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L78)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L79)
 
 Column numbers to draw a ruler at.
 
@@ -732,7 +732,7 @@ Column numbers to draw a ruler at.
 
 **Default:** `[ 80 120 ]`
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L88)
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L89)
 
 Highlight trailing whitespace.
 
@@ -740,7 +740,7 @@ Highlight trailing whitespace.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L26)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L27)
 
 install and configure Visual Studio Code
 
@@ -750,7 +750,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L96)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L97)
 
 Use a FHS environment for VS Code.
 
@@ -758,7 +758,7 @@ Use a FHS environment for VS Code.
 
 **Default:** `pkgs.stdenv.isLinux`
 
-## [`my-dotfiles.vscode.fhs.packages`](programs/vscode/default.nix#L103)
+## [`my-dotfiles.vscode.fhs.packages`](programs/vscode/default.nix#L104)
 
 Extra packages to install in the VS Code FHS. If FHS is disabled, this will install them to the user profile.
 
@@ -768,7 +768,7 @@ Extra packages to install in the VS Code FHS. If FHS is disabled, this will inst
 
 **Example:** `[ (pkgs: with pkgs; [ gcc rustc ]) ]`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L30)
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L31)
 
 use alternate keybindings
 
@@ -896,7 +896,33 @@ use a Language Server for Nix language support
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L27)
+## [`my-dotfiles.vscode.language.rust.enable`](programs/vscode/language-rust.nix#L16)
+
+add Rust language support to Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.language.rust.lsp.enable`](programs/vscode/language-rust.nix#L19)
+
+install the Rust language server, rust-analyzer
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.vscode.language.rust.lsp.package`](programs/vscode/language-rust.nix#L25)
+
+the rust-analyzer package
+
+**Type:** `any`
+
+**Default:** `pkgs-unstable.rust-analyzer`
+
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L28)
 
 do not install Visual Studio Code, only configure it
 
