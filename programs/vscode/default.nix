@@ -104,6 +104,7 @@ in
       type = my-dotfiles.lib.types.functionListTo lib.types.package;
       description = "Extra packages to install. This will either install them to the FHS or user profile, depending on whether the FHS is enabled.";
       example = (pkgs: with pkgs; [ gcc rustc ]);
+      default = (pkgs: [ ]);
     };
   };
 

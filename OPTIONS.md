@@ -722,6 +722,8 @@ Extra packages to install. This will either install them to the FHS or user prof
 
 **Type:** `my-dotfiles.lib.types.functionListTo lib.types.package`
 
+**Default:** `(pkgs: [ ])`
+
 **Example:** `(pkgs: with pkgs; [ gcc rustc ])`
 
 ## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L84)
