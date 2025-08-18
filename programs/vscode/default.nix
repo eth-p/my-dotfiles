@@ -191,7 +191,7 @@ in
 
     (mkIf (cfg.colorscheme != "auto") {
       programs.vscode.profiles.default.userSettings = {
-        "workbench.colorTheme" = cfg.colorschemes."${cfg.colorscheme}";
+        "workbench.colorTheme" = cfg.colorschemes."${cfg.colorscheme}".name;
       };
     })
 
