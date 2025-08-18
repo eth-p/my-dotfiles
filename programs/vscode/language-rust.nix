@@ -7,7 +7,7 @@
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.language.go;
+  cfg = config.my-dotfiles.vscode.language.rust;
   extensions = pkgs-unstable.vscode-extensions;
 in
 {
@@ -57,7 +57,7 @@ in
     (mkIf cfg.lsp.enable {
       programs.vscode = {
         profiles.default.userSettings = {
-          "rust-analyzer.server.path" = pkgs-unstable.rust-analyzer + "/bin/rust-analyzer";
+          "rust-analyzer.server.path" = cfg.lsp.package + "/bin/rust-analyzer";
         };
       };
     })
