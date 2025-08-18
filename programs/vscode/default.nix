@@ -165,7 +165,7 @@ in
 
     # Optionally set the Visual Studio Code package to an empty package.
     (mkIf cfg.onlyConfigure {
-      programs.vscode.package = lib.mkOrder 1100 (pkgs.stdenv.mkDerivation {
+      programs.vscode.package = lib.mkForce (pkgs.stdenv.mkDerivation {
         pname = "vscode";
         name = "vscode";
         version = "1.74.0"; # must be at least 1.74.0 for extensions.json to be generated
