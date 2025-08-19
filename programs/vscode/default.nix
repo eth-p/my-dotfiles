@@ -233,6 +233,7 @@ in
       programs.vscode.profiles.default.userSettings = {
         "trailing-spaces.backgroundColor" = "rgba(255, 0, 179, 0.3)";
         "trailing-spaces.borderColor" = "rgba(255, 88, 205, 0.15)";
+        "trailing-spaces.trimOnSave" = false;
       };
     })
 
