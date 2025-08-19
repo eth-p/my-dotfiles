@@ -38,5 +38,14 @@ in
         ];
     }
 
+    # Disable format-on-save for Markdown.
+    {
+      programs.vscode.profiles.default.userSettings = {
+        "[markdown]" = {
+          "editor.formatOnSave" = false;
+        };
+      };
+    }
+
   ]);
 }
