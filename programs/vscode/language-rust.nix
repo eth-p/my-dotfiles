@@ -5,7 +5,7 @@
 # ==============================================================================
 { lib, config, pkgs, pkgs-unstable, ... }:
 let
-  inherit (lib) mkIf mkMerge;
+  inherit (lib) mkIf mkMerge mkDefault;
   vscodeCfg = config.my-dotfiles.vscode;
   cfg = config.my-dotfiles.vscode.language.rust;
   extensions = pkgs-unstable.vscode-extensions;
@@ -51,6 +51,9 @@ in
           rustfmt
         ])
       ;
+
+      # Enable TOML language support.
+      my-dotfiles.vscode.language.toml.enable = mkDefault true;
     }
 
     # Install the Rust language server, rust-analyzer.
