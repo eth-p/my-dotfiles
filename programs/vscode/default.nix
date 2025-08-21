@@ -19,6 +19,7 @@ in
     ./language-markdown.nix
     ./language-nix.nix
     ./language-rust.nix
+    ./language-toml.nix
     ./qol-github.nix
     ./qol-todo.nix
   ];
