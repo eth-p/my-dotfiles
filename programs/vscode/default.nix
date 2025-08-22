@@ -140,6 +140,29 @@ in
       }
     )
 
+    # If using a FHS environmment, shim a sudo-esque command that uses `run0`.
+    (mkIf cfg.fhs.enabled {
+      my-dotfiles.vscode.dependencies.packages = _: [
+        (pkgs.writeShellApplication {
+          name = "fhs-sudo";
+
+          runtimeInputs = with pkgs; [
+            bash
+            util-linux # nsenter
+            systemdMinimal # run0
+          ];
+
+          text = ''
+            run0 \
+              nsenter --mount=/proc/$$/ns/mnt \
+              env PATH="$PATH" \
+              "$@"
+            exit $?
+          '';
+        })
+      ];
+    })
+
     # Optionally set the Visual Studio Code package to an empty package.
     (mkIf cfg.onlyConfigure {
       programs.vscode.package = lib.mkOrder 1100 (pkgs.stdenv.mkDerivation {
