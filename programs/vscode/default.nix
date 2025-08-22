@@ -22,6 +22,7 @@ in
     ./language-toml.nix
     ./qol-github.nix
     ./qol-todo.nix
+    ./remote-devcontainer.nix
     ./remote-ssh.nix
   ];
 

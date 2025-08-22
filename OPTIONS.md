@@ -708,7 +708,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L39)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L40)
 
 The color scheme used for Visual Studio Code.
 
@@ -716,7 +716,7 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L105)
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L106)
 
 Extra packages to install. This will either install them to the FHS or user profile, depending on whether the FHS is enabled.
 
@@ -726,7 +726,7 @@ Extra packages to install. This will either install them to the FHS or user prof
 
 **Example:** `(pkgs: with pkgs; [ gcc rustc ])`
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L112)
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L113)
 
 Unfree packages to allow.
 
@@ -736,7 +736,7 @@ Unfree packages to allow.
 
 **Example:** `[ "vscode-extension-ms-vscode-remote-remote-ssh" ]`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L86)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L87)
 
 show the git blame as an inline hint
 
@@ -744,7 +744,7 @@ show the git blame as an inline hint
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L81)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L82)
 
 Column numbers to draw a ruler at.
 
@@ -752,7 +752,7 @@ Column numbers to draw a ruler at.
 
 **Default:** `[ 80 120 ]`
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L91)
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L92)
 
 Highlight trailing whitespace.
 
@@ -760,7 +760,7 @@ Highlight trailing whitespace.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L29)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L30)
 
 install and configure Visual Studio Code
 
@@ -770,7 +770,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L98)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L99)
 
 Use a FHS environment for VS Code.
 
@@ -778,7 +778,7 @@ Use a FHS environment for VS Code.
 
 **Default:** `pkgs.stdenv.isLinux`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L33)
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L34)
 
 use alternate keybindings
 
@@ -950,7 +950,7 @@ add TOML language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L30)
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L31)
 
 do not install Visual Studio Code, only configure it
 
@@ -973,6 +973,16 @@ add GitHub-centric extensions
 ## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L16)
 
 improve TODO support
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.remote.devcontainer.enable`](programs/vscode/remote-devcontainer.nix#L16)
+
+add support for running VS Code in dev containers
 
 **Type:** `boolean`
 
