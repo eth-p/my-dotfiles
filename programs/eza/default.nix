@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/eza-community/eza
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
+{ lib, config, pkgs, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.eza;

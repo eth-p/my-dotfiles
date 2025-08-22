@@ -321,7 +321,7 @@ the act package to install
 
 **Type:** `lib.types.package`
 
-**Default:** `pkgs-unstable.act`
+**Default:** `pkgs.act`
 
 ## [`my-dotfiles.github-act.runnerImages`](programs/github-act/default.nix#L36)
 
@@ -792,7 +792,7 @@ the Go compiler package
 
 **Type:** `any`
 
-**Default:** `pkgs-unstable.go`
+**Default:** `pkgs.go`
 
 ## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L24)
 
@@ -808,7 +808,7 @@ the dlv package
 
 **Type:** `any`
 
-**Default:** `pkgs-unstable.delve`
+**Default:** `pkgs.delve`
 
 ## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L16)
 
@@ -834,7 +834,7 @@ the golangci-lint package
 
 **Type:** `any`
 
-**Default:** `pkgs-unstable.golangci-lint`
+**Default:** `pkgs.golangci-lint`
 
 ## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L49)
 
@@ -850,7 +850,7 @@ the gopls package
 
 **Type:** `any`
 
-**Default:** `pkgs-unstable.gopls`
+**Default:** `pkgs.gopls`
 
 ## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L62)
 
@@ -928,7 +928,7 @@ the rust-analyzer package
 
 **Type:** `any`
 
-**Default:** `pkgs-unstable.rust-analyzer`
+**Default:** `pkgs.rust-analyzer`
 
 ## [`my-dotfiles.vscode.language.toml.enable`](programs/vscode/language-toml.nix#L16)
 

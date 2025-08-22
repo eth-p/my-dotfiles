@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/neovim/neovim
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) tolua;

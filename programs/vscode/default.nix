@@ -3,11 +3,11 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.vscode;
-  extensions = pkgs-unstable.vscode-extensions;
+  extensions = pkgs.vscode-extensions;
   extensionsDir = ".vscode/extensions";
 in
 {

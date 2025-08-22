@@ -3,7 +3,7 @@
 #
 # Program: https://devenv.sh/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.devenv;

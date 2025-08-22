@@ -3,11 +3,11 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }@inputs:
+{ lib, config, pkgs, ... }@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.vscode;
-  extensions = pkgs-unstable.vscode-extensions;
+  extensions = pkgs.vscode-extensions;
   darwinOr =
     if pkgs.stdenv.isDarwin
     then mac: _: mac

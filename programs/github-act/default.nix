@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/nektos/act
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, my-dotfiles, ... } @ inputs:
+{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.github-act;
@@ -16,7 +16,7 @@ in
     package = lib.mkOption {
       type = lib.types.package;
       description = "the act package to install";
-      default = pkgs-unstable.act;
+      default = pkgs.act;
     };
 
     githubEnterpriseHostname = lib.mkOption {

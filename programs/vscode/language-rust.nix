@@ -3,12 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkIf mkMerge mkDefault;
   vscodeCfg = config.my-dotfiles.vscode;
   cfg = config.my-dotfiles.vscode.language.rust;
-  extensions = pkgs-unstable.vscode-extensions;
+  extensions = pkgs.vscode-extensions;
 in
 {
   options.my-dotfiles.vscode.language.rust = {
@@ -23,7 +23,7 @@ in
       };
 
       package = lib.mkOption {
-        default = pkgs-unstable.rust-analyzer;
+        default = pkgs.rust-analyzer;
         description = "the rust-analyzer package";
       };
     };

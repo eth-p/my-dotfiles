@@ -3,7 +3,7 @@
 #
 # Program: https://carapace.sh/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.carapace;

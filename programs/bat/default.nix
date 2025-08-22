@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/sharkdp/bat
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.bat;
@@ -35,7 +35,7 @@ in
 
     # Configure batman.
     (mkIf cfg.enableBatman {
-      programs.bat.extraPackages = with pkgs-unstable.bat-extras; [ batman ];
+      programs.bat.extraPackages = with pkgs.bat-extras; [ batman ];
 
       programs.fish.shellAliases = {
         man = "batman";

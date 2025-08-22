@@ -3,7 +3,7 @@
 #
 # Program: https://github.com/gdubicki/ets/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
+{ lib, config, pkgs, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.ets;

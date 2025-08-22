@@ -11,13 +11,12 @@
   inputs = {
     # home-manager is used to manage dotfiles and user config.
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nixpkgs is for installing packages.
-    nixpkgs.url = "nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # My own packages:
     kubesel = {
@@ -26,7 +25,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... } @ inputs: rec {
+  outputs = { self, nixpkgs, flake-utils, home-manager, ... } @ inputs: rec {
 
     # lib provides reusable library functions.
     lib = (import ./lib/nix) ({ lib = nixpkgs.lib; my-dotfiles = self; } // inputs);
@@ -34,7 +33,6 @@
     # homeModules declares reusable home-manager modules.
     #
     # A few `extraSpecialArgs` are required:
-    #  - `pkgs-unstable` (nixpkgs-unstable)
     #  - `my-dotfiles`   (this flake)
     homeModules = (import ./programs) ++ [
       ./programs/globals.nix
@@ -60,7 +58,6 @@
 
           # Get nixpkgs for the system the package is being defined for.
           pkgs = import nixpkgs { inherit system; };
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
         };
 
         # Import the packages.

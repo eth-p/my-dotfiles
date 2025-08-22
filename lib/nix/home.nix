@@ -3,7 +3,7 @@
 #
 # Helpers for creating a home-manager flake using my-dotfiles.
 # ==============================================================================
-{ lib, my-dotfiles, home-manager, nixpkgs, nixpkgs-unstable, ... } @ inputs:
+{ lib, my-dotfiles, home-manager, nixpkgs, ... } @ inputs:
 let inherit (my-dotfiles.lib.util) getOrDefault;
 in rec {
 
@@ -30,7 +30,6 @@ in rec {
 
       # Get the nixpkgs for the specified platform.
       pkgs = import nixpkgs { inherit system overlays; };
-      pkgs-unstable = import nixpkgs-unstable { inherit system overlays; };
 
       # Get the profile module.
       profileMod = (
@@ -46,7 +45,6 @@ in rec {
         ++ profileMod
         ++ modules;
       extraSpecialArgs = {
-        inherit pkgs-unstable;
         my-dotfiles = my-dotfiles // { inherit inputs; };
       };
     };

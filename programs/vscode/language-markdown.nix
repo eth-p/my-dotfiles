@@ -3,12 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }@inputs:
+{ lib, config, pkgs, ... }@inputs:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
   cfg = config.my-dotfiles.vscode.language.markdown;
-  extensions = pkgs-unstable.vscode-extensions;
+  extensions = pkgs.vscode-extensions;
 in
 {
   options.my-dotfiles.vscode.language.markdown = {

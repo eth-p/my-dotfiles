@@ -3,12 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
   cfg = config.my-dotfiles.vscode.language.go;
-  extensions = pkgs-unstable.vscode-extensions;
+  extensions = pkgs.vscode-extensions;
 in
 {
   options.my-dotfiles.vscode.language.go = {
@@ -16,7 +16,7 @@ in
       lib.mkEnableOption "add Go language support to Visual Studio Code";
 
     compiler.package = lib.mkOption {
-      default = pkgs-unstable.go;
+      default = pkgs.go;
       description = "the Go compiler package";
     };
 
@@ -27,7 +27,7 @@ in
         description = "install the Go debugger, dlv";
       };
       package = lib.mkOption {
-        default = pkgs-unstable.delve;
+        default = pkgs.delve;
         description = "the dlv package";
       };
     };
@@ -40,7 +40,7 @@ in
       };
 
       package = lib.mkOption {
-        default = pkgs-unstable.golangci-lint;
+        default = pkgs.golangci-lint;
         description = "the golangci-lint package";
       };
     };
@@ -53,7 +53,7 @@ in
       };
 
       package = lib.mkOption {
-        default = pkgs-unstable.gopls;
+        default = pkgs.gopls;
         description = "the gopls package";
       };
     };

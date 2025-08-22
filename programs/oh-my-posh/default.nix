@@ -4,7 +4,7 @@
 # Program: https://github.com/JanDeDobbeleer/oh-my-posh
 # (This is used for my shell prompts)
 # ==============================================================================
-{ lib, config, pkgs, pkgs-unstable, ... } @ inputs:
+{ lib, config, pkgs, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.oh-my-posh;
@@ -63,7 +63,7 @@ in
     {
       programs.oh-my-posh = {
         enable = true;
-        package = lib.mkDefault pkgs-unstable.oh-my-posh;
+        package = lib.mkDefault pkgs.oh-my-posh;
         settings = {
           version = 3;
           final_space = !cfg.newline;
