@@ -15,7 +15,7 @@ pkgs.vscode-utils.buildVscodeMarketplaceExtension {
   meta = {
     changelog =
       "https://marketplace.visualstudio.com/items/yahyabatulu.vscode-markdown-alert/changelog";
-    description = "Zig support for Visual Studio Code";
+    description = "Add GitHub markdown alerts to the markdown preview";
     downloadPage =
       "https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert";
     homepage = "https://github.com/ByPikod/vscode-markdown-alert";
