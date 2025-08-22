@@ -21,7 +21,7 @@
     # My own packages:
     kubesel = {
       url = "github:eth-p/kubesel";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.url = "nixpkgs/nixos-25.05";
     };
   };
 
