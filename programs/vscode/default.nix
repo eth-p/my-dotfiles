@@ -22,6 +22,7 @@ in
     ./language-toml.nix
     ./qol-github.nix
     ./qol-todo.nix
+    ./remote-ssh.nix
   ];
 
   options.my-dotfiles.vscode = {
@@ -107,6 +108,14 @@ in
       example = (pkgs: with pkgs; [ gcc rustc ]);
       default = (pkgs: [ ]);
     };
+
+    dependencies.unfreePackages = lib.mkOption {
+      visible = false;
+      type = lib.types.listOf lib.types.str;
+      description = "Unfree packages to allow.";
+      example = [ "vscode-extension-ms-vscode-remote-remote-ssh" ];
+      default = [ ];
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -138,7 +147,7 @@ in
         home.packages = if cfg.fhs.enabled then [ ] else (mkPkgList pkgs);
 
         nixpkgs.config.allowUnfreePredicate = pkg:
-          builtins.elem (lib.getName pkg) [ "vscode" "code" ];
+          builtins.elem (lib.getName pkg) ([ "vscode" "code" ] ++ cfg.dependencies.unfreePackages);
       }
     )
 
