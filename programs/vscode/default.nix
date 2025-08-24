@@ -160,14 +160,17 @@ in
 
           runtimeInputs = with pkgs; [
             bash
+            coreutils # pwd
             util-linux # nsenter
             systemdMinimal # run0
           ];
 
           text = ''
+            # shellcheck disable=SC2016
             run0 \
               nsenter --mount=/proc/$$/ns/mnt \
               env PATH="$PATH" \
+              sh -c 'cd "$1" && shift && exec "$@"' -- "$(pwd)" \
               "$@"
             exit $?
           '';
