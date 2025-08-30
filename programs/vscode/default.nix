@@ -6,6 +6,7 @@
 { lib, config, pkgs, my-dotfiles, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
+  inherit (lib.strings) concatStringsSep;
   cfg = config.my-dotfiles.vscode;
   extensions = pkgs.vscode-extensions;
   extensionsDir = ".vscode/extensions";
@@ -99,13 +100,13 @@ in
     fhs.enabled = lib.mkOption {
       type = lib.types.bool;
       description = "Use a FHS environment for VS Code.";
-      default = pkgs.stdenv.isLinux;
+      default = false;
       readOnly = ! pkgs.stdenv.isLinux;
     };
 
     dependencies.packages = lib.mkOption {
       type = my-dotfiles.lib.types.functionListTo lib.types.package;
-      description = "Extra packages to install. This will either install them to the FHS or user profile, depending on whether the FHS is enabled.";
+      description = "Extra packages to install.";
       example = (pkgs: with pkgs; [ gcc rustc ]);
       default = (pkgs: [ ]);
     };
@@ -123,15 +124,28 @@ in
 
     # Install Visual Studio Code.
     (
-      let mkPkgList = pkgs: builtins.foldl' (a: b: a ++ (b pkgs)) [ ] cfg.dependencies.packages;
+      let
+        mkPkgList = pkgs: builtins.foldl' (a: b: a ++ (b pkgs)) [ ] cfg.dependencies.packages;
+        mkWrapProgramPathPrependArgs = (p: "--prefix PATH : ${p + /bin}");
 
-      in {
+      in
+      {
         programs.vscode = {
           enable = true;
           package =
             if cfg.fhs.enabled
             then (pkgs.vscode.fhsWithPackages mkPkgList)
-            else (pkgs.vscode);
+            else
+              (pkgs.vscode.overrideAttrs (old:
+                let wrapProgramArgs = concatStringsSep " \\\n" (map mkWrapProgramPathPrependArgs (mkPkgList pkgs));
+                in
+                {
+                  postFixup = ''
+                    ${old.postFixup}
+                    wrapProgram $out/bin/code \
+                      ${wrapProgramArgs}
+                  '';
+                }));
 
           mutableExtensionsDir = false;
           profiles.default = {
@@ -144,8 +158,6 @@ in
             };
           };
         };
-
-        home.packages = if cfg.fhs.enabled then [ ] else (mkPkgList pkgs);
 
         nixpkgs.config.allowUnfreePredicate = pkg:
           builtins.elem (lib.getName pkg) ([ "vscode" "code" ] ++ cfg.dependencies.unfreePackages);
