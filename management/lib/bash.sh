@@ -3,6 +3,7 @@
 #
 # Utility functions for Bash-related things.
 # ==============================================================================
+# shellcheck shell=bash source-path=../../
 if test -n "${__guard_lib_bash:-}"; then return 0; fi
 __guard_lib_bash="${BASH_SOURCE[0]}"
 # ==============================================================================

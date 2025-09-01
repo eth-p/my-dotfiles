@@ -3,10 +3,11 @@
 #
 # Utility functions for manipulating files.
 # ==============================================================================
+# shellcheck shell=bash source-path=../../
 if test -n "${__guard_lib_files:-}"; then return 0; fi
 __guard_lib_files="${BASH_SOURCE[0]}"
 # ==============================================================================
-source "$LIB_DIR/print.sh"
+source "management/lib/print.sh"
 
 create_and_overwrite() {
 	if test -f "$1"; then

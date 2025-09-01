@@ -5,10 +5,10 @@
 # Apply any local changes made to my-dotfiles or the
 # device-specific configuration file.
 # ==============================================================================
+# shellcheck shell=bash source-path=../../
 set -euo pipefail
 cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
 REPO_DIR="$(pwd)"
-LIB_DIR="${REPO_DIR}/management/lib"
 # ==============================================================================
 source "management/lib/nix.sh"
 

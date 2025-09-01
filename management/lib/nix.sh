@@ -4,10 +4,11 @@
 # Wrappers and utility functions for working with Nix or running Nix commands
 # before my-dotfiles is initially set up.
 # ==============================================================================
+# shellcheck shell=bash source-path=../../
 if test -n "${__guard_lib_nix:-}"; then return 0; fi
 __guard_lib_nix="${BASH_SOURCE[0]}"
 # ==============================================================================
-source "$LIB_DIR/bash.sh"
+source "management/lib/bash.sh"
 
 nix() {
 	command nix --experimental-features 'flakes nix-command' "$@" || return $?
@@ -34,7 +35,7 @@ nix_installed() {
 nix_install_dir() {
 	local result
 	if result="$(bash -lc 'command -v nix >&3' 3>&1 &>/dev/null)"; then
-		print_and_redefine "$FUNCNAME" "$(dirname -- "$result")"
+		print_and_redefine "${FUNCNAME[0]}" "$(dirname -- "$result")"
 		return 0
 	fi
 
@@ -50,12 +51,13 @@ nix_platform() {
 	local kernel arch
 	kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
 	arch="$(uname -m | sed 's/^arm64$/aarch64/; s/^amd64$/x86_64/')"
-	print_and_redefine "$FUNCNAME" "${arch}-${kernel}"
+	print_and_redefine "${FUNCNAME[0]}" "${arch}-${kernel}"
 }
 
 # nix_flake_ref returns a reference to the locked version of some flake used in
 # my-dotfiles.
 nix_flake_ref() {
+	# shellcheck disable=SC2016
 	nix eval --impure --raw --expr '
         let
             lock = (builtins.fromJSON (builtins.readFile ./flake.lock));
@@ -77,7 +79,7 @@ nixpkgs_flake() {
 		nix_flake_ref nixpkgs
 	})"
 
-	print_and_redefine "$FUNCNAME" "$ref"
+	print_and_redefine "${FUNCNAME[0]}" "$ref"
 }
 
 # nixpkgs_run executes a program from nixpkgs.
@@ -92,5 +94,5 @@ nixpkgs_run() {
 home_manager_flake() {
 	local ref
 	ref="$(nix_flake_ref home-manager)"
-	print_and_redefine "$FUNCNAME" "$ref"
+	print_and_redefine "${FUNCNAME[0]}" "$ref"
 }

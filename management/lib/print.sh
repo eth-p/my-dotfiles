@@ -3,6 +3,7 @@
 #
 # Utility functions for printing output.
 # ==============================================================================
+# shellcheck shell=bash source-path=../../
 if test -n "${__guard_lib_print:-}"; then return 0; fi
 __guard_lib_print="${BASH_SOURCE[0]}"
 # ==============================================================================
@@ -27,5 +28,6 @@ show_notice() {
 
 # show_error prints an error message.
 show_error() {
+	# shellcheck disable=SC2059
 	printf "\033[31m$1\033[m\n" "${@:2}" 1>&2
 }

@@ -4,10 +4,11 @@
 # Wrappers for running Nix commands or nix-shell programs without having my
 # configuration fully set up.
 # ==============================================================================
+# shellcheck shell=bash source-path=../../
 if test -n "${__guard_lib_system:-}"; then return 0; fi
 __guard_lib_system="${BASH_SOURCE[0]}"
 # ==============================================================================
-source "$LIB_DIR/bash.sh"
+source "management/lib/bash.sh"
 
 user_homedir() {
 	if test -n "$HOME"; then
@@ -22,7 +23,7 @@ user_username() {
 }
 
 user_configdir() {
-	print_and_redefine "$FUNCNAME" "${XDG_CONFIG_HOME:-$(user_homedir)/.config}"
+	print_and_redefine "${FUNCNAME[0]}" "${XDG_CONFIG_HOME:-$(user_homedir)/.config}"
 }
 
 system_hostname() {
@@ -34,7 +35,7 @@ system_hostname() {
 }
 
 mydotfiles_configdir() {
-	print_and_redefine "$FUNCNAME" "$(user_configdir)/my-dotfiles"
+	print_and_redefine "${FUNCNAME[0]}" "$(user_configdir)/my-dotfiles"
 }
 
 is_steamos() {
