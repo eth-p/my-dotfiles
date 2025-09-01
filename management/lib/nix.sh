@@ -64,11 +64,19 @@ nix_flake_ref() {
     '
 }
 
-# nixpkgs_flake returns a reference to the locked version of the nixpkgs flake
-# used in my-dotfiles.
+# nixpkgs_flake returns a reference to the locked version of the nixpkgs flake,
+# prioritizing the applied nixpkgs version used by my-dotfiles, or failing
+# that, the version specified in the my-dotfiles repo.
 nixpkgs_flake() {
 	local ref
-	ref="$(nix_flake_ref nixpkgs)"
+	ref="$({
+		if [[ -n "${BOOTSTRAPPED_FLAKE_DIR:-}" ]]; then
+			cd "$BOOTSTRAPPED_FLAKE_DIR" || return 1
+		fi
+
+		nix_flake_ref nixpkgs
+	})"
+
 	print_and_redefine "$FUNCNAME" "$ref"
 }
 
