@@ -8,7 +8,6 @@
 # shellcheck shell=bash source-path=../../
 set -euo pipefail
 cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
-REPO_DIR="$(pwd)"
 # ==============================================================================
 source "management/lib/nix.sh"
 
@@ -16,15 +15,28 @@ BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
 
 # ------------------------------------------------------------------------------
 
-# Apply config using home-manager.
-# Overriding the `my-dotfiles` allows it to ignore the lockfile for my-dotfiles.
-nix run "$(home_manager_flake)" -- switch \
-	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
-	--option "warn-dirty" false \
-	--option "commit-lock-file-summary" false \
-	--override-input 'my-dotfiles' "git+file:${REPO_DIR}"
+git() {
+	nixpkgs_run git "$@"
+}
 
-# Delete neovim's Luajit cache if it gets too large.
-if [[ "$(du -k "$HOME/.cache/nvim/luac" | awk '{ print $1 }')" -gt 65536 ]]; then
-	find "$HOME/.cache/nvim/luac" -iname "%2fnix%2fstore%2f*.luac" | xargs rm
+# Ensure my-dotfiles repo is not dirty.
+git diff --quiet --ignore-submodules HEAD || {
+	show_error "error: my-dotfiles repo is dirty, cannot update flake lockfile."
+	exit 1
+}
+
+# Update repo.
+if ! pull_message=$(git pull --ff-only 2>&1); then
+	show_error "error: failed to pull my-dotfiles repo."
+	echo "$pull_message"
+	exit 1
 fi
+
+# Update lock file.
+nix flake update my-dotfiles \
+	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
+	--commit-lock-file \
+	--quiet
+
+# Instruct user.
+show_notice "Run 'my-dotfiles apply' to apply the upgrade."
