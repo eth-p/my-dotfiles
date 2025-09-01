@@ -42,3 +42,8 @@ is_steamos() {
 	test -f /etc/steamos-release || return 1
 	return 0
 }
+
+is_android() {
+	command -v nix-on-droid &>/dev/null || return 1
+	return 0
+}

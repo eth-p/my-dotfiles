@@ -10,6 +10,7 @@ set -euo pipefail
 cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
 # ==============================================================================
 source "management/lib/nix.sh"
+source "management/lib/system.sh"
 
 BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
 
@@ -33,10 +34,18 @@ if ! pull_message=$(git pull --ff-only 2>&1); then
 fi
 
 # Update lock file.
-nix flake update my-dotfiles \
-	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
-	--commit-lock-file \
-	--quiet
+if is_android; then
+	(
+		# Older version of nix, nix flake update behaves differently.
+		cd "$BOOTSTRAPPED_FLAKE_DIR"
+		nix flake update path:.
+	)
+else
+	nix flake update my-dotfiles \
+		--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
+		--commit-lock-file \
+		--quiet
+fi
 
 # Instruct user.
 show_notice "Run 'my-dotfiles apply' to apply the upgrade."
