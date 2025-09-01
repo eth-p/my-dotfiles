@@ -60,7 +60,7 @@ nix_flake_ref() {
         let
             lock = (builtins.fromJSON (builtins.readFile ./flake.lock));
             flake = lock.nodes.'"$1"';
-        in "github:${flake.original.owner}/${flake.original.repo}?rev=${flake.locked.rev}\n"
+        in "github:${flake.locked.owner}/${flake.locked.repo}?rev=${flake.locked.rev}\n"
     '
 }
 
