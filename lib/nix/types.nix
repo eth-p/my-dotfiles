@@ -3,7 +3,7 @@
 #
 # Custom module option types.
 # ==============================================================================
-{ lib, ... }:
+{ lib, my-dotfiles, ... }:
 {
 
   # functionListTo is an option type that takes option values in the form of
@@ -13,4 +13,9 @@
     check = f: lib.isFunction f;
     merge = loc: defs: map (def: def.value) defs;
   };
+
+  # creds is an option type for a runtime credentials provider.
+  # See `creds.nix` for more details.
+  creds = my-dotfiles.lib.creds.type;
+
 }

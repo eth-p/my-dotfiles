@@ -4,6 +4,7 @@
 # This references all nix files this directory.
 # ==============================================================================
 { ... } @ inputs: {
+  creds = (import ./creds.nix) inputs;
   tolua = (import ./tolua.nix) inputs;
   togotemplate = (import ./togotemplate.nix) inputs;
   theming = (import ./theming.nix) inputs;
