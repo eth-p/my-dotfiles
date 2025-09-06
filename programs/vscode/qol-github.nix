@@ -3,7 +3,7 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, ... } @ inputs:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -25,6 +25,17 @@ in
         profiles.default.extensions = with extensions;
           [
             github.vscode-github-actions
+          ];
+      };
+    }
+
+    # GitHub Actions Shell Scripts
+    # https://marketplace.visualstudio.com/items?itemName=marcovr.actions-shell-scripts
+    {
+      programs.vscode = {
+        profiles.default.extensions =
+          [
+            (import ./extensions/actions-shell-scripts.nix inputs)
           ];
       };
     }
