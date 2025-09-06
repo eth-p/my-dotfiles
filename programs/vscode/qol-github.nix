@@ -40,5 +40,11 @@ in
       };
     }
 
+    (mkIf config.my-dotfiles.vscode.language.bash.enable {
+      programs.vscode.profiles.default.userSettings = {
+        "actions-shell-scripts.shellcheckFolder" = config.my-dotfiles.vscode.language.bash.shellcheck.package + "/bin";
+      };
+    })
+
   ]);
 }

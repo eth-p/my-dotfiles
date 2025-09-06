@@ -796,6 +796,14 @@ add Bash language support to Visual Studio Code
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.language.bash.shellcheck.package`](programs/vscode/language-bash.nix#L19)
+
+the shellcheck package
+
+**Type:** `lib.types.package`
+
+**Default:** `pkgs.shellcheck`
+
 ## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L18)
 
 the Go compiler package

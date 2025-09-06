@@ -14,6 +14,14 @@ in
   options.my-dotfiles.vscode.language.bash = {
     enable =
       lib.mkEnableOption "add Bash language support to Visual Studio Code";
+
+    shellcheck = {
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.shellcheck;
+        description = "the shellcheck package";
+      };
+    };
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -28,7 +36,7 @@ in
           ];
 
         profiles.default.userSettings = {
-          "shellcheck.executablePath" = pkgs.shellcheck + "/bin/shellcheck";
+          "shellcheck.executablePath" = cfg.shellcheck.package + "/bin/shellcheck";
           "shellcheck.customArgs" = [ "-x" ];
           "shellcheck.disableVersionCheck" = true;
         };
