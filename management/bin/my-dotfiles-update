@@ -2,8 +2,8 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# Apply any local changes made to my-dotfiles or the
-# device-specific configuration file.
+# Update the lockfile and pull in the latest version of
+# packages and dependencies.
 # ==============================================================================
 # shellcheck shell=bash source-path=../../
 set -euo pipefail
