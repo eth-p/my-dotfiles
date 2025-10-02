@@ -19,6 +19,26 @@ Enable batman for reading manpages.
 
 **Default:** `true`
 
+## [`my-dotfiles.bitwarden.enable`](programs/bitwarden/default.nix#L13)
+
+install Bitwarden
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.bitwarden.useForSSHAgent`](programs/bitwarden/default.nix#L14)
+
+use Bitwarden as the ssh-agent
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.btop.enable`](programs/btop/default.nix#L13)
 
 install and configure btop
