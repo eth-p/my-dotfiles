@@ -2,7 +2,7 @@
 # Repository: https://github.com/eth-p/my-dotfiles
 #
 # Program: https://code.visualstudio.com/
-# Extension: https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert
+# Extension: https://marketplace.visualstudio.com/items?itemName=jkiviluoto.tws
 # ==============================================================================
 { pkgs, lib, ... }:
 pkgs.vscode-utils.buildVscodeMarketplaceExtension {
