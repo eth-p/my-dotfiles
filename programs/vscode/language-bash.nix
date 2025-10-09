@@ -50,7 +50,7 @@ in
       programs.vscode = {
         profiles.default.extensions = with extensions;
           [
-            (import ./extensions/shfmt.nix inputs)
+            mkhl.shfmt
           ];
 
         profiles.default.userSettings = {
