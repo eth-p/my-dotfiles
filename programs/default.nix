@@ -24,7 +24,6 @@
   ./github-cli
   ./github-act
   ./glow
-  ./goldwarden
   ./kubesel
   ./neovim
   ./oh-my-posh

@@ -430,26 +430,6 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`my-dotfiles.goldwarden.enable`](programs/goldwarden/default.nix#L13)
-
-install goldwarden
-
-**Type:** `boolean`
-
-**Default:** `false`
-
-**Example:** `true`
-
-## [`my-dotfiles.goldwarden.useForSSHAgent`](programs/goldwarden/default.nix#L14)
-
-use goldwarden as the ssh-agent
-
-**Type:** `boolean`
-
-**Default:** `false`
-
-**Example:** `true`
-
 ## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L15)
 
 install kubesel
