@@ -8,5 +8,9 @@
 
   runtimeInputs = [ pkgs.bash ];
 
+  excludeShellChecks = [
+    "SC2329" # Unused function
+  ];
+
   text = (builtins.readFile ./bin/term-query-bg.sh);
 }
