@@ -18,6 +18,9 @@
     # nixpkgs is for installing packages.
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    # vicinae: https://github.com/vicinaehq/vicinae
+    vicinae.url = "github:vicinaehq/vicinae/v0.14.2";
+
     # My own packages:
     kubesel = {
       url = "github:eth-p/kubesel";
@@ -25,7 +28,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, ... } @ inputs: rec {
+  outputs = { self, nixpkgs, ... } @ inputs: rec {
 
     # lib provides reusable library functions.
     lib = (import ./lib/nix) ({ lib = nixpkgs.lib; my-dotfiles = self; } // inputs);

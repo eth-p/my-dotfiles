@@ -3,7 +3,7 @@
 #
 # Helpers for creating a home-manager flake using my-dotfiles.
 # ==============================================================================
-{ lib, my-dotfiles, home-manager, nixpkgs, ... } @ inputs:
+{ lib, my-dotfiles, home-manager, nixpkgs, vicinae, ... } @ inputs:
 let inherit (my-dotfiles.lib.util) getOrDefault;
 in rec {
 
@@ -26,6 +26,7 @@ in rec {
       # Add overlays.
       overlays = [
         my-dotfiles.overlay
+        vicinae.overlays.default
       ];
 
       # Get the nixpkgs for the specified platform.
@@ -42,6 +43,9 @@ in rec {
       inherit pkgs;
       modules =
         my-dotfiles.homeModules
+        ++ [
+          vicinae.homeManagerModules.default
+        ]
         ++ profileMod
         ++ modules;
       extraSpecialArgs = {

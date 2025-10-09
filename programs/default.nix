@@ -30,6 +30,7 @@
   ./ranger
   ./ranger/patch-scope-options.nix
   ./ripgrep
+  ./vicinae
   ./vscode
   ./yq
   ./zoxide

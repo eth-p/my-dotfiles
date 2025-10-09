@@ -708,6 +708,16 @@ install ripgrep
 
 **Example:** `true`
 
+## [`my-dotfiles.vicinae.enable`](programs/vicinae/default.nix#L13)
+
+install vicinae
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L41)
 
 The color scheme used for Visual Studio Code.
