@@ -21,6 +21,7 @@ in
     ./language-nix.nix
     ./language-rust.nix
     ./language-toml.nix
+    ./language-yaml.nix
     ./qol-github.nix
     ./qol-todo.nix
     ./remote-devcontainer.nix

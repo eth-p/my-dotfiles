@@ -718,7 +718,7 @@ install vicinae
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L41)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L42)
 
 The color scheme used for Visual Studio Code.
 
@@ -726,7 +726,7 @@ The color scheme used for Visual Studio Code.
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L107)
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L108)
 
 Extra packages to install.
 
@@ -736,7 +736,7 @@ Extra packages to install.
 
 **Example:** `(pkgs: with pkgs; [ gcc rustc ])`
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L114)
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L115)
 
 Unfree packages to allow.
 
@@ -746,7 +746,7 @@ Unfree packages to allow.
 
 **Example:** `[ "vscode-extension-ms-vscode-remote-remote-ssh" ]`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L88)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L89)
 
 show the git blame as an inline hint
 
@@ -754,7 +754,7 @@ show the git blame as an inline hint
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L83)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L84)
 
 Column numbers to draw a ruler at.
 
@@ -762,7 +762,7 @@ Column numbers to draw a ruler at.
 
 **Default:** `[ 80 120 ]`
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L93)
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L94)
 
 Highlight trailing whitespace.
 
@@ -770,7 +770,7 @@ Highlight trailing whitespace.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L31)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L32)
 
 install and configure Visual Studio Code
 
@@ -780,7 +780,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L100)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L101)
 
 Use a FHS environment for VS Code.
 
@@ -788,7 +788,7 @@ Use a FHS environment for VS Code.
 
 **Default:** `false`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L35)
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L36)
 
 use alternate keybindings
 
@@ -968,7 +968,17 @@ add TOML language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L32)
+## [`my-dotfiles.vscode.language.yaml.enable`](programs/vscode/language-yaml.nix#L16)
+
+add Yaml language support to Visual Studio Code
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L33)
 
 do not install Visual Studio Code, only configure it
 
