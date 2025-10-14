@@ -19,6 +19,7 @@ in
     ./language-makefile.nix
     ./language-markdown.nix
     ./language-nix.nix
+    ./language-python.nix
     ./language-rust.nix
     ./language-toml.nix
     ./language-yaml.nix
