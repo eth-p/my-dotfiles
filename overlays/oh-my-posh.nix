@@ -9,23 +9,23 @@ final: prev:
 let
   inherit (prev) lib system stdenv;
   pkgs = prev;
-  version = "v26.19.1";
+  version = "v27.2.1";
   downloads = {
     "x86_64-linux" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/${version}/posh-linux-amd64";
-      hash = "sha256-iMCWjA1MiqtQ8MFCQr/pVgvv0QtFl6gYsS2PiYhqqp4=";
+      hash = "sha256-rNO2yU+gNvQ3N08LhX9CmIMFC9Z9eewhuf2fT2Hl6ZM=";
     };
     "aarch64-linux" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/${version}/posh-linux-arm64";
-      hash = "sha256-MyL+xhnIZR1E9sAS5DxfKJ9lvJVwToQS1CdZST5g+po=";
+      hash = "sha256-tGbdBk7VbdfOMAJKhW1E3K2FCUjtB+CSMqVzD4h6oXQ=";
     };
     "x86_64-darwin" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/${version}/posh-darwin-amd64";
-      hash = "sha256-EoRJ3VfY4ThsIU55iwjPoY+oXsKmxUEI5BHZBfqojRU=";
+      hash = "sha256-OUzfMtWEo7ALR3+jeix3WaTpBOv+3Phf+tQrTMDtlsk=";
     };
     "aarch64-darwin" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/${version}/posh-darwin-arm64";
-      hash = "sha256-vmT32mM1zHJvVnWI1e/Sl7Z9qAguNU/8n2vuDMceaJ0=";
+      hash = "sha256-FgNs3QeauYrNI/N2lwmlYzqH1R2itpSp7seZTKrbTTk=";
     };
   };
 in
