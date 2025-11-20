@@ -2,6 +2,9 @@
 inputs:
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
+
+  nix-options-doc:
+    url: github:Thunderbottom/nix-options-doc?rev=2caa4b5756a8666d65d70122f413e295f56886e7
 # If you're using non-OSS software, you can set allowUnfree to true.
 # allowUnfree: true
 
