@@ -3,7 +3,13 @@
 #
 # Program: https://github.com/fish-shell/fish-shell
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (import ./generator.nix inputs) mkPrivateFishFunction privateIdent;
@@ -68,7 +74,9 @@ in
       '';
 
       xdg.configFile = builtins.listToAttrs [
-        (mkPrivateFishFunction "detect_colorscheme" (import ./functions/detect_colorscheme.nix) { inherit my-pkgs; })
+        (mkPrivateFishFunction "detect_colorscheme" (import ./functions/detect_colorscheme.nix) {
+          inherit my-pkgs;
+        })
       ];
     })
 
@@ -79,17 +87,21 @@ in
 
     # Fix the PATH variable on login.
     (mkIf cfg.fixPATH {
-      programs.fish.loginShellInit = (lib.mkOrder 0 ''
-        # Fix the PATH
-        ${privateIdent "fix_path"}
-      '');
-
-      programs.fish.shellInit = (lib.mkOrder 0 ''
-        # Fix the PATH
-        if test -n "$__ETHP_FIXED_PATH" && not status --is-interactive
+      programs.fish.loginShellInit = (
+        lib.mkOrder 0 ''
+          # Fix the PATH
           ${privateIdent "fix_path"}
-        end
-      '');
+        ''
+      );
+
+      programs.fish.shellInit = (
+        lib.mkOrder 0 ''
+          # Fix the PATH
+          if test -n "$__ETHP_FIXED_PATH" && not status --is-interactive
+            ${privateIdent "fix_path"}
+          end
+        ''
+      );
 
       xdg.configFile = builtins.listToAttrs [
         (mkPrivateFishFunction "fix_path" (import ./functions/fix_path.nix) { })

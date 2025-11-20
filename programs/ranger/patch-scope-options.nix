@@ -1,29 +1,37 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# Patch to make ranger's scope.sh configurable. 
+# Patch to make ranger's scope.sh configurable.
 # ==============================================================================
-{ lib, pkgs, config, ctx, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ctx,
+  ...
+}:
 let
   inherit (lib) mkIf;
   cfg = config.programs.ranger;
 
-  bashCase = with lib; types.submodule {
-    options = {
-      case = mkOption {
-        type = types.str;
-        description = ''
-          The case expression.
-        '';
-      };
-      command = mkOption {
-        type = types.lines;
-        description = ''
-          The command to run if this branch is taken.
-        '';
+  bashCase =
+    with lib;
+    types.submodule {
+      options = {
+        case = mkOption {
+          type = types.str;
+          description = ''
+            The case expression.
+          '';
+        };
+        command = mkOption {
+          type = types.lines;
+          description = ''
+            The command to run if this branch is taken.
+          '';
+        };
       };
     };
-  };
 in
 {
   options.programs.ranger = {
@@ -87,14 +95,15 @@ in
         in
         {
           executable = true;
-          text = builtins.replaceStrings
-            [ subst_extension subst_mime subst_image ]
-            [
-              "${subst_extension}\n${createInject cfg.scope.extension}"
-              "${subst_mime}\n${createInject cfg.scope.mimeType}"
-              "${subst_image}\n${createInject cfg.scope.imageType}"
-            ]
-            (builtins.readFile "${rangerSrc}/ranger/data/scope.sh");
+          text =
+            builtins.replaceStrings
+              [ subst_extension subst_mime subst_image ]
+              [
+                "${subst_extension}\n${createInject cfg.scope.extension}"
+                "${subst_mime}\n${createInject cfg.scope.mimeType}"
+                "${subst_image}\n${createInject cfg.scope.imageType}"
+              ]
+              (builtins.readFile "${rangerSrc}/ranger/data/scope.sh");
         };
 
     };

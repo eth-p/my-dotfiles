@@ -3,7 +3,12 @@
 #
 # Program: https://github.com/ranger/ranger
 # ==============================================================================
-{ lib, config, pkgs, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   rangerHome = "${config.xdg.configHome}/ranger";
@@ -59,14 +64,12 @@ in
     # Add ranger themes.
     {
       home.file = builtins.listToAttrs (
-        builtins.map
-          (theme: {
-            name = "${rangerHome}/colorschemes/${theme}.py";
-            value = {
-              source = ./themes + "/${theme}.py";
-            };
-          })
-          themes.custom
+        builtins.map (theme: {
+          name = "${rangerHome}/colorschemes/${theme}.py";
+          value = {
+            source = ./themes + "/${theme}.py";
+          };
+        }) themes.custom
       );
     }
 
@@ -107,9 +110,10 @@ in
         glowThemes = (import ../glow/themes.nix inputs);
         glowTheme = config.my-dotfiles.glow.theme;
         styleFlag =
-          if config.my-dotfiles.glow.enable
-          then "--style=${builtins.toJSON (glowThemes.toFlag glowTheme)}"
-          else "--style=dark";
+          if config.my-dotfiles.glow.enable then
+            "--style=${builtins.toJSON (glowThemes.toFlag glowTheme)}"
+          else
+            "--style=dark";
       in
       {
         home.packages = [ pkgs.glow ];

@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.qol.todo = {
-    enable =
-      lib.mkEnableOption "improve TODO support";
+    enable = lib.mkEnableOption "improve TODO support";
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -22,10 +26,9 @@ in
     # https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
     {
       programs.vscode = {
-        profiles.default.extensions = with extensions;
-          [
-            gruntfuggly.todo-tree
-          ];
+        profiles.default.extensions = with extensions; [
+          gruntfuggly.todo-tree
+        ];
 
         profiles.default.userSettings = {
           "todo-tree.general.automaticGitRefreshInterval" = 30;
@@ -50,7 +53,11 @@ in
           ];
 
           "todo-tree.general.tagGroups" = {
-            "FIXME" = [ "FIX" "FIXIT" "FIXME" ];
+            "FIXME" = [
+              "FIX"
+              "FIXIT"
+              "FIXME"
+            ];
           };
 
           "todo-tree.highlights.defaultHighlight" = {

@@ -3,7 +3,13 @@
 #
 # Program: https://github.com/charmbracelet/glow
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf;
   cfg = config.my-dotfiles.glow;
@@ -30,27 +36,24 @@ in
 
     # Configure glow.
     home.file = {
-      "${glowHome}/glow.yml" =
-        {
-          text = ''
-            style: ${builtins.toJSON (themes.toFlag cfg.theme)}
-            mouse: true
-            pager: true
-          '';
-        };
+      "${glowHome}/glow.yml" = {
+        text = ''
+          style: ${builtins.toJSON (themes.toFlag cfg.theme)}
+          mouse: true
+          pager: true
+        '';
+      };
     }
 
     # Add the custom theme files.
     // (builtins.listToAttrs (
-      builtins.map
-        (theme: {
-          name = "${glowHome}/themes/${theme}.json";
-          value = {
-            source = ./themes + "/${theme}.json";
-          };
-        })
-        themes.custom)
-    );
+      builtins.map (theme: {
+        name = "${glowHome}/themes/${theme}.json";
+        value = {
+          source = ./themes + "/${theme}.json";
+        };
+      }) themes.custom
+    ));
 
   };
 }

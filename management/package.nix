@@ -4,7 +4,8 @@
 # Nix function to link the my-dotfiles script in this repo to somewhere in the
 # PATH.
 # ==============================================================================
-{ pkgs, bootstrap }: pkgs.writeShellApplication {
+{ pkgs, bootstrap }:
+pkgs.writeShellApplication {
   name = "my-dotfiles";
   runtimeInputs = [ pkgs.bash ];
   text =

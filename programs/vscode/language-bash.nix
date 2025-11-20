@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }@inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.bash = {
-    enable =
-      lib.mkEnableOption "add Bash language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add Bash language support to Visual Studio Code";
 
     shellcheck = {
       package = lib.mkOption {
@@ -30,10 +34,9 @@ in
     # https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
     {
       programs.vscode = {
-        profiles.default.extensions = with extensions;
-          [
-            timonwong.shellcheck
-          ];
+        profiles.default.extensions = with extensions; [
+          timonwong.shellcheck
+        ];
 
         profiles.default.userSettings = {
           "shellcheck.executablePath" = cfg.shellcheck.package + "/bin/shellcheck";
@@ -48,10 +51,9 @@ in
     {
       my-dotfiles.vscode.editorconfig = lib.mkForce true; # dependency
       programs.vscode = {
-        profiles.default.extensions = with extensions;
-          [
-            mkhl.shfmt
-          ];
+        profiles.default.extensions = with extensions; [
+          mkhl.shfmt
+        ];
 
         profiles.default.userSettings = {
           "shfmt.executablePath" = pkgs.shfmt + "/bin/shfmt";

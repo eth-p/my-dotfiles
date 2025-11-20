@@ -3,7 +3,8 @@
 #
 # Program: https://github.com/fish-shell/fish-shell
 # ==============================================================================
-{ lib, ... }: rec {
+{ lib, ... }:
+rec {
   privateIdentPrefix = "__mydotfiles";
 
   # privateIdent converts a public identifier to a private identifier.
@@ -23,10 +24,13 @@
   mkPrivateFishFunction = name: gen: template_vars: {
     name = "fish/functions/${privateIdent name}.fish";
     value = {
-      text = gen ({
-        inherit privateIdent;
-        name = privateIdent name;
-      } // template_vars);
+      text = gen (
+        {
+          inherit privateIdent;
+          name = privateIdent name;
+        }
+        // template_vars
+      );
     };
   };
 

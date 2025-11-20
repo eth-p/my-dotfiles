@@ -3,7 +3,12 @@
 #
 # Program: https://github.com/sharkdp/fd
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.fd;

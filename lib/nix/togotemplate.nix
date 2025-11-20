@@ -20,20 +20,23 @@ let
   nul = v: "nil";
 
   # attrs converts an attribute set into its GoTemplate equivalent.
-  attrs = v:
-    if builtins.length (builtins.attrNames v) == 0
-    then "(dict)"
-    else "(dict\n${_indentLines (_concatItems (_mapAttrsToList _namedValueToGoTemplate v))}\n)";
+  attrs =
+    v:
+    if builtins.length (builtins.attrNames v) == 0 then
+      "(dict)"
+    else
+      "(dict\n${_indentLines (_concatItems (_mapAttrsToList _namedValueToGoTemplate v))}\n)";
 
   # list converts a list into its GoTemplate equivalent.
-  list = v:
-    if builtins.length v == 0
-    then "(list)"
-    else "(list\n${_indentLines (_concatItems (builtins.map _valueToGoTemplate v))}\n)";
+  list =
+    v:
+    if builtins.length v == 0 then
+      "(list)"
+    else
+      "(list\n${_indentLines (_concatItems (builtins.map _valueToGoTemplate v))}\n)";
 
   # _mapAttrsToList :: (f string string -> string) attrs -> list
-  _mapAttrsToList = f: set:
-    (builtins.map (k: f k (builtins.getAttr k set)) (builtins.attrNames set));
+  _mapAttrsToList = f: set: (builtins.map (k: f k (builtins.getAttr k set)) (builtins.attrNames set));
 
   # _namedValueToGoTemplate :: string any -> string
   _namedValueToGoTemplate = name: value: "${string name} ${_valueToGoTemplate value}";
@@ -52,7 +55,6 @@ let
     set = attrs;
     null = nul;
   };
-
 
 in
 {

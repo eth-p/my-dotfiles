@@ -3,7 +3,12 @@
 #
 # Program: https://direnv.net/
 # ==============================================================================
-{ lib, config, pkgs, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.direnv;

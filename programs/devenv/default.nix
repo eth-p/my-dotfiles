@@ -3,7 +3,13 @@
 #
 # Program: https://devenv.sh/
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.devenv;
@@ -38,11 +44,16 @@ in
         leading_diamond = " ";
         trailing_diamond = "";
 
-        template = (builtins.concatStringsSep "" [
-          "{{ if .Env.DEVENV_ROOT }}"
-          (nerdOr /* F1064 */ "󱁤 " "devenv")
-          "{{ end }}"
-        ]);
+        template = (
+          builtins.concatStringsSep "" [
+            "{{ if .Env.DEVENV_ROOT }}"
+            (
+              # F1064
+              nerdOr "󱁤 " "devenv"
+            )
+            "{{ end }}"
+          ]
+        );
       };
     })
 

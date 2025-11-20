@@ -3,7 +3,13 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (lib.strings) concatStringsSep;
@@ -32,16 +38,25 @@ in
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
     onlyConfigure = lib.mkEnableOption "do not install Visual Studio Code, only configure it";
-    editorconfig = lib.mkEnableOption "install the EditorConfig extension" // { default = true; };
+    editorconfig = lib.mkEnableOption "install the EditorConfig extension" // {
+      default = true;
+    };
 
     keybindings = lib.mkOption {
-      type = lib.types.enum [ "default" "intellij" ];
+      type = lib.types.enum [
+        "default"
+        "intellij"
+      ];
       description = "use alternate keybindings";
       default = "default";
     };
 
     colorscheme = lib.mkOption {
-      type = lib.types.enum [ "dark" "light" "auto" ];
+      type = lib.types.enum [
+        "dark"
+        "light"
+        "auto"
+      ];
       default = config.my-dotfiles.global.colorscheme;
       description = "The color scheme used for Visual Studio Code.";
     };
@@ -85,7 +100,10 @@ in
       rulers = lib.mkOption {
         type = lib.types.listOf lib.types.int;
         description = "Column numbers to draw a ruler at.";
-        default = [ 80 120 ];
+        default = [
+          80
+          120
+        ];
       };
       inlineBlame = lib.mkOption {
         type = lib.types.bool;
@@ -103,13 +121,18 @@ in
       type = lib.types.bool;
       description = "Use a FHS environment for VS Code.";
       default = false;
-      readOnly = ! pkgs.stdenv.isLinux;
+      readOnly = !pkgs.stdenv.isLinux;
     };
 
     dependencies.packages = lib.mkOption {
       type = my-dotfiles.lib.types.functionListTo lib.types.package;
       description = "Extra packages to install.";
-      example = (pkgs: with pkgs; [ gcc rustc ]);
+      example = (
+        pkgs: with pkgs; [
+          gcc
+          rustc
+        ]
+      );
       default = (pkgs: [ ]);
     };
 
@@ -135,11 +158,13 @@ in
         programs.vscode = {
           enable = true;
           package =
-            if cfg.fhs.enabled
-            then (pkgs.vscode.fhsWithPackages mkPkgList)
+            if cfg.fhs.enabled then
+              (pkgs.vscode.fhsWithPackages mkPkgList)
             else
-              (pkgs.vscode.overrideAttrs (old:
-                let wrapProgramArgs = concatStringsSep " \\\n" (map mkWrapProgramPathPrependArgs (mkPkgList pkgs));
+              (pkgs.vscode.overrideAttrs (
+                old:
+                let
+                  wrapProgramArgs = concatStringsSep " \\\n" (map mkWrapProgramPathPrependArgs (mkPkgList pkgs));
                 in
                 {
                   postFixup = ''
@@ -147,7 +172,8 @@ in
                     wrapProgram $out/bin/code \
                       ${wrapProgramArgs}
                   '';
-                }));
+                }
+              ));
 
           mutableExtensionsDir = false;
           profiles.default = {
@@ -161,8 +187,15 @@ in
           };
         };
 
-        nixpkgs.config.allowUnfreePredicate = pkg:
-          builtins.elem (lib.getName pkg) ([ "vscode" "code" ] ++ cfg.dependencies.unfreePackages);
+        nixpkgs.config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) (
+            [
+              "vscode"
+              "code"
+            ]
+            ++ cfg.dependencies.unfreePackages
+          );
       }
     )
 
@@ -194,15 +227,17 @@ in
 
     # Optionally set the Visual Studio Code package to an empty package.
     (mkIf cfg.onlyConfigure {
-      programs.vscode.package = lib.mkForce (pkgs.stdenv.mkDerivation {
-        pname = "vscode";
-        name = "vscode";
-        version = "1.74.0"; # must be at least 1.74.0 for extensions.json to be generated
-        unpackPhase = ":";
-        buildPhase = ''
-          mkdir $out
-        '';
-      });
+      programs.vscode.package = lib.mkForce (
+        pkgs.stdenv.mkDerivation {
+          pname = "vscode";
+          name = "vscode";
+          version = "1.74.0"; # must be at least 1.74.0 for extensions.json to be generated
+          unpackPhase = ":";
+          buildPhase = ''
+            mkdir $out
+          '';
+        }
+      );
     })
 
     # Set up colorschemes.
@@ -225,7 +260,8 @@ in
 
     # Set up fonts.
     (
-      let inherit (config.my-dotfiles.global) font-category;
+      let
+        inherit (config.my-dotfiles.global) font-category;
         defaultFonts = "Menlo, Monaco, 'Courier New', monospace";
       in
       {
@@ -244,19 +280,17 @@ in
     # Install EditorConfig extension.
     # https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
     (mkIf cfg.editorconfig {
-      programs.vscode.profiles.default.extensions = with extensions;
-        [
-          editorconfig.editorconfig
-        ];
+      programs.vscode.profiles.default.extensions = with extensions; [
+        editorconfig.editorconfig
+      ];
     })
 
     # Install Trailing Whitespace extension.
     # https://marketplace.visualstudio.com/items?itemName=jkiviluoto.tws
     (mkIf cfg.editor.whitespace.showTrailing {
-      programs.vscode.profiles.default.extensions =
-        with extensions; [
-          shardulm94.trailing-spaces
-        ];
+      programs.vscode.profiles.default.extensions = with extensions; [
+        shardulm94.trailing-spaces
+      ];
 
       programs.vscode.profiles.default.userSettings = {
         "trailing-spaces.backgroundColor" = "rgba(255, 0, 179, 0.3)";
@@ -268,8 +302,10 @@ in
     # Configure to use `fish` as the shell.
     (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {
       programs.vscode.profiles.default.userSettings =
-        let os = if pkgs.stdenv.isDarwin then "osx" else "linux";
-        in {
+        let
+          os = if pkgs.stdenv.isDarwin then "osx" else "linux";
+        in
+        {
           "terminal.integrated.defaultProfile.${os}" = "fish";
           "terminal.integrated.profiles.${os}" = {
             "fish" = {

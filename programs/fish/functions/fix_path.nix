@@ -1,4 +1,5 @@
-{ name, ... }: ''
+{ name, ... }:
+''
   # MacOS has a special path_helper executable that will push any path not
   # specified in `/etc/paths` or `/etc/paths.d` to the very end of the PATH
   # environment variable.

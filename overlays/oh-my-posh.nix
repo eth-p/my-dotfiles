@@ -39,10 +39,7 @@ stdenv.mkDerivation rec {
   dontBuild = true;
   dontUnpack = true;
 
-  nativeBuildInputs =
-    if stdenv.isLinux
-    then [ pkgs.autoPatchelfHook ]
-    else [ ];
+  nativeBuildInputs = if stdenv.isLinux then [ pkgs.autoPatchelfHook ] else [ ];
 
   installPhase = ''
     ls -la

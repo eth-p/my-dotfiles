@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.remote.devcontainer = {
-    enable =
-      lib.mkEnableOption "add support for running VS Code in dev containers";
+    enable = lib.mkEnableOption "add support for running VS Code in dev containers";
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -22,8 +26,7 @@ in
       programs.vscode = {
         # Install the Devcontainers extension.
         # https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
-        profiles.default.extensions = with extensions;
-          [ ms-vscode-remote.remote-containers ];
+        profiles.default.extensions = with extensions; [ ms-vscode-remote.remote-containers ];
 
       };
 

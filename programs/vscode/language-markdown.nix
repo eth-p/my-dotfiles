@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }@inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.markdown = {
-    enable = lib.mkEnableOption
-      "add Markdown language extensions to Visual Studio Code" // {
+    enable = lib.mkEnableOption "add Markdown language extensions to Visual Studio Code" // {
       default = true;
     };
   };
@@ -28,14 +32,13 @@ in
     # https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
     # https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
     {
-      programs.vscode.profiles.default.extensions =
-        with extensions; [
-          (import ./extensions/vscode-markdown-alert.nix inputs)
-          bierner.markdown-checkbox
-          bierner.markdown-footnotes
-          bierner.markdown-mermaid
-          bierner.markdown-emoji
-        ];
+      programs.vscode.profiles.default.extensions = with extensions; [
+        (import ./extensions/vscode-markdown-alert.nix inputs)
+        bierner.markdown-checkbox
+        bierner.markdown-footnotes
+        bierner.markdown-mermaid
+        bierner.markdown-emoji
+      ];
     }
 
     # Disable format-on-save for Markdown.

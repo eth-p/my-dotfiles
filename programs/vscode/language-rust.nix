@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge mkDefault;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.rust = {
-    enable =
-      lib.mkEnableOption "add Rust language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add Rust language support to Visual Studio Code";
 
     lsp = {
       enable = lib.mkOption {
@@ -35,13 +39,12 @@ in
       programs.vscode = {
         # Install the rust-analyzer extension.
         # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
-        profiles.default.extensions = with extensions;
-          [ rust-lang.rust-analyzer ];
+        profiles.default.extensions = with extensions; [ rust-lang.rust-analyzer ];
       };
 
       # In the VS Code FHS, install dependencies for compiling Rust.
-      my-dotfiles.vscode.dependencies.packages =
-        (pkgs: with pkgs; [
+      my-dotfiles.vscode.dependencies.packages = (
+        pkgs: with pkgs; [
           # Compilers
           rustc
           clang
@@ -49,8 +52,8 @@ in
           # Tools
           cargo
           rustfmt
-        ])
-      ;
+        ]
+      );
 
       # Enable TOML language support.
       my-dotfiles.vscode.language.toml.enable = mkDefault true;

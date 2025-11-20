@@ -38,10 +38,7 @@ stdenv.mkDerivation rec {
   dontConfigure = true;
   dontBuild = true;
 
-  nativeBuildInputs =
-    if stdenv.isLinux
-    then [ pkgs.autoPatchelfHook ]
-    else [ ];
+  nativeBuildInputs = if stdenv.isLinux then [ pkgs.autoPatchelfHook ] else [ ];
 
   installPhase = ''
     runHook preInstall

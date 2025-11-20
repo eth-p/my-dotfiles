@@ -4,7 +4,13 @@
 # Program: https://github.com/JanDeDobbeleer/oh-my-posh
 # Type: Block (https://ohmyposh.dev/docs/configuration/block)
 # ==============================================================================
-{ config, cfg, generator, ... } @ inputs: {
+{
+  config,
+  cfg,
+  generator,
+  ...
+}@inputs:
+{
   enable = cfg.newline;
   priority = 1000;
 

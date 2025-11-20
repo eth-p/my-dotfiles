@@ -1,7 +1,7 @@
 # NixOS Module Options
 
 
-## [`my-dotfiles.bat.enable`](programs/bat/default.nix#L13)
+## [`my-dotfiles.bat.enable`](programs/bat/default.nix#L18)
 
 install and configure bat
 
@@ -11,7 +11,7 @@ install and configure bat
 
 **Example:** `true`
 
-## [`my-dotfiles.bat.enableBatman`](programs/bat/default.nix#L15)
+## [`my-dotfiles.bat.enableBatman`](programs/bat/default.nix#L20)
 
 Enable batman for reading manpages.
 
@@ -19,7 +19,7 @@ Enable batman for reading manpages.
 
 **Default:** `true`
 
-## [`my-dotfiles.bitwarden.enable`](programs/bitwarden/default.nix#L13)
+## [`my-dotfiles.bitwarden.enable`](programs/bitwarden/default.nix#L18)
 
 install Bitwarden
 
@@ -29,7 +29,7 @@ install Bitwarden
 
 **Example:** `true`
 
-## [`my-dotfiles.bitwarden.useForSSHAgent`](programs/bitwarden/default.nix#L14)
+## [`my-dotfiles.bitwarden.useForSSHAgent`](programs/bitwarden/default.nix#L19)
 
 use Bitwarden as the ssh-agent
 
@@ -39,7 +39,7 @@ use Bitwarden as the ssh-agent
 
 **Example:** `true`
 
-## [`my-dotfiles.btop.enable`](programs/btop/default.nix#L13)
+## [`my-dotfiles.btop.enable`](programs/btop/default.nix#L18)
 
 install and configure btop
 
@@ -49,7 +49,7 @@ install and configure btop
 
 **Example:** `true`
 
-## [`my-dotfiles.carapace.enable`](programs/carapace/default.nix#L13)
+## [`my-dotfiles.carapace.enable`](programs/carapace/default.nix#L18)
 
 install and configure carapace
 
@@ -59,7 +59,7 @@ install and configure carapace
 
 **Example:** `true`
 
-## [`my-dotfiles.devenv.enable`](programs/devenv/default.nix#L15)
+## [`my-dotfiles.devenv.enable`](programs/devenv/default.nix#L21)
 
 install devenv
 
@@ -69,7 +69,7 @@ install devenv
 
 **Example:** `true`
 
-## [`my-dotfiles.devenv.inPrompt`](programs/devenv/default.nix#L16)
+## [`my-dotfiles.devenv.inPrompt`](programs/devenv/default.nix#L22)
 
 show git info in the shell prompt
 
@@ -79,7 +79,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.direnv.enable`](programs/direnv/default.nix#L13)
+## [`my-dotfiles.direnv.enable`](programs/direnv/default.nix#L18)
 
 install direnv
 
@@ -89,7 +89,7 @@ install direnv
 
 **Example:** `true`
 
-## [`my-dotfiles.direnv.hideDiff`](programs/direnv/default.nix#L15)
+## [`my-dotfiles.direnv.hideDiff`](programs/direnv/default.nix#L20)
 
 hide the environment variable diff
 
@@ -99,7 +99,7 @@ hide the environment variable diff
 
 **Example:** `true`
 
-## [`my-dotfiles.discord.betterdiscord.enable`](programs/discord/default.nix#L28)
+## [`my-dotfiles.discord.betterdiscord.enable`](programs/discord/default.nix#L34)
 
 install BetterDiscord
 
@@ -109,7 +109,7 @@ install BetterDiscord
 
 **Example:** `true`
 
-## [`my-dotfiles.discord.enable`](programs/discord/default.nix#L13)
+## [`my-dotfiles.discord.enable`](programs/discord/default.nix#L18)
 
 enable Discord config
 
@@ -119,7 +119,7 @@ enable Discord config
 
 **Example:** `true`
 
-## [`my-dotfiles.discord.source`](programs/discord/default.nix#L22)
+## [`my-dotfiles.discord.source`](programs/discord/default.nix#L27)
 
 the installation source for Discord
 
@@ -127,7 +127,7 @@ the installation source for Discord
 
 **Default:** `"flatpak"`
 
-## [`my-dotfiles.discord.supported`](programs/discord/default.nix#L15)
+## [`my-dotfiles.discord.supported`](programs/discord/default.nix#L20)
 
 whether Discord is supported on the current platform
 
@@ -135,7 +135,7 @@ whether Discord is supported on the current platform
 
 **Default:** `pkgs.stdenv.isLinux`
 
-## [`my-dotfiles.ets.enable`](programs/ets/default.nix#L13)
+## [`my-dotfiles.ets.enable`](programs/ets/default.nix#L18)
 
 install and configure ets
 
@@ -145,7 +145,7 @@ install and configure ets
 
 **Example:** `true`
 
-## [`my-dotfiles.eza.enable`](programs/eza/default.nix#L15)
+## [`my-dotfiles.eza.enable`](programs/eza/default.nix#L20)
 
 install and configure eza as a replacement for ls
 
@@ -155,7 +155,7 @@ install and configure eza as a replacement for ls
 
 **Example:** `true`
 
-## [`my-dotfiles.eza.enableAliases`](programs/eza/default.nix#L23)
+## [`my-dotfiles.eza.enableAliases`](programs/eza/default.nix#L28)
 
 Enable shell aliases.
 
@@ -163,7 +163,7 @@ Enable shell aliases.
 
 **Default:** `true`
 
-## [`my-dotfiles.eza.theme`](programs/eza/default.nix#L17)
+## [`my-dotfiles.eza.theme`](programs/eza/default.nix#L22)
 
 the theme to use
 
@@ -171,7 +171,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`my-dotfiles.fd.enable`](programs/fd/default.nix#L13)
+## [`my-dotfiles.fd.enable`](programs/fd/default.nix#L18)
 
 install and configure fd
 
@@ -181,7 +181,7 @@ install and configure fd
 
 **Example:** `true`
 
-## [`my-dotfiles.fd.ignoreGitRepoFiles`](programs/fd/default.nix#L21)
+## [`my-dotfiles.fd.ignoreGitRepoFiles`](programs/fd/default.nix#L26)
 
 Ignore files inside .git
 
@@ -189,7 +189,7 @@ Ignore files inside .git
 
 **Default:** `true`
 
-## [`my-dotfiles.fd.ignoreMacFiles`](programs/fd/default.nix#L15)
+## [`my-dotfiles.fd.ignoreMacFiles`](programs/fd/default.nix#L20)
 
 Ignore system files created by MacOS.
 
@@ -197,7 +197,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L16)
+## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L22)
 
 install and configure fish
 
@@ -207,7 +207,7 @@ install and configure fish
 
 **Example:** `true`
 
-## [`my-dotfiles.fish.fixPATH`](programs/fish/default.nix#L19)
+## [`my-dotfiles.fish.fixPATH`](programs/fish/default.nix#L25)
 
 fix the PATH variable on login
 
@@ -215,7 +215,7 @@ fix the PATH variable on login
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L18)
+## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L24)
 
 use as `$SHELL`
 
@@ -225,7 +225,7 @@ use as `$SHELL`
 
 **Example:** `true`
 
-## [`my-dotfiles.fzf.enable`](programs/fzf/default.nix#L13)
+## [`my-dotfiles.fzf.enable`](programs/fzf/default.nix#L18)
 
 install and configure fzf
 
@@ -235,7 +235,7 @@ install and configure fzf
 
 **Example:** `true`
 
-## [`my-dotfiles.git.enable`](programs/git/default.nix#L14)
+## [`my-dotfiles.git.enable`](programs/git/default.nix#L20)
 
 install and configure git
 
@@ -245,7 +245,7 @@ install and configure git
 
 **Example:** `true`
 
-## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L21)
+## [`my-dotfiles.git.fzf.fixup`](programs/git/default.nix#L26)
 
 Add `git fixup` command
 
@@ -253,7 +253,7 @@ Add `git fixup` command
 
 **Default:** `false`
 
-## [`my-dotfiles.git.github-actions`](programs/git/default.nix#L17)
+## [`my-dotfiles.git.github-actions`](programs/git/default.nix#L23)
 
 install the act command-line tool for locally running GitHub Actions
 
@@ -263,7 +263,7 @@ install the act command-line tool for locally running GitHub Actions
 
 **Example:** `true`
 
-## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L40)
+## [`my-dotfiles.git.ignoreMacFiles`](programs/git/default.nix#L45)
 
 Ignore system files created by MacOS.
 
@@ -271,7 +271,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.git.inPrompt`](programs/git/default.nix#L15)
+## [`my-dotfiles.git.inPrompt`](programs/git/default.nix#L21)
 
 show git info in the shell prompt
 
@@ -281,7 +281,7 @@ show git info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L28)
+## [`my-dotfiles.git.useDelta`](programs/git/default.nix#L33)
 
 Use delta to show diffs.
 
@@ -289,7 +289,7 @@ Use delta to show diffs.
 
 **Default:** `true`
 
-## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L34)
+## [`my-dotfiles.git.useDyff`](programs/git/default.nix#L39)
 
 Use dyff to show diffs between YAML files.
 
@@ -297,7 +297,7 @@ Use dyff to show diffs between YAML files.
 
 **Default:** `true`
 
-## [`my-dotfiles.github-act.containerArchitecture`](programs/github-act/default.nix#L29)
+## [`my-dotfiles.github-act.containerArchitecture`](programs/github-act/default.nix#L35)
 
 the container architecture to use for runners
 
@@ -307,7 +307,7 @@ the container architecture to use for runners
 
 **Example:** `"linux/amd64"`
 
-## [`my-dotfiles.github-act.enable`](programs/github-act/default.nix#L14)
+## [`my-dotfiles.github-act.enable`](programs/github-act/default.nix#L20)
 
 install and configure act, the local GitHub Actions runner
 
@@ -317,7 +317,7 @@ install and configure act, the local GitHub Actions runner
 
 **Example:** `true`
 
-## [`my-dotfiles.github-act.extraConfig`](programs/github-act/default.nix#L45)
+## [`my-dotfiles.github-act.extraConfig`](programs/github-act/default.nix#L51)
 
 extra values to add to `.actrc`
 
@@ -325,7 +325,7 @@ extra values to add to `.actrc`
 
 **Default:** `""`
 
-## [`my-dotfiles.github-act.githubEnterpriseHostname`](programs/github-act/default.nix#L22)
+## [`my-dotfiles.github-act.githubEnterpriseHostname`](programs/github-act/default.nix#L28)
 
 the hostname of the GitHub Enterprise instance, if using one
 
@@ -335,7 +335,7 @@ the hostname of the GitHub Enterprise instance, if using one
 
 **Example:** `"github.my-company.com"`
 
-## [`my-dotfiles.github-act.package`](programs/github-act/default.nix#L16)
+## [`my-dotfiles.github-act.package`](programs/github-act/default.nix#L22)
 
 the act package to install
 
@@ -343,7 +343,7 @@ the act package to install
 
 **Default:** `pkgs.act`
 
-## [`my-dotfiles.github-act.runnerImages`](programs/github-act/default.nix#L36)
+## [`my-dotfiles.github-act.runnerImages`](programs/github-act/default.nix#L42)
 
 the available runners (platforms) and their Docker images
 
@@ -359,7 +359,7 @@ the available runners (platforms) and their Docker images
 }
 ```
 
-## [`my-dotfiles.github-cli.enable`](programs/github-cli/default.nix#L13)
+## [`my-dotfiles.github-cli.enable`](programs/github-cli/default.nix#L19)
 
 install and configure the github CLI tool
 
@@ -369,17 +369,25 @@ install and configure the github CLI tool
 
 **Example:** `true`
 
-## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L43)
+## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L49)
 
 
 The general color scheme used throughout various programs.
 
 
-**Type:** `types.enum [ "dark" "light" "auto" ]`
+**Type:**
+
+```nix
+types.enum [
+  "dark"
+  "light"
+  "auto"
+]
+```
 
 **Default:** `"auto"`
 
-## [`my-dotfiles.global.font-category.code`](programs/globals.nix#L28)
+## [`my-dotfiles.global.font-category.code`](programs/globals.nix#L34)
 
 the monospace font family used for displaying code.
 
@@ -394,7 +402,7 @@ the monospace font family used for displaying code.
 }
 ```
 
-## [`my-dotfiles.global.font-category.terminal`](programs/globals.nix#L36)
+## [`my-dotfiles.global.font-category.terminal`](programs/globals.nix#L42)
 
 the monospace font family used for the terminal.
 
@@ -402,7 +410,7 @@ the monospace font family used for the terminal.
 
 **Default:** `config.my-dotfiles.global.font-category.code`
 
-## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L25)
+## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L31)
 
 NerdFonts are supported and installed
 
@@ -412,7 +420,7 @@ NerdFonts are supported and installed
 
 **Example:** `true`
 
-## [`my-dotfiles.glow.enable`](programs/glow/default.nix#L15)
+## [`my-dotfiles.glow.enable`](programs/glow/default.nix#L21)
 
 install glow
 
@@ -422,7 +430,7 @@ install glow
 
 **Example:** `true`
 
-## [`my-dotfiles.glow.theme`](programs/glow/default.nix#L17)
+## [`my-dotfiles.glow.theme`](programs/glow/default.nix#L23)
 
 the theme to use
 
@@ -430,7 +438,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L15)
+## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L21)
 
 install kubesel
 
@@ -440,7 +448,7 @@ install kubesel
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L24)
+## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L30)
 
 show kubesel info in the shell prompt
 
@@ -450,7 +458,7 @@ show kubesel info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L26)
+## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L32)
 
 override the name or color for specific clusters
 
@@ -470,7 +478,7 @@ override the name or color for specific clusters
 }
 ```
 
-## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L17)
+## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L23)
 
 glob pattern matching kubeconfig files
 
@@ -480,7 +488,7 @@ glob pattern matching kubeconfig files
 
 **Example:** `"~/.kube/configs/*.yaml"`
 
-## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L23)
+## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L29)
 
 The colorscheme used for dark mode.
 
@@ -488,7 +496,7 @@ The colorscheme used for dark mode.
 
 **Default:** `"monokai-pro"`
 
-## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L29)
+## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L35)
 
 The colorscheme used for light mode.
 
@@ -496,15 +504,22 @@ The colorscheme used for light mode.
 
 **Default:** `"catppuccin-latte"`
 
-## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L90)
+## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L96)
 
 Column numbers to draw a ruler at.
 
 **Type:** `lib.types.listOf lib.types.int`
 
-**Default:** `[ 80 120 ]`
+**Default:**
 
-## [`my-dotfiles.neovim.enable`](programs/neovim/default.nix#L20)
+```nix
+[
+  80
+  120
+]
+```
+
+## [`my-dotfiles.neovim.enable`](programs/neovim/default.nix#L26)
 
 neovim
 
@@ -514,7 +529,7 @@ neovim
 
 **Example:** `true`
 
-## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L66)
+## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L72)
 
 Enable git integrations.
 
@@ -522,7 +537,7 @@ Enable git integrations.
 
 **Default:** `config.programs.git.enable`
 
-## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L72)
+## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L78)
 
 Enable hex editing with xxd.
 
@@ -530,7 +545,7 @@ Enable hex editing with xxd.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L54)
+## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L60)
 
 Display the keymap after a short delay.
 
@@ -538,7 +553,7 @@ Display the keymap after a short delay.
 
 **Default:** `true`
 
-## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L60)
+## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L66)
 
 Change the <Leader> key.
 
@@ -546,7 +561,7 @@ Change the <Leader> key.
 
 **Default:** `"<Space>"`
 
-## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L78)
+## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L84)
 
 Create cvim alias for using neovim as a pager.
 
@@ -554,7 +569,7 @@ Create cvim alias for using neovim as a pager.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L84)
+## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L90)
 
 Create yvim alias for using neovim as YAML pager.
 
@@ -562,7 +577,7 @@ Create yvim alias for using neovim as YAML pager.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.syntax.nix`](programs/neovim/plugins-treesitter.nix#L22)
+## [`my-dotfiles.neovim.syntax.nix`](programs/neovim/plugins-treesitter.nix#L28)
 
 Enable nix syntax support (treesitter).
 
@@ -570,7 +585,7 @@ Enable nix syntax support (treesitter).
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L16)
+## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L22)
 
 Enable yaml syntax support (treesitter).
 
@@ -578,7 +593,7 @@ Enable yaml syntax support (treesitter).
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L42)
+## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L48)
 
 Dim unfocused panes.
 
@@ -586,7 +601,7 @@ Dim unfocused panes.
 
 **Default:** `true`
 
-## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L36)
+## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L42)
 
 Enable support for using Nerdfonts.
 
@@ -594,7 +609,7 @@ Enable support for using Nerdfonts.
 
 **Default:** `cfgGlobal.nerdfonts`
 
-## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L48)
+## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L54)
 
 Use a transparent background.
 
@@ -602,7 +617,7 @@ Use a transparent background.
 
 **Default:** `false`
 
-## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L17)
+## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L22)
 
 install and configure oh-my-posh
 
@@ -612,7 +627,7 @@ install and configure oh-my-posh
 
 **Example:** `true`
 
-## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L25)
+## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L30)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -633,13 +648,13 @@ install and configure oh-my-posh
 }
 ```
 
-## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L55)
+## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L60)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
 **Default:** `{ }`
 
-## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L19)
+## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L24)
 
 user text is entered on a new line
 
@@ -647,7 +662,7 @@ user text is entered on a new line
 
 **Default:** `true`
 
-## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L40)
+## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L45)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -668,7 +683,7 @@ user text is entered on a new line
 }
 ```
 
-## [`my-dotfiles.ranger.enable`](programs/ranger/default.nix#L15)
+## [`my-dotfiles.ranger.enable`](programs/ranger/default.nix#L20)
 
 install and configure ranger
 
@@ -678,7 +693,7 @@ install and configure ranger
 
 **Example:** `true`
 
-## [`my-dotfiles.ranger.glow.forOpen`](programs/ranger/default.nix#L18)
+## [`my-dotfiles.ranger.glow.forOpen`](programs/ranger/default.nix#L23)
 
 use glow to open markdown files
 
@@ -688,7 +703,7 @@ use glow to open markdown files
 
 **Example:** `true`
 
-## [`my-dotfiles.ranger.glow.forPreview`](programs/ranger/default.nix#L19)
+## [`my-dotfiles.ranger.glow.forPreview`](programs/ranger/default.nix#L24)
 
 use glow to preview markdown files
 
@@ -698,7 +713,7 @@ use glow to preview markdown files
 
 **Example:** `true`
 
-## [`my-dotfiles.ripgrep.enable`](programs/ripgrep/default.nix#L13)
+## [`my-dotfiles.ripgrep.enable`](programs/ripgrep/default.nix#L18)
 
 install ripgrep
 
@@ -708,7 +723,7 @@ install ripgrep
 
 **Example:** `true`
 
-## [`my-dotfiles.vicinae.enable`](programs/vicinae/default.nix#L13)
+## [`my-dotfiles.vicinae.enable`](programs/vicinae/default.nix#L18)
 
 install vicinae
 
@@ -718,15 +733,23 @@ install vicinae
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L43)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L54)
 
 The color scheme used for Visual Studio Code.
 
-**Type:** `lib.types.enum [ "dark" "light" "auto" ]`
+**Type:**
+
+```nix
+lib.types.enum [
+  "dark"
+  "light"
+  "auto"
+]
+```
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L109)
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L127)
 
 Extra packages to install.
 
@@ -734,9 +757,18 @@ Extra packages to install.
 
 **Default:** `(pkgs: [ ])`
 
-**Example:** `(pkgs: with pkgs; [ gcc rustc ])`
+**Example:**
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L116)
+```nix
+(
+  pkgs: with pkgs; [
+    gcc
+    rustc
+  ]
+)
+```
+
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L139)
 
 Unfree packages to allow.
 
@@ -746,7 +778,7 @@ Unfree packages to allow.
 
 **Example:** `[ "vscode-extension-ms-vscode-remote-remote-ssh" ]`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L90)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L108)
 
 show the git blame as an inline hint
 
@@ -754,15 +786,22 @@ show the git blame as an inline hint
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L85)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L100)
 
 Column numbers to draw a ruler at.
 
 **Type:** `lib.types.listOf lib.types.int`
 
-**Default:** `[ 80 120 ]`
+**Default:**
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L95)
+```nix
+[
+  80
+  120
+]
+```
+
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L113)
 
 Highlight trailing whitespace.
 
@@ -770,7 +809,7 @@ Highlight trailing whitespace.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L33)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L39)
 
 install and configure Visual Studio Code
 
@@ -780,7 +819,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L102)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L120)
 
 Use a FHS environment for VS Code.
 
@@ -788,15 +827,22 @@ Use a FHS environment for VS Code.
 
 **Default:** `false`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L37)
+## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L45)
 
 use alternate keybindings
 
-**Type:** `lib.types.enum [ "default" "intellij" ]`
+**Type:**
+
+```nix
+lib.types.enum [
+  "default"
+  "intellij"
+]
+```
 
 **Default:** `"default"`
 
-## [`my-dotfiles.vscode.language.bash.enable`](programs/vscode/language-bash.nix#L16)
+## [`my-dotfiles.vscode.language.bash.enable`](programs/vscode/language-bash.nix#L20)
 
 add Bash language support to Visual Studio Code
 
@@ -806,7 +852,7 @@ add Bash language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.bash.shellcheck.package`](programs/vscode/language-bash.nix#L19)
+## [`my-dotfiles.vscode.language.bash.shellcheck.package`](programs/vscode/language-bash.nix#L23)
 
 the shellcheck package
 
@@ -814,7 +860,7 @@ the shellcheck package
 
 **Default:** `pkgs.shellcheck`
 
-## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L18)
+## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L22)
 
 the Go compiler package
 
@@ -822,7 +868,7 @@ the Go compiler package
 
 **Default:** `pkgs.go`
 
-## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L24)
+## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L28)
 
 install the Go debugger, dlv
 
@@ -830,7 +876,7 @@ install the Go debugger, dlv
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go.nix#L29)
+## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go.nix#L33)
 
 the dlv package
 
@@ -838,7 +884,7 @@ the dlv package
 
 **Default:** `pkgs.delve`
 
-## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L16)
+## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L20)
 
 add Go language support to Visual Studio Code
 
@@ -848,7 +894,7 @@ add Go language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go.nix#L36)
+## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go.nix#L40)
 
 install golangci-lint for linting Go source code
 
@@ -856,7 +902,7 @@ install golangci-lint for linting Go source code
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go.nix#L42)
+## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go.nix#L46)
 
 the golangci-lint package
 
@@ -864,7 +910,7 @@ the golangci-lint package
 
 **Default:** `pkgs.golangci-lint`
 
-## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L49)
+## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L53)
 
 install the Go language server, gopls
 
@@ -872,7 +918,7 @@ install the Go language server, gopls
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L55)
+## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L59)
 
 the gopls package
 
@@ -880,7 +926,7 @@ the gopls package
 
 **Default:** `pkgs.gopls`
 
-## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L62)
+## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L66)
 
 add snippets for general language features
 
@@ -888,7 +934,7 @@ add snippets for general language features
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.makefile.enable`](programs/vscode/language-makefile.nix#L16)
+## [`my-dotfiles.vscode.language.makefile.enable`](programs/vscode/language-makefile.nix#L20)
 
 add Makefile language support to Visual Studio Code
 
@@ -898,7 +944,7 @@ add Makefile language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.makefile.showWhitespace`](programs/vscode/language-makefile.nix#L18)
+## [`my-dotfiles.vscode.language.makefile.showWhitespace`](programs/vscode/language-makefile.nix#L22)
 
 Show boundary whitespace in Makefiles.
 
@@ -906,7 +952,7 @@ Show boundary whitespace in Makefiles.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L15)
+## [`my-dotfiles.vscode.language.nix.enable`](programs/vscode/language-nix.nix#L19)
 
 add Nix language support to Visual Studio Code
 
@@ -916,7 +962,7 @@ add Nix language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.nix.formatter`](programs/vscode/language-nix.nix#L23)
+## [`my-dotfiles.vscode.language.nix.formatter`](programs/vscode/language-nix.nix#L27)
 
 the formatter to use for Nix files
 
@@ -924,7 +970,7 @@ the formatter to use for Nix files
 
 **Default:** `"nixfmt"`
 
-## [`my-dotfiles.vscode.language.nix.lsp.enable`](programs/vscode/language-nix.nix#L17)
+## [`my-dotfiles.vscode.language.nix.lsp.enable`](programs/vscode/language-nix.nix#L21)
 
 use a Language Server for Nix language support
 
@@ -932,7 +978,7 @@ use a Language Server for Nix language support
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.python.enable`](programs/vscode/language-python.nix#L16)
+## [`my-dotfiles.vscode.language.python.enable`](programs/vscode/language-python.nix#L20)
 
 add python language support to Visual Studio Code
 
@@ -942,7 +988,7 @@ add python language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.rust.enable`](programs/vscode/language-rust.nix#L16)
+## [`my-dotfiles.vscode.language.rust.enable`](programs/vscode/language-rust.nix#L20)
 
 add Rust language support to Visual Studio Code
 
@@ -952,7 +998,7 @@ add Rust language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.rust.lsp.enable`](programs/vscode/language-rust.nix#L19)
+## [`my-dotfiles.vscode.language.rust.lsp.enable`](programs/vscode/language-rust.nix#L23)
 
 install the Rust language server, rust-analyzer
 
@@ -960,7 +1006,7 @@ install the Rust language server, rust-analyzer
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.rust.lsp.package`](programs/vscode/language-rust.nix#L25)
+## [`my-dotfiles.vscode.language.rust.lsp.package`](programs/vscode/language-rust.nix#L29)
 
 the rust-analyzer package
 
@@ -968,7 +1014,7 @@ the rust-analyzer package
 
 **Default:** `pkgs.rust-analyzer`
 
-## [`my-dotfiles.vscode.language.toml.enable`](programs/vscode/language-toml.nix#L16)
+## [`my-dotfiles.vscode.language.toml.enable`](programs/vscode/language-toml.nix#L20)
 
 add TOML language support to Visual Studio Code
 
@@ -978,7 +1024,7 @@ add TOML language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.yaml.enable`](programs/vscode/language-yaml.nix#L16)
+## [`my-dotfiles.vscode.language.yaml.enable`](programs/vscode/language-yaml.nix#L20)
 
 add Yaml language support to Visual Studio Code
 
@@ -988,7 +1034,7 @@ add Yaml language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L34)
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L40)
 
 do not install Visual Studio Code, only configure it
 
@@ -998,7 +1044,7 @@ do not install Visual Studio Code, only configure it
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.github.enable`](programs/vscode/qol-github.nix#L16)
+## [`my-dotfiles.vscode.qol.github.enable`](programs/vscode/qol-github.nix#L20)
 
 add GitHub-centric extensions
 
@@ -1008,7 +1054,7 @@ add GitHub-centric extensions
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L16)
+## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L20)
 
 improve TODO support
 
@@ -1018,7 +1064,7 @@ improve TODO support
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.remote.devcontainer.enable`](programs/vscode/remote-devcontainer.nix#L16)
+## [`my-dotfiles.vscode.remote.devcontainer.enable`](programs/vscode/remote-devcontainer.nix#L20)
 
 add support for running VS Code in dev containers
 
@@ -1028,7 +1074,7 @@ add support for running VS Code in dev containers
 
 **Example:** `true`
 
-## [`my-dotfiles.yq.enable`](programs/yq/default.nix#L13)
+## [`my-dotfiles.yq.enable`](programs/yq/default.nix#L18)
 
 install and configure yq
 
@@ -1038,7 +1084,7 @@ install and configure yq
 
 **Example:** `true`
 
-## [`my-dotfiles.zoxide.enable`](programs/zoxide/default.nix#L13)
+## [`my-dotfiles.zoxide.enable`](programs/zoxide/default.nix#L18)
 
 install and configure zoxide
 

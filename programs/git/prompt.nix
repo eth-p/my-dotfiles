@@ -6,7 +6,12 @@
 #
 # Prompt segment for git status.
 # ==============================================================================
-{ lib, config, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.git;
@@ -14,11 +19,21 @@ let
   nerdOr = my-dotfiles.lib.text.nerdOr cfgGlobal.nerdfonts;
 
   # Icons.
-  rebase_icon = nerdOr /* E728 */ "" "rebase";
-  commit_icon = nerdOr /* F417 */ " " "@";
-  branch_icon = nerdOr /* E0A0 */ "" "";
-  tag_icon = nerdOr /* F412 */ " " "tag ";
-  onto_icon = nerdOr /* 2B9E */ "⮞" "onto";
+  rebase_icon =
+    # E728
+    nerdOr "" "rebase";
+  commit_icon =
+    # F417
+    nerdOr " " "@";
+  branch_icon =
+    # E0A0
+    nerdOr "" "";
+  tag_icon =
+    # F412
+    nerdOr " " "tag ";
+  onto_icon =
+    # 2B9E
+    nerdOr "⮞" "onto";
 
   # Color templates.
   background_templates = [
@@ -56,7 +71,12 @@ let
       fetch_status = true;
       source = "cli";
 
-      inherit rebase_icon commit_icon tag_icon branch_icon;
+      inherit
+        rebase_icon
+        commit_icon
+        tag_icon
+        branch_icon
+        ;
     };
   };
 
@@ -67,32 +87,38 @@ in
   segments = [
 
     # Current git status:
-    (git-segment // {
-      leading_diamond = " ";
-      templates = [
+    (
+      git-segment
+      // {
+        leading_diamond = " ";
+        templates = [
 
-        # Rebase.
-        ''
-          {{- if .Rebase }}{{` ` -}}
-            ${rebase_icon} [{{ add 1 (sub .Rebase.Total .Rebase.Current) }}] {{``}}
-            {{- .Rebase.HEAD }} ${onto_icon} {{``}}
-            {{- if eq .Rebase.Onto "undefined" }}(root)
-            {{- else }}{{ .Rebase.Onto }}{{- end -}}
-          {{` `}}{{ end -}}
-        ''
+          # Rebase.
+          ''
+            {{- if .Rebase }}{{` ` -}}
+              ${rebase_icon} [{{ add 1 (sub .Rebase.Total .Rebase.Current) }}] {{``}}
+              {{- .Rebase.HEAD }} ${onto_icon} {{``}}
+              {{- if eq .Rebase.Onto "undefined" }}(root)
+              {{- else }}{{ .Rebase.Onto }}{{- end -}}
+            {{` `}}{{ end -}}
+          ''
 
-        # Other.
-        ''
-          {{- ` `}}{{ .HEAD }}{{` ` -}}
-        ''
+          # Other.
+          ''
+            {{- ` `}}{{ .HEAD }}{{` ` -}}
+          ''
 
-      ];
-    })
+        ];
+      }
+    )
 
     # Untracked status:
-    (git-segment // {
-      template = "{{- if gt .Working.Untracked 0 -}}*{{` `}}{{- end -}}";
-    })
+    (
+      git-segment
+      // {
+        template = "{{- if gt .Working.Untracked 0 -}}*{{` `}}{{- end -}}";
+      }
+    )
 
   ];
 }

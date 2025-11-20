@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -11,8 +16,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.nix = {
-    enable =
-      lib.mkEnableOption "add Nix language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add Nix language support to Visual Studio Code";
 
     lsp.enable = lib.mkOption {
       type = lib.types.bool;
@@ -33,8 +37,7 @@ in
     # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
     {
       programs.vscode = {
-        profiles.default.extensions = with pkgs.vscode-extensions;
-          [ jnoortheen.nix-ide ];
+        profiles.default.extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
       };
     }
 
@@ -49,8 +52,10 @@ in
     # Install `nixfmt` and use it for formatting.
     (mkIf (cfg.formatter == "nixfmt") (
 
-      let formatter = pkgs.nixfmt-rfc-style + "/bin/nixfmt";
-      in {
+      let
+        formatter = pkgs.nixfmt-rfc-style + "/bin/nixfmt";
+      in
+      {
         programs.vscode.profiles.default.userSettings = {
           "nix.formatterPath" = [ formatter ];
           "nix.serverSettings".nixd.formatting.command = [ formatter ];

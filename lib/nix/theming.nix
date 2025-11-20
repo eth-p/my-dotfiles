@@ -9,15 +9,17 @@ let
 
   # themeFilesFromDir read the theme files under the specified directory
   # and returns their basenames.
-  # 
+  #
   # themeFilesFromDir :: string path -> [string]
-  themeFilesFromDir = ext: dir:
-    builtins.map
-      (strings.removeSuffix ext)
-      (builtins.attrNames (attrsets.filterAttrs
-        (name: kind: kind == "regular" && (strings.hasSuffix ext name))
-        (builtins.readDir dir)
-      ));
+  themeFilesFromDir =
+    ext: dir:
+    builtins.map (strings.removeSuffix ext) (
+      builtins.attrNames (
+        attrsets.filterAttrs (name: kind: kind == "regular" && (strings.hasSuffix ext name)) (
+          builtins.readDir dir
+        )
+      )
+    );
 
 in
 {

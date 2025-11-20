@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.toml = {
-    enable =
-      lib.mkEnableOption "add TOML language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add TOML language support to Visual Studio Code";
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -22,8 +26,7 @@ in
       programs.vscode = {
         # Install the Even Better TOML extension.
         # https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
-        profiles.default.extensions = with extensions;
-          [ tamasfe.even-better-toml ];
+        profiles.default.extensions = with extensions; [ tamasfe.even-better-toml ];
       };
     }
 

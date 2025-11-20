@@ -3,7 +3,13 @@
 #
 # Program: https://github.com/neovim/neovim
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) tolua;
@@ -90,119 +96,116 @@ in
     editor.rulers = lib.mkOption {
       type = lib.types.listOf lib.types.int;
       description = "Column numbers to draw a ruler at.";
-      default = [ 80 120 ];
+      default = [
+        80
+        120
+      ];
     };
   };
 
-  config = mkIf cfg.enable (lib.mkMerge [
+  config = mkIf cfg.enable (
+    lib.mkMerge [
 
-    # Configure neovim.
-    {
-      programs.neovim = {
-        enable = true;
-        viAlias = true; # Symlink `vi` to `nvim`
-        defaultEditor = true; # Use neovim as $EDITOR
-        extraLuaConfig = (builtins.readFile ./init.lua);
+      # Configure neovim.
+      {
+        programs.neovim = {
+          enable = true;
+          viAlias = true; # Symlink `vi` to `nvim`
+          defaultEditor = true; # Use neovim as $EDITOR
+          extraLuaConfig = (builtins.readFile ./init.lua);
 
-        # Add my base config as a plugin.
-        plugins = [
-          (pkgs.vimUtils.buildVimPlugin {
-            pname = "my-neovim-config";
-            version = "0.0.0";
-            src = ./config;
+          # Add my base config as a plugin.
+          plugins = [
+            (pkgs.vimUtils.buildVimPlugin {
+              pname = "my-neovim-config";
+              version = "0.0.0";
+              src = ./config;
 
-            doCheck = false;
-          })
-        ];
+              doCheck = false;
+            })
+          ];
 
-        # Use the latest neovim.
-        package = lib.mkDefault pkgs.neovim-unwrapped;
-      };
+          # Use the latest neovim.
+          package = lib.mkDefault pkgs.neovim-unwrapped;
+        };
 
-      home.file = {
-        # Generate config for options/plugins managed by nix.
-        #
-        # Prefer adding plugins through Lazy.nvim configuration to support
-        # lazy loading, except when plugins rely on native binaries or libraries.
-        "${nvimHome}/managed-by-home-manager.json" =
-          let
-            external_executables = {
-              xxd = if cfg.integrations.xxd then pkgs.unixtools.xxd + "/bin/xxd" else null;
-            };
-            managedOptions = {
-              inherit external_executables;
-              integration = cfg.integrations;
-              editor = cfg.editor;
-              keymap = {
-                help = cfg.keymap.help;
-                leader = cfg.keymap.leader;
+        home.file = {
+          # Generate config for options/plugins managed by nix.
+          #
+          # Prefer adding plugins through Lazy.nvim configuration to support
+          # lazy loading, except when plugins rely on native binaries or libraries.
+          "${nvimHome}/managed-by-home-manager.json" =
+            let
+              external_executables = {
+                xxd = if cfg.integrations.xxd then pkgs.unixtools.xxd + "/bin/xxd" else null;
               };
-              ui = cfg.ui // {
-                colorscheme =
-                  if cfgGlobal.colorscheme != "auto"
-                  then cfg.colorschemes."${cfgGlobal.colorscheme}"
-                  else null;
+              managedOptions = {
+                inherit external_executables;
+                integration = cfg.integrations;
+                editor = cfg.editor;
+                keymap = {
+                  help = cfg.keymap.help;
+                  leader = cfg.keymap.leader;
+                };
+                ui = cfg.ui // {
+                  colorscheme =
+                    if cfgGlobal.colorscheme != "auto" then cfg.colorschemes."${cfgGlobal.colorscheme}" else null;
 
-                colorschemes = {
-                  dark = cfg.colorschemes.dark;
-                  light = cfg.colorschemes.light;
+                  colorschemes = {
+                    dark = cfg.colorschemes.dark;
+                    light = cfg.colorschemes.light;
+                  };
                 };
               };
+
+              # home-manager neovim adds plugins the `finalPackage.packpathDirs`.
+              packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
+              packpathInStore = pkgs.neovimUtils.packDir packpathDirs;
+
+              # Reading the output dir gives us the list of loadable plugins.
+              builtPluginsPath = packpathInStore + "/pack/myNeovimPackages/start";
+              builtPluginNames = builtins.attrNames (builtins.readDir builtPluginsPath);
+
+              managedPlugins =
+                if (builtins.length packpathDirs.myNeovimPackages.start > 0) then builtPluginNames else [ ];
+
+              mkLazyNvimSpecForManagedPlugin = name: {
+                name = name + " (via nix)";
+                dir = builtPluginsPath + "/" + name;
+                lazy = false;
+              };
+
+            in
+            {
+              text = builtins.toJSON {
+                plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
+                opts = managedOptions;
+              };
             };
+        };
+      }
 
-            # home-manager neovim adds plugins the `finalPackage.packpathDirs`.
-            packpathDirs = config.programs.neovim.finalPackage.packpathDirs;
-            packpathInStore = pkgs.neovimUtils.packDir packpathDirs;
-
-            # Reading the output dir gives us the list of loadable plugins.
-            builtPluginsPath = packpathInStore + "/pack/myNeovimPackages/start";
-            builtPluginNames = builtins.attrNames (builtins.readDir builtPluginsPath);
-
-            managedPlugins =
-              if (builtins.length packpathDirs.myNeovimPackages.start > 0)
-              then builtPluginNames
-              else [ ];
-
-            mkLazyNvimSpecForManagedPlugin = name: {
-              name = name + " (via nix)";
-              dir = builtPluginsPath + "/" + name;
-              lazy = false;
-            };
-
-          in
-          {
-            text = builtins.toJSON {
-              plugins = (map mkLazyNvimSpecForManagedPlugin managedPlugins);
-              opts = managedOptions;
-            };
-          };
-      };
-    }
-
-    # Create cvim shell alias.
-    (lib.mkIf cfg.shellAliases.cvim {
-      home.packages = [
-        (
-          pkgs.writeShellScriptBin "cvim" ''
+      # Create cvim shell alias.
+      (lib.mkIf cfg.shellAliases.cvim {
+        home.packages = [
+          (pkgs.writeShellScriptBin "cvim" ''
             if [ $# -eq 0 ]; then
               nvim '+set nomodified'
             else
               nvim "+set ft=$1 | set nomodified" "''${@:2}"
             fi
-          ''
-        )
-      ];
-    })
+          '')
+        ];
+      })
 
-    # Create yvim shell alias.
-    (lib.mkIf cfg.shellAliases.yvim {
-      home.packages = [
-        (
-          pkgs.writeShellScriptBin "yvim" ''
+      # Create yvim shell alias.
+      (lib.mkIf cfg.shellAliases.yvim {
+        home.packages = [
+          (pkgs.writeShellScriptBin "yvim" ''
             nvim '+set ft=yaml | set nomodified' "$@"
-          ''
-        )
-      ];
-    })
-  ]);
+          '')
+        ];
+      })
+    ]
+  );
 }

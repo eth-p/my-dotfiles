@@ -3,7 +3,13 @@
 #
 # Program: https://github.com/eth-p/kubesel
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) togotemplate;
@@ -41,7 +47,8 @@ in
 
     # Install kubesel.
     (
-      let kubesel = my-dotfiles.inputs.kubesel.packages.${pkgs.stdenv.system}.kubesel;
+      let
+        kubesel = my-dotfiles.inputs.kubesel.packages.${pkgs.stdenv.system}.kubesel;
       in
       {
         home.packages = [
@@ -50,7 +57,9 @@ in
 
         programs.fish.interactiveShellInit = ''
           # Initialize kubesel.
-          ${kubesel.out + /bin/kubesel} init fish ${if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"} | source
+          ${kubesel.out + /bin/kubesel} init fish ${
+            if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"
+          } | source
         '';
       }
     )
@@ -60,24 +69,27 @@ in
       my-dotfiles.oh-my-posh.extraBlocks.kubernetes =
         let
           icons =
-            if cfgGlobal.nerdfonts
-            then {
-              leading = " "; # e81d (kubernetes)
-              trailing = "";
-            }
-            else {
-              leading = "";
-              trailing = "³";
-            };
+            if cfgGlobal.nerdfonts then
+              {
+                leading = " "; # e81d (kubernetes)
+                trailing = "";
+              }
+            else
+              {
+                leading = "";
+                trailing = "³";
+              };
 
           # raiseAttr picks a property from an attribute set and raises it.
           # Example: `"bar" {foo = { bar = "baz" }} -> { foo = "baz" }
-          raiseAttr = name: attrs: builtins.listToAttrs (map
-            (k: {
-              name = k;
-              value = attrs.${k}.${name};
-            })
-            (builtins.attrNames attrs));
+          raiseAttr =
+            name: attrs:
+            builtins.listToAttrs (
+              map (k: {
+                name = k;
+                value = attrs.${k}.${name};
+              }) (builtins.attrNames attrs)
+            );
 
           fgColorLUT = raiseAttr "fg" cfg.inPromptClusterOverrides;
           bgColorLUT = raiseAttr "bg" cfg.inPromptClusterOverrides;
@@ -108,21 +120,22 @@ in
               leading_diamond = " ";
               trailing_diamond = "";
 
-              template = (builtins.concatStringsSep "" [
-                # Get the cluster name.
-                "{{- $clusterAliases := ${togotemplate.attrs nameLUT} }}"
-                "{{- $cluster := (get $clusterAliases .Cluster | default .Cluster) }}"
+              template = (
+                builtins.concatStringsSep "" [
+                  # Get the cluster name.
+                  "{{- $clusterAliases := ${togotemplate.attrs nameLUT} }}"
+                  "{{- $cluster := (get $clusterAliases .Cluster | default .Cluster) }}"
 
-                # Print.
-                " ${icons.leading}{{$cluster}}{{if .Namespace}}/{{.Namespace}}{{end}}${icons.trailing} "
-              ]);
+                  # Print.
+                  " ${icons.leading}{{$cluster}}{{if .Namespace}}/{{.Namespace}}{{end}}${icons.trailing} "
+                ]
+              );
 
               properties = {
                 parse_kubeconfig = true;
               };
             }
           ];
-
 
         };
     })

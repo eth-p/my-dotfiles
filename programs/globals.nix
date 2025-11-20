@@ -3,7 +3,12 @@
 #
 # This contains global options used throughout my home-manager modules.
 # ==============================================================================
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   fontType = lib.types.submodule {
     options = {
@@ -19,7 +24,8 @@ let
     };
   };
 in
-with lib; {
+with lib;
+{
   options.my-dotfiles.global = {
 
     nerdfonts = mkEnableOption "NerdFonts are supported and installed";
@@ -41,7 +47,11 @@ with lib; {
     };
 
     colorscheme = mkOption {
-      type = types.enum [ "dark" "light" "auto" ];
+      type = types.enum [
+        "dark"
+        "light"
+        "auto"
+      ];
       default = "auto";
       description = ''
         The general color scheme used throughout various programs.

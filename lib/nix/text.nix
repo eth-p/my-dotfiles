@@ -6,11 +6,8 @@
 { lib, ... }:
 {
   # nerdOr returns the first string (glyph) if the first argument is true,
-  # or the second string (textual replacement) otherwise. 
-  # 
+  # or the second string (textual replacement) otherwise.
+  #
   # nerdOr :: bool string string -> string
-  nerdOr = enabled:
-    if enabled
-    then nfIcon: txtIcon: nfIcon
-    else nfIcon: txtIcon: txtIcon;
+  nerdOr = enabled: if enabled then nfIcon: txtIcon: nfIcon else nfIcon: txtIcon: txtIcon;
 }

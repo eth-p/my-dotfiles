@@ -3,7 +3,12 @@
 #
 # Custom themes for glow.
 # ==============================================================================
-{ lib, config, my-dotfiles, ... }:
+{
+  lib,
+  config,
+  my-dotfiles,
+  ...
+}:
 let
   inherit (my-dotfiles.lib) theming;
   glowHome = "${config.xdg.configHome}/glow";
@@ -29,10 +34,7 @@ let
 
   # toFlag converts the theme to the appropriate value for glow's
   # `--theme` flag (and config option).
-  toFlag = theme:
-    if (isCustomTheme theme)
-    then "${glowHome}/themes/${theme}.json"
-    else theme;
+  toFlag = theme: if (isCustomTheme theme) then "${glowHome}/themes/${theme}.json" else theme;
 
 in
 {

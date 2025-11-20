@@ -3,7 +3,13 @@
 #
 # Program: https://cli.github.com/
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.github-cli;

@@ -3,7 +3,8 @@
 #
 # Nix function to generate the package for my term-query-bg script.
 # ==============================================================================
-{ pkgs, system, ... }: pkgs.writeShellApplication {
+{ pkgs, system, ... }:
+pkgs.writeShellApplication {
   name = "term-query-bg";
 
   runtimeInputs = [ pkgs.bash ];

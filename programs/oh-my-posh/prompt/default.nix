@@ -4,7 +4,13 @@
 # Program: https://github.com/JanDeDobbeleer/oh-my-posh
 # Type: Blocks (https://ohmyposh.dev/docs/configuration/block)
 # ==============================================================================
-{ config, cfg, generator, ... } @ inputs: {
+{
+  config,
+  cfg,
+  generator,
+  ...
+}@inputs:
+{
   envs = (import ./envs.nix inputs);
   flags = (import ./flags.nix inputs);
   path = (import ./path.nix inputs);

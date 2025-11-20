@@ -3,7 +3,13 @@
 #
 # Program: https://git-scm.com/
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.git;
@@ -14,8 +20,7 @@ in
     enable = lib.mkEnableOption "install and configure git";
     inPrompt = lib.mkEnableOption "show git info in the shell prompt";
 
-    github-actions = lib.mkEnableOption
-      "install the act command-line tool for locally running GitHub Actions";
+    github-actions = lib.mkEnableOption "install the act command-line tool for locally running GitHub Actions";
 
     fzf = {
       fixup = lib.mkOption {
@@ -118,9 +123,7 @@ in
     # Configure 'dyff' diff tool.
     (mkIf cfg.useDyff (
       let
-        diff_with_dyff = (
-          pkgs.writeShellScript "diff_with_dyff" (builtins.readFile ./diff_with_dyff.sh)
-        );
+        diff_with_dyff = (pkgs.writeShellScript "diff_with_dyff" (builtins.readFile ./diff_with_dyff.sh));
       in
       {
         home.packages = [ pkgs.dyff ];
@@ -143,8 +146,11 @@ in
         (pkgs.writeShellApplication {
           name = "git-fzf-fixup";
 
-          runtimeInputs = [ pkgs.git pkgs.fzf ] ++
-            (if cfg.useDelta then [ pkgs.delta ] else [ ]);
+          runtimeInputs = [
+            pkgs.git
+            pkgs.fzf
+          ]
+          ++ (if cfg.useDelta then [ pkgs.delta ] else [ ]);
 
           text = ''
             useDelta=${toString cfg.useDelta}
@@ -156,7 +162,6 @@ in
         fixup = "fzf-fixup";
       };
     }))
-
 
     # Configure oh-my-posh to show git info.
     (mkIf cfg.inPrompt {

@@ -3,7 +3,12 @@
 #
 # Program: https://discord.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }@inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.discord;
@@ -25,15 +30,16 @@ in
       default = "flatpak";
     };
 
-    betterdiscord = { enable = lib.mkEnableOption "install BetterDiscord"; };
+    betterdiscord = {
+      enable = lib.mkEnableOption "install BetterDiscord";
+    };
   };
 
   config =
     let
       sources = {
         flatpak = {
-          configDir = config.home.homeDirectory
-            + "/.var/app/com.discordapp.Discord/config";
+          configDir = config.home.homeDirectory + "/.var/app/com.discordapp.Discord/config";
         };
       };
 
@@ -48,24 +54,22 @@ in
 
       (mkIf (cfg.betterdiscord.enable && cfg.source == "flatpak") (
         let
-          wrapper =
-            pkgs.writeShellApplication
-              {
-                name = "discord-betterdiscord-flatpak-wrapper";
-                runtimeInputs = [ pkgs.betterdiscordctl ];
+          wrapper = pkgs.writeShellApplication {
+            name = "discord-betterdiscord-flatpak-wrapper";
+            runtimeInputs = [ pkgs.betterdiscordctl ];
 
-                text = ''
-                  if betterdiscordctl -i flatpak status | grep 'no$'; then
-                    betterdiscordctl -i flatpak install
-                  fi
+            text = ''
+              if betterdiscordctl -i flatpak status | grep 'no$'; then
+                betterdiscordctl -i flatpak install
+              fi
 
-                  flatpak run --branch=stable \
-                    --arch=${pkgs.stdenv.targetPlatform.linuxArch} \
-                    --command=com.discordapp.Discord \
-                    --file-forwarding \
-                    com.discordapp.Discord "$@"
-                '';
-              };
+              flatpak run --branch=stable \
+                --arch=${pkgs.stdenv.targetPlatform.linuxArch} \
+                --command=com.discordapp.Discord \
+                --file-forwarding \
+                com.discordapp.Discord "$@"
+            '';
+          };
         in
         {
           # Flatpak has XDG_DATA_DIRS higher priority than `~/.nix-profile`.

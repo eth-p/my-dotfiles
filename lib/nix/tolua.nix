@@ -20,20 +20,23 @@ let
   nul = v: "nil";
 
   # attrs converts an attribute set into its Lua equivalent.
-  attrs = v:
-    if builtins.length (builtins.attrNames v) == 0
-    then "{}"
-    else "{\n${_indentLines (_concatItems (_mapAttrsToList _namedValueToLua v))},\n}";
+  attrs =
+    v:
+    if builtins.length (builtins.attrNames v) == 0 then
+      "{}"
+    else
+      "{\n${_indentLines (_concatItems (_mapAttrsToList _namedValueToLua v))},\n}";
 
   # list converts a list into its Lua equivalent.
-  list = v:
-    if builtins.length v == 0
-    then "{}"
-    else "{\n${_indentLines (_concatItems (builtins.map _valueToLua v))},\n}";
+  list =
+    v:
+    if builtins.length v == 0 then
+      "{}"
+    else
+      "{\n${_indentLines (_concatItems (builtins.map _valueToLua v))},\n}";
 
   # _mapAttrsToList :: (f string string -> string) attrs -> list
-  _mapAttrsToList = f: set:
-    (builtins.map (k: f k (builtins.getAttr k set)) (builtins.attrNames set));
+  _mapAttrsToList = f: set: (builtins.map (k: f k (builtins.getAttr k set)) (builtins.attrNames set));
 
   # _namedValueToLua :: string any -> string
   _namedValueToLua = name: value: "${name} = ${_valueToLua value}";
@@ -52,7 +55,6 @@ let
     set = attrs;
     null = nul;
   };
-
 
 in
 {

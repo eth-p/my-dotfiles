@@ -5,7 +5,8 @@
 #
 # All of them must be loaded by home-manager as modules.
 # ==============================================================================
-{ ... } @ inputs: (final: prev: {
+{ ... }@inputs:
+(final: prev: {
   oh-my-posh = (import ./oh-my-posh.nix final prev);
   golangci-lint-v1 = (import ./golangci-lint-v1.nix final prev);
 })

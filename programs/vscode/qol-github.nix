@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.qol.github = {
-    enable =
-      lib.mkEnableOption "add GitHub-centric extensions";
+    enable = lib.mkEnableOption "add GitHub-centric extensions";
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -22,10 +26,9 @@ in
     # https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
     {
       programs.vscode = {
-        profiles.default.extensions = with extensions;
-          [
-            github.vscode-github-actions
-          ];
+        profiles.default.extensions = with extensions; [
+          github.vscode-github-actions
+        ];
       };
     }
 
@@ -33,16 +36,16 @@ in
     # https://marketplace.visualstudio.com/items?itemName=marcovr.actions-shell-scripts
     {
       programs.vscode = {
-        profiles.default.extensions =
-          [
-            (import ./extensions/actions-shell-scripts.nix inputs)
-          ];
+        profiles.default.extensions = [
+          (import ./extensions/actions-shell-scripts.nix inputs)
+        ];
       };
     }
 
     (mkIf config.my-dotfiles.vscode.language.bash.enable {
       programs.vscode.profiles.default.userSettings = {
-        "actions-shell-scripts.shellcheckFolder" = config.my-dotfiles.vscode.language.bash.shellcheck.package + "/bin";
+        "actions-shell-scripts.shellcheckFolder" =
+          config.my-dotfiles.vscode.language.bash.shellcheck.package + "/bin";
       };
     })
 

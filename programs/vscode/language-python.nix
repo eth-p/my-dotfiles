@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge mkDefault;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.python = {
-    enable =
-      lib.mkEnableOption "add python language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add python language support to Visual Studio Code";
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
@@ -22,8 +26,7 @@ in
       programs.vscode = {
         # Install the Python extension.
         # https://marketplace.visualstudio.com/items?itemName=ms-python.python
-        profiles.default.extensions = with extensions;
-          [ ms-python.python ];
+        profiles.default.extensions = with extensions; [ ms-python.python ];
       };
 
     }

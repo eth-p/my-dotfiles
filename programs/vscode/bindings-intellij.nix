@@ -3,15 +3,17 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }@inputs:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.vscode;
   extensions = pkgs.vscode-extensions;
-  darwinOr =
-    if pkgs.stdenv.isDarwin
-    then mac: _: mac
-    else _: other: other;
+  darwinOr = if pkgs.stdenv.isDarwin then mac: _: mac else _: other: other;
 in
 {
   config = mkIf (cfg.keybindings == "intellij") (mkMerge [

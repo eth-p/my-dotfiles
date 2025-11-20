@@ -3,7 +3,13 @@
 #
 # Program: https://github.com/nektos/act
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.github-act;
@@ -67,39 +73,38 @@ in
         let
           maybeCreateFlag = flag: value: if value == "" then "" else "${flag} ${value}";
 
-          extraConfig =
-            if cfg.extraConfig == ""
-            then ""
-            else "# Extra configuration:\n${extraConfig}";
+          extraConfig = if cfg.extraConfig == "" then "" else "# Extra configuration:\n${extraConfig}";
 
           # Build the `--platform` flags:
           runnerImagesFlags =
-            if (builtins.length (builtins.attrNames cfg.runnerImages)) == 0
-            then ""
+            if (builtins.length (builtins.attrNames cfg.runnerImages)) == 0 then
+              ""
             else
-              lib.strings.concatMapStringsSep
-                "\n"
-                (name: "--platform ${name}=${cfg.runnerImages.${name}}")
-                (builtins.attrNames cfg.runnerImages);
+              lib.strings.concatMapStringsSep "\n" (name: "--platform ${name}=${cfg.runnerImages.${name}}") (
+                builtins.attrNames cfg.runnerImages
+              );
 
           # Build simple flags:
           containerArchFlag = maybeCreateFlag "--container-architecture" cfg.containerArchitecture;
           githubInstanceFlag = maybeCreateFlag "--github-instance" cfg.githubEnterpriseHostname;
 
           # Combine everything:
-          configContents = lib.strings.concatStringsSep "\n" (builtins.filter (it: it != "") [
-            runnerImagesFlags
-            containerArchFlag
-            githubInstanceFlag
-            extraConfig
-          ]);
+          configContents = lib.strings.concatStringsSep "\n" (
+            builtins.filter (it: it != "") [
+              runnerImagesFlags
+              containerArchFlag
+              githubInstanceFlag
+              extraConfig
+            ]
+          );
 
         in
-        if configContents == ""
-        then { }
-        else {
-          ".actrc".text = "${configContents}\n";
-        };
+        if configContents == "" then
+          { }
+        else
+          {
+            ".actrc".text = "${configContents}\n";
+          };
 
     }
 

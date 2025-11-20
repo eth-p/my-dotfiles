@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.makefile = {
-    enable =
-      lib.mkEnableOption "add Makefile language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add Makefile language support to Visual Studio Code";
 
     showWhitespace = lib.mkOption {
       type = lib.types.bool;
@@ -28,10 +32,9 @@ in
     # https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools
     {
       programs.vscode = {
-        profiles.default.extensions = with extensions;
-          [
-            ms-vscode.makefile-tools
-          ];
+        profiles.default.extensions = with extensions; [
+          ms-vscode.makefile-tools
+        ];
 
         profiles.default.userSettings = {
           "[makefile]" = {

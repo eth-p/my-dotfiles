@@ -13,11 +13,9 @@ pkgs.vscode-utils.buildVscodeMarketplaceExtension {
     hash = "sha256-dCaSMPSntYo0QLr2pcs9GfJxOshfyeXbs8IMCwd+lqw=";
   };
   meta = {
-    changelog =
-      "https://marketplace.visualstudio.com/items/yahyabatulu.vscode-markdown-alert/changelog";
+    changelog = "https://marketplace.visualstudio.com/items/yahyabatulu.vscode-markdown-alert/changelog";
     description = "Add GitHub markdown alerts to the markdown preview";
-    downloadPage =
-      "https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert";
+    downloadPage = "https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert";
     homepage = "https://github.com/ByPikod/vscode-markdown-alert";
     license = lib.licenses.mit;
     maintainers = [ ];

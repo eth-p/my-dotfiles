@@ -3,7 +3,12 @@
 #
 # Program: https://github.com/junegunn/fzf
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf;
   cfg = config.my-dotfiles.fzf;

@@ -3,9 +3,18 @@
 #
 # Helpers for creating a home-manager flake using my-dotfiles.
 # ==============================================================================
-{ lib, my-dotfiles, home-manager, nixpkgs, vicinae, ... } @ inputs:
-let inherit (my-dotfiles.lib.util) getOrDefault;
-in rec {
+{
+  lib,
+  my-dotfiles,
+  home-manager,
+  nixpkgs,
+  vicinae,
+  ...
+}@inputs:
+let
+  inherit (my-dotfiles.lib.util) getOrDefault;
+in
+rec {
 
   # profileModules maps my-dotfiles profile names to home-manager modules.
   profileModules = {
@@ -17,10 +26,10 @@ in rec {
   # mkHomeConfiguration provides a way to create a home-manager configuration
   # without having to set up all the manual boilerplate.
   mkHomeConfiguration =
-    { system
-    , modules
-    , profile ? null
-    ,
+    {
+      system,
+      modules,
+      profile ? null,
     }:
     let
       # Add overlays.
@@ -33,11 +42,7 @@ in rec {
       pkgs = import nixpkgs { inherit system overlays; };
 
       # Get the profile module.
-      profileMod = (
-        if profile == null
-        then [ ]
-        else getOrDefault profileModules profile [ ]
-      );
+      profileMod = (if profile == null then [ ] else getOrDefault profileModules profile [ ]);
     in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -49,7 +54,9 @@ in rec {
         ++ profileMod
         ++ modules;
       extraSpecialArgs = {
-        my-dotfiles = my-dotfiles // { inherit inputs; };
+        my-dotfiles = my-dotfiles // {
+          inherit inputs;
+        };
       };
     };
 

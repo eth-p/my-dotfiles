@@ -4,5 +4,4 @@
 # minimal profile is the bare minimum needed for home-manager to work.
 # This is effectly empty, with nothing configured.
 # ==============================================================================
-{ ... }:
-{ }
+{ ... }: { }

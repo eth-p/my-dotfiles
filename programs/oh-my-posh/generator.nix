@@ -11,10 +11,9 @@ let
   # omitting entries which have their `enable` attribuet set to `false`
   #
   # sortAndFilter :: attrset -> attrset
-  sortAndFilter = attrs:
-    builtins.sort
-      (a: b: (getPriority a) < (getPriority b))
-      (builtins.filter (a: getEnable a) attrs);
+  sortAndFilter =
+    attrs:
+    builtins.sort (a: b: (getPriority a) < (getPriority b)) (builtins.filter (a: getEnable a) attrs);
 
   # flattenSegments recursively flattens segments nested within segments,
   # evaluating their enablement and priority within each nested group.
@@ -53,14 +52,13 @@ let
   #     }
   #   ]
   #
-  flattenSegments = segmentList: lib.lists.flatten
-    (map
-      (segment:
-        if segment ? "segments"
-        then (mkSegments segment.segments)
-        else [ segment ]
-      )
-      segmentList);
+  flattenSegments =
+    segmentList:
+    lib.lists.flatten (
+      map (
+        segment: if segment ? "segments" then (mkSegments segment.segments) else [ segment ]
+      ) segmentList
+    );
 
   # getPriority returns the declared priority of the block/segment, defaulting
   # to 0 if unspecified.
@@ -78,28 +76,22 @@ let
   # the provided attribute set, along with any null values.
   #
   # cleanAttrs :: attrs -> attrs
-  cleanAttrs =
-    lib.attrsets.filterAttrs (k: v: (k != "enable" && k != "priority" && v != null));
+  cleanAttrs = lib.attrsets.filterAttrs (k: v: (k != "enable" && k != "priority" && v != null));
 
-  mkSegments = segments:
+  mkSegments =
+    segments:
     let
-      segmentList =
-        if builtins.typeOf segments == "list"
-        then segments
-        else builtins.attrValues segments;
+      segmentList = if builtins.typeOf segments == "list" then segments else builtins.attrValues segments;
       cleanSegmentList = map cleanAttrs (sortAndFilter segmentList);
     in
     flattenSegments cleanSegmentList;
 
-  mkSegmentsInBlock = { segments, ... } @ block:
-    block // { segments = mkSegments segments; };
+  mkSegmentsInBlock = { segments, ... }@block: block // { segments = mkSegments segments; };
 
-  mkBlocks = blocks:
+  mkBlocks =
+    blocks:
     let
-      blockList =
-        if builtins.typeOf blocks == "list"
-        then blocks
-        else builtins.attrValues blocks;
+      blockList = if builtins.typeOf blocks == "list" then blocks else builtins.attrValues blocks;
       cleanBlockList = map cleanAttrs (sortAndFilter blockList);
     in
     map mkSegmentsInBlock cleanBlockList;

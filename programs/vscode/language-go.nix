@@ -3,7 +3,12 @@
 #
 # Program: https://code.visualstudio.com/
 # ==============================================================================
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf mkMerge;
   vscodeCfg = config.my-dotfiles.vscode;
@@ -12,8 +17,7 @@ let
 in
 {
   options.my-dotfiles.vscode.language.go = {
-    enable =
-      lib.mkEnableOption "add Go language support to Visual Studio Code";
+    enable = lib.mkEnableOption "add Go language support to Visual Studio Code";
 
     compiler.package = lib.mkOption {
       default = pkgs.go;
@@ -73,10 +77,9 @@ in
     # https://marketplace.visualstudio.com/items?itemName=golang.go
     {
       programs.vscode = {
-        profiles.default.extensions = with extensions;
-          [
-            golang.go
-          ];
+        profiles.default.extensions = with extensions; [
+          golang.go
+        ];
 
         profiles.default.userSettings = {
           "go.alternateTools" = {

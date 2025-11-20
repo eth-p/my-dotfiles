@@ -3,7 +3,13 @@
 #
 # Program: https://github.com/neovim/neovim
 # ==============================================================================
-{ lib, config, pkgs, my-dotfiles, ... } @ inputs:
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
   inherit (my-dotfiles.lib) tolua;
@@ -35,17 +41,14 @@ in
       };
 
       # List of keys under `syntaxes` variable, including only enabled ones.
-      syntaxesEnabled =
-        builtins.filter (n: cfg.syntax."${n}") (builtins.attrNames syntaxes);
+      syntaxesEnabled = builtins.filter (n: cfg.syntax."${n}") (builtins.attrNames syntaxes);
 
     in
     mkIf (cfg.enable && (builtins.length syntaxesEnabled) > 0) {
 
       # Install the nvim-treesitter plugin through nix.
       programs.neovim.plugins = [
-        (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-          p: map (n: syntaxes."${n}" p) syntaxesEnabled
-        ))
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: map (n: syntaxes."${n}" p) syntaxesEnabled))
       ];
 
       # Run the nvim-treesitter setup function after other plugins.
