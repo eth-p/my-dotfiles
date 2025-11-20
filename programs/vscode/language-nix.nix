@@ -49,7 +49,7 @@ in
     # Install `nixfmt` and use it for formatting.
     (mkIf (cfg.formatter == "nixfmt") (
 
-      let formatter = pkgs.nixfmt + "/bin/nixfmt";
+      let formatter = pkgs.nixfmt-rfc-style + "/bin/nixfmt";
       in {
         programs.vscode.profiles.default.userSettings = {
           "nix.formatterPath" = [ formatter ];
