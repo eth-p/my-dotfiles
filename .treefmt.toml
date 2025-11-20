@@ -50,8 +50,8 @@ includes = [
     "*.envrc.*",
 ]
 
-[formatter.nixpkgs-fmt]
-command = "nixpkgs-fmt"
+[formatter.nixfmt]
+command = "nixfmt"
 options = []
 excludes = []
 includes = ["*.nix"]

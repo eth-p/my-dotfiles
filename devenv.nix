@@ -3,7 +3,13 @@
 #
 # This provides a consistent environment for running development scripts.
 # ==============================================================================
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 {
   packages = [
     pkgs.git
@@ -12,7 +18,7 @@
     pkgs.treefmt
     pkgs.nodePackages.prettier
     pkgs.shfmt
-    pkgs.nixpkgs-fmt
+    pkgs.nixfmt-rfc-style
     pkgs.stylua
   ];
 
