@@ -36,8 +36,8 @@ in
     # https://marketplace.visualstudio.com/items?itemName=marcovr.actions-shell-scripts
     {
       programs.vscode = {
-        profiles.default.extensions = [
-          (import ./extensions/actions-shell-scripts.nix inputs)
+        profiles.default.extensions = with extensions; [
+          marcovr.actions-shell-scripts
         ];
       };
     }

@@ -289,7 +289,7 @@ in
     })
 
     # Install Trailing Whitespace extension.
-    # https://marketplace.visualstudio.com/items?itemName=jkiviluoto.tws
+    # https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces
     (mkIf cfg.editor.whitespace.showTrailing {
       programs.vscode.profiles.default.extensions = with extensions; [
         shardulm94.trailing-spaces

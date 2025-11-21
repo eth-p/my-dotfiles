@@ -5,7 +5,7 @@
 # ==============================================================================
 { ... }@inputs:
 rec {
-  default = final: prev: (packages final prev);
+  default = final: prev: (packages final prev) // (vscode-extensions final prev);
 
   packages =
     final: prev:
@@ -15,5 +15,17 @@ rec {
     {
       oh-my-posh = packageOverlay ./packages/oh-my-posh.nix;
       golangci-lint-v1 = packageOverlay ./packages/golangci-lint-v1.nix;
+    };
+
+  vscode-extensions =
+    final: prev:
+    let
+      extensionOverlay = file: (import file final prev);
+    in
+    {
+      vscode-extensions = prev.vscode-extensions // {
+        marcovr.actions-shell-scripts = extensionOverlay ./vscode-extensions/marcovr.actions-shell-scripts.nix;
+        yahyabatulu.vscode-markdown-alert = extensionOverlay ./vscode-extensions/yahyabatulu.vscode-markdown-alert.nix;
+      };
     };
 }

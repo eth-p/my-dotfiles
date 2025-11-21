@@ -33,7 +33,7 @@ in
     # https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
     {
       programs.vscode.profiles.default.extensions = with extensions; [
-        (import ./extensions/vscode-markdown-alert.nix inputs)
+        yahyabatulu.vscode-markdown-alert
         bierner.markdown-checkbox
         bierner.markdown-footnotes
         bierner.markdown-mermaid

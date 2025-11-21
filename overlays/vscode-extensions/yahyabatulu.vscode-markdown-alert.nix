@@ -4,8 +4,11 @@
 # Program: https://code.visualstudio.com/
 # Extension: https://marketplace.visualstudio.com/items?itemName=yahyabatulu.vscode-markdown-alert
 # ==============================================================================
-{ pkgs, lib, ... }:
-pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+final: prev:
+let
+  inherit (prev) lib vscode-utils;
+in
+vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     name = "vscode-markdown-alert";
     publisher = "yahyabatulu";
