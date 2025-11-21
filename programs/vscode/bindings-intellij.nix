@@ -102,6 +102,13 @@ in
     (mkIf (!pkgs.stdenv.isDarwin) {
       programs.vscode.profiles.default.keybindings = [
 
+        # "editor.action.smartSelect.grow"
+        {
+          "key" = "ctrl+w";
+          "command" = "-editor.action.smartSelect.grow";
+          "when" = "editorTextFocus";
+        }
+
       ];
     })
 
