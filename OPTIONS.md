@@ -1044,7 +1044,7 @@ do not install Visual Studio Code, only configure it
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.bookmarks.enable`](programs/vscode/qol-bookmarks.nix#L20)
+## [`my-dotfiles.vscode.qol.bookmarks.enable`](programs/vscode/qol-bookmarks.nix#L21)
 
 add bookmarking support
 
