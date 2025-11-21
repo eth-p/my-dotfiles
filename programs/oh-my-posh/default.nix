@@ -92,5 +92,9 @@ in
         };
       };
     };
+
+    programs.fish.shellAliases = {
+      oh-my-posh-fix = "oh-my-posh init fish --config ~/.config/oh-my-posh/config.json | source";
+    };
   };
 }
