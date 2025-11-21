@@ -733,7 +733,7 @@ install vicinae
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L55)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L57)
 
 The color scheme used for Visual Studio Code.
 
@@ -749,7 +749,7 @@ lib.types.enum [
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L128)
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L130)
 
 Extra packages to install.
 
@@ -768,7 +768,7 @@ Extra packages to install.
 )
 ```
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L140)
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L142)
 
 Unfree packages to allow.
 
@@ -778,7 +778,7 @@ Unfree packages to allow.
 
 **Example:** `[ "vscode-extension-ms-vscode-remote-remote-ssh" ]`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L109)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L111)
 
 show the git blame as an inline hint
 
@@ -786,7 +786,7 @@ show the git blame as an inline hint
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L101)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L103)
 
 Column numbers to draw a ruler at.
 
@@ -801,7 +801,7 @@ Column numbers to draw a ruler at.
 ]
 ```
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L114)
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L116)
 
 Highlight trailing whitespace.
 
@@ -819,7 +819,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L121)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L123)
 
 Use a FHS environment for VS Code.
 
@@ -827,7 +827,7 @@ Use a FHS environment for VS Code.
 
 **Default:** `false`
 
-## [`my-dotfiles.vscode.keybindings`](programs/vscode/default.nix#L46)
+## [`my-dotfiles.vscode.keybindings.style`](programs/vscode/default.nix#L47)
 
 use alternate keybindings
 

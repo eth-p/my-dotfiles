@@ -11,12 +11,12 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  cfg = config.my-dotfiles.vscode;
+  cfg = config.my-dotfiles.vscode.keybindings;
   extensions = pkgs.vscode-extensions;
   darwinOr = if pkgs.stdenv.isDarwin then mac: _: mac else _: other: other;
 in
 {
-  config = mkIf (cfg.keybindings == "intellij") (mkMerge [
+  config = mkIf (cfg.style == "intellij") (mkMerge [
 
     # Install IntelliJ IDEA Keybindings Extension
     # https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings

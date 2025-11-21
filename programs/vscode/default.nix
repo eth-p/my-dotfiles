@@ -19,7 +19,7 @@ let
 in
 {
   imports = [
-    ./bindings-intellij.nix
+    ./bindings-style-intellij.nix
     ./language-bash.nix
     ./language-go.nix
     ./language-makefile.nix
@@ -43,13 +43,15 @@ in
       default = true;
     };
 
-    keybindings = lib.mkOption {
-      type = lib.types.enum [
-        "default"
-        "intellij"
-      ];
-      description = "use alternate keybindings";
-      default = "default";
+    keybindings = {
+      style = lib.mkOption {
+        type = lib.types.enum [
+          "default"
+          "intellij"
+        ];
+        description = "use alternate keybindings";
+        default = "default";
+      };
     };
 
     colorscheme = lib.mkOption {
