@@ -48,7 +48,8 @@ in
     # Install kubesel.
     (
       let
-        kubesel = my-dotfiles.inputs.kubesel.packages.${pkgs.stdenv.system}.kubesel;
+        system = pkgs.stdenv.hostPlatform.system;
+        kubesel = my-dotfiles.inputs.kubesel.packages.${system}.kubesel;
       in
       {
         home.packages = [

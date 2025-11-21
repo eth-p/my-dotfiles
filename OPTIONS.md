@@ -197,7 +197,7 @@ Ignore system files created by MacOS.
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L22)
+## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L23)
 
 install and configure fish
 
@@ -207,7 +207,7 @@ install and configure fish
 
 **Example:** `true`
 
-## [`my-dotfiles.fish.fixPATH`](programs/fish/default.nix#L25)
+## [`my-dotfiles.fish.fixPATH`](programs/fish/default.nix#L26)
 
 fix the PATH variable on login
 
@@ -215,7 +215,7 @@ fix the PATH variable on login
 
 **Default:** `pkgs.stdenv.isDarwin`
 
-## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L24)
+## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L25)
 
 use as `$SHELL`
 

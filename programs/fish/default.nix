@@ -13,7 +13,8 @@
 let
   inherit (lib) mkIf mkMerge;
   inherit (import ./generator.nix inputs) mkPrivateFishFunction privateIdent;
-  my-pkgs = my-dotfiles.packages."${pkgs.system}";
+  system = pkgs.stdenv.hostPlatform.system;
+  my-pkgs = my-dotfiles.packages."${system}";
   cfg = config.my-dotfiles.fish;
   cfgGlobal = config.my-dotfiles.global;
 in
