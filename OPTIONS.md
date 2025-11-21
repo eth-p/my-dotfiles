@@ -1064,7 +1064,7 @@ add GitHub-centric extensions
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L20)
+## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L21)
 
 improve TODO support
 

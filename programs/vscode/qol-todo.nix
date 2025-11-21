@@ -14,6 +14,7 @@ let
   vscodeCfg = config.my-dotfiles.vscode;
   cfg = config.my-dotfiles.vscode.qol.todo;
   extensions = pkgs.vscode-extensions;
+  darwinOr = if pkgs.stdenv.isDarwin then mac: _: mac else _: other: other;
 in
 {
   options.my-dotfiles.vscode.qol.todo = {
@@ -91,6 +92,20 @@ in
           };
         };
       };
+    }
+
+    # Keybindings
+    {
+      programs.vscode.profiles.default.keybindings = [
+
+
+        # View: Show TODOs
+        {
+          "key" = darwinOr "cmd+k g t" "ctrl+k g t";
+          "command" = "workbench.view.extension.todo-tree-container";
+        }
+
+      ];
     }
 
   ]);
