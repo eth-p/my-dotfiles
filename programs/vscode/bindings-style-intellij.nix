@@ -11,9 +11,10 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  cfg = config.my-dotfiles.vscode.keybindings;
+  inherit (import ./lib.nix inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  darwinOr = if pkgs.stdenv.isDarwin then mac: _: mac else _: other: other;
+  cfg = vscodeCfg.keybindings;
+  darwinOr = mkDarwinOr pkgs;
 in
 {
   config = mkIf (cfg.style == "intellij") (mkMerge [

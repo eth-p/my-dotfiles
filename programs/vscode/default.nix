@@ -13,9 +13,9 @@
 let
   inherit (lib) mkIf mkMerge;
   inherit (lib.strings) concatStringsSep;
-  cfg = config.my-dotfiles.vscode;
+  inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
-  extensionsDir = ".vscode/extensions";
+  cfg = vscodeCfg;
 in
 {
   imports = [

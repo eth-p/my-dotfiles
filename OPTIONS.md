@@ -842,7 +842,7 @@ lib.types.enum [
 
 **Default:** `"default"`
 
-## [`my-dotfiles.vscode.language.bash.enable`](programs/vscode/language-bash.nix#L20)
+## [`my-dotfiles.vscode.language.bash.enable`](programs/vscode/language-bash.nix#L19)
 
 add Bash language support to Visual Studio Code
 
@@ -852,7 +852,7 @@ add Bash language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.bash.shellcheck.package`](programs/vscode/language-bash.nix#L23)
+## [`my-dotfiles.vscode.language.bash.shellcheck.package`](programs/vscode/language-bash.nix#L22)
 
 the shellcheck package
 
@@ -860,7 +860,7 @@ the shellcheck package
 
 **Default:** `pkgs.shellcheck`
 
-## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L22)
+## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L21)
 
 the Go compiler package
 
@@ -868,7 +868,7 @@ the Go compiler package
 
 **Default:** `pkgs.go`
 
-## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L28)
+## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L27)
 
 install the Go debugger, dlv
 
@@ -876,7 +876,7 @@ install the Go debugger, dlv
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go.nix#L33)
+## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go.nix#L32)
 
 the dlv package
 
@@ -884,7 +884,7 @@ the dlv package
 
 **Default:** `pkgs.delve`
 
-## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L20)
+## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L19)
 
 add Go language support to Visual Studio Code
 
@@ -894,7 +894,7 @@ add Go language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go.nix#L40)
+## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go.nix#L39)
 
 install golangci-lint for linting Go source code
 
@@ -902,7 +902,7 @@ install golangci-lint for linting Go source code
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go.nix#L46)
+## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go.nix#L45)
 
 the golangci-lint package
 
@@ -910,7 +910,7 @@ the golangci-lint package
 
 **Default:** `pkgs.golangci-lint`
 
-## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L53)
+## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L52)
 
 install the Go language server, gopls
 
@@ -918,7 +918,7 @@ install the Go language server, gopls
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L59)
+## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L58)
 
 the gopls package
 
@@ -926,7 +926,7 @@ the gopls package
 
 **Default:** `pkgs.gopls`
 
-## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L66)
+## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L65)
 
 add snippets for general language features
 
@@ -934,7 +934,7 @@ add snippets for general language features
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.makefile.enable`](programs/vscode/language-makefile.nix#L20)
+## [`my-dotfiles.vscode.language.makefile.enable`](programs/vscode/language-makefile.nix#L19)
 
 add Makefile language support to Visual Studio Code
 
@@ -944,7 +944,7 @@ add Makefile language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.makefile.showWhitespace`](programs/vscode/language-makefile.nix#L22)
+## [`my-dotfiles.vscode.language.makefile.showWhitespace`](programs/vscode/language-makefile.nix#L21)
 
 Show boundary whitespace in Makefiles.
 
@@ -978,7 +978,7 @@ use a Language Server for Nix language support
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.python.enable`](programs/vscode/language-python.nix#L20)
+## [`my-dotfiles.vscode.language.python.enable`](programs/vscode/language-python.nix#L19)
 
 add python language support to Visual Studio Code
 
@@ -988,7 +988,7 @@ add python language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.rust.enable`](programs/vscode/language-rust.nix#L20)
+## [`my-dotfiles.vscode.language.rust.enable`](programs/vscode/language-rust.nix#L19)
 
 add Rust language support to Visual Studio Code
 
@@ -998,7 +998,7 @@ add Rust language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.rust.lsp.enable`](programs/vscode/language-rust.nix#L23)
+## [`my-dotfiles.vscode.language.rust.lsp.enable`](programs/vscode/language-rust.nix#L22)
 
 install the Rust language server, rust-analyzer
 
@@ -1006,7 +1006,7 @@ install the Rust language server, rust-analyzer
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.rust.lsp.package`](programs/vscode/language-rust.nix#L29)
+## [`my-dotfiles.vscode.language.rust.lsp.package`](programs/vscode/language-rust.nix#L28)
 
 the rust-analyzer package
 
@@ -1014,7 +1014,7 @@ the rust-analyzer package
 
 **Default:** `pkgs.rust-analyzer`
 
-## [`my-dotfiles.vscode.language.toml.enable`](programs/vscode/language-toml.nix#L20)
+## [`my-dotfiles.vscode.language.toml.enable`](programs/vscode/language-toml.nix#L19)
 
 add TOML language support to Visual Studio Code
 
@@ -1024,7 +1024,7 @@ add TOML language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.yaml.enable`](programs/vscode/language-yaml.nix#L20)
+## [`my-dotfiles.vscode.language.yaml.enable`](programs/vscode/language-yaml.nix#L19)
 
 add Yaml language support to Visual Studio Code
 
@@ -1044,7 +1044,7 @@ do not install Visual Studio Code, only configure it
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.bookmarks.enable`](programs/vscode/qol-bookmarks.nix#L21)
+## [`my-dotfiles.vscode.qol.bookmarks.enable`](programs/vscode/qol-bookmarks.nix#L20)
 
 add bookmarking support
 
@@ -1054,7 +1054,7 @@ add bookmarking support
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.github.enable`](programs/vscode/qol-github.nix#L20)
+## [`my-dotfiles.vscode.qol.github.enable`](programs/vscode/qol-github.nix#L19)
 
 add GitHub-centric extensions
 
@@ -1064,7 +1064,7 @@ add GitHub-centric extensions
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L21)
+## [`my-dotfiles.vscode.qol.todo.enable`](programs/vscode/qol-todo.nix#L20)
 
 improve TODO support
 
@@ -1074,7 +1074,7 @@ improve TODO support
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.remote.devcontainer.enable`](programs/vscode/remote-devcontainer.nix#L20)
+## [`my-dotfiles.vscode.remote.devcontainer.enable`](programs/vscode/remote-devcontainer.nix#L19)
 
 add support for running VS Code in dev containers
 

@@ -5,16 +5,15 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.qol.bookmarks;
+  inherit (import ./lib.nix inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  darwinOr = if pkgs.stdenv.isDarwin then mac: _: mac else _: other: other;
+  cfg = vscodeCfg.qol.bookmarks;
+  darwinOr = mkDarwinOr pkgs;
 in
 {
   options.my-dotfiles.vscode.qol.bookmarks = {
@@ -36,7 +35,6 @@ in
     # Bookmark Keybindings
     {
       programs.vscode.profiles.default.keybindings = [
-
 
         # Bookmarks: Toggle
         {

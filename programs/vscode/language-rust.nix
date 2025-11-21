@@ -5,15 +5,14 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge mkDefault;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.language.rust;
+  inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
+  cfg = vscodeCfg.language.rust;
 in
 {
   options.my-dotfiles.vscode.language.rust = {

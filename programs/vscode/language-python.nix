@@ -5,15 +5,14 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge mkDefault;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.language.python;
+  inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
+  cfg = vscodeCfg.language.python;
 in
 {
   options.my-dotfiles.vscode.language.python = {

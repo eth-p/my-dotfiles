@@ -5,15 +5,14 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.remote.ssh;
+  inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
+  cfg = vscodeCfg.remote.ssh;
 in
 {
   options.my-dotfiles.vscode.remote.ssh = {

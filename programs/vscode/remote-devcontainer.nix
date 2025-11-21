@@ -5,15 +5,14 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.remote.devcontainer;
+  inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
+  cfg = vscodeCfg.remote.devcontainer;
 in
 {
   options.my-dotfiles.vscode.remote.devcontainer = {

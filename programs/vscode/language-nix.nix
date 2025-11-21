@@ -5,14 +5,14 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.language.nix;
+  inherit (import ./lib.nix inputs) vscodeCfg;
+  extensions = pkgs.vscode-extensions;
+  cfg = vscodeCfg.language.nix;
 in
 {
   options.my-dotfiles.vscode.language.nix = {
@@ -37,7 +37,7 @@ in
     # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
     {
       programs.vscode = {
-        profiles.default.extensions = with pkgs.vscode-extensions; [ jnoortheen.nix-ide ];
+        profiles.default.extensions = with extensions; [ jnoortheen.nix-ide ];
       };
     }
 

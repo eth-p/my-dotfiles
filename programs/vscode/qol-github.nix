@@ -5,15 +5,14 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.qol.github;
+  inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
+  cfg = vscodeCfg.qol.github;
 in
 {
   options.my-dotfiles.vscode.qol.github = {
@@ -42,10 +41,10 @@ in
       };
     }
 
-    (mkIf config.my-dotfiles.vscode.language.bash.enable {
+    (mkIf vscodeCfg.language.bash.enable {
       programs.vscode.profiles.default.userSettings = {
         "actions-shell-scripts.shellcheckFolder" =
-          config.my-dotfiles.vscode.language.bash.shellcheck.package + "/bin";
+          vscodeCfg.language.bash.shellcheck.package + "/bin";
       };
     })
 

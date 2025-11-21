@@ -5,16 +5,15 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
   ...
-}:
+}@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  vscodeCfg = config.my-dotfiles.vscode;
-  cfg = config.my-dotfiles.vscode.qol.todo;
+  inherit (import ./lib.nix inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  darwinOr = if pkgs.stdenv.isDarwin then mac: _: mac else _: other: other;
+  cfg = vscodeCfg.qol.todo;
+  darwinOr = mkDarwinOr pkgs;
 in
 {
   options.my-dotfiles.vscode.qol.todo = {
@@ -97,7 +96,6 @@ in
     # Keybindings
     {
       programs.vscode.profiles.default.keybindings = [
-
 
         # View: Show TODOs
         {
