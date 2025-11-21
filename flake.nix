@@ -49,8 +49,8 @@
         ./programs/globals.nix
       ];
 
-      # overlay exports the overlays I use to update certain packages.
-      overlay = (import ./overlays inputs);
+      # overlays exports the overlays I use to update certain packages.
+      overlays = (import ./overlays inputs);
 
       # packages exports my various utility scripts (or flake-installed programs)
       # as packages, making them easier to reuse between programs.

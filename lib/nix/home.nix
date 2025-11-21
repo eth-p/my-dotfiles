@@ -34,7 +34,7 @@ rec {
     let
       # Add overlays.
       overlays = [
-        my-dotfiles.overlay
+        my-dotfiles.overlays.default
         vicinae.overlays.default
       ];
 
