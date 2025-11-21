@@ -57,20 +57,20 @@ in
         enable = true;
         lfs.enable = true;
 
-        aliases = {
-          ss = "status --short";
-          lg = "log --oneline --graph";
-          r = "rebase --interactive --autosquash";
-          rc = "rebase --continue";
+        settings = {
+          alias = {
+            ss = "status --short";
+            lg = "log --oneline --graph";
+            r = "rebase --interactive --autosquash";
+            rc = "rebase --continue";
 
-          # Aliases to get diffs:
-          sdiff = "diff --staged";
-          cdiff = ''
-            !bash -c "git diff \"''${1:-HEAD}~1\" \"''${1:-HEAD}\""
-          '';
-        };
+            # Aliases to get diffs:
+            sdiff = "diff --staged";
+            cdiff = ''
+              !bash -c "git diff \"''${1:-HEAD}~1\" \"''${1:-HEAD}\""
+            '';
+          };
 
-        extraConfig = {
           # Show the line(s) of parent commit
           merge.conflictstyle = "zdiff3";
 
@@ -112,8 +112,9 @@ in
 
     # Configure 'delta' diff tool.
     (mkIf cfg.useDelta {
-      programs.git.delta = {
+      programs.delta = {
         enable = true;
+        enableGitIntegration = true;
         options = {
           navigate = true;
         };
@@ -133,7 +134,7 @@ in
             "*.yaml diff=dyff"
           ];
 
-          extraConfig = {
+          settings = {
             diff.dyff.command = diff_with_dyff.outPath;
           };
         };
@@ -158,7 +159,7 @@ in
           '';
         })
       ];
-      programs.git.aliases = {
+      programs.git.settings.alias = {
         fixup = "fzf-fixup";
       };
     }))
