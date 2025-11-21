@@ -34,7 +34,7 @@ in
       };
 
       # Add it as a git alias, `git gh`.
-      programs.git.aliases = {
+      programs.git.settings.alias = {
         gh = "!gh";
       };
     }
