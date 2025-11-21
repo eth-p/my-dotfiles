@@ -19,6 +19,7 @@ let
 in
 {
   imports = [
+    ./bindings-map-cw.nix
     ./bindings-style-intellij.nix
     ./language-bash.nix
     ./language-go.nix
@@ -52,6 +53,8 @@ in
         description = "use alternate keybindings";
         default = "default";
       };
+
+      map-cw = lib.mkEnableOption "Map Ctrl-W to control panes and focus";
     };
 
     colorscheme = lib.mkOption {
