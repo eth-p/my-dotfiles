@@ -89,6 +89,12 @@ in
           "command" = "-workbench.action.tasks.configureTaskRunner";
         }
 
+        # "Git: Commit All"
+        {
+          "key" = "cmd+k";
+          "command" = "-git.commitAll";
+          "when" = "!inDebugMode && !operationInProgress && !terminalFocus";
+        }
       ];
     })
 
