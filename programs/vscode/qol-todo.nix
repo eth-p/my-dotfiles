@@ -94,17 +94,17 @@ in
     }
 
     # Keybindings
-    {
+    (mkIf (vscodeCfg.keybindings."map-cg") {
       programs.vscode.profiles.default.keybindings = [
 
         # View: Show TODOs
         {
-          "key" = darwinOr "cmd+k g t" "ctrl+k g t";
+          "key" = "ctrl+g l";
           "command" = "workbench.view.extension.todo-tree-container";
         }
 
       ];
-    }
+    })
 
   ]);
 }
