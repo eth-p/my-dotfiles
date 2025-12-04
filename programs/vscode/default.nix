@@ -23,7 +23,7 @@ in
     ./bindings-map-cg.nix
     ./bindings-style-intellij.nix
     ./language-bash.nix
-    ./language-go.nix
+    ./language-go
     ./language-makefile.nix
     ./language-markdown.nix
     ./language-nix.nix

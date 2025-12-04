@@ -880,7 +880,7 @@ the shellcheck package
 
 **Default:** `pkgs.shellcheck`
 
-## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go.nix#L21)
+## [`my-dotfiles.vscode.language.go.compiler.package`](programs/vscode/language-go/default.nix#L22)
 
 the Go compiler package
 
@@ -888,7 +888,7 @@ the Go compiler package
 
 **Default:** `pkgs.go`
 
-## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go.nix#L27)
+## [`my-dotfiles.vscode.language.go.debugger.enable`](programs/vscode/language-go/default.nix#L28)
 
 install the Go debugger, dlv
 
@@ -896,7 +896,7 @@ install the Go debugger, dlv
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go.nix#L32)
+## [`my-dotfiles.vscode.language.go.debugger.package`](programs/vscode/language-go/default.nix#L33)
 
 the dlv package
 
@@ -904,7 +904,7 @@ the dlv package
 
 **Default:** `pkgs.delve`
 
-## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go.nix#L19)
+## [`my-dotfiles.vscode.language.go.enable`](programs/vscode/language-go/default.nix#L20)
 
 add Go language support to Visual Studio Code
 
@@ -914,7 +914,7 @@ add Go language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go.nix#L39)
+## [`my-dotfiles.vscode.language.go.linter.enable`](programs/vscode/language-go/default.nix#L40)
 
 install golangci-lint for linting Go source code
 
@@ -922,7 +922,7 @@ install golangci-lint for linting Go source code
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go.nix#L45)
+## [`my-dotfiles.vscode.language.go.linter.package`](programs/vscode/language-go/default.nix#L46)
 
 the golangci-lint package
 
@@ -930,7 +930,7 @@ the golangci-lint package
 
 **Default:** `pkgs.golangci-lint`
 
-## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go.nix#L52)
+## [`my-dotfiles.vscode.language.go.lsp.enable`](programs/vscode/language-go/default.nix#L53)
 
 install the Go language server, gopls
 
@@ -938,7 +938,7 @@ install the Go language server, gopls
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go.nix#L58)
+## [`my-dotfiles.vscode.language.go.lsp.package`](programs/vscode/language-go/default.nix#L59)
 
 the gopls package
 
@@ -946,7 +946,7 @@ the gopls package
 
 **Default:** `pkgs.gopls`
 
-## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go.nix#L65)
+## [`my-dotfiles.vscode.language.go.snippets.general`](programs/vscode/language-go/default.nix#L66)
 
 add snippets for general language features
 
