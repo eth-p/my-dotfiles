@@ -43,8 +43,7 @@ in
 
     (mkIf vscodeCfg.language.bash.enable {
       programs.vscode.profiles.default.userSettings = {
-        "actions-shell-scripts.shellcheckFolder" =
-          vscodeCfg.language.bash.shellcheck.package + "/bin";
+        "actions-shell-scripts.shellcheckFolder" = vscodeCfg.language.bash.shellcheck.package + "/bin";
       };
     })
 

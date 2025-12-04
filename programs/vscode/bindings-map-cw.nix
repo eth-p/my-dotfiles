@@ -100,19 +100,18 @@ in
             "k"
           ]
         )
-        ++ (
-          map
-            (key: [
-              {
-                "key" = "ctrl+w ${key}";
-                "command" = "workbench.action.focusBelowGroup";
-                "when" = "editorFocus";
-              }
-            ])
-            [
-              "down"
-              "j"
-            ]
+        ++ (map
+          (key: [
+            {
+              "key" = "ctrl+w ${key}";
+              "command" = "workbench.action.focusBelowGroup";
+              "when" = "editorFocus";
+            }
+          ])
+          [
+            "down"
+            "j"
+          ]
         )
       ));
 

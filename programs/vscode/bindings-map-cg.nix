@@ -57,7 +57,6 @@ in
           "when" = "!terminalFocus";
         }
 
-
         # Bind "View: Focus Active Editor Group" to "ctrl-k backspace".
         # This is an escape hatch to get out of the terminal.
         {
