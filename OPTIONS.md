@@ -617,7 +617,7 @@ Use a transparent background.
 
 **Default:** `false`
 
-## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L22)
+## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L23)
 
 install and configure oh-my-posh
 
@@ -627,7 +627,7 @@ install and configure oh-my-posh
 
 **Example:** `true`
 
-## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L30)
+## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L31)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -648,13 +648,13 @@ install and configure oh-my-posh
 }
 ```
 
-## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L60)
+## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L61)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
 **Default:** `{ }`
 
-## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L24)
+## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L25)
 
 user text is entered on a new line
 
@@ -662,7 +662,7 @@ user text is entered on a new line
 
 **Default:** `true`
 
-## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L45)
+## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L46)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
