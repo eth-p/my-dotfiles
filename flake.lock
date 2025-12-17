@@ -18,24 +18,6 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "inputs": {
-        "systems": "systems_2"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "gomod2nix": {
       "inputs": {
         "flake-utils": [
@@ -188,20 +170,20 @@
     },
     "vicinae": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1763502740,
-        "narHash": "sha256-TAKv3dmc8DSlVp0LXQeLgrgfLTbQ/saQelenFUp9sP0=",
+        "lastModified": 1765271704,
+        "narHash": "sha256-G9zuw0IuzOxCeAcLE+IXcsdp0vAGMXBBdlfjBISnL90=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "c373db9b3121022b4382137694a212c36572ee83",
+        "rev": "04608039dda3da97ccb2e89f22f4943eb1df9a03",
         "type": "github"
       },
       "original": {
         "owner": "vicinaehq",
-        "ref": "v0.16.8",
+        "ref": "v0.16.14",
         "repo": "vicinae",
         "type": "github"
       }
