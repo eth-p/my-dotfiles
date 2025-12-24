@@ -121,14 +121,11 @@ in
               leading_diamond = " ";
               trailing_diamond = "";
 
+              cluster_aliases = nameLUT;
+
               template = (
                 builtins.concatStringsSep "" [
-                  # Get the cluster name.
-                  "{{- $clusterAliases := ${togotemplate.attrs nameLUT} }}"
-                  "{{- $cluster := (get $clusterAliases .Cluster | default .Cluster) }}"
-
-                  # Print.
-                  " ${icons.leading}{{$cluster}}{{if .Namespace}}/{{.Namespace}}{{end}}${icons.trailing} "
+                  " ${icons.leading}{{.Cluster}}{{if .Namespace}}/{{.Namespace}}{{end}}${icons.trailing} "
                 ]
               );
 
