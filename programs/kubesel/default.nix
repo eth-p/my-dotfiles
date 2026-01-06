@@ -127,7 +127,9 @@ in
 
               template = (
                 builtins.concatStringsSep "" [
+                  "{{if ne .Cluster \"\"}}"
                   " ${icons.leading}{{.Cluster}}{{if .Namespace}}/{{.Namespace}}{{end}}${icons.trailing} "
+                  "{{end}}"
                 ]
               );
 
