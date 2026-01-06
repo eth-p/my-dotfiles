@@ -488,7 +488,7 @@ glob pattern matching kubeconfig files
 
 **Example:** `"~/.kube/configs/*.yaml"`
 
-## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L29)
+## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L33)
 
 The colorscheme used for dark mode.
 
@@ -496,7 +496,7 @@ The colorscheme used for dark mode.
 
 **Default:** `"monokai-pro"`
 
-## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L35)
+## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L39)
 
 The colorscheme used for light mode.
 
@@ -504,7 +504,7 @@ The colorscheme used for light mode.
 
 **Default:** `"catppuccin-latte"`
 
-## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L96)
+## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L100)
 
 Column numbers to draw a ruler at.
 
@@ -529,7 +529,7 @@ neovim
 
 **Example:** `true`
 
-## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L72)
+## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L76)
 
 Enable git integrations.
 
@@ -537,7 +537,7 @@ Enable git integrations.
 
 **Default:** `config.programs.git.enable`
 
-## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L78)
+## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L82)
 
 Enable hex editing with xxd.
 
@@ -545,7 +545,7 @@ Enable hex editing with xxd.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L60)
+## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L64)
 
 Display the keymap after a short delay.
 
@@ -553,7 +553,7 @@ Display the keymap after a short delay.
 
 **Default:** `true`
 
-## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L66)
+## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L70)
 
 Change the <Leader> key.
 
@@ -561,7 +561,7 @@ Change the <Leader> key.
 
 **Default:** `"<Space>"`
 
-## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L84)
+## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L88)
 
 Create cvim alias for using neovim as a pager.
 
@@ -569,7 +569,7 @@ Create cvim alias for using neovim as a pager.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L90)
+## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L94)
 
 Create yvim alias for using neovim as YAML pager.
 
@@ -593,7 +593,7 @@ Enable yaml syntax support (treesitter).
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L48)
+## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L52)
 
 Dim unfocused panes.
 
@@ -601,7 +601,7 @@ Dim unfocused panes.
 
 **Default:** `true`
 
-## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L42)
+## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L46)
 
 Enable support for using Nerdfonts.
 
@@ -609,7 +609,7 @@ Enable support for using Nerdfonts.
 
 **Default:** `cfgGlobal.nerdfonts`
 
-## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L54)
+## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L58)
 
 Use a transparent background.
 

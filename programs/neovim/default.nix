@@ -25,6 +25,10 @@ in
   options.my-dotfiles.neovim = {
     enable = lib.mkEnableOption "neovim";
 
+    autoClearCache = lib.mkEnableOption "Automatically clear the luajit cache." // {
+      default = true;
+    };
+
     colorschemes = {
       dark = lib.mkOption {
         type = lib.types.str;
@@ -184,6 +188,14 @@ in
             };
         };
       }
+
+      # Automatically clear the neovim luajit cache.
+      (lib.mkIf cfg.autoClearCache {
+        home.activation.clearNeovimLuaCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          ${pkgs.findutils}/bin/find "${config.home.homeDirectory}/.cache/nvim/luac" -type f -iname '%2fnix%2fstore*' \
+            | ${pkgs.findutils}/bin/xargs --no-run-if-empty rm
+        '';
+      })
 
       # Create cvim shell alias.
       (lib.mkIf cfg.shellAliases.cvim {
