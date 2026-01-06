@@ -54,7 +54,7 @@ in
       # Run the nvim-treesitter setup function after other plugins.
       programs.neovim.extraLuaConfig = lib.mkOrder 2000 ''
         -- Set up nvim-treesitter plugin.
-        require("nvim-treesitter.configs").setup {
+        require("nvim-treesitter").setup {
           auto_install = false,
           highlight = {
             enable = true,
