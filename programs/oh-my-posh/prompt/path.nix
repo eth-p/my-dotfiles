@@ -28,7 +28,7 @@
       foreground = "p:path_parent";
       background = "p:path_bg";
       template = "{{ if and (ne .Path \"/\") (ne .Path \"~\") }}{{ dir .Path }}/{{ end }}";
-      properties = {
+      options = {
         style = "letter";
       };
     }
@@ -41,7 +41,7 @@
       foreground = "p:path_curdir";
       background = "p:path_bg";
       template = "<b>{{ .Path }}</b>";
-      properties = {
+      options = {
         style = "folder";
       };
     }

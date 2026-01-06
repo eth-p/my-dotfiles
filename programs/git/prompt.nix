@@ -67,7 +67,7 @@ let
 
     templates_logic = "first_match";
 
-    properties = {
+    options = {
       fetch_status = true;
       source = "cli";
 

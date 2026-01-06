@@ -121,10 +121,6 @@ in
               leading_diamond = " ";
               trailing_diamond = "";
 
-              options = {
-                cluster_aliases = nameLUT;
-              };
-
               template = (
                 builtins.concatStringsSep "" [
                   "{{if ne .Cluster \"\"}}"
@@ -133,8 +129,9 @@ in
                 ]
               );
 
-              properties = {
+              options = {
                 parse_kubeconfig = true;
+                cluster_aliases = nameLUT;
               };
             }
           ];

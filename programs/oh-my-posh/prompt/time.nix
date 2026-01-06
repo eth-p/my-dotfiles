@@ -30,7 +30,7 @@
 
       template = "{{ .FormattedMs }}";
 
-      properties = {
+      options = {
         threshold = 500;
         style = "austin";
       };

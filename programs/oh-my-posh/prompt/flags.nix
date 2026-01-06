@@ -31,7 +31,7 @@
 
       template = "<b>!</b>";
 
-      properties = { };
+      options = { };
     }
 
     # Exit code segment:
@@ -45,7 +45,7 @@
 
       template = "<b>{{ .String }}</b>";
 
-      properties = { };
+      options = { };
     }
   ];
 }
