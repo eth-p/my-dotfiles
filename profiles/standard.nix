@@ -45,4 +45,8 @@
     glow.forPreview = lib.mkDefault true;
   };
 
+  my-dotfiles.lf = {
+    enable = lib.mkDefault true;
+  };
+
 }

@@ -82,6 +82,10 @@
     enable = lib.mkDefault true;
   };
 
+  my-dotfiles.lf = {
+    enable = lib.mkDefault true;
+  };
+
   home.packages = [
     # Nix Language Server
     pkgs.nil
