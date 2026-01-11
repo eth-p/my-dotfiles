@@ -25,6 +25,7 @@
   ./github-act
   ./glow
   ./kubesel
+  ./lf
   ./neovim
   ./oh-my-posh
   ./ranger
