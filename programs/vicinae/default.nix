@@ -23,6 +23,7 @@ in
     # Configure vicinae.
     {
       services.vicinae = {
+        enable = true;
         systemd = {
           enable = true;
           autoStart = true;
