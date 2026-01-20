@@ -191,6 +191,7 @@ in
             userSettings = {
               "git.blame.editorDecoration.enabled" = cfg.editor.inlineBlame;
               "editor.rulers" = cfg.editor.rulers;
+              "terminal.integrated.macOptionIsMeta" = true;
             };
           };
         };
