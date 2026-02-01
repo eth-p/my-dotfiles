@@ -26,10 +26,18 @@
       url = "github:eth-p/kubesel";
       inputs.nixpkgs.url = "nixpkgs/nixos-25.05";
     };
+
+    # systems lists the default nix systems.
+    systems.url = "github:nix-systems/default";
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      systems,
+      ...
+    }@inputs:
     rec {
 
       # lib provides reusable library functions.
@@ -56,61 +64,17 @@
       # as packages, making them easier to reuse between programs.
       packages =
         let
-          defaultSystems = [
-            "aarch64-darwin"
-            "aarch64-linux"
-            "x86_64-darwin"
-            "x86_64-linux"
-          ];
-
-          inputsForSystem = system: {
-            system = system;
-            my-dotfiles = self;
-
-            # Get nixpkgs for the system the package is being defined for.
-            pkgs = import nixpkgs { inherit system; };
-          };
-
-          # Import the packages.
-          #
-          # Note: I declared them as `${package}.${system}` for organization
-          # purposes. This is not what Nix expects, and consequently, these
-          # can't be used directly by `nix flake run`.
-          packageDefs = (import ./packages) {
-            systems = {
-              inherit defaultSystems;
-              inputsForSystem = inputsForSystem;
-              inputs = builtins.listToAttrs (
-                map (sys: {
-                  name = sys;
-                  value = inputsForSystem sys;
-                }) defaultSystems
-              );
-            };
-          };
-
-          # To solve the above issue, I swap the order to `${system}.${package}`.
-          #
-          # This involves iterating all the systems and generating a new attrset
-          # containing the subset of packages which support the given system.
-          collectPackagesForSystem =
-            sys:
-            let
-              packageSupportsSys = (name: packageDefs."${name}" ? "${sys}");
-              packageForSys = (name: packageDefs."${name}"."${sys}");
-              packageNames = builtins.attrNames packageDefs;
-            in
-            nixpkgs.lib.attrsets.mergeAttrsList (
-              map (name: { "${name}" = (packageForSys name); }) (builtins.filter packageSupportsSys packageNames)
+          defaultSystems = import systems;
+          forDefaultSystems = fn: forEachSystem fn defaultSystems;
+          forEachSystem =
+            fn: systems:
+            nixpkgs.lib.genAttrs systems (
+              system:
+              fn {
+                pkgs = (import nixpkgs { inherit system; });
+              }
             );
-
         in
-        builtins.listToAttrs (
-          map (sys: {
-            name = sys;
-            value = collectPackagesForSystem sys;
-          }) defaultSystems
-        );
-
+        forDefaultSystems (import ./packages);
     };
 }
