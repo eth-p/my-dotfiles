@@ -1,14 +1,16 @@
 # my-dotfiles | Copyright (C) 2025 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
-# Program: https://github.com/JanDeDobbeleer/oh-my-posh
-# This overrides oh-my-posh to use the official binary release.
-# Reason for doing this is because it's updated frequently compared to nixpkgs.
+# Program: https://github.com/golangci/golangci-lint
+# This provides the binary release for the last v1 release of golangci-lint.
 # ==============================================================================
-final: prev:
+{
+  lib,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+}:
 let
-  inherit (prev) lib system stdenv;
-  pkgs = prev;
   version = "1.64.8";
   downloads = {
     "x86_64-linux" = {
@@ -33,12 +35,12 @@ stdenv.mkDerivation rec {
   pname = "golangci-lint-v1";
   inherit version;
 
-  src = pkgs.fetchurl downloads."${system}";
+  src = fetchurl downloads."${stdenv.hostPlatform.system}";
 
   dontConfigure = true;
   dontBuild = true;
 
-  nativeBuildInputs = if stdenv.isLinux then [ pkgs.autoPatchelfHook ] else [ ];
+  nativeBuildInputs = if stdenv.isLinux then [ autoPatchelfHook ] else [ ];
 
   installPhase = ''
     runHook preInstall
@@ -51,7 +53,7 @@ stdenv.mkDerivation rec {
     description = "Fast linters Runner for Go";
     homepage = "https://golangci-lint.run/";
     changelog = "https://github.com/golangci/golangci-lint/blob/v${version}/CHANGELOG.md";
-    mainProgram = "golangci-lint";
+    mainProgram = "golangci-lint-v1";
     license = lib.licenses.gpl3Plus;
     maintainers = [ ];
   };

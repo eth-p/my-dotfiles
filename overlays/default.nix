@@ -3,18 +3,20 @@
 #
 # This references all the overlays.
 # ==============================================================================
-{ ... }@inputs:
+{ my-dotfiles, ... }@inputs:
 rec {
   default = final: prev: (packages final prev) // (vscode-extensions final prev);
 
   packages =
     final: prev:
     let
+      system = final.stdenv.hostPlatform.system;
+      packages = my-dotfiles.packages.${system};
       packageOverlay = file: (import file final prev);
     in
     {
       oh-my-posh = packageOverlay ./packages/oh-my-posh.nix;
-      golangci-lint-v1 = packageOverlay ./packages/golangci-lint-v1.nix;
+      golangci-lint-v1 = packages.golangci-lint-v1-bin;
     };
 
   vscode-extensions =

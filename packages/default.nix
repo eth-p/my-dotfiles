@@ -8,4 +8,6 @@
 }:
 {
   term-query-bg = pkgs.callPackage ./term-query-bg/package.nix { };
+
+  golangci-lint-v1-bin = pkgs.callPackage ./golangci-lint-v1-bin/package.nix { };
 }

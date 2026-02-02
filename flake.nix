@@ -58,7 +58,7 @@
       ];
 
       # overlays exports the overlays I use to update certain packages.
-      overlays = (import ./overlays inputs);
+      overlays = (import ./overlays (inputs // { my-dotfiles = self; }));
 
       # packages exports my various utility scripts (or flake-installed programs)
       # as packages, making them easier to reuse between programs.
