@@ -51,6 +51,10 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
+  passthru.updateInfo = {
+    github = "JanDeDobbeleer/oh-my-posh";
+  };
+
   meta = {
     description = "Prompt theme engine for any shell";
     mainProgram = "oh-my-posh";
