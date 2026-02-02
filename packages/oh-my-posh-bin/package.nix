@@ -5,10 +5,13 @@
 # This overrides oh-my-posh to use the official binary release.
 # Reason for doing this is because it's updated frequently compared to nixpkgs.
 # ==============================================================================
-final: prev:
+{
+  lib,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+}:
 let
-  inherit (prev) lib system stdenv;
-  pkgs = prev;
   version = "v28.5.1";
   downloads = {
     "x86_64-linux" = {
@@ -33,13 +36,13 @@ stdenv.mkDerivation rec {
   pname = "oh-my-posh";
   inherit version;
 
-  src = pkgs.fetchurl downloads."${system}";
+  src = fetchurl downloads."${stdenv.hostPlatform.system}";
 
   dontConfigure = true;
   dontBuild = true;
   dontUnpack = true;
 
-  nativeBuildInputs = if stdenv.isLinux then [ pkgs.autoPatchelfHook ] else [ ];
+  nativeBuildInputs = if stdenv.isLinux then [ autoPatchelfHook ] else [ ];
 
   installPhase = ''
     ls -la

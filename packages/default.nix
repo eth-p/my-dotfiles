@@ -10,4 +10,5 @@
   term-query-bg = pkgs.callPackage ./term-query-bg/package.nix { };
 
   golangci-lint-v1-bin = pkgs.callPackage ./golangci-lint-v1-bin/package.nix { };
+  oh-my-posh-bin = pkgs.callPackage ./oh-my-posh-bin/package.nix { };
 }

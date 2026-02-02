@@ -12,10 +12,9 @@ rec {
     let
       system = final.stdenv.hostPlatform.system;
       packages = my-dotfiles.packages.${system};
-      packageOverlay = file: (import file final prev);
     in
     {
-      oh-my-posh = packageOverlay ./packages/oh-my-posh.nix;
+      oh-my-posh = packages.oh-my-posh-bin;
       golangci-lint-v1 = packages.golangci-lint-v1-bin;
     };
 
