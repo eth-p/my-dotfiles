@@ -21,6 +21,14 @@
       packages = [
         pkgs.git
 
+        # Package update scripts
+        pkgs.nix-update
+        pkgs.yq-go
+        pkgs.gawk
+        pkgs.gnused
+        pkgs.github-cli
+        pkgs.bash
+
         # Formatters
         pkgs.treefmt
         pkgs.nodePackages.prettier
