@@ -4,10 +4,10 @@
 # Program: https://code.visualstudio.com/
 # Extension: https://marketplace.visualstudio.com/items?itemName=marcovr.actions-shell-scripts
 # ==============================================================================
-final: prev:
-let
-  inherit (prev) lib vscode-utils;
-in
+{
+  lib,
+  vscode-utils,
+}:
 vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     name = "actions-shell-scripts";

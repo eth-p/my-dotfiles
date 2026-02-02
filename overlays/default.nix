@@ -21,12 +21,10 @@ rec {
   vscode-extensions =
     final: prev:
     let
-      extensionOverlay = file: (import file final prev);
+      system = final.stdenv.hostPlatform.system;
+      extensions = my-dotfiles.legacyPackages.${system}.vscode-extensions;
     in
     {
-      vscode-extensions = prev.vscode-extensions // {
-        marcovr.actions-shell-scripts = extensionOverlay ./vscode-extensions/marcovr.actions-shell-scripts.nix;
-        yahyabatulu.vscode-markdown-alert = extensionOverlay ./vscode-extensions/yahyabatulu.vscode-markdown-alert.nix;
-      };
+      vscode-extensions = prev.vscode-extensions // extensions;
     };
 }

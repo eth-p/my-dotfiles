@@ -38,6 +38,11 @@
       systems,
       ...
     }@inputs:
+    let
+      defaultSystems = import systems;
+      forDefaultSystems = fn: forEachSystem fn defaultSystems;
+      forEachSystem = fn: systems: nixpkgs.lib.genAttrs systems (system: fn system);
+    in
     rec {
 
       # lib provides reusable library functions.
@@ -60,21 +65,22 @@
       # overlays exports the overlays I use to update certain packages.
       overlays = (import ./overlays (inputs // { my-dotfiles = self; }));
 
-      # packages exports my various utility scripts (or flake-installed programs)
-      # as packages, making them easier to reuse between programs.
-      packages =
-        let
-          defaultSystems = import systems;
-          forDefaultSystems = fn: forEachSystem fn defaultSystems;
-          forEachSystem =
-            fn: systems:
-            nixpkgs.lib.genAttrs systems (
-              system:
-              fn {
-                pkgs = (import nixpkgs { inherit system; });
-              }
-            );
-        in
-        forDefaultSystems (import ./packages);
+      # packages exports custom packages.
+      packages = forDefaultSystems (
+        system:
+        (import ./packages) {
+          pkgs = (import nixpkgs { inherit system; });
+        }
+      );
+
+      # legacyPackages exports custom package sets.
+      legacyPackages = forDefaultSystems (system: {
+        vscode-extensions = (
+          import ./packages/vscode-extensions.nix {
+            pkgs = nixpkgs.legacyPackages.${system};
+            my-dotfiles = self;
+          }
+        );
+      });
     };
 }
