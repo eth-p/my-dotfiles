@@ -17,6 +17,26 @@ let
   cfgPosh = config.programs.oh-my-posh;
   generator = (import ./generator.nix) inputs;
 
+  # https://github.com/nix-community/home-manager/blob/fca4cba863e76c26cfe48e5903c2ff4bac2b2d5d/modules/programs/oh-my-posh.nix#L13C1-L22C10
+  poshInitArgs =
+    if cfgPosh.settings != { } then
+      [
+        "--config"
+        "${config.xdg.configHome}/oh-my-posh/config.json"
+      ]
+    else if cfgPosh.useTheme != null then
+      [
+        "--config"
+        "${cfgPosh.package}/share/oh-my-posh/themes/${cfgPosh.useTheme}.omp.json"
+      ]
+    else if cfgPosh.configFile != null then
+      [
+        "--config"
+        "${cfgPosh.configFile}"
+      ]
+    else
+      [ ];
+
 in
 {
   options.my-dotfiles.oh-my-posh = {
@@ -62,6 +82,12 @@ in
       type = lib.types.attrsOf lib.types.attrs; # TODO: Proper typing.
       default = { };
     };
+
+    enableFishIntegration = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "use oh-my-posh on fish";
+    };
   };
 
   # Configure oh-my-posh.
@@ -100,30 +126,18 @@ in
       };
     }
 
+    # Only initialize when using an interactive shell.
+    (mkIf cfg.enableFishIntegration {
+      programs.oh-my-posh.enableFishIntegration = lib.mkForce false;
+      programs.fish.interactiveShellInit = mkIf cfg.enableFishIntegration ''
+        ${lib.getExe cfgPosh.package} init fish ${lib.strings.escapeShellArgs poshInitArgs} | source
+      '';
+    })
+
     # Fix for the prompt theme being reset every time home-manager config is switched.
     (mkIf cfgPosh.enableFishIntegration (
       let
         universalVarName = "__ethp_dotfiles_oh_my_posh_cache_reload";
-
-        # https://github.com/nix-community/home-manager/blob/fca4cba863e76c26cfe48e5903c2ff4bac2b2d5d/modules/programs/oh-my-posh.nix#L13C1-L22C10
-        poshInitArgs =
-          if cfgPosh.settings != { } then
-            [
-              "--config"
-              "${config.xdg.configHome}/oh-my-posh/config.json"
-            ]
-          else if cfgPosh.useTheme != null then
-            [
-              "--config"
-              "${cfgPosh.package}/share/oh-my-posh/themes/${cfgPosh.useTheme}.omp.json"
-            ]
-          else if cfgPosh.configFile != null then
-            [
-              "--config"
-              "${cfgPosh.configFile}"
-            ]
-          else
-            [ ];
 
       in
       {

@@ -617,7 +617,7 @@ Use a transparent background.
 
 **Default:** `false`
 
-## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L23)
+## [`my-dotfiles.oh-my-posh.enable`](programs/oh-my-posh/default.nix#L43)
 
 install and configure oh-my-posh
 
@@ -627,7 +627,15 @@ install and configure oh-my-posh
 
 **Example:** `true`
 
-## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L31)
+## [`my-dotfiles.oh-my-posh.enableFishIntegration`](programs/oh-my-posh/default.nix#L86)
+
+use oh-my-posh on fish
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L51)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -648,13 +656,13 @@ install and configure oh-my-posh
 }
 ```
 
-## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L61)
+## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L81)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
 **Default:** `{ }`
 
-## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L25)
+## [`my-dotfiles.oh-my-posh.newline`](programs/oh-my-posh/default.nix#L45)
 
 user text is entered on a new line
 
@@ -662,7 +670,7 @@ user text is entered on a new line
 
 **Default:** `true`
 
-## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L46)
+## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L66)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
