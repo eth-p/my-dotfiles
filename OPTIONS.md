@@ -733,7 +733,7 @@ install vicinae
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L62)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L63)
 
 The color scheme used for Visual Studio Code.
 
@@ -749,7 +749,7 @@ lib.types.enum [
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L135)
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L136)
 
 Extra packages to install.
 
@@ -768,7 +768,7 @@ Extra packages to install.
 )
 ```
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L147)
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L148)
 
 Unfree packages to allow.
 
@@ -778,7 +778,7 @@ Unfree packages to allow.
 
 **Example:** `[ "vscode-extension-ms-vscode-remote-remote-ssh" ]`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L116)
+## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L117)
 
 show the git blame as an inline hint
 
@@ -786,7 +786,7 @@ show the git blame as an inline hint
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L108)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L109)
 
 Column numbers to draw a ruler at.
 
@@ -801,7 +801,7 @@ Column numbers to draw a ruler at.
 ]
 ```
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L121)
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L122)
 
 Highlight trailing whitespace.
 
@@ -809,7 +809,7 @@ Highlight trailing whitespace.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L42)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L43)
 
 install and configure Visual Studio Code
 
@@ -819,7 +819,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L128)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L129)
 
 Use a FHS environment for VS Code.
 
@@ -827,7 +827,7 @@ Use a FHS environment for VS Code.
 
 **Default:** `false`
 
-## [`my-dotfiles.vscode.keybindings.map-cg`](programs/vscode/default.nix#L59)
+## [`my-dotfiles.vscode.keybindings.map-cg`](programs/vscode/default.nix#L60)
 
 Map Ctrl-G to goto panes
 
@@ -837,7 +837,7 @@ Map Ctrl-G to goto panes
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.keybindings.map-cw`](programs/vscode/default.nix#L58)
+## [`my-dotfiles.vscode.keybindings.map-cw`](programs/vscode/default.nix#L59)
 
 Map Ctrl-W to control panes and focus
 
@@ -847,7 +847,7 @@ Map Ctrl-W to control panes and focus
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.keybindings.style`](programs/vscode/default.nix#L49)
+## [`my-dotfiles.vscode.keybindings.style`](programs/vscode/default.nix#L50)
 
 use alternate keybindings
 
@@ -1054,7 +1054,7 @@ add Yaml language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L43)
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L44)
 
 do not install Visual Studio Code, only configure it
 
@@ -1077,6 +1077,16 @@ add bookmarking support
 ## [`my-dotfiles.vscode.qol.github.enable`](programs/vscode/qol-github.nix#L19)
 
 add GitHub-centric extensions
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.qol.kubernetes.enable`](programs/vscode/qol-kubernetes.nix#L19)
+
+add Kubernetes-centric extensions
 
 **Type:** `boolean`
 

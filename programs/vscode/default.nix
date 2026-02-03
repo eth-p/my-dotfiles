@@ -33,6 +33,7 @@ in
     ./language-yaml.nix
     ./qol-bookmarks.nix
     ./qol-github.nix
+    ./qol-kubernetes.nix
     ./qol-todo.nix
     ./remote-devcontainer.nix
     ./remote-ssh.nix
