@@ -30,6 +30,7 @@ rec {
       system,
       modules,
       profile ? null,
+      extraSpecialArgs ? {},
     }:
     let
       # Add overlays.
@@ -53,7 +54,7 @@ rec {
         ]
         ++ profileMod
         ++ modules;
-      extraSpecialArgs = {
+      extraSpecialArgs = extraSpecialArgs // {
         my-dotfiles = my-dotfiles // {
           inherit inputs;
         };
