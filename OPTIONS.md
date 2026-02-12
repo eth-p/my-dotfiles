@@ -488,6 +488,16 @@ glob pattern matching kubeconfig files
 
 **Example:** `"~/.kube/configs/*.yaml"`
 
+## [`my-dotfiles.lf.enable`](programs/lf/default.nix#L20)
+
+install and configure lf
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L33)
 
 The colorscheme used for dark mode.

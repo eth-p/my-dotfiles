@@ -30,7 +30,7 @@ rec {
       system,
       modules,
       profile ? null,
-      extraSpecialArgs ? {},
+      extraSpecialArgs ? { },
     }:
     let
       # Add overlays.

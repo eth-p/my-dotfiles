@@ -191,12 +191,24 @@ in
         };
       }
       // (snippets.mkTableTestSnippet { paramCount = 1; })
-      // (snippets.mkTableTestSnippet { paramCount = 1; returnsError = true; })
+      // (snippets.mkTableTestSnippet {
+        paramCount = 1;
+        returnsError = true;
+      })
       // (snippets.mkTableTestSnippet { paramCount = 2; })
-      // (snippets.mkTableTestSnippet { paramCount = 2; returnsError = true; })
-      // (snippets.mkTableTestSnippet { paramCount = 2; returnCount = 2; })
-      // (snippets.mkTableTestSnippet { paramCount = 2; returnCount = 2; returnsError = true; })
-      ;
+      // (snippets.mkTableTestSnippet {
+        paramCount = 2;
+        returnsError = true;
+      })
+      // (snippets.mkTableTestSnippet {
+        paramCount = 2;
+        returnCount = 2;
+      })
+      // (snippets.mkTableTestSnippet {
+        paramCount = 2;
+        returnCount = 2;
+        returnsError = true;
+      });
     })
 
   ]);

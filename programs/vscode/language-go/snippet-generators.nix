@@ -63,13 +63,17 @@ rec {
         ++ (lib.optional returnsError "E")
       );
 
-      generateStructInputField = i: p: "\t\t\${${toString p}:input${toString i}} \${${toString (p + 1)}:type}";
-      generateStructExpectField = i: p: "\t\texpected\${${toString p}:Value${toString i}} \${${toString (p + 1)}:type}";
-      generateReturnAssert = i: p: "\t\t\tassert.Equal(t, tc.expected\$${toString p}, actual\$${toString p})";
+      generateStructInputField =
+        i: p: "\t\t\${${toString p}:input${toString i}} \${${toString (p + 1)}:type}";
+      generateStructExpectField =
+        i: p: "\t\texpected\${${toString p}:Value${toString i}} \${${toString (p + 1)}:type}";
+      generateReturnAssert =
+        i: p: "\t\t\tassert.Equal(t, tc.expected\$${toString p}, actual\$${toString p})";
       generateCallParam = i: p: "tc.\$${toString p}";
       generateCallReturn = i: p: "actual\$${toString p}";
 
-      funcReturnValues = (mkPlaceholders expectPOpts generateCallReturn returnCount) ++ (lib.optional returnsError "err");
+      funcReturnValues =
+        (mkPlaceholders expectPOpts generateCallReturn returnCount) ++ (lib.optional returnsError "err");
 
       inputPOpts = {
         start = 2;
