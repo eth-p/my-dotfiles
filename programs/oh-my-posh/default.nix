@@ -135,7 +135,7 @@ in
     })
 
     # Fix for the prompt theme being reset every time home-manager config is switched.
-    (mkIf cfgPosh.enableFishIntegration (
+    (mkIf cfg.enableFishIntegration (
       let
         universalVarName = "__ethp_dotfiles_oh_my_posh_cache_reload";
 
