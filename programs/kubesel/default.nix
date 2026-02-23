@@ -83,18 +83,20 @@ in
 
           # raiseAttr picks a property from an attribute set and raises it.
           # Example: `"bar" {foo = { bar = "baz" }} -> { foo = "baz" }
-          raiseAttr =
-            name: attrs:
-            builtins.listToAttrs (
-              map (k: {
-                name = k;
-                value = attrs.${k}.${name};
-              }) (builtins.attrNames attrs)
-            );
+          raiseAttr = name: lib.attrsets.mapAttrs (k: v: v.${name});
 
-          fgColorLUT = raiseAttr "fg" cfg.inPromptClusterOverrides;
-          bgColorLUT = raiseAttr "bg" cfg.inPromptClusterOverrides;
-          nameLUT = raiseAttr "name" cfg.inPromptClusterOverrides;
+          # rekeyToAlias changes the attribute names to be keyed using the
+          # cluster name alias instead of the original cluster name.
+          rekeyToAlias = lib.attrsets.mapAttrs' (
+            k: v: {
+              name = v.name;
+              value = v;
+            }
+          );
+
+          fgColorLUT = raiseAttr "fg" (rekeyToAlias cfg.inPromptClusterOverrides);
+          bgColorLUT = raiseAttr "bg" (rekeyToAlias cfg.inPromptClusterOverrides);
+          clusterAliases = raiseAttr "name" cfg.inPromptClusterOverrides;
         in
         {
           priority = 50;
@@ -131,7 +133,7 @@ in
 
               options = {
                 parse_kubeconfig = true;
-                cluster_aliases = nameLUT;
+                cluster_aliases = clusterAliases;
               };
             }
           ];
