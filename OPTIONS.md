@@ -767,7 +767,23 @@ lib.types.enum [
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L136)
+## [`my-dotfiles.vscode.config.allowedLinkSchemes.extras`](programs/vscode/default.nix#L143)
+
+Extra hyperlink schemes that are allowed to be opened.
+
+**Type:** `lib.types.listOf lib.types.str`
+
+**Default:** `[ ]`
+
+## [`my-dotfiles.vscode.config.allowedLinkSchemes.includeDefaults`](programs/vscode/default.nix#L137)
+
+Include the default hyperlink schemes that are allowed to be opened.
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L150)
 
 Extra packages to install.
 
@@ -786,7 +802,7 @@ Extra packages to install.
 )
 ```
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L148)
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L162)
 
 Unfree packages to allow.
 

@@ -133,6 +133,20 @@ in
       readOnly = !pkgs.stdenv.isLinux;
     };
 
+    config.allowedLinkSchemes = {
+      includeDefaults = lib.mkOption {
+        type = lib.types.bool;
+        description = "Include the default hyperlink schemes that are allowed to be opened.";
+        default = true;
+      };
+
+      extras = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "Extra hyperlink schemes that are allowed to be opened.";
+        default = [ ];
+      };
+    };
+
     dependencies.packages = lib.mkOption {
       type = my-dotfiles.lib.types.functionListTo lib.types.package;
       description = "Extra packages to install.";
@@ -308,6 +322,22 @@ in
         "trailing-spaces.trimOnSave" = false;
       };
     })
+
+    # Configure allowed link schemas.
+    {
+      programs.vscode.profiles.default.userSettings = {
+        "terminal.integrated.allowedLinkSchemes" =
+          cfg.config.allowedLinkSchemes.extras
+          ++ (lib.optional cfg.config.allowedLinkSchemes.includeDefaults [
+            "file"
+            "http"
+            "https"
+            "mailto"
+            "vscode"
+            "vscode-insiders"
+          ]);
+      };
+    }
 
     # Configure to use `fish` as the shell.
     (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {
