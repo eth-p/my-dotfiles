@@ -54,12 +54,15 @@ in
       # Run the nvim-treesitter setup function after other plugins.
       programs.neovim.initLua = lib.mkOrder 2000 ''
         -- Set up nvim-treesitter plugin.
-        require("nvim-treesitter").setup {
-          auto_install = false,
-          highlight = {
-            enable = true,
-          },
-        }
+        local res = pcall(require, "nvim-treesitter.configs")
+        if res then
+          require("nvim-treesitter.configs").setup {
+            auto_install = false,
+            highlight = {
+              enable = true,
+            },
+          }
+        end
       '';
 
     };
