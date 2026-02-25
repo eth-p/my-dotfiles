@@ -53,7 +53,7 @@ in
     (mkIf (cfg.formatter == "nixfmt") (
 
       let
-        formatter = pkgs.nixfmt-rfc-style + "/bin/nixfmt";
+        formatter = pkgs.nixfmt + "/bin/nixfmt";
       in
       {
         programs.vscode.profiles.default.userSettings = {
