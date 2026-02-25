@@ -33,7 +33,7 @@
         pkgs.treefmt
         pkgs.nodePackages.prettier
         pkgs.shfmt
-        pkgs.nixfmt-rfc-style
+        pkgs.nixfmt
         pkgs.stylua
       ];
 
