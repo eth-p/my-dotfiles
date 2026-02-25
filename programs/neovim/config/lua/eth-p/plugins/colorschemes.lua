@@ -24,9 +24,8 @@ return {
 
 		config = function(self)
 			require("monokai-pro").setup(self.opts)
-			require("monokai-pro.theme").setup()
 
-			local palette = require("monokai-pro.colorscheme.palette.pro")
+			local palette = require("monokai-pro.palette.pro")
 			local gutter_bg = "#353337"
 			local gutter_bg_uf = "#252227"
 
