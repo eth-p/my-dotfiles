@@ -48,6 +48,22 @@ local managed_config = read_json_file(
 	config_home .. "/managed-by-home-manager.json"
 ) or {}
 
+-- Load plugins managed by home-manager.
+local managed_plugins = {}
+local hm_plugin_dir = vim.fn.stdpath("data") .. "/site/pack/hm/start"
+local res, hm_plugins = pcall(vim.fn.readdir, hm_plugin_dir)
+if res then
+	for _, name in pairs(hm_plugins) do
+		if name ~= "my-neovim-config" then
+			table.insert(managed_plugins, {
+				name = name .. " (via nix)",
+				dir = hm_plugin_dir .. "/" .. name,
+				lazy = false,
+			})
+		end
+	end
+end
+
 -- Load mutable config from config.lua
 local user_config = {}
 if vim.uv.fs_stat(config_home .. "/config.lua") then
@@ -64,7 +80,7 @@ require("eth-p") {
 		user_config.opts or {}
 	),
 	plugins = {
-		(managed_config.plugins or {}),
+		(managed_plugins or {}),
 		(user_config.plugins or {}),
 	},
 }
