@@ -637,7 +637,7 @@ install and configure oh-my-posh
 
 **Example:** `true`
 
-## [`my-dotfiles.oh-my-posh.enableFishIntegration`](programs/oh-my-posh/default.nix#L86)
+## [`my-dotfiles.oh-my-posh.enableFishIntegration`](programs/oh-my-posh/default.nix#L95)
 
 use oh-my-posh on fish
 
@@ -645,7 +645,7 @@ use oh-my-posh on fish
 
 **Default:** `true`
 
-## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L51)
+## [`my-dotfiles.oh-my-posh.envAnnotations`](programs/oh-my-posh/default.nix#L60)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -666,7 +666,7 @@ use oh-my-posh on fish
 }
 ```
 
-## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L81)
+## [`my-dotfiles.oh-my-posh.extraBlocks`](programs/oh-my-posh/default.nix#L90)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -680,7 +680,7 @@ user text is entered on a new line
 
 **Default:** `true`
 
-## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L66)
+## [`my-dotfiles.oh-my-posh.pathAnnotations`](programs/oh-my-posh/default.nix#L75)
 
 **Type:** `lib.types.attrsOf lib.types.attrs`
 
@@ -700,6 +700,24 @@ user text is entered on a new line
   };
 }
 ```
+
+## [`my-dotfiles.oh-my-posh.streaming.enable`](programs/oh-my-posh/default.nix#L52)
+
+render slow prompt segments in the background
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.oh-my-posh.streaming.timeout`](programs/oh-my-posh/default.nix#L53)
+
+max time to wait before showing the incomplete prompt
+
+**Type:** `lib.types.int`
+
+**Default:** `100`
 
 ## [`my-dotfiles.ranger.enable`](programs/ranger/default.nix#L20)
 

@@ -48,6 +48,15 @@ in
       description = "user text is entered on a new line";
     };
 
+    streaming = {
+      enable = lib.mkEnableOption "render slow prompt segments in the background";
+      timeout = lib.mkOption {
+        type = lib.types.int;
+        default = 100;
+        description = "max time to wait before showing the incomplete prompt";
+      };
+    };
+
     envAnnotations = lib.mkOption {
       type = lib.types.attrsOf lib.types.attrs; # TODO: Proper typing.
       default = { };
@@ -125,6 +134,12 @@ in
         oh-my-posh-fix = "oh-my-posh init fish --config ~/.config/oh-my-posh/config.json | source";
       };
     }
+
+    # Enable prompt streaming (oh-my-posh v29.4.0)
+    # https://github.com/JanDeDobbeleer/oh-my-posh/releases/tag/v29.4.0
+    (mkIf cfg.streaming.enable {
+      programs.oh-my-posh.settings.streaming = cfg.streaming.timeout;
+    })
 
     # Only initialize when using an interactive shell.
     (mkIf cfg.enableFishIntegration {
