@@ -190,16 +190,16 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1769547888,
-        "narHash": "sha256-x/WIhul+slaDhW8PvcHpa/FElraGCWfFvgT7Xgw1Hbo=",
+        "lastModified": 1770672288,
+        "narHash": "sha256-jJhGzVLu8QgMQrhZgJxRYcYwzrG+dKUdo9qWX8KBwnk=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "d2f38c2b1fff24c4aba5bb0ea2c2bddd4ea5a5df",
+        "rev": "1399606ebe1e799c4c22c7fbcaeae155a6a3d6e4",
         "type": "github"
       },
       "original": {
         "owner": "vicinaehq",
-        "ref": "v0.19.3",
+        "ref": "v0.19.7",
         "repo": "vicinae",
         "type": "github"
       }
