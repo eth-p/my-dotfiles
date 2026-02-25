@@ -116,7 +116,7 @@ in
           enable = true;
           viAlias = true; # Symlink `vi` to `nvim`
           defaultEditor = true; # Use neovim as $EDITOR
-          extraLuaConfig = (builtins.readFile ./init.lua);
+          initLua = (builtins.readFile ./init.lua);
 
           # Add my base config as a plugin.
           plugins = [
