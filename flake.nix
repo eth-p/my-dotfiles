@@ -22,10 +22,7 @@
     vicinae.url = "github:vicinaehq/vicinae/v0.19.7";
 
     # My own packages:
-    kubesel = {
-      url = "github:eth-p/kubesel";
-      inputs.nixpkgs.url = "nixpkgs/nixos-25.05";
-    };
+    kubesel.url = "github:eth-p/kubesel";
 
     # systems lists the default nix systems.
     systems.url = "github:nix-systems/default";
