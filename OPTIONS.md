@@ -1050,7 +1050,7 @@ use a Language Server for Nix language support
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.language.python.enable`](programs/vscode/language-python.nix#L19)
+## [`my-dotfiles.vscode.language.python.enable`](programs/vscode/language-python.nix#L21)
 
 add python language support to Visual Studio Code
 

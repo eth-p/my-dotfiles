@@ -6,6 +6,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }@inputs:
 let
@@ -13,6 +14,7 @@ let
   inherit (import ./lib.nix inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
   cfg = vscodeCfg.language.python;
+  cfgDevenv = config.my-dotfiles.devenv;
 in
 {
   options.my-dotfiles.vscode.language.python = {
@@ -23,11 +25,16 @@ in
 
     {
       programs.vscode = {
-        # Install the Python extension.
-        # https://marketplace.visualstudio.com/items?itemName=ms-python.python
-        profiles.default.extensions = with extensions; [ ms-python.python ];
-      };
+        profiles.default.extensions = with extensions; [
+          # Install the Python extension.
+          # https://marketplace.visualstudio.com/items?itemName=ms-python.python
+          ms-python.python
 
+          # Install the Python Environments extension.
+          # https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-python-envs
+          ms-python.vscode-python-envs
+        ];
+      };
     }
 
   ]);
