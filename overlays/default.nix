@@ -3,7 +3,7 @@
 #
 # This references all the overlays.
 # ==============================================================================
-{ my-dotfiles, ... }@inputs:
+{ lib, my-dotfiles, ... }@inputs:
 rec {
   default = final: prev: (packages final prev) // (vscode-extensions final prev);
 
@@ -25,6 +25,9 @@ rec {
       extensions = my-dotfiles.legacyPackages.${system}.vscode-extensions;
     in
     {
-      vscode-extensions = prev.vscode-extensions // extensions;
+      vscode-extensions = lib.foldAttrs (i: acc: acc // i) { } [
+        prev.vscode-extensions
+        extensions
+      ];
     };
 }

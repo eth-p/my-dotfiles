@@ -39,17 +39,18 @@
       defaultSystems = import systems;
       forDefaultSystems = fn: forEachSystem fn defaultSystems;
       forEachSystem = fn: systems: nixpkgs.lib.genAttrs systems (system: fn system);
-    in
-    rec {
-
-      # lib provides reusable library functions.
-      lib = (import ./lib/nix) (
+      libsAttrs = (
         {
           lib = nixpkgs.lib;
           my-dotfiles = self;
         }
         // inputs
       );
+    in
+    rec {
+
+      # lib provides reusable library functions.
+      lib = (import ./lib/nix) libsAttrs;
 
       # homeModules declares reusable home-manager modules.
       #
@@ -60,7 +61,7 @@
       ];
 
       # overlays exports the overlays I use to update certain packages.
-      overlays = (import ./overlays (inputs // { my-dotfiles = self; }));
+      overlays = (import ./overlays) libsAttrs;
 
       # packages exports custom packages.
       packages = forDefaultSystems (
