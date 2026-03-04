@@ -56,20 +56,36 @@ in
 
     # Configure to support `devenv shell`.
     (mkIf (cfgDevenv.enable) {
-      programs.vscode.profiles.default.userSettings = {
-        "terminal.integrated.profiles.${osName}" = {
-          "devenv" = {
-            "path" = lib.getExe pkgs.devenv;
-            "icon" = "circuit-board";
-            "args" = [
-              "shell"
-            ]
-            ++ (lib.optionals (defaultShell.package != null) [
-              defaultShell.executable
-            ]);
+      programs.vscode.profiles.default.userSettings =
+        let
+          runDefaultShell =
+            if defaultShell.package != null then lib.escapeShellArg defaultShell.executable else "\"$SHELL\"";
+
+          # Create a wrapper that drops back into the default shell if the
+          # devenv.nix flake could not be found.
+          wrapper = pkgs.writeShellApplication {
+            name = "devenv-in-vscode";
+            text = ''
+              if [[ -f devenv.nix ]]; then
+                if ! ${lib.getExe pkgs.devenv} shell ${runDefaultShell} "$@"; then
+                  read -rsn1
+                  exit 1
+                fi
+              fi
+
+              echo "error: No devenv.nix in current directory."
+              exec ${runDefaultShell} "$@"
+            '';
+          };
+        in
+        {
+          "terminal.integrated.profiles.${osName}" = {
+            "devenv" = {
+              "path" = lib.getExe wrapper;
+              "icon" = "circuit-board";
+            };
           };
         };
-      };
     })
 
   ]);
