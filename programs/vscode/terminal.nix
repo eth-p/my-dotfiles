@@ -65,16 +65,45 @@ in
           # devenv.nix flake could not be found.
           wrapper = pkgs.writeShellApplication {
             name = "devenv-in-vscode";
+
+            runtimeInputs = with pkgs; [
+              fzf
+              findutils
+              coreutils
+            ];
+
             text = ''
-              if [[ -f devenv.nix ]]; then
-                if ! ${lib.getExe pkgs.devenv} shell ${runDefaultShell} "$@"; then
-                  read -rsn1
-                  exit 1
-                fi
+              selected_dir="$(pwd)"
+
+              # Find all devenv directories.
+              devenv_dirs=()
+              while read -r line; do
+                devenv_dirs+=("$(dirname -- "''$line")")
+              done < <(find "$(pwd)" -name 'devenv.nix')
+
+              if [[ "''${#devenv_dirs[@]}" -gt 0 ]]; then
+                selected_dir=$(
+                  fzf \
+                    --info=inline-right \
+                    --no-separator \
+                    --filepath-word \
+                    --footer="Select Devenv Directory" \
+                    --footer-border=sharp \
+                    --select-1 \
+                    < <(printf "%s\n" "''${devenv_dirs[@]}")
+                )
               fi
 
-              echo "error: No devenv.nix in current directory."
-              exec ${runDefaultShell} "$@"
+              if ! [[ -f "''${selected_dir}/devenv.nix" ]]; then
+                printf "error: No devenv.nix in %s\n" "''$selected_dir"
+                exec ${runDefaultShell} "$@"
+              fi
+
+              cd "$selected_dir"
+              if ! ${lib.getExe pkgs.devenv} shell ${runDefaultShell} "$@"; then
+                read -rsn1
+                exit 1
+              fi
             '';
           };
         in
