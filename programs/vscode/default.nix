@@ -267,7 +267,7 @@ in
     # Set up colorschemes.
     {
       programs.vscode.profiles.default = {
-        extensions = cfg.colorschemes.dark.extensions ++ cfg.colorschemes.dark.extensions;
+        extensions = cfg.colorschemes.dark.extensions ++ cfg.colorschemes.light.extensions;
         userSettings = {
           "window.autoDetectColorScheme" = (cfg.colorscheme == "auto");
           "workbench.preferredLightColorTheme" = cfg.colorschemes.light.name;
