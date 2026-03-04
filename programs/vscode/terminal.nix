@@ -14,7 +14,9 @@ let
   inherit (import ./lib.nix inputs) vscodeCfg;
   cfg = vscodeCfg;
   cfgFish = config.my-dotfiles.fish;
+  cfgDevenv = config.my-dotfiles.devenv;
   osName = if pkgs.stdenv.isDarwin then "osx" else "linux";
+  defaultShellPkg = if cfgFish.enable && cfgFish.isSHELL then pkgs.fish else null;
 in
 {
   config = mkIf (cfg.enable) (mkMerge [
@@ -49,6 +51,24 @@ in
     (mkIf (cfgFish.enable && cfgFish.isSHELL) {
       programs.vscode.profiles.default.userSettings = {
         "terminal.integrated.defaultProfile.${osName}" = "fish";
+      };
+    })
+
+    # Configure to support `devenv shell`.
+    (mkIf (cfgDevenv.enable) {
+      programs.vscode.profiles.default.userSettings = {
+        "terminal.integrated.profiles.${osName}" = {
+          "devenv" = {
+            "path" = lib.getExe pkgs.devenv;
+            "icon" = "circuit-board";
+            "args" = [
+              "shell"
+            ]
+            ++ (lib.optionals (defaultShellPkg != null) [
+              (lib.getExe defaultShellPkg)
+            ]);
+          };
+        };
       };
     })
 
