@@ -16,7 +16,7 @@ let
   cfgFish = config.my-dotfiles.fish;
   cfgDevenv = config.my-dotfiles.devenv;
   osName = if pkgs.stdenv.isDarwin then "osx" else "linux";
-  defaultShellPkg = if cfgFish.enable && cfgFish.isSHELL then pkgs.fish else null;
+  defaultShell = config._my-dotfiles.shell;
 in
 {
   config = mkIf (cfg.enable) (mkMerge [
@@ -64,8 +64,8 @@ in
             "args" = [
               "shell"
             ]
-            ++ (lib.optionals (defaultShellPkg != null) [
-              (lib.getExe defaultShellPkg)
+            ++ (lib.optionals (defaultShell.package != null) [
+              defaultShell.executable
             ]);
           };
         };

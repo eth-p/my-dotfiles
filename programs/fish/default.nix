@@ -83,7 +83,8 @@ in
 
     # Use as $SHELL.
     (mkIf cfg.isSHELL {
-      home.sessionVariables.SHELL = config.programs.fish.package + "/bin/fish";
+      _my-dotfiles.shell.package = config.programs.fish.package;
+      home.sessionVariables.SHELL = lib.getExe config._my-dotfiles.shell.package;
     })
 
     # Fix the PATH variable on login.

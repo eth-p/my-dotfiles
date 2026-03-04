@@ -23,6 +23,9 @@ let
       };
     };
   };
+
+  cfgGlobal = config.my-dotfiles.global;
+  cfgInternal = config._my-dotfiles;
 in
 with lib;
 {
@@ -57,6 +60,30 @@ with lib;
         The general color scheme used throughout various programs.
       '';
     };
-
   };
+
+  # Internal settings that are set by modules to simplify cross-configuration.
+  options._my-dotfiles = {
+    shell.package = lib.mkOption {
+      type = lib.types.nullOr lib.types.package;
+      internal = true;
+      visible = false;
+      description = ''
+        **INTERNAL USE ONLY — DO NOT SET**
+        The default user shell.
+      '';
+    };
+
+    shell.executable = lib.mkOption {
+      type = lib.types.nullOr lib.types.pathInStore;
+      internal = true;
+      visible = false;
+      default = lib.getExe cfgInternal.shell.package;
+      description = ''
+        **INTERNAL USE ONLY — DO NOT SET**
+        The main executable of the default user shell.
+      '';
+    };
+  };
+
 }

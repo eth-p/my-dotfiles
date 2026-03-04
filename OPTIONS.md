@@ -369,7 +369,7 @@ install and configure the github CLI tool
 
 **Example:** `true`
 
-## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L49)
+## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L52)
 
 
 The general color scheme used throughout various programs.
@@ -387,7 +387,7 @@ types.enum [
 
 **Default:** `"auto"`
 
-## [`my-dotfiles.global.font-category.code`](programs/globals.nix#L34)
+## [`my-dotfiles.global.font-category.code`](programs/globals.nix#L37)
 
 the monospace font family used for displaying code.
 
@@ -402,7 +402,7 @@ the monospace font family used for displaying code.
 }
 ```
 
-## [`my-dotfiles.global.font-category.terminal`](programs/globals.nix#L42)
+## [`my-dotfiles.global.font-category.terminal`](programs/globals.nix#L45)
 
 the monospace font family used for the terminal.
 
@@ -410,7 +410,7 @@ the monospace font family used for the terminal.
 
 **Default:** `config.my-dotfiles.global.font-category.code`
 
-## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L31)
+## [`my-dotfiles.global.nerdfonts`](programs/globals.nix#L34)
 
 NerdFonts are supported and installed
 
