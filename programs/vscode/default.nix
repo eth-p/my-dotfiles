@@ -37,6 +37,7 @@ in
     ./qol-todo.nix
     ./remote-devcontainer.nix
     ./remote-ssh.nix
+    ./terminal.nix
   ];
 
   options.my-dotfiles.vscode = {
@@ -321,39 +322,6 @@ in
         "trailing-spaces.borderColor" = "rgba(255, 88, 205, 0.15)";
         "trailing-spaces.trimOnSave" = false;
       };
-    })
-
-    # Configure allowed link schemas.
-    {
-      programs.vscode.profiles.default.userSettings = {
-        "terminal.integrated.allowedLinkSchemes" =
-          cfg.config.allowedLinkSchemes.extras
-          ++ (lib.optional cfg.config.allowedLinkSchemes.includeDefaults [
-            "file"
-            "http"
-            "https"
-            "mailto"
-            "vscode"
-            "vscode-insiders"
-          ]);
-      };
-    }
-
-    # Configure to use `fish` as the shell.
-    (mkIf (config.my-dotfiles.fish.enable && config.my-dotfiles.fish.isSHELL) {
-      programs.vscode.profiles.default.userSettings =
-        let
-          os = if pkgs.stdenv.isDarwin then "osx" else "linux";
-        in
-        {
-          "terminal.integrated.defaultProfile.${os}" = "fish";
-          "terminal.integrated.profiles.${os}" = {
-            "fish" = {
-              "path" = pkgs.fish + "/bin/fish";
-              "icon" = "terminal-bash";
-            };
-          };
-        };
     })
 
   ]);
