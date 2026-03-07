@@ -31,6 +31,7 @@ in
     ./language-rust.nix
     ./language-toml.nix
     ./language-yaml.nix
+    ./misc-copilot.nix
     ./qol-bookmarks.nix
     ./qol-github.nix
     ./qol-kubernetes.nix
