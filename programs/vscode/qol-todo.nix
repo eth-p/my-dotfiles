@@ -94,12 +94,12 @@ in
     }
 
     # Keybindings
-    (mkIf (vscodeCfg.keybindings."map-cg") {
+    (mkIf (vscodeCfg.keybindings."map-cw") {
       programs.vscode.profiles.default.keybindings = [
 
         # View: Show TODOs
         {
-          "key" = "ctrl+g l";
+          "key" = "ctrl+w g l";
           "command" = "workbench.view.extension.todo-tree-container";
         }
 

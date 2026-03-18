@@ -20,7 +20,6 @@ in
 {
   imports = [
     ./bindings-map-cw.nix
-    ./bindings-map-cg.nix
     ./bindings-style-intellij.nix
     ./language-bash.nix
     ./language-go
@@ -59,7 +58,6 @@ in
       };
 
       map-cw = lib.mkEnableOption "Map Ctrl-W to control panes and focus";
-      map-cg = lib.mkEnableOption "Map Ctrl-G to goto panes";
     };
 
     colorscheme = lib.mkOption {

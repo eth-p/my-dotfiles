@@ -57,6 +57,41 @@ in
           "when" = "!terminalFocus";
         }
 
+        # Bind "User View Container: Focus on Outline View" to "ctrl-w g o".
+        {
+          "key" = "ctrl+w g o";
+          "command" = "outline.focus";
+          "when" = "!terminalFocus";
+        }
+
+        # Bind "Source Control: Focus on Changes View" to "ctrl-w g g".
+        {
+          "key" = "ctrl+w g g";
+          "command" = "workbench.scm.focus";
+          "when" = "!terminalFocus";
+        }
+
+        # Bind "View: Focus Active Editor Group" to "ctrl-w g e".
+        {
+          "key" = "ctrl+w g e";
+          "command" = "workbench.action.focusActiveEditorGroup";
+          "when" = "!terminalFocus";
+        }
+
+        # Bind "Problems: Focus on Problems View" to "ctrl-w g p".
+        {
+          "key" = "ctrl+w g p";
+          "command" = "workbench.panel.markers.view.focus";
+          "when" = "!terminalFocus";
+        }
+
+        # Bind "Terminal: Focus on Terminal View" to "ctrl-w g t".
+        {
+          "key" = "ctrl+w g t";
+          "command" = "terminal.focus";
+          "when" = "!terminalFocus";
+        }
+
       ]
 
       # Navigate focus with "ctrl+w <arrow key>".
