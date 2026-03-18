@@ -10,21 +10,20 @@
   vscode-utils,
 }:
 
-# "https://${publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/${publisher}/extension/${name}/${version}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=${arch}"
-# ./scripts/fetch-src-hash "https://ms-python.gallery.vsassets.io/_apis/public/gallery/publisher/ms-python/extension/vscode-python-envs/1.20.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64"
+# ./scripts/fetch-src-hash "https://ms-python.gallery.vsassets.io/_apis/public/gallery/publisher/ms-python/extension/vscode-python-envs/1.22.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64"
 let
   supported = {
     "x86_64-linux" = {
       arch = "linux-x64";
-      hash = "sha256-DN8xFxHPDtQSfS5LNYWebeT0B/4JE74Q+y3xt8zPEWM=";
+      hash = "sha256-Y2gBJw+qDR3wz2su963yqyEcDuUSvVg4tMvcGI6HBKo=";
     };
     "aarch64-linux" = {
       arch = "linux-arm64";
-      hash = "sha256-JTKc2vYoXEqAvTTpUoUVaSn9RBbaYC3fnqlG7d8mOcw=";
+      hash = "sha256-RdYKGccXPPXnZNsA698Y6XSBDDN1VadpcYvuGF/ce80=";
     };
     "aarch64-darwin" = {
       arch = "darwin-arm64";
-      hash = "sha256-Cy1GBU0U08anuRKCoPcYQYZJWyH2H+Bcn7hMxVzRfLM=";
+      hash = "sha256-CXZiVy+VEUXt76zAHnVo3iF54rF/TswDZ69s3FIYkgY=";
     };
   };
 
@@ -37,7 +36,7 @@ vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = base // {
     name = "vscode-python-envs";
     publisher = "ms-python";
-    version = "1.20.1";
+    version = "1.22.0";
   };
 
   meta = {
