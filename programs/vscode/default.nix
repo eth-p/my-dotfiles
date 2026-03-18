@@ -323,5 +323,13 @@ in
       };
     })
 
+    # Disable the Kitty Keyboard protocol. It's broken in versions < 1.111.1
+    # https://github.com/microsoft/vscode/issues/302524
+    {
+      programs.vscode.profiles.default.userSettings = {
+        "terminal.integrated.enableKittyKeyboardProtocol" = false;
+      };
+    }
+
   ]);
 }
