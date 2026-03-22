@@ -12,12 +12,12 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.qol.bookmarks;
+  cfg = vscodeCfg.bookmarks;
   darwinOr = mkDarwinOr pkgs;
 in
 {
-  options.my-dotfiles.vscode.qol.bookmarks = {
-    enable = lib.mkEnableOption "add bookmarking support";
+  options.my-dotfiles.vscode.bookmarks = {
+    enable = lib.mkEnableOption "add bookmark support";
   };
 
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [

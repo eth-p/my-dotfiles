@@ -13,10 +13,10 @@ let
   inherit (lib) mkIf mkMerge mkDefault;
   inherit (import ../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.misc.copilot;
+  cfg = vscodeCfg.copilot;
 in
 {
-  options.my-dotfiles.vscode.misc.copilot = {
+  options.my-dotfiles.vscode.copilot = {
     enable = lib.mkEnableOption "add GitHub Copilot to Visual Studio Code";
   };
 

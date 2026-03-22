@@ -12,10 +12,10 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.qol.kubernetes;
+  cfg = vscodeCfg.kubernetes;
 in
 {
-  options.my-dotfiles.vscode.qol.kubernetes = {
+  options.my-dotfiles.vscode.kubernetes = {
     enable = lib.mkEnableOption "add Kubernetes-centric extensions";
   };
 

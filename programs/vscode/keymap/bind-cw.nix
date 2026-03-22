@@ -12,11 +12,15 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.keybindings;
+  cfg = vscodeCfg.keymap;
   darwinOr = mkDarwinOr pkgs;
 in
 {
-  config = mkIf (cfg."map-cw") (mkMerge [
+  options.my-dotfiles.vscode.keymap = {
+    bind-cw = lib.mkEnableOption "Map Ctrl-W to control panes and focus";
+  };
+
+  config = mkIf (cfg.bind-cw) (mkMerge [
 
     # Custom bindings
     {

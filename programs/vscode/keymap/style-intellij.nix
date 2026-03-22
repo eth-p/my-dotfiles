@@ -13,7 +13,7 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.keybindings;
+  cfg = vscodeCfg.keymap;
   darwinOr = mkDarwinOr pkgs;
 in
 {

@@ -33,19 +33,6 @@ in
       default = true;
     };
 
-    keybindings = {
-      style = lib.mkOption {
-        type = lib.types.enum [
-          "default"
-          "intellij"
-        ];
-        description = "use alternate keybindings";
-        default = "default";
-      };
-
-      map-cw = lib.mkEnableOption "Map Ctrl-W to control panes and focus";
-    };
-
     colorscheme = lib.mkOption {
       type = lib.types.enum [
         "dark"

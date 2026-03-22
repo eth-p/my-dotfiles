@@ -12,10 +12,10 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.remote.devcontainer;
+  cfg = vscodeCfg.devcontainers;
 in
 {
-  options.my-dotfiles.vscode.remote.devcontainer = {
+  options.my-dotfiles.vscode.devcontainers = {
     enable = lib.mkEnableOption "add support for running VS Code in dev containers";
   };
 

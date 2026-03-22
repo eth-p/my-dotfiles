@@ -12,11 +12,11 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.qol.todo;
+  cfg = vscodeCfg.todos;
   darwinOr = mkDarwinOr pkgs;
 in
 {
-  options.my-dotfiles.vscode.qol.todo = {
+  options.my-dotfiles.vscode.todos = {
     enable = lib.mkEnableOption "improve TODO support";
   };
 
@@ -94,7 +94,7 @@ in
     }
 
     # Keybindings
-    (mkIf (vscodeCfg.keybindings."map-cw") {
+    (mkIf (vscodeCfg.keymap.bind-cw) {
       programs.vscode.profiles.default.keybindings = [
 
         # View: Show TODOs

@@ -12,10 +12,10 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.qol.github;
+  cfg = vscodeCfg.github;
 in
 {
-  options.my-dotfiles.vscode.qol.github = {
+  options.my-dotfiles.vscode.github = {
     enable = lib.mkEnableOption "add GitHub-centric extensions";
   };
 

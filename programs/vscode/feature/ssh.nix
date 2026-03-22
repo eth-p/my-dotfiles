@@ -12,10 +12,10 @@ let
   inherit (lib) mkIf mkMerge;
   inherit (import ../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
-  cfg = vscodeCfg.remote.ssh;
+  cfg = vscodeCfg.ssh;
 in
 {
-  options.my-dotfiles.vscode.remote.ssh = {
+  options.my-dotfiles.vscode.ssh = {
     enable = lib.mkEnableOption "add support for running VS Code over SSH" // {
       default = true;
     };

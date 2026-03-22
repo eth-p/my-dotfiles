@@ -6,6 +6,7 @@
 # Includes each submodule.
 # ==============================================================================
 {
+  lib,
   ...
 }:
 {
@@ -13,4 +14,15 @@
     ./bind-cw.nix
     ./style-intellij.nix
   ];
+
+  options.my-dotfiles.vscode.keymap = {
+    style = lib.mkOption {
+      type = lib.types.enum [
+        "default"
+        "intellij"
+      ];
+      description = "use alternate keybindings";
+      default = "default";
+    };
+  };
 }
