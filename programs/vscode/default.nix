@@ -13,30 +13,16 @@
 let
   inherit (lib) mkIf mkMerge;
   inherit (lib.strings) concatStringsSep;
-  inherit (import ./lib.nix inputs) vscodeCfg;
+  inherit (import ./lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
   cfg = vscodeCfg;
 in
 {
   imports = [
-    ./bindings-map-cw.nix
-    ./bindings-style-intellij.nix
-    ./language-bash.nix
-    ./language-go
-    ./language-makefile.nix
-    ./language-markdown.nix
-    ./language-nix.nix
-    ./language-python.nix
-    ./language-rust.nix
-    ./language-toml.nix
-    ./language-yaml.nix
-    ./misc-copilot.nix
-    ./qol-bookmarks.nix
-    ./qol-github.nix
-    ./qol-kubernetes.nix
-    ./qol-todo.nix
-    ./remote-devcontainer.nix
-    ./remote-ssh.nix
+    ./keymap
+    ./feature
+    ./language
+
     ./terminal.nix
   ];
 

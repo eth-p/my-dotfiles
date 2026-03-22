@@ -11,7 +11,7 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ./lib.nix inputs) vscodeCfg mkDarwinOr;
+  inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
   extensions = pkgs.vscode-extensions;
   cfg = vscodeCfg.keybindings;
   darwinOr = mkDarwinOr pkgs;

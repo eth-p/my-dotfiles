@@ -1,4 +1,4 @@
-# my-dotfiles | Copyright (C) 2025 eth-p
+# my-dotfiles | Copyright (C) 2025-2026 eth-p
 # Repository: https://github.com/eth-p/my-dotfiles
 #
 # Program: https://code.visualstudio.com/
@@ -10,7 +10,7 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ./lib.nix inputs) vscodeCfg;
+  inherit (import ../../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
   cfg = vscodeCfg.language.bash;
 in

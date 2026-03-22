@@ -11,7 +11,7 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge mkDefault;
-  inherit (import ./lib.nix inputs) vscodeCfg;
+  inherit (import ../lib inputs) vscodeCfg;
   extensions = pkgs.vscode-extensions;
   cfg = vscodeCfg.misc.copilot;
 in

@@ -11,7 +11,7 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ./lib.nix inputs) vscodeCfg;
+  inherit (import ./lib inputs) vscodeCfg;
   cfg = vscodeCfg;
   cfgFish = config.my-dotfiles.fish;
   cfgDevenv = config.my-dotfiles.devenv;
