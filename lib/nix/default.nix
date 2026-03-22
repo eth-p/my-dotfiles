@@ -15,5 +15,4 @@
   text = (import ./text.nix) inputs;
   types = (import ./types.nix) inputs;
   util = (import ./util.nix) inputs;
-  home = (import ./home.nix) inputs;
 }

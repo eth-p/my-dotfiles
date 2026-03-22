@@ -32,36 +32,87 @@
     {
       self,
       nixpkgs,
+      home-manager,
       systems,
+
+      vicinae,
+      kubesel,
       ...
     }@inputs:
     let
+      inherit (nixpkgs) lib;
+
       defaultSystems = import systems;
       forDefaultSystems = fn: forEachSystem fn defaultSystems;
-      forEachSystem = fn: systems: nixpkgs.lib.genAttrs systems (system: fn system);
-      libsAttrs = (
-        {
-          lib = nixpkgs.lib;
-          my-dotfiles = self;
-        }
-        // inputs
-      );
-    in
-    rec {
+      forEachSystem = fn: systems: lib.genAttrs systems (system: fn system);
 
-      # lib provides reusable library functions.
-      lib = (import ./lib/nix) libsAttrs;
+      selfLibOnly = { inherit (self) lib; };
+      selfLibPackages = { inherit (self) lib packages legacyPackages; };
 
-      # homeModules declares reusable home-manager modules.
-      #
-      # A few `extraSpecialArgs` are required:
-      #  - `my-dotfiles`   (this flake)
-      homeModules = (import ./programs) ++ [
-        ./programs/globals.nix
+      # Default home-manager overlays and modules.
+      hmOverlays = [
+        self.overlays.default
+        vicinae.overlays.default
+        kubesel.overlays.default
       ];
 
-      # overlays exports the overlays I use to update certain packages.
-      overlays = (import ./overlays) libsAttrs;
+      hmModules = [
+        self.homeManagerModules.default
+        vicinae.homeManagerModules.default
+      ];
+
+      myProfiles = {
+        minimal = [ ./profiles/minimal.nix ];
+        standard = [ ./profiles/standard.nix ];
+        development = [ ./profiles/development.nix ];
+      };
+
+      # mkHomeConfiguration provides a way to create a home-manager configuration
+      # without having to set up all the manual boilerplate.
+      mkHomeConfiguration =
+        {
+          system,
+          modules,
+          profile ? null,
+          overlays ? [ ],
+          extraSpecialArgs ? { },
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = hmOverlays ++ overlays;
+          };
+
+          modules = hmModules ++ modules ++ (if profile == null then [ ] else myProfiles."${profile}");
+          extraSpecialArgs = extraSpecialArgs // {
+            my-dotfiles = selfLibPackages;
+          };
+        };
+
+      # The library functions exported from this flake.
+      # It only has access to the nixpkgs lib and itself.
+      my-dotfiles-lib = (import ./lib/nix) {
+        inherit lib;
+        my-dotfiles = selfLibOnly;
+      };
+    in
+    {
+
+      # lib provides reusable library functions.
+      #
+      # These rely on the nixpkgs standard library.
+      lib = my-dotfiles-lib // {
+        home = { inherit mkHomeConfiguration; }; # alias
+        inherit mkHomeConfiguration;
+      };
+
+      # overlays exports overlays used to insert the packages exported from
+      # this flake into the standard `pkgs` variable accessible in home-manager
+      # modules.
+      overlays = (import ./overlays) {
+        inherit lib;
+        my-dotfiles = selfLibPackages;
+      };
 
       # packages exports custom packages.
       packages = forDefaultSystems (
@@ -80,5 +131,17 @@
           }
         );
       });
+
+      # homeManagerModules declares reusable home-manager modules.
+      #
+      # In the `default` module set, `extraSpecialArgs` must contain this flake
+      # passed through as `my-dotfiles`.
+      homeManagerModules = {
+        default = {
+          imports = (import ./programs) ++ [
+            ./programs/globals.nix
+          ];
+        };
+      };
     };
 }

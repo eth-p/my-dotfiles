@@ -3,7 +3,7 @@
 #
 # This references all the overlays.
 # ==============================================================================
-{ lib, my-dotfiles, ... }@inputs:
+{ lib, my-dotfiles, ... }:
 rec {
   default = final: prev: (packages final prev) // (vscode-extensions final prev);
 

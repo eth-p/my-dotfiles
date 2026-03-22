@@ -48,12 +48,11 @@ in
     # Install kubesel.
     (
       let
-        system = pkgs.stdenv.hostPlatform.system;
-        kubesel = my-dotfiles.inputs.kubesel.packages.${system}.kubesel;
+        kubesel = pkgs.kubesel;
       in
       {
         home.packages = [
-          kubesel
+          pkgs.kubesel # via overlay
         ];
 
         programs.fish.interactiveShellInit = ''
