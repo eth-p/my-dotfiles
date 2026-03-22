@@ -20,6 +20,12 @@ in
   options.my-dotfiles.kubesel = {
     enable = lib.mkEnableOption "install kubesel";
 
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.kubesel; # via overlay
+      description = "the kubesel package to install";
+    };
+
     kubeconfigs = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
@@ -46,23 +52,18 @@ in
   config = mkIf cfg.enable (mkMerge [
 
     # Install kubesel.
-    (
-      let
-        kubesel = pkgs.kubesel;
-      in
-      {
-        home.packages = [
-          pkgs.kubesel # via overlay
-        ];
+    {
+      home.packages = [
+        cfg.package
+      ];
 
-        programs.fish.interactiveShellInit = ''
-          # Initialize kubesel.
-          ${kubesel.out + /bin/kubesel} init fish ${
-            if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"
-          } | source
-        '';
-      }
-    )
+      programs.fish.interactiveShellInit = ''
+        # Initialize kubesel.
+        ${lib.getExe cfg.package} init fish ${
+          if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"
+        } | source
+      '';
+    }
 
     # Configure oh-my-posh to show kubernetes info.
     (mkIf cfg.inPrompt {

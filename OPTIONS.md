@@ -448,7 +448,7 @@ install kubesel
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L30)
+## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L36)
 
 show kubesel info in the shell prompt
 
@@ -458,7 +458,7 @@ show kubesel info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L32)
+## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L38)
 
 override the name or color for specific clusters
 
@@ -478,7 +478,7 @@ override the name or color for specific clusters
 }
 ```
 
-## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L23)
+## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L29)
 
 glob pattern matching kubeconfig files
 
@@ -487,6 +487,14 @@ glob pattern matching kubeconfig files
 **Default:** `null`
 
 **Example:** `"~/.kube/configs/*.yaml"`
+
+## [`my-dotfiles.kubesel.package`](programs/kubesel/default.nix#L23)
+
+the kubesel package to install
+
+**Type:** `lib.types.package`
+
+**Default:** `pkgs.kubesel`
 
 ## [`my-dotfiles.lf.enable`](programs/lf/default.nix#L20)
 
