@@ -10,7 +10,6 @@
   };
 
   creds = (import ./creds.nix) inputs;
-  tolua = (import ./tolua.nix) inputs;
   theming = (import ./theming.nix) inputs;
   text = (import ./text.nix) inputs;
   types = (import ./types.nix) inputs;
