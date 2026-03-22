@@ -12,7 +12,7 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (my-dotfiles.lib) togotemplate;
+  inherit (my-dotfiles.lib.generators) toGoTemplate;
   cfg = config.my-dotfiles.kubesel;
   cfgGlobal = config.my-dotfiles.global;
 in
@@ -97,6 +97,7 @@ in
           fgColorLUT = raiseAttr "fg" (rekeyToAlias cfg.inPromptClusterOverrides);
           bgColorLUT = raiseAttr "bg" (rekeyToAlias cfg.inPromptClusterOverrides);
           clusterAliases = raiseAttr "name" cfg.inPromptClusterOverrides;
+          generateGoTemplate = toGoTemplate { multiline = false; };
         in
         {
           priority = 50;
@@ -111,11 +112,11 @@ in
               type = "kubectl";
 
               foreground_templates = [
-                "{{- $lut := ${togotemplate.attrs fgColorLUT} }}{{ (get $lut .Cluster | default \"\") }}"
+                "{{- $lut := ${generateGoTemplate fgColorLUT} }}{{ (get $lut .Cluster | default \"\") }}"
                 "p:kubectl_fg"
               ];
               background_templates = [
-                "{{- $lut := ${togotemplate.attrs bgColorLUT} }}{{ (get $lut .Cluster | default \"\") }}"
+                "{{- $lut := ${generateGoTemplate bgColorLUT} }}{{ (get $lut .Cluster | default \"\") }}"
                 "p:kubectl_bg"
               ];
 

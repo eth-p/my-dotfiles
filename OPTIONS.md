@@ -498,7 +498,7 @@ install and configure lf
 
 **Example:** `true`
 
-## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L33)
+## [`my-dotfiles.neovim.colorschemes.dark`](programs/neovim/default.nix#L32)
 
 The colorscheme used for dark mode.
 
@@ -506,7 +506,7 @@ The colorscheme used for dark mode.
 
 **Default:** `"monokai-pro"`
 
-## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L39)
+## [`my-dotfiles.neovim.colorschemes.light`](programs/neovim/default.nix#L38)
 
 The colorscheme used for light mode.
 
@@ -514,7 +514,7 @@ The colorscheme used for light mode.
 
 **Default:** `"catppuccin-latte"`
 
-## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L100)
+## [`my-dotfiles.neovim.editor.rulers`](programs/neovim/default.nix#L99)
 
 Column numbers to draw a ruler at.
 
@@ -529,7 +529,7 @@ Column numbers to draw a ruler at.
 ]
 ```
 
-## [`my-dotfiles.neovim.enable`](programs/neovim/default.nix#L26)
+## [`my-dotfiles.neovim.enable`](programs/neovim/default.nix#L25)
 
 neovim
 
@@ -539,7 +539,7 @@ neovim
 
 **Example:** `true`
 
-## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L76)
+## [`my-dotfiles.neovim.integrations.git`](programs/neovim/default.nix#L75)
 
 Enable git integrations.
 
@@ -547,7 +547,7 @@ Enable git integrations.
 
 **Default:** `config.programs.git.enable`
 
-## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L82)
+## [`my-dotfiles.neovim.integrations.xxd`](programs/neovim/default.nix#L81)
 
 Enable hex editing with xxd.
 
@@ -555,7 +555,7 @@ Enable hex editing with xxd.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L64)
+## [`my-dotfiles.neovim.keymap.help`](programs/neovim/default.nix#L63)
 
 Display the keymap after a short delay.
 
@@ -563,7 +563,7 @@ Display the keymap after a short delay.
 
 **Default:** `true`
 
-## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L70)
+## [`my-dotfiles.neovim.keymap.leader`](programs/neovim/default.nix#L69)
 
 Change the <Leader> key.
 
@@ -571,7 +571,7 @@ Change the <Leader> key.
 
 **Default:** `"<Space>"`
 
-## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L88)
+## [`my-dotfiles.neovim.shellAliases.cvim`](programs/neovim/default.nix#L87)
 
 Create cvim alias for using neovim as a pager.
 
@@ -579,7 +579,7 @@ Create cvim alias for using neovim as a pager.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L94)
+## [`my-dotfiles.neovim.shellAliases.yvim`](programs/neovim/default.nix#L93)
 
 Create yvim alias for using neovim as YAML pager.
 
@@ -587,7 +587,7 @@ Create yvim alias for using neovim as YAML pager.
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.syntax.nix`](programs/neovim/plugins-treesitter.nix#L28)
+## [`my-dotfiles.neovim.syntax.nix`](programs/neovim/plugins-treesitter.nix#L27)
 
 Enable nix syntax support (treesitter).
 
@@ -595,7 +595,7 @@ Enable nix syntax support (treesitter).
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L22)
+## [`my-dotfiles.neovim.syntax.yaml`](programs/neovim/plugins-treesitter.nix#L21)
 
 Enable yaml syntax support (treesitter).
 
@@ -603,7 +603,7 @@ Enable yaml syntax support (treesitter).
 
 **Default:** `false`
 
-## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L52)
+## [`my-dotfiles.neovim.ui.focus_dimming`](programs/neovim/default.nix#L51)
 
 Dim unfocused panes.
 
@@ -611,7 +611,7 @@ Dim unfocused panes.
 
 **Default:** `true`
 
-## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L46)
+## [`my-dotfiles.neovim.ui.nerdfonts`](programs/neovim/default.nix#L45)
 
 Enable support for using Nerdfonts.
 
@@ -619,7 +619,7 @@ Enable support for using Nerdfonts.
 
 **Default:** `cfgGlobal.nerdfonts`
 
-## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L58)
+## [`my-dotfiles.neovim.ui.transparent_background`](programs/neovim/default.nix#L57)
 
 Use a transparent background.
 

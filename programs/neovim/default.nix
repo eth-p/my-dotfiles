@@ -12,7 +12,6 @@
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (my-dotfiles.lib) tolua;
   cfg = config.my-dotfiles.neovim;
   cfgGlobal = config.my-dotfiles.global;
   nvimHome = "${config.xdg.configHome}/nvim";
