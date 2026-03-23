@@ -24,101 +24,22 @@ in
     ./feature
     ./language
 
+    ./editor.nix
     ./terminal.nix
+    ./terminal-integration-fish.nix
+    ./terminal-integration-devenv.nix
+    ./theme.nix
   ];
 
   options.my-dotfiles.vscode = {
     enable = lib.mkEnableOption "install and configure Visual Studio Code";
     onlyConfigure = lib.mkEnableOption "do not install Visual Studio Code, only configure it";
-    editorconfig = lib.mkEnableOption "install the EditorConfig extension" // {
-      default = true;
-    };
-
-    colorscheme = lib.mkOption {
-      type = lib.types.enum [
-        "dark"
-        "light"
-        "auto"
-      ];
-      default = config.my-dotfiles.global.colorscheme;
-      description = "The color scheme used for Visual Studio Code.";
-    };
-
-    colorschemes =
-      let
-        themeType = lib.types.submodule {
-          options = {
-            name = lib.mkOption {
-              type = lib.types.str;
-              description = "the name of the theme as it would appear in Visual Studio Code.";
-            };
-            extensions = lib.mkOption {
-              type = lib.types.listOf lib.types.package;
-              description = "extensions needed for the theme to be available";
-            };
-          };
-        };
-      in
-      {
-        dark = lib.mkOption {
-          type = themeType;
-          description = "The theme used for the dark color scheme";
-          default = {
-            name = "Dark (Molokai)";
-            extensions = with extensions; [ nonylene.dark-molokai-theme ];
-          };
-        };
-
-        light = lib.mkOption {
-          type = themeType;
-          description = "The theme used for the light color scheme";
-          default = {
-            name = "Default Light Modern";
-            extensions = [ ];
-          };
-        };
-      };
-
-    editor = {
-      rulers = lib.mkOption {
-        type = lib.types.listOf lib.types.int;
-        description = "Column numbers to draw a ruler at.";
-        default = [
-          80
-          120
-        ];
-      };
-      inlineBlame = lib.mkOption {
-        type = lib.types.bool;
-        description = "show the git blame as an inline hint";
-        default = true;
-      };
-      whitespace.showTrailing = lib.mkOption {
-        type = lib.types.bool;
-        description = "Highlight trailing whitespace.";
-        default = true;
-      };
-    };
 
     fhs.enabled = lib.mkOption {
       type = lib.types.bool;
       description = "Use a FHS environment for VS Code.";
       default = false;
       readOnly = !pkgs.stdenv.isLinux;
-    };
-
-    config.allowedLinkSchemes = {
-      includeDefaults = lib.mkOption {
-        type = lib.types.bool;
-        description = "Include the default hyperlink schemes that are allowed to be opened.";
-        default = true;
-      };
-
-      extras = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        description = "Extra hyperlink schemes that are allowed to be opened.";
-        default = [ ];
-      };
     };
 
     dependencies.packages = lib.mkOption {
@@ -178,9 +99,6 @@ in
             enableExtensionUpdateCheck = false;
 
             userSettings = {
-              "git.blame.editorDecoration.enabled" = cfg.editor.inlineBlame;
-              "editor.rulers" = cfg.editor.rulers;
-              "terminal.integrated.macOptionIsMeta" = true;
             };
           };
         };
@@ -237,73 +155,6 @@ in
         }
       );
     })
-
-    # Set up colorschemes.
-    {
-      programs.vscode.profiles.default = {
-        extensions = cfg.colorschemes.dark.extensions ++ cfg.colorschemes.light.extensions;
-        userSettings = {
-          "window.autoDetectColorScheme" = (cfg.colorscheme == "auto");
-          "workbench.preferredLightColorTheme" = cfg.colorschemes.light.name;
-          "workbench.preferredDarkColorTheme" = cfg.colorschemes.dark.name;
-        };
-      };
-    }
-
-    (mkIf (cfg.colorscheme != "auto") {
-      programs.vscode.profiles.default.userSettings = {
-        "workbench.colorTheme" = cfg.colorschemes."${cfg.colorscheme}".name;
-      };
-    })
-
-    # Set up fonts.
-    (
-      let
-        inherit (config.my-dotfiles.global) font-category;
-        defaultFonts = "Menlo, Monaco, 'Courier New', monospace";
-      in
-      {
-        home.packages = [
-          font-category.code.package
-          font-category.terminal.package
-        ];
-
-        programs.vscode.profiles.default.userSettings = {
-          "editor.fontFamily" = "'${font-category.code.family-name}', ${defaultFonts}";
-          "terminal.integrated.fontFamily" = "'${font-category.terminal.family-name}', ${defaultFonts}";
-        };
-      }
-    )
-
-    # Install EditorConfig extension.
-    # https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
-    (mkIf cfg.editorconfig {
-      programs.vscode.profiles.default.extensions = with extensions; [
-        editorconfig.editorconfig
-      ];
-    })
-
-    # Install Trailing Whitespace extension.
-    # https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces
-    (mkIf cfg.editor.whitespace.showTrailing {
-      programs.vscode.profiles.default.extensions = with extensions; [
-        shardulm94.trailing-spaces
-      ];
-
-      programs.vscode.profiles.default.userSettings = {
-        "trailing-spaces.backgroundColor" = "rgba(255, 0, 179, 0.3)";
-        "trailing-spaces.borderColor" = "rgba(255, 88, 205, 0.15)";
-        "trailing-spaces.trimOnSave" = false;
-      };
-    })
-
-    # Disable the Kitty Keyboard protocol. It's broken in versions < 1.111.1
-    # https://github.com/microsoft/vscode/issues/302524
-    {
-      programs.vscode.profiles.default.userSettings = {
-        "terminal.integrated.enableKittyKeyboardProtocol" = false;
-      };
-    }
 
   ]);
 }

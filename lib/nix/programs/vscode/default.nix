@@ -15,6 +15,12 @@
   # getConfig :: config -> attrset
   getConfig = config: config.my-dotfiles.vscode;
 
+  # getTerminalPlatformName returns the platform name used for configuring
+  # integrated terminal settings.
+  #
+  # getTerminalPlatformName :: pkgs -> str
+  getTerminalPlatformName = pkgs: if pkgs.stdenv.targetPlatform.isDarwin then "osx" else "linux";
+
   # extensionsDir is the path to VS Code's extensions directory, relative
   # to the user's home directory.
   extensionsDir = ".vscode/extensions";

@@ -12,6 +12,7 @@
   imports = [
     ./copilot.nix
     ./bookmarks.nix
+    ./git.nix
     ./github.nix
     ./kubernetes.nix
     ./todos.nix

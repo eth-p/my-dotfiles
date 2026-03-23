@@ -787,7 +787,7 @@ add bookmark support
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.colorscheme`](programs/vscode/default.nix#L37)
+## [`my-dotfiles.vscode.colorscheme`](programs/vscode/theme.nix#L22)
 
 The color scheme used for Visual Studio Code.
 
@@ -803,7 +803,7 @@ lib.types.enum [
 
 **Default:** `config.my-dotfiles.global.colorscheme`
 
-## [`my-dotfiles.vscode.config.allowedLinkSchemes.extras`](programs/vscode/default.nix#L117)
+## [`my-dotfiles.vscode.config.allowedLinkSchemes.extras`](programs/vscode/terminal.nix#L27)
 
 Extra hyperlink schemes that are allowed to be opened.
 
@@ -811,7 +811,7 @@ Extra hyperlink schemes that are allowed to be opened.
 
 **Default:** `[ ]`
 
-## [`my-dotfiles.vscode.config.allowedLinkSchemes.includeDefaults`](programs/vscode/default.nix#L111)
+## [`my-dotfiles.vscode.config.allowedLinkSchemes.includeDefaults`](programs/vscode/terminal.nix#L21)
 
 Include the default hyperlink schemes that are allowed to be opened.
 
@@ -829,7 +829,7 @@ add GitHub Copilot to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L124)
+## [`my-dotfiles.vscode.dependencies.packages`](programs/vscode/default.nix#L45)
 
 Extra packages to install.
 
@@ -848,7 +848,7 @@ Extra packages to install.
 )
 ```
 
-## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L136)
+## [`my-dotfiles.vscode.dependencies.unfreePackages`](programs/vscode/default.nix#L57)
 
 Unfree packages to allow.
 
@@ -868,15 +868,7 @@ add support for running VS Code in dev containers
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.editor.inlineBlame`](programs/vscode/default.nix#L91)
-
-show the git blame as an inline hint
-
-**Type:** `lib.types.bool`
-
-**Default:** `true`
-
-## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/default.nix#L83)
+## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/editor.nix#L26)
 
 Column numbers to draw a ruler at.
 
@@ -891,7 +883,7 @@ Column numbers to draw a ruler at.
 ]
 ```
 
-## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/default.nix#L96)
+## [`my-dotfiles.vscode.editor.whitespace.showTrailing`](programs/vscode/editor.nix#L35)
 
 Highlight trailing whitespace.
 
@@ -899,7 +891,7 @@ Highlight trailing whitespace.
 
 **Default:** `true`
 
-## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L31)
+## [`my-dotfiles.vscode.enable`](programs/vscode/default.nix#L35)
 
 install and configure Visual Studio Code
 
@@ -909,7 +901,7 @@ install and configure Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L103)
+## [`my-dotfiles.vscode.fhs.enabled`](programs/vscode/default.nix#L38)
 
 Use a FHS environment for VS Code.
 
@@ -1154,7 +1146,7 @@ add Yaml language support to Visual Studio Code
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L32)
+## [`my-dotfiles.vscode.onlyConfigure`](programs/vscode/default.nix#L36)
 
 do not install Visual Studio Code, only configure it
 

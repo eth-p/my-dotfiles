@@ -51,7 +51,7 @@ in
     # Install the shfmt extension.
     # https://marketplace.visualstudio.com/items?itemName=mkhl.shfmt
     {
-      my-dotfiles.vscode.editorconfig = lib.mkForce true; # dependency
+      my-dotfiles.vscode.editor.editorconfig = lib.mkForce true; # dependency
       programs.vscode = {
         profiles.default.extensions = with extensions; [
           mkhl.shfmt
