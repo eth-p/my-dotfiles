@@ -97,12 +97,12 @@ in
 
     # Keybindings
     (mkIf (vscodeCfg.keymap.bind-cw) {
-      programs.vscode.profiles.default.keybindings = [
+      my-dotfiles.vscode.keymap.bindings = [
 
         # View: Show TODOs
         {
-          "key" = "ctrl+w g l";
-          "command" = "workbench.view.extension.todo-tree-container";
+          key = "ctrl+w g l";
+          command = "workbench.view.extension.todo-tree-container";
         }
 
       ];

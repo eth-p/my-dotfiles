@@ -7,8 +7,17 @@
 # ==============================================================================
 {
   lib,
+  pkgs,
+  config,
+  my-dotfiles,
   ...
 }:
+let
+  inherit (lib) mkIf mkMerge;
+  inherit (my-dotfiles.lib.programs) vscode;
+  vscodeCfg = vscode.getConfig config;
+  cfg = vscodeCfg.keymap;
+in
 {
   imports = [
     ./bind-cw.nix
@@ -24,5 +33,17 @@
       description = "use alternate keybindings";
       default = "default";
     };
+
+    bindings = lib.mkOption {
+      type = lib.types.listOf vscode.types.keybind;
+      description = "custom keybindings";
+      default = [ ];
+    };
   };
+
+  config = mkIf (vscodeCfg.enable) (mkMerge [
+    {
+      programs.vscode.profiles.default.keybindings = vscode.generate.vsCodeKeybindings cfg.bindings;
+    }
+  ]);
 }

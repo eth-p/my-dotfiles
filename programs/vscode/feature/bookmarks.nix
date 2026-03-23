@@ -37,20 +37,20 @@ in
 
     # Bookmark Keybindings
     {
-      programs.vscode.profiles.default.keybindings = [
+      my-dotfiles.vscode.keymap.bindings = [
 
         # Bookmarks: Toggle
         {
-          "key" = if isDarwin then "cmd+k b" else "ctrl+k b";
-          "command" = "bookmarks.toggle";
-          "when" = "editorTextFocus";
+          key = if isDarwin then "cmd+k b" else "ctrl+k b";
+          command = "bookmarks.toggle";
+          when = "editorTextFocus";
         }
 
         # Bookmarks: Toggle Labeled
         {
-          "key" = if isDarwin then "cmd+k shift+b" else "ctrl+k shift+b";
-          "command" = "bookmarks.toggleLabeled";
-          "when" = "editorTextFocus";
+          key = if isDarwin then "cmd+k shift+b" else "ctrl+k shift+b";
+          command = "bookmarks.toggleLabeled";
+          when = "editorTextFocus";
         }
 
       ];
