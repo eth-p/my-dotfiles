@@ -6,13 +6,16 @@
 {
   lib,
   pkgs,
+  config,
+  my-dotfiles,
   ...
 }@inputs:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ../../lib inputs) vscodeCfg;
-  snippets = (import ./snippet-generators.nix inputs);
+  inherit (my-dotfiles.lib.programs) vscode;
   extensions = pkgs.vscode-extensions;
+  snippets = (import ./snippet-generators.nix inputs);
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.language.go;
 in
 {

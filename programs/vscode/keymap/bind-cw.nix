@@ -6,14 +6,16 @@
 {
   lib,
   pkgs,
+  config,
+  my-dotfiles,
   ...
-}@inputs:
+}:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
-  extensions = pkgs.vscode-extensions;
+  inherit (my-dotfiles.lib.programs) vscode;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.keymap;
-  darwinOr = mkDarwinOr pkgs;
 in
 {
   options.my-dotfiles.vscode.keymap = {
@@ -157,7 +159,7 @@ in
     }
 
     # Unbind defaults: Other (not MacOS)-specific
-    (mkIf (!pkgs.stdenv.isDarwin) {
+    (mkIf (!isDarwin) {
       programs.vscode.profiles.default.keybindings = [
 
         # "View: Close Editor"

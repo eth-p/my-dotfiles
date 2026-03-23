@@ -9,6 +9,10 @@
     inherit (import ./generators/gotemplate.nix inputs) toGoTemplate;
   };
 
+  programs = {
+    vscode = (import ./programs/vscode inputs);
+  };
+
   creds = (import ./creds.nix) inputs;
   theming = (import ./theming.nix) inputs;
   text = (import ./text.nix) inputs;

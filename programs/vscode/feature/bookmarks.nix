@@ -5,15 +5,18 @@
 # ==============================================================================
 {
   lib,
+  config,
   pkgs,
+  my-dotfiles,
   ...
-}@inputs:
+}:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
+  inherit (my-dotfiles.lib.programs) vscode;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
   extensions = pkgs.vscode-extensions;
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.bookmarks;
-  darwinOr = mkDarwinOr pkgs;
 in
 {
   options.my-dotfiles.vscode.bookmarks = {
@@ -38,14 +41,14 @@ in
 
         # Bookmarks: Toggle
         {
-          "key" = darwinOr "cmd+k b" "ctrl+k b";
+          "key" = if isDarwin then "cmd+k b" else "ctrl+k b";
           "command" = "bookmarks.toggle";
           "when" = "editorTextFocus";
         }
 
         # Bookmarks: Toggle Labeled
         {
-          "key" = darwinOr "cmd+k shift+b" "ctrl+k shift+b";
+          "key" = if isDarwin then "cmd+k shift+b" else "ctrl+k shift+b";
           "command" = "bookmarks.toggleLabeled";
           "when" = "editorTextFocus";
         }

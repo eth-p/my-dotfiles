@@ -6,12 +6,15 @@
 {
   lib,
   pkgs,
+  config,
+  my-dotfiles,
   ...
-}@inputs:
+}:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ../lib inputs) vscodeCfg;
+  inherit (my-dotfiles.lib.programs) vscode;
   extensions = pkgs.vscode-extensions;
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.github;
 in
 {

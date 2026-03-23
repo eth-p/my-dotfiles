@@ -7,14 +7,15 @@
   lib,
   pkgs,
   config,
+  my-dotfiles,
   ...
-}@inputs:
+}:
 let
-  inherit (lib) mkIf mkMerge mkDefault;
-  inherit (import ../../lib inputs) vscodeCfg;
+  inherit (lib) mkIf mkMerge;
+  inherit (my-dotfiles.lib.programs) vscode;
   extensions = pkgs.vscode-extensions;
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.language.python;
-  cfgDevenv = config.my-dotfiles.devenv;
 in
 {
   options.my-dotfiles.vscode.language.python = {

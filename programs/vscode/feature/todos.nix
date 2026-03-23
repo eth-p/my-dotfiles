@@ -6,14 +6,16 @@
 {
   lib,
   pkgs,
+  config,
+  my-dotfiles,
   ...
-}@inputs:
+}:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
+  inherit (my-dotfiles.lib.programs) vscode;
   extensions = pkgs.vscode-extensions;
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.todos;
-  darwinOr = mkDarwinOr pkgs;
 in
 {
   options.my-dotfiles.vscode.todos = {

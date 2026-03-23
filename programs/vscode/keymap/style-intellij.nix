@@ -5,16 +5,18 @@
 # ==============================================================================
 {
   lib,
-  config,
   pkgs,
+  config,
+  my-dotfiles,
   ...
-}@inputs:
+}:
 let
   inherit (lib) mkIf mkMerge;
-  inherit (import ../lib inputs) vscodeCfg mkDarwinOr;
+  inherit (my-dotfiles.lib.programs) vscode;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin;
   extensions = pkgs.vscode-extensions;
+  vscodeCfg = vscode.getConfig config;
   cfg = vscodeCfg.keymap;
-  darwinOr = mkDarwinOr pkgs;
 in
 {
   config = mkIf (cfg.style == "intellij") (mkMerge [
@@ -48,15 +50,15 @@ in
 
         # "Show All Commands"
         {
-          "key" = darwinOr "cmd+p" "ctrl+p";
+          "key" = if isDarwin then "cmd+p" else "ctrl+p";
           "command" = "-workbench.action.showCommands";
         }
         {
-          "key" = darwinOr "cmd+shift+a" "ctrl+shift+a";
+          "key" = if isDarwin then "cmd+shift+a" else "ctrl+shift+a";
           "command" = "-workbench.action.showCommands";
         }
         {
-          "key" = darwinOr "cmd+shift+p" "ctrl+shift+p";
+          "key" = if isDarwin then "cmd+shift+p" else "ctrl+shift+p";
           "command" = "-workbench.action.showCommands";
         }
         {
@@ -75,7 +77,7 @@ in
     }
 
     # Unbind defaults: MacOS-specific
-    (mkIf pkgs.stdenv.isDarwin {
+    (mkIf isDarwin {
       programs.vscode.profiles.default.keybindings = [
 
         # "Show All Commands"
@@ -100,7 +102,7 @@ in
     })
 
     # Unbind defaults: Other (not MacOS)-specific
-    (mkIf (!pkgs.stdenv.isDarwin) {
+    (mkIf (!isDarwin) {
       programs.vscode.profiles.default.keybindings = [
 
         # "editor.action.smartSelect.grow"
