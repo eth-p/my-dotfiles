@@ -12,6 +12,8 @@ let
   lib-keybind = (import ./keybind.nix inputs);
 in
 {
+  keybind = lib-keybind;
+
   types = {
     keybind = lib-keybind.type;
   };
@@ -19,6 +21,7 @@ in
   generate = {
     vsCodeKeybinding = lib-keybind.generateVsCodeKeybinding;
     vsCodeKeybindings = lib-keybind.generateVsCodeKeybindings;
+    whichKeyBindings = lib-keybind.generateWhichKeyBindings;
   };
 
   # getConfig returns the config for the my-dotfiles Visual Studio Code module.

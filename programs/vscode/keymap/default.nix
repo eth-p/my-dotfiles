@@ -21,6 +21,7 @@ in
 {
   imports = [
     ./bind-cw.nix
+    ./help.nix
     ./style-intellij.nix
   ];
 

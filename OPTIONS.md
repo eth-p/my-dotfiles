@@ -929,7 +929,7 @@ Map Ctrl-W to control panes and focus
 
 **Example:** `true`
 
-## [`my-dotfiles.vscode.keymap.bindings`](programs/vscode/keymap/default.nix#L37)
+## [`my-dotfiles.vscode.keymap.bindings`](programs/vscode/keymap/default.nix#L38)
 
 custom keybindings
 
@@ -937,7 +937,17 @@ custom keybindings
 
 **Default:** `[ ]`
 
-## [`my-dotfiles.vscode.keymap.style`](programs/vscode/keymap/default.nix#L28)
+## [`my-dotfiles.vscode.keymap.help.enable`](programs/vscode/keymap/help.nix#L22)
+
+show a help menu for multi-key key bindings
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.vscode.keymap.style`](programs/vscode/keymap/default.nix#L29)
 
 use alternate keybindings
 
