@@ -41,7 +41,7 @@ in
         ];
 
         profiles.default.userSettings = {
-          "shellcheck.executablePath" = cfg.shellcheck.package + "/bin/shellcheck";
+          "shellcheck.executablePath" = lib.getExe cfg.shellcheck.package;
           "shellcheck.customArgs" = [ "-x" ];
           "shellcheck.disableVersionCheck" = true;
         };

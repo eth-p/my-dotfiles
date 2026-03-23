@@ -65,7 +65,7 @@ in
     (mkIf cfg.lsp.enable {
       programs.vscode = {
         profiles.default.userSettings = {
-          "rust-analyzer.server.path" = cfg.lsp.package + "/bin/rust-analyzer";
+          "rust-analyzer.server.path" = (lib.getExe cfg.lsp.package);
         };
       };
     })
