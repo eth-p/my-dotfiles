@@ -28,12 +28,14 @@ in
 
         # Toggle focus to the primary side bar with "ctrl+w tab".
         {
+          name = "Focus Sidebar";
           key = "ctrl+w tab";
           command = "workbench.action.focusSideBar";
           when = "!terminalFocus && !sideBarFocus";
         }
 
         {
+          name = "Focus Editor";
           key = "ctrl+w tab";
           command = "workbench.action.focusActiveEditorGroup";
           when = "!terminalFocus && sideBarFocus";
@@ -41,6 +43,7 @@ in
 
         # Bind "View: Focus into Secondary Side Bar" to "ctrl+w shift+tab".
         {
+          name = "Focus Right Sidebar";
           key = "ctrl+w shift+tab";
           command = "workbench.action.focusAuxiliaryBar";
           when = "!terminalFocus";
@@ -48,6 +51,7 @@ in
 
         # Close editor.
         {
+          name = "Close Active Editor";
           key = "ctrl+w c";
           command = "workbench.action.closeActiveEditor";
           when = "editorFocus";
@@ -55,6 +59,7 @@ in
 
         # Select editor from list.
         {
+          name = "Change Editor...";
           key = "ctrl+w a";
           command = "workbench.action.showAllEditorsByMostRecentlyUsed";
           when = "!terminalFocus";
@@ -62,6 +67,7 @@ in
 
         # Bind "User View Container: Focus on Outline View" to "ctrl-w g o".
         {
+          name = "Focus Outline Panel";
           key = "ctrl+w g o";
           command = "outline.focus";
           when = "!terminalFocus";
@@ -69,6 +75,7 @@ in
 
         # Bind "Source Control: Focus on Changes View" to "ctrl-w g g".
         {
+          name = "Focus Changes Panel";
           key = "ctrl+w g g";
           command = "workbench.scm.focus";
           when = "!terminalFocus";
@@ -76,6 +83,7 @@ in
 
         # Bind "View: Focus Active Editor Group" to "ctrl-w g e".
         {
+          name = "Focus Activate Editor Group";
           key = "ctrl+w g e";
           command = "workbench.action.focusActiveEditorGroup";
           when = "!terminalFocus";
@@ -83,6 +91,7 @@ in
 
         # Bind "Problems: Focus on Problems View" to "ctrl-w g p".
         {
+          name = "Focus Problems Panel";
           key = "ctrl+w g p";
           command = "workbench.panel.markers.view.focus";
           when = "!terminalFocus";
@@ -90,6 +99,7 @@ in
 
         # Bind "Terminal: Focus on Terminal View" to "ctrl-w g t".
         {
+          name = "Focus Terminal";
           key = "ctrl+w g t";
           command = "terminal.focus";
           when = "!terminalFocus";
@@ -102,6 +112,7 @@ in
         (map
           (key: [
             {
+              name = "Focus Editor Left";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusLeftGroup";
               when = "editorFocus";
@@ -115,6 +126,7 @@ in
         ++ (map
           (key: [
             {
+              name = "Focus Editor Right";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusRightGroup";
               when = "editorFocus";
@@ -128,6 +140,7 @@ in
         ++ (map
           (key: [
             {
+              name = "Focus Editor Above";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusAboveGroup";
               when = "editorFocus";
@@ -141,6 +154,7 @@ in
         ++ (map
           (key: [
             {
+              name = "Focus Editor Below";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusBelowGroup";
               when = "editorFocus";

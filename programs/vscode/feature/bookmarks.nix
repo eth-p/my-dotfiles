@@ -41,6 +41,7 @@ in
 
         # Bookmarks: Toggle
         {
+          name = "Toggle Bookmark";
           key = if isDarwin then "cmd+k b" else "ctrl+k b";
           command = "bookmarks.toggle";
           when = "editorTextFocus";
@@ -48,6 +49,7 @@ in
 
         # Bookmarks: Toggle Labeled
         {
+          name = "Toggle Named Bookmark";
           key = if isDarwin then "cmd+k shift+b" else "ctrl+k shift+b";
           command = "bookmarks.toggleLabeled";
           when = "editorTextFocus";
