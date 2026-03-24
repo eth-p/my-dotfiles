@@ -133,10 +133,9 @@ rec {
         in
         if k != shiftTrimmed then lib.strings.toUpper shiftTrimmed else k;
 
-      # FIXME: This doesn't seem to work.
       special = {
-        "tab" = "↹";
-        "shift+tab" = "S-↹";
+        "tab" = "\t";
+        "shift+tab" = "S-\t";
         "up" = "⭡";
         "down" = "⭣";
         "left" = "⭠";

@@ -35,40 +35,33 @@ in
         };
 
         keybindings = [
-          # FIXME: These don't seem to work.
-          {
-            key = "tab";
-            when = "whichKeyVisible";
-            command = "whichkey.triggerKey";
-            args = "↹";
-          }
           {
             key = "shift+tab";
-            when = "whichKeyVisible";
+            when = "whichkeyVisible";
             command = "whichkey.triggerKey";
-            args = "S-↹";
+            args = "S-\t";
           }
           {
             key = "up";
-            when = "whichKeyVisible";
+            when = "whichkeyVisible";
             command = "whichkey.triggerKey";
             args = "⭡";
           }
           {
             key = "down";
-            when = "whichKeyVisible";
+            when = "whichkeyVisible";
             command = "whichkey.triggerKey";
             args = "⭣";
           }
           {
             key = "left";
-            when = "whichKeyVisible";
+            when = "whichkeyVisible";
             command = "whichkey.triggerKey";
             args = "⭠";
           }
           {
             key = "right";
-            when = "whichKeyVisible";
+            when = "whichkeyVisible";
             command = "whichkey.triggerKey";
             args = "⭢";
           }
