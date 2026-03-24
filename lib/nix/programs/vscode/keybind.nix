@@ -109,6 +109,44 @@ rec {
   # generateVsCodeKeybindings :: [keybind] -> attrs
   generateVsCodeKeybindings = map generateVsCodeKeybinding;
 
+  # whichKeySpecialKeys is a map of special keys (in VS Code key name format)
+  # to their which-key equivalent.
+  whichKeySpecialKeys = {
+    "tab" = "\t";
+    "shift+tab" = "S-\t";
+    "up" = "⭡";
+    "down" = "⭣";
+    "left" = "⭠";
+    "right" = "⭢";
+  };
+
+  # vsCodeKeyToWhichKey converts a VS Code key name into a which-key compatible
+  # key symbol.
+  convertKeyNameToWhichKey =
+    key:
+    let
+      inherit (lib.strings) replaceString;
+      applyCommandModifier = replaceString "cmd+" "⌘";
+      applyCtrlModifier = replaceString "ctrl+" "C-";
+      applyAltModifier = replaceString "alt+" "M-";
+      applyShiftModifier =
+        k:
+        let
+          withoutShift = replaceString "shift+" "" k;
+        in
+        if k == withoutShift then k else lib.strings.toUpper withoutShift;
+
+      applyModifiers =
+        k:
+        builtins.foldl' (a: fn: fn a) k [
+          applyCommandModifier
+          applyCtrlModifier
+          applyAltModifier
+          applyShiftModifier
+        ];
+    in
+    whichKeySpecialKeys."${key}" or (applyModifiers key);
+
   # generateVsCodeKeybindings generates which-key bindings from a list of
   # `keybind`s.
   #
@@ -121,29 +159,6 @@ rec {
     in
     bindingTree;
 
-  # vsCodeKeyToWhichKey converts a VS Code key name into a which-key compatible
-  # key symbol.
-  vsCodeKeyToWhichKey =
-    key:
-    let
-      convertModifier =
-        k:
-        let
-          shiftTrimmed = lib.strings.removePrefix "shift+" k;
-        in
-        if k != shiftTrimmed then lib.strings.toUpper shiftTrimmed else k;
-
-      special = {
-        "tab" = "\t";
-        "shift+tab" = "S-\t";
-        "up" = "⭡";
-        "down" = "⭣";
-        "left" = "⭠";
-        "right" = "⭢";
-      };
-    in
-    special."${key}" or (convertModifier key);
-
   _generateWhichKeyBindingsTree =
     { }@params:
     kbs:
@@ -154,7 +169,7 @@ rec {
       leaderMap = lib.lists.groupBy (kb: getChordLeader kb.key) chords;
       leaderToMenu = (
         leader: subBindings: {
-          key = vsCodeKeyToWhichKey leader;
+          key = convertKeyNameToWhichKey leader;
           name = "...";
           type = "bindings";
           bindings = _generateWhichKeyBindingsTree params (
@@ -172,7 +187,7 @@ rec {
     let
       keysMap = lib.lists.groupBy (kb: joinChord kb.key) kbs;
       wrapConditionals = key: bindings: {
-        key = vsCodeKeyToWhichKey (joinChord key);
+        key = convertKeyNameToWhichKey (joinChord key);
         name = "...";
         type = "conditional";
         bindings = map (
@@ -201,7 +216,7 @@ rec {
     in
     {
       name = if (binding.name or null) == null then binding.command else binding.name;
-      key = vsCodeKeyToWhichKey key;
+      key = convertKeyNameToWhichKey key;
       command = binding.command;
     }
     // (lib.optionalAttrs (binding.args != null) { args = binding.args; });

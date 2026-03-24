@@ -34,38 +34,19 @@ in
           "whichkey.bindings" = (vscode.generate.whichKeyBindings vscodeCfg.keymap.bindings);
         };
 
-        keybindings = [
-          {
-            key = "shift+tab";
-            when = "whichkeyVisible";
-            command = "whichkey.triggerKey";
-            args = "S-\t";
-          }
-          {
-            key = "up";
-            when = "whichkeyVisible";
-            command = "whichkey.triggerKey";
-            args = "⭡";
-          }
-          {
-            key = "down";
-            when = "whichkeyVisible";
-            command = "whichkey.triggerKey";
-            args = "⭣";
-          }
-          {
-            key = "left";
-            when = "whichkeyVisible";
-            command = "whichkey.triggerKey";
-            args = "⭠";
-          }
-          {
-            key = "right";
-            when = "whichkeyVisible";
-            command = "whichkey.triggerKey";
-            args = "⭢";
-          }
-        ];
+        keybindings =
+          let
+            # Non-visible keys need to be specifically bound.
+            # https://vspacecode.github.io/docs/whichkey/extra/#use-non-character-keys
+            createSpecialKeyTriggerBinding = vKey: wKey: {
+              key = vKey;
+              when = "whichkeyVisible";
+              command = "whichkey.triggerKey";
+              args = wKey;
+            };
+
+        in
+          lib.attrsets.mapAttrsToList createSpecialKeyTriggerBinding vscode.keybind.whichKeySpecialKeys;
       };
     }
 
@@ -88,12 +69,11 @@ in
               "whichkey.show"
               {
                 command = "whichkey.triggerKey";
-                args = leader;
+                args = vscode.keybind.convertKeyNameToWhichKey leader;
               }
             ];
           };
         }) allLeaders;
-
     }
 
   ]);
