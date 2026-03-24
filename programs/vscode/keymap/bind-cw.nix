@@ -129,7 +129,7 @@ in
           (key: [
             {
               key = "ctrl+w ${key}";
-              command = "workbench.action.focusRightGroup";
+              command = "workbench.action.focusAboveGroup";
               when = "editorFocus";
             }
           ])
