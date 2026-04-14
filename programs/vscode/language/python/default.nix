@@ -34,6 +34,10 @@ in
           # Install the Python Environments extension.
           # https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-python-envs
           ms-python.vscode-python-envs
+
+          # Install the autoDocstring extension.
+          # https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring
+          njpwerner.autodocstring
         ];
       };
     }
