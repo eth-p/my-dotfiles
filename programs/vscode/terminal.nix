@@ -40,7 +40,7 @@ in
         "terminal.integrated.macOptionIsMeta" = true;
         "terminal.integrated.allowedLinkSchemes" =
           cfg.config.allowedLinkSchemes.extras
-          ++ (lib.optional cfg.config.allowedLinkSchemes.includeDefaults [
+          ++ (lib.optionals cfg.config.allowedLinkSchemes.includeDefaults [
             "file"
             "http"
             "https"
