@@ -6,6 +6,7 @@
     flags_bg = "#ffffff";
     flags_exitcode_color = "#ff0000";
     flags_sudo_color = "#009900";
+    flags_jobs_color = "#8c0099";
     time_bg = "#dddddd";
     time_color = "#666666";
     vcs_fg = "#ffffff";
@@ -26,6 +27,7 @@
     flags_bg = "#bbbbbb";
     flags_exitcode_color = "#f25757";
     flags_sudo_color = "#009900";
+    flags_jobs_color = "#8c0099";
     time_bg = "#cccccc";
     time_color = "#333333";
     vcs_fg = "#000000";

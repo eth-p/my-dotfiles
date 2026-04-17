@@ -146,6 +146,11 @@ in
       programs.oh-my-posh.enableFishIntegration = lib.mkForce false;
       programs.fish.interactiveShellInit = mkIf cfg.enableFishIntegration ''
         ${lib.getExe cfgPosh.package} init fish ${lib.strings.escapeShellArgs poshInitArgs} | source
+        source "$__fish_config_dir/functions/set_poshcontext.fish"
+      '';
+
+      programs.fish.functions.set_poshcontext.body = ''
+        set -gx _poshcontext_background_jobs $(jobs --pid | count)
       '';
     })
 
@@ -162,6 +167,7 @@ in
               --description "Reloads the oh-my-posh prompt config after home-manager switch" \
               --on-variable ${universalVarName}
               oh-my-posh init fish ''$${universalVarName}[2..] | source
+              source "$__fish_config_dir/functions/set_poshcontext.fish"
             end
           '';
         };

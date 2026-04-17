@@ -34,6 +34,20 @@
       options = { };
     }
 
+    # Jobs segment:
+    {
+      type = "text";
+      style = "diamond";
+      trailing_diamond = "█";
+
+      foreground = "p:flags_jobs_color";
+      background = "p:flags_bg";
+
+      template = "{{ if gt (atoi .Env._poshcontext_background_jobs) 0 }}%{{ .Env._poshcontext_background_jobs }}{{ end }}";
+
+      options = { };
+    }
+
     # Exit code segment:
     {
       type = "status";
