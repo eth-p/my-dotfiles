@@ -1,12 +1,40 @@
+# my-dotfiles | Copyright (C) 2026 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+#
+# Configuration for text editors and IDEs.
+#
+# Spec: https://editorconfig.org/
+# ==============================================================================
 root = true
 
-[*.fish]
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# ------------------------------------------------------------------------------
+# Sources
+# ------------------------------------------------------------------------------
+
+[*.nix]
+indent_size = 2
+indent_style = space
+max_line_length = 100
+
+# ------------------------------------------------------------------------------
+# Scripts
+# ------------------------------------------------------------------------------
+
+[*.{sh,bash}]
 indent_size = 4
 indent_style = tab
 
-[*.json]
+# ------------------------------------------------------------------------------
+# Data Files
+# ------------------------------------------------------------------------------
+
+[*.yaml]
 indent_size = 2
-indent_style = tab
+indent_style = space
 
 [*.toml]
 indent_size = 2
