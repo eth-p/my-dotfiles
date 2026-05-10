@@ -66,6 +66,52 @@ nix_flake_ref() {
     '
 }
 
+# nix_flake_local_inputs returns local inputs declared in the specified flake's
+# `flake.nix` file.
+nix_flake_local_inputs() {
+	: "${1?Requires first parameter as path to flake}"
+	: "${2?Requires second parameter as delimiter between name and url}"
+	# shellcheck disable=SC2016
+	nix eval --impure --raw --expr '
+		let
+			flakeFile = "'"$1"'/flake.nix";
+			flakeDef = import flakeFile;
+
+			urlOf = input: if (builtins.typeOf input) == "string"
+				then input
+				else if input ? url then input.url
+				else builtins.flakeRefToString input;
+
+			inputIsLocal = url:
+				let
+					parts = builtins.match "^([^:]+):.*" url;
+					urlProto = builtins.elemAt parts 0;
+				in {
+					"path" = true;
+					"file" = true;
+					"git+file" = true;
+				} ? ${urlProto};
+
+			inputNames = builtins.attrNames
+				(if flakeDef ? inputs then flakeDef.inputs else {});
+
+			inputEntries = builtins.map
+				(n: { name = n; value = urlOf flakeDef.inputs.${n}; })
+				inputNames;
+
+			localInputEntries = builtins.filter
+				({name, value}: inputIsLocal value)
+				inputEntries;
+		in
+			builtins.concatStringsSep "\n" (
+				builtins.map
+					({name, value}: "${name}'"$2"'${value}")
+					localInputEntries
+			)
+    '
+	printf "\n"
+}
+
 # nixpkgs_flake returns a reference to the locked version of the nixpkgs flake,
 # prioritizing the applied nixpkgs version used by my-dotfiles, or failing
 # that, the version specified in the my-dotfiles repo.
