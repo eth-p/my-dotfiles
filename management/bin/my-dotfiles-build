@@ -8,11 +8,9 @@
 # ==============================================================================
 # shellcheck shell=bash source-path=../../
 set -euo pipefail
-CUR_DIR="$(pwd)"
-cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
-REPO_DIR="$(pwd)"
+REPO_DIR=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.." && pwd)
 # ==============================================================================
-source "management/lib/nix.sh"
+source "${REPO_DIR}/management/lib/nix.sh"
 
 BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
 
@@ -53,7 +51,6 @@ fi
 # ------------------------------------------------------------------------------
 
 # Build or apply config using home-manager.
-cd "$(CUR_DIR)"
 nix run "$(home_manager_flake)" -- "${hm_subcommand}" \
 	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
 	--option "warn-dirty" false \

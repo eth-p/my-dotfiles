@@ -8,7 +8,7 @@
 if test -n "${__guard_lib_nix:-}"; then return 0; fi
 __guard_lib_nix="${BASH_SOURCE[0]}"
 # ==============================================================================
-source "management/lib/bash.sh"
+source "${REPO_DIR}/management/lib/bash.sh"
 
 nix() {
 	command nix --experimental-features 'flakes nix-command' "$@" || return $?
@@ -57,11 +57,14 @@ nix_platform() {
 # nix_flake_ref returns a reference to the locked version of some flake used in
 # my-dotfiles.
 nix_flake_ref() {
+	: "${1?Requires first parameter as path to flake}"
+	: "${2?Requires second parameter as node name in lockfile}"
 	# shellcheck disable=SC2016
 	nix eval --impure --raw --expr '
         let
-            lock = (builtins.fromJSON (builtins.readFile ./flake.lock));
-            flake = lock.nodes.'"$1"';
+            lockFile = "'"$1"'/flake.lock";
+            lock = (builtins.fromJSON (builtins.readFile lockFile));
+            flake = lock.nodes.'"$2"';
         in "github:${flake.locked.owner}/${flake.locked.repo}?rev=${flake.locked.rev}\n"
     '
 }
@@ -119,10 +122,10 @@ nixpkgs_flake() {
 	local ref
 	ref="$({
 		if [[ -n "${BOOTSTRAPPED_FLAKE_DIR:-}" ]]; then
-			cd "$BOOTSTRAPPED_FLAKE_DIR" || return 1
+			nix_flake_ref "$BOOTSTRAPPED_FLAKE_DIR" nixpkgs
+		else
+			nix_flake_ref "$REPO_DIR" nixpkgs
 		fi
-
-		nix_flake_ref nixpkgs
 	})"
 
 	print_and_redefine "${FUNCNAME[0]}" "$ref"
@@ -139,6 +142,6 @@ nixpkgs_run() {
 # home-manager flake used in my-dotfiles.
 home_manager_flake() {
 	local ref
-	ref="$(nix_flake_ref home-manager)"
+	ref="$(nix_flake_ref "$REPO_DIR" home-manager)"
 	print_and_redefine "${FUNCNAME[0]}" "$ref"
 }

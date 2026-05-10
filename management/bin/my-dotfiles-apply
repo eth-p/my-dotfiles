@@ -6,13 +6,13 @@
 #
 # Use `--dirty` to use local changes in my-dotfiles.
 # ==============================================================================
-# shellcheck shell=bash source-path=.
+# shellcheck shell=bash source-path=../../
 set -euo pipefail
+REPO_DIR=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.." && pwd)
 
 # Run `my-dotfiles-build` with the `--apply` flag.
 set -- "$@" --apply
-cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-source "my-dotfiles-build"
+source "${REPO_DIR}/management/bin/my-dotfiles-build"
 
 # ------------------------------------------------------------------------------
 

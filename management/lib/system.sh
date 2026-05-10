@@ -8,7 +8,7 @@
 if test -n "${__guard_lib_system:-}"; then return 0; fi
 __guard_lib_system="${BASH_SOURCE[0]}"
 # ==============================================================================
-source "management/lib/bash.sh"
+source "${REPO_DIR}/management/lib/bash.sh"
 
 user_homedir() {
 	if test -n "$HOME"; then

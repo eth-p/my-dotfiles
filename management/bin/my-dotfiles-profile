@@ -6,11 +6,10 @@
 # ==============================================================================
 # shellcheck shell=bash source-path=../../
 set -euo pipefail
-cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
-REPO_DIR="$(pwd)"
+REPO_DIR=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.." && pwd)
 # ==============================================================================
-source "management/lib/nix.sh"
-source "management/lib/print.sh"
+source "${REPO_DIR}/management/lib/nix.sh"
+source "${REPO_DIR}/management/lib/print.sh"
 
 BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
 
