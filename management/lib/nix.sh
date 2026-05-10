@@ -66,8 +66,8 @@ nix_flake_ref() {
 			nodeName = builtins.getEnv "opt_lock_node";
 			lockFile = "${builtins.getEnv "opt_flake_dir"}/flake.lock";
 			lock = (builtins.fromJSON (builtins.readFile lockFile));
-			flake = lock.nodes.${nodeName};
-		in "github:${flake.locked.owner}/${flake.locked.repo}?rev=${flake.locked.rev}\n"
+			inputRef = lock.nodes.${nodeName};
+		in "${builtins.flakeRefToString inputRef.locked}\n"
 	'
 }
 
