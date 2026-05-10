@@ -57,14 +57,16 @@ nix_platform() {
 # nix_flake_ref returns a reference to the locked version of some flake used in
 # my-dotfiles.
 nix_flake_ref() {
-	: "${1?Requires first parameter as path to flake}"
-	: "${2?Requires second parameter as node name in lockfile}"
+	export opt_flake_dir opt_lock_node
+	opt_flake_dir="${1?Requires first parameter as path to flake}"
+	opt_lock_node="${2?Requires second parameter as node name in lockfile}"
 	# shellcheck disable=SC2016
 	nix eval --impure --raw --expr '
 		let
-			lockFile = "'"$1"'/flake.lock";
+			nodeName = builtins.getEnv "opt_lock_node";
+			lockFile = "${builtins.getEnv "opt_flake_dir"}/flake.lock";
 			lock = (builtins.fromJSON (builtins.readFile lockFile));
-			flake = lock.nodes.'"$2"';
+			flake = lock.nodes.${nodeName};
 		in "github:${flake.locked.owner}/${flake.locked.repo}?rev=${flake.locked.rev}\n"
 	'
 }
@@ -72,12 +74,14 @@ nix_flake_ref() {
 # nix_flake_local_inputs returns local inputs declared in the specified flake's
 # `flake.nix` file.
 nix_flake_local_inputs() {
-	: "${1?Requires first parameter as path to flake}"
-	: "${2?Requires second parameter as delimiter between name and url}"
+	export opt_flake_dir opt_delim
+	opt_flake_dir="${1?Requires first parameter as path to flake}"
+	opt_delim="${2?Requires second parameter as delimiter between name and url}"
 	# shellcheck disable=SC2016
 	nix eval --impure --raw --expr '
 		let
-			flakeFile = "'"$1"'/flake.nix";
+			delim = builtins.getEnv "opt_delim";
+			flakeFile = "${builtins.getEnv "opt_flake_dir"}/flake.nix";
 			flakeDef = import flakeFile;
 
 			urlOf = input: if (builtins.typeOf input) == "string"
@@ -108,7 +112,7 @@ nix_flake_local_inputs() {
 		in
 			builtins.concatStringsSep "\n" (
 				builtins.map
-					({name, value}: "${name}'"$2"'${value}")
+					({name, value}: "${name}${delim}${value}")
 					localInputEntries
 			)
 	'
