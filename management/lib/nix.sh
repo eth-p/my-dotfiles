@@ -20,12 +20,12 @@ nix_installed() {
 	local result
 	result="$(
 		bash -lc '
-            if command -v nix; then
-                echo true >&3
-            else
-                echo false >&3
-            fi
-        ' 3>&1 &>/dev/null
+			if command -v nix; then
+				echo true >&3
+			else
+				echo false >&3
+			fi
+		' 3>&1 &>/dev/null
 	)"
 	test "$result" = "true" || return 1
 }
@@ -61,12 +61,12 @@ nix_flake_ref() {
 	: "${2?Requires second parameter as node name in lockfile}"
 	# shellcheck disable=SC2016
 	nix eval --impure --raw --expr '
-        let
-            lockFile = "'"$1"'/flake.lock";
-            lock = (builtins.fromJSON (builtins.readFile lockFile));
-            flake = lock.nodes.'"$2"';
-        in "github:${flake.locked.owner}/${flake.locked.repo}?rev=${flake.locked.rev}\n"
-    '
+		let
+			lockFile = "'"$1"'/flake.lock";
+			lock = (builtins.fromJSON (builtins.readFile lockFile));
+			flake = lock.nodes.'"$2"';
+		in "github:${flake.locked.owner}/${flake.locked.repo}?rev=${flake.locked.rev}\n"
+	'
 }
 
 # nix_flake_local_inputs returns local inputs declared in the specified flake's
@@ -111,7 +111,7 @@ nix_flake_local_inputs() {
 					({name, value}: "${name}'"$2"'${value}")
 					localInputEntries
 			)
-    '
+	'
 	printf "\n"
 }
 

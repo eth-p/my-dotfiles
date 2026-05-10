@@ -45,7 +45,7 @@ in
               args = wKey;
             };
 
-        in
+          in
           lib.attrsets.mapAttrsToList createSpecialKeyTriggerBinding vscode.keybind.whichKeySpecialKeys;
       };
     }

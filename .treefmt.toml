@@ -7,23 +7,23 @@
 # Program: https://treefmt.com/latest/
 # ==============================================================================
 excludes = [
-    "*.md",
-    "*.png",
-    "*.lock",
-    "Makefile",
+  "*.md",
+  "*.png",
+  "*.lock",
+  "Makefile",
 
-    # system
-    ".DS_Store",
+  # system
+  ".DS_Store",
 
-    # unsupported
-    ".envrc",
-    ".editorconfig",
-    ".git*",
+  # unsupported
+  ".envrc",
+  ".editorconfig",
+  ".git*",
 
-    # ignored files
-    ".devenv/**",
-    ".idea/**",
-    "result/**",
+  # ignored files
+  ".devenv/**",
+  ".idea/**",
+  "result/**",
 ]
 
 [formatter.prettier]
@@ -31,10 +31,10 @@ command = "prettier"
 options = ["--write"]
 excludes = []
 includes = [
-    "*.json",
-    "*.json5",
-    "*.yaml",
-    "*.yml",
+  "*.json",
+  "*.json5",
+  "*.yaml",
+  "*.yml",
 ]
 
 [formatter.shfmt]
@@ -42,13 +42,13 @@ command = "shfmt"
 options = ["-w", "--indent=0", "--language-dialect=bash"]
 excludes = []
 includes = [
-    "scripts/*",
-    "management/bin/*",
-    "bootstrap",
-    "*.sh",
-    "*.bash",
-    "*.envrc",
-    "*.envrc.*",
+  "scripts/*",
+  "management/bin/*",
+  "bootstrap",
+  "*.sh",
+  "*.bash",
+  "*.envrc",
+  "*.envrc.*",
 ]
 
 [formatter.nixfmt]
