@@ -35,6 +35,7 @@
         pkgs.shfmt
         pkgs.nixfmt
         pkgs.stylua
+        pkgs.tombi
       ];
 
       # https://devenv.sh/tasks/

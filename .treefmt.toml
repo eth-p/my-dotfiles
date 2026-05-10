@@ -62,3 +62,9 @@ command = "stylua"
 excludes = []
 includes = ["*.lua"]
 options = []
+
+[formatter.tombi]
+command = "tombi"
+options = ["format"]
+excludes = []
+includes = ["*.toml"]
