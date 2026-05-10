@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+#
+# Build the device-specific configuration.
+#
+# Use `--dirty` to use local changes in my-dotfiles.
+# ==============================================================================
+# shellcheck shell=bash source-path=../../
+set -euo pipefail
+CUR_DIR="$(pwd)"
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
+REPO_DIR="$(pwd)"
+# ==============================================================================
+source "management/lib/nix.sh"
+
+BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
+
+# ------------------------------------------------------------------------------
+
+hm_subcommand=build
+hm_flags=()
+opt_dirty=false
+
+while [[ "$#" -gt 0 ]]; do
+	case "$1" in
+	"--dirty")
+		opt_dirty=true
+		shift
+		;;
+	"--apply")
+		hm_subcommand=switch
+		shift
+		;;
+	-*)
+		show_error "unknown option: %s" "$1"
+		exit 1
+		;;
+	*)
+		show_error "subcommand does not have positional arguments"
+		exit 1
+		;;
+	esac
+done
+
+# Override local inputs to enable building with uncommitted changes.
+if "$opt_dirty"; then
+	while read -r name url; do
+		hm_flags+=(--override-input "$name" "$url")
+	done < <(nix_flake_local_inputs "${BOOTSTRAPPED_FLAKE_DIR}" ' ')
+fi
+
+# ------------------------------------------------------------------------------
+
+# Build or apply config using home-manager.
+cd "$(CUR_DIR)"
+nix run "$(home_manager_flake)" -- "${hm_subcommand}" \
+	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
+	--option "warn-dirty" false \
+	--option "commit-lock-file-summary" false \
+	"${hm_flags[@]}"

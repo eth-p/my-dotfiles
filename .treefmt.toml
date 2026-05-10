@@ -23,6 +23,7 @@ excludes = [
     # ignored files
     ".devenv/**",
     ".idea/**",
+    "result/**",
 ]
 
 [formatter.prettier]

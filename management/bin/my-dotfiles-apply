@@ -6,53 +6,15 @@
 #
 # Use `--dirty` to use local changes in my-dotfiles.
 # ==============================================================================
-# shellcheck shell=bash source-path=../../
+# shellcheck shell=bash source-path=.
 set -euo pipefail
-cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../.."
-REPO_DIR="$(pwd)"
-# ==============================================================================
-source "management/lib/nix.sh"
 
-BOOTSTRAPPED_FLAKE_DIR="${BOOTSTRAPPED_FLAKE_DIR?Required}"
-
-# ------------------------------------------------------------------------------
-
-hm_flags=()
-opt_dirty=false
-
-while [[ "$#" -gt 0 ]]; do
-	case "$1" in
-	"--dirty")
-		opt_dirty=true
-		shift
-		;;
-	-*)
-		show_error "unknown option: %s" "$1"
-		exit 1
-		;;
-	*)
-		show_error "subcommand does not have positional arguments"
-		exit 1
-		;;
-	esac
-done
-
-# Override local inputs to enable building with uncommitted changes.
-if "$opt_dirty"; then
-	while read -r name url; do
-		hm_flags+=(--override-input "$name" "$url")
-	done < <(nix_flake_local_inputs "${BOOTSTRAPPED_FLAKE_DIR}" ' ')
-fi
+# Run `my-dotfiles-build` with the `--apply` flag.
+set -- "$@" --apply
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+source "my-dotfiles-build"
 
 # ------------------------------------------------------------------------------
-
-# Apply config using home-manager.
-# Overriding the `my-dotfiles` allows it to ignore the lockfile for my-dotfiles.
-nix run "$(home_manager_flake)" -- switch \
-	--flake "path:${BOOTSTRAPPED_FLAKE_DIR}" \
-	--option "warn-dirty" false \
-	--option "commit-lock-file-summary" false \
-	"${hm_flags[@]}"
 
 # Delete neovim's Luajit cache if it gets too large.
 if [[ "$(du -k "$HOME/.cache/nvim/luac" | awk '{ print $1 }')" -gt 65536 ]]; then
