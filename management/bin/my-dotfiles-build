@@ -30,6 +30,10 @@ while [[ "$#" -gt 0 ]]; do
 		hm_subcommand=switch
 		shift
 		;;
+	"--show-trace")
+		hm_flags+=(--show-trace)
+		shift
+		;;
 	-*)
 		show_error "unknown option: %s" "$1"
 		exit 1
