@@ -58,7 +58,7 @@ in
           type = themeType;
           description = "The theme used for the light color scheme";
           default = {
-            name = "Default Light Modern";
+            name = "Light Modern";
             extensions = [ ];
           };
         };
