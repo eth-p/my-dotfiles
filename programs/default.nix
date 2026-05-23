@@ -24,6 +24,7 @@
   ./github-cli
   ./github-act
   ./glow
+  ./kubectl
   ./kubesel
   ./lf
   ./neovim

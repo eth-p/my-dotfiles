@@ -446,6 +446,24 @@ the theme to use
 
 **Default:** `"base16"`
 
+## [`my-dotfiles.kubectl.enable`](programs/kubectl/default.nix#L21)
+
+install kubectl
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
+## [`my-dotfiles.kubectl.package`](programs/kubectl/default.nix#L23)
+
+the kubectl package to install
+
+**Type:** `lib.types.package`
+
+**Default:** `pkgs.kubectl`
+
 ## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L21)
 
 install kubesel
