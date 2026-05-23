@@ -17,6 +17,12 @@ in
 {
   options.my-dotfiles.github-cli = {
     enable = lib.mkEnableOption "install and configure the github CLI tool";
+
+    stack.enable = lib.mkOption {
+      description = "install the stack extension";
+      type = lib.types.bool;
+      default = true;
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -38,6 +44,13 @@ in
         gh = "!gh";
       };
     }
+
+    # Install the `gh-stack` extension.
+    (mkIf cfg.stack.enable {
+      programs.gh.extensions = [
+        pkgs.gh-stack
+      ];
+    })
 
   ]);
 }

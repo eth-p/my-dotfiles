@@ -369,6 +369,14 @@ install and configure the github CLI tool
 
 **Example:** `true`
 
+## [`my-dotfiles.github-cli.stack.enable`](programs/github-cli/default.nix#L21)
+
+install the stack extension
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
 ## [`my-dotfiles.global.colorscheme`](programs/globals.nix#L52)
 
 
