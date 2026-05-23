@@ -26,6 +26,13 @@ let
         description = "name of the alias; can only include alphabetical characters, built-in commands take priorirty over user-defined ones";
       };
 
+      description = lib.mkOption {
+        # Not part of the kuberc spec; used to generate carapace overlays.
+        type = lib.types.str;
+        default = "";
+        description = "description of the alias (carapace only)";
+      };
+
       options = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
         description = "default options (in long form, without dashes) for the command when invoked via this alias";
@@ -188,6 +195,50 @@ in
           defaults = lib.attrsets.mapAttrsToList canonicalizeDefaults cfg.extraDefaults;
         });
 
+      # ----------------------------------------------------------------------
+      # Generate carapace overlay for improved auto-completion based on the
+      # user-defined aliases.
+      # ----------------------------------------------------------------------
+
+      # Converts the attrset-based alias configuration into a carapace command
+      # specification that bridges the alias to carapace's normal completer
+      # for the underlying kubectl command.
+      #
+      # Example input (as YAML):
+      #    get-ns:
+      #      command: get
+      #      description: "get a kubenetes namespace"
+      #      prependArgs: [namespace]
+      #
+      # Example output (as YAML):
+      #    name: get-ns
+      #    description: "get a kubenetes namespace"
+      #    completion:
+      #      positionalany:
+      #        - $carapace.bridge.CarapaceBin(["kubectl", "get", "namespace"])
+      #
+      # For use via `lib.attrsets.mapAttrsToList`.
+      carapaceOverlayForAlias =
+        name: alias:
+        {
+          inherit name;
+          completion = {
+            positionalany = [
+              "$carapace.bridge.CarapaceBin(${
+                lib.strings.toJSON ([ "kubectl" ] ++ alias.prependArgs ++ [ alias.command ])
+              })"
+            ];
+          };
+        }
+        // (lib.optionalAttrs (alias.description != "") {
+          inherit (alias) description;
+        });
+
+      carapaceOverlay = {
+        name = "kubectl";
+        commands = (lib.attrsets.mapAttrsToList carapaceOverlayForAlias cfg.extraAliases);
+      };
+
     in
     mkIf cfg.enable (mkMerge [
 
@@ -208,6 +259,21 @@ in
           // kubercContents
         );
       })
+
+      # Add carapace overlay for custom aliases.
+      (mkIf (config.programs.carapace.enable && cfg.extraAliases != { }) (
+        let
+          carapaceConfigDir =
+            if pkgs.stdenvNoCC.targetPlatform.isDarwin then
+              "Library/Application Support/carapace"
+            else
+              "${config.xdg.configHome}/.config/carapace";
+        in
+        {
+          home.file."${carapaceConfigDir}/overlays/kubectl.yaml".source =
+            yamlFormat.generate "kubectl-carapace-overlay" carapaceOverlay;
+        }
+      ))
 
     ]);
 }
