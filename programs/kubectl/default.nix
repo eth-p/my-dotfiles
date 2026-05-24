@@ -62,7 +62,6 @@ in
 
   config =
     let
-
       emptyKuberc = kuberc.generate {
         aliases = { };
         defaults = { };
@@ -72,46 +71,6 @@ in
         aliases = cfg.extraAliases;
         defaults = cfg.extraDefaults;
       };
-
-      # ----------------------------------------------------------------------
-      # Generate carapace overlay for improved auto-completion based on the
-      # user-defined aliases.
-      # ----------------------------------------------------------------------
-
-      # Converts the attrset-based alias configuration into a carapace command
-      # specification that bridges the alias to carapace's normal completer
-      # for the underlying kubectl command.
-      #
-      # Example input (as YAML):
-      #    get-ns:
-      #      command: get
-      #      description: "get a kubenetes namespace"
-      #      prependArgs: [namespace]
-      #
-      # Example output (as YAML):
-      #    name: get-ns
-      #    description: "get a kubenetes namespace"
-      #    completion:
-      #      positionalany:
-      #        - $carapace.bridge.CarapaceBin(["kubectl", "get", "namespace"])
-      #
-      # For use via `lib.attrsets.mapAttrsToList`.
-      carapaceOverlayForAlias =
-        name: alias:
-        {
-          inherit name;
-          completion = {
-            positionalany = [
-              "$carapace.bridge.CarapaceBin(${
-                lib.strings.toJSON ([ "kubectl" ] ++ alias.prependArgs ++ [ alias.command ])
-              })"
-            ];
-          };
-        }
-        // (lib.optionalAttrs (alias.description != "") {
-          inherit (alias) description;
-        });
-
     in
     mkIf cfg.enable (mkMerge [
 
@@ -131,7 +90,7 @@ in
       (mkIf (cfg.extraAliases != { }) {
         my-dotfiles.carapace.overlays.kubectl = {
           name = "kubectl";
-          commands = (lib.attrsets.mapAttrsToList carapaceOverlayForAlias cfg.extraAliases);
+          commands = (lib.attrsets.mapAttrsToList kuberc.carapaceOverlayForAlias cfg.extraAliases);
         };
       })
 
