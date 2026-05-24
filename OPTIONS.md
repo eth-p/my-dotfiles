@@ -456,7 +456,7 @@ the theme to use
 
 **Default:** `"base16"`
 
-## [`my-dotfiles.kubectl.enable`](programs/kubectl/default.nix#L72)
+## [`my-dotfiles.kubectl.enable`](programs/kubectl/default.nix#L23)
 
 install kubectl
 
@@ -466,11 +466,11 @@ install kubectl
 
 **Example:** `true`
 
-## [`my-dotfiles.kubectl.extraAliases`](programs/kubectl/default.nix#L95)
+## [`my-dotfiles.kubectl.extraAliases`](programs/kubectl/default.nix#L46)
 
 extra kubectl aliases to add to the kuberc file
 
-**Type:** `lib.types.attrsOf kubercAliasOverride`
+**Type:** `lib.types.attrsOf kuberc.types.aliasOverride`
 
 **Default:** `{ }`
 
@@ -489,11 +489,11 @@ extra kubectl aliases to add to the kuberc file
 }
 ```
 
-## [`my-dotfiles.kubectl.extraDefaults`](programs/kubectl/default.nix#L80)
+## [`my-dotfiles.kubectl.extraDefaults`](programs/kubectl/default.nix#L31)
 
 extra default option overrides for specific kubectl subcommands
 
-**Type:** `lib.types.attrsOf kubercCommandDefaults`
+**Type:** `lib.types.attrsOf kuberc.types.commandDefaults`
 
 **Default:** `{ }`
 
@@ -511,7 +511,7 @@ extra default option overrides for specific kubectl subcommands
 }
 ```
 
-## [`my-dotfiles.kubectl.package`](programs/kubectl/default.nix#L74)
+## [`my-dotfiles.kubectl.package`](programs/kubectl/default.nix#L25)
 
 the kubectl package to install
 
