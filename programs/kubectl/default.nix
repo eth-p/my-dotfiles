@@ -21,6 +21,7 @@ in
 {
   imports = [
     ./my-aliases.nix
+    ./my-defaults.nix
   ];
 
   options.my-dotfiles.kubectl = {
