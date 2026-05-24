@@ -6,7 +6,7 @@
 {
   lib,
 }:
-{
+rec {
 
   # Submodule types based on:
   # https://kubernetes.io/docs/reference/config-api/kuberc.v1beta1/
@@ -17,6 +17,13 @@
         command = lib.mkOption {
           type = lib.types.str;
           description = "name of the alias; can only include alphabetical characters, built-in commands take priorirty over user-defined ones";
+        };
+
+        enable = lib.mkOption {
+          # Not part of the kuberc spec; used to disable generating specific aliases.
+          type = lib.types.bool;
+          description = "whether to enable the alias";
+          default = true;
         };
 
         description = lib.mkOption {
@@ -152,11 +159,16 @@
       kind = "Preference";
     }
     // (lib.optionalAttrs (aliases != { }) {
-      aliases = lib.attrsets.mapAttrsToList canonicalizeAlias aliases;
+      aliases = lib.attrsets.mapAttrsToList canonicalizeAlias (onlyEnabledAliasesIn aliases);
     })
     // (lib.optionalAttrs (defaults != { }) {
       defaults = lib.attrsets.mapAttrsToList canonicalizeDefaults defaults;
     });
+
+  # Removes any non-enabled aliases in the provided attrset of aliases.
+  #
+  # onlyEnabledAliasesIn :: attrset -> attrset
+  onlyEnabledAliasesIn = lib.attrsets.filterAttrs (_: v: v.enable);
 
   # Converts the attrset-based alias configuration into a carapace command
   # specification that bridges the alias to carapace's normal completer

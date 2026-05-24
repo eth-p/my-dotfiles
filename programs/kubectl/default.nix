@@ -62,14 +62,16 @@ in
 
   config =
     let
+      enabledAliases = kuberc.onlyEnabledAliasesIn cfg.extraAliases;
+
       emptyKuberc = kuberc.generate {
         aliases = { };
         defaults = { };
       };
 
       configKuberc = kuberc.generate {
-        aliases = cfg.extraAliases;
         defaults = cfg.extraDefaults;
+        aliases = enabledAliases;
       };
     in
     mkIf cfg.enable (mkMerge [
@@ -87,10 +89,10 @@ in
       })
 
       # Add carapace overlay for custom aliases.
-      (mkIf (cfg.extraAliases != { }) {
+      (mkIf (enabledAliases != { }) {
         my-dotfiles.carapace.overlays.kubectl = {
           name = "kubectl";
-          commands = (lib.attrsets.mapAttrsToList kuberc.carapaceOverlayForAlias cfg.extraAliases);
+          commands = (lib.attrsets.mapAttrsToList kuberc.carapaceOverlayForAlias enabledAliases);
         };
       })
 
