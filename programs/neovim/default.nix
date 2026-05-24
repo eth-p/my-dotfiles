@@ -198,6 +198,14 @@ in
           '')
         ];
       })
+
+      # STATE_VERSION: Accept defaults for home-manager 26.05.
+      (lib.mkIf (lib.versionOlder config.home.stateVersion "26.05") {
+        programs.neovim = {
+          withRuby = false;
+          withPython3 = false;
+        };
+      })
     ]
   );
 }
