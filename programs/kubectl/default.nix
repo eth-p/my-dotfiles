@@ -234,11 +234,6 @@ in
           inherit (alias) description;
         });
 
-      carapaceOverlay = {
-        name = "kubectl";
-        commands = (lib.attrsets.mapAttrsToList carapaceOverlayForAlias cfg.extraAliases);
-      };
-
     in
     mkIf cfg.enable (mkMerge [
 
@@ -261,19 +256,12 @@ in
       })
 
       # Add carapace overlay for custom aliases.
-      (mkIf (config.programs.carapace.enable && cfg.extraAliases != { }) (
-        let
-          carapaceConfigDir =
-            if pkgs.stdenvNoCC.targetPlatform.isDarwin then
-              "Library/Application Support/carapace"
-            else
-              "${config.xdg.configHome}/.config/carapace";
-        in
-        {
-          home.file."${carapaceConfigDir}/overlays/kubectl.yaml".source =
-            yamlFormat.generate "kubectl-carapace-overlay" carapaceOverlay;
-        }
-      ))
+      (mkIf (cfg.extraAliases != { }) {
+        my-dotfiles.carapace.overlays.kubectl = {
+          name = "kubectl";
+          commands = (lib.attrsets.mapAttrsToList carapaceOverlayForAlias cfg.extraAliases);
+        };
+      })
 
     ]);
 }
