@@ -49,7 +49,7 @@ install and configure btop
 
 **Example:** `true`
 
-## [`my-dotfiles.carapace.enable`](programs/carapace/default.nix#L18)
+## [`my-dotfiles.carapace.enable`](programs/carapace/default.nix#L20)
 
 install and configure carapace
 
@@ -58,6 +58,16 @@ install and configure carapace
 **Default:** `false`
 
 **Example:** `true`
+
+## [`my-dotfiles.carapace.overlays`](programs/carapace/default.nix#L22)
+
+
+Completion overlays to install in the carapace config directory.
+
+
+**Type:** `lib.types.attrsOf yamlFormat.type`
+
+**Default:** `{ }`
 
 ## [`my-dotfiles.devenv.enable`](programs/devenv/default.nix#L21)
 

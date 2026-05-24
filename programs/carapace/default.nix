@@ -12,23 +12,54 @@
 let
   inherit (lib) mkIf mkMerge;
   cfg = config.my-dotfiles.carapace;
+
+  yamlFormat = pkgs.formats.yaml { };
 in
 {
   options.my-dotfiles.carapace = {
     enable = lib.mkEnableOption "install and configure carapace";
+
+    overlays = lib.mkOption {
+      type = lib.types.attrsOf yamlFormat.type;
+      default = { };
+      description = ''
+        Completion overlays to install in the carapace config directory.
+      '';
+    };
   };
 
-  config = mkIf cfg.enable (mkMerge [
+  config =
+    let
+      carapaceConfigPath =
+        if pkgs.stdenvNoCC.hostPlatform.isDarwin then
+          "Library/Application Support/carapace"
+        else
+          "${config.xdg.configHome}/carapace";
 
-    # Configure carapace.
-    {
-      programs.carapace = {
-        enable = true;
-        enableFishIntegration = true;
+    in
+    mkIf cfg.enable (mkMerge [
 
-        package = lib.mkDefault pkgs.carapace;
-      };
-    }
+      # Configure carapace.
+      {
+        programs.carapace = {
+          enable = true;
+          enableFishIntegration = true;
 
-  ]);
+          package = lib.mkDefault pkgs.carapace;
+        };
+      }
+
+      # Install overlays.
+      {
+        home.file = (
+          lib.mapAttrs' (name: value: {
+            name = "${carapaceConfigPath}/overlays/${name}.yaml";
+            value = {
+              source = yamlFormat.generate "carapace-overlay-${name}" value;
+            };
+          }) cfg.overlays
+        );
+      }
+
+    ]);
 }
