@@ -19,6 +19,10 @@ let
 
 in
 {
+  imports = [
+    ./my-aliases.nix
+  ];
+
   options.my-dotfiles.kubectl = {
     enable = lib.mkEnableOption "install kubectl";
 
