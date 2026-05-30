@@ -50,5 +50,21 @@ in
       };
     })
 
+    # actionlint for VS Code
+    # (Also covers shellcheck integration for GitHub Actions workflow files)
+    # https://marketplace.visualstudio.com/items?itemName=jimeh.actionlint
+    {
+      programs.vscode = {
+        profiles.default.extensions = with extensions; [
+          jimeh.actionlint
+        ];
+
+        profiles.default.userSettings = {
+          "actionlint.executable" = lib.getExe pkgs.actionlint;
+          "actionlint.shellcheckExecutable" = lib.getExe vscodeCfg.language.bash.shellcheck.package;
+        };
+      };
+    }
+
   ]);
 }
