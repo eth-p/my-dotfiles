@@ -551,7 +551,7 @@ use server-side apply by default
 
 **Default:** `true`
 
-## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L21)
+## [`my-dotfiles.kubesel.enable`](programs/kubesel/default.nix#L25)
 
 install kubesel
 
@@ -561,7 +561,23 @@ install kubesel
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L36)
+## [`my-dotfiles.kubesel.enableFishAliases`](programs/kubesel/shell-aliases.nix#L24)
+
+add fish shell aliases and abbreviations for kubesel commands
+
+**Type:** `lib.types.bool`
+
+**Default:** `cfg.enableShellAliases`
+
+## [`my-dotfiles.kubesel.enableShellAliases`](programs/kubesel/shell-aliases.nix#L18)
+
+add shell aliases and abbreviations for kubesel commands
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubesel.inPrompt`](programs/kubesel/default.nix#L40)
 
 show kubesel info in the shell prompt
 
@@ -571,7 +587,7 @@ show kubesel info in the shell prompt
 
 **Example:** `true`
 
-## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L38)
+## [`my-dotfiles.kubesel.inPromptClusterOverrides`](programs/kubesel/default.nix#L42)
 
 override the name or color for specific clusters
 
@@ -591,7 +607,7 @@ override the name or color for specific clusters
 }
 ```
 
-## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L29)
+## [`my-dotfiles.kubesel.kubeconfigs`](programs/kubesel/default.nix#L33)
 
 glob pattern matching kubeconfig files
 
@@ -601,7 +617,7 @@ glob pattern matching kubeconfig files
 
 **Example:** `"~/.kube/configs/*.yaml"`
 
-## [`my-dotfiles.kubesel.package`](programs/kubesel/default.nix#L23)
+## [`my-dotfiles.kubesel.package`](programs/kubesel/default.nix#L27)
 
 the kubesel package to install
 

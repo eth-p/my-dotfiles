@@ -17,6 +17,10 @@ let
   cfgGlobal = config.my-dotfiles.global;
 in
 {
+  imports = [
+    ./shell-aliases.nix
+  ];
+
   options.my-dotfiles.kubesel = {
     enable = lib.mkEnableOption "install kubesel";
 
