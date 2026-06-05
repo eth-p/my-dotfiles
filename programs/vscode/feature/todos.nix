@@ -91,6 +91,9 @@ in
               "icon" = "tools";
             };
           };
+
+          # Requires ripgrep executable.
+          "todo-tree.ripgrep.ripgrep" = lib.getExe pkgs.ripgrep;
         };
       };
     }
