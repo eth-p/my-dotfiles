@@ -464,7 +464,7 @@ alias to list resources by name
 
 **Default:** `false`
 
-## [`my-dotfiles.kubectl.enable`](programs/kubectl/default.nix#L28)
+## [`my-dotfiles.kubectl.enable`](programs/kubectl/default.nix#L29)
 
 install kubectl
 
@@ -474,7 +474,23 @@ install kubectl
 
 **Example:** `true`
 
-## [`my-dotfiles.kubectl.extraAliases`](programs/kubectl/default.nix#L51)
+## [`my-dotfiles.kubectl.enableFishAliases`](programs/kubectl/shell-aliases.nix#L29)
+
+add fish shell aliases and abbreviations for kubectl commands
+
+**Type:** `lib.types.bool`
+
+**Default:** `cfg.enableShellAliases`
+
+## [`my-dotfiles.kubectl.enableShellAliases`](programs/kubectl/shell-aliases.nix#L23)
+
+add shell aliases and abbreviations for kubectl commands
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.extraAliases`](programs/kubectl/default.nix#L52)
 
 extra kubectl aliases to add to the kuberc file
 
@@ -497,7 +513,7 @@ extra kubectl aliases to add to the kuberc file
 }
 ```
 
-## [`my-dotfiles.kubectl.extraDefaults`](programs/kubectl/default.nix#L36)
+## [`my-dotfiles.kubectl.extraDefaults`](programs/kubectl/default.nix#L37)
 
 extra default option overrides for specific kubectl subcommands
 
@@ -519,7 +535,7 @@ extra default option overrides for specific kubectl subcommands
 }
 ```
 
-## [`my-dotfiles.kubectl.package`](programs/kubectl/default.nix#L30)
+## [`my-dotfiles.kubectl.package`](programs/kubectl/default.nix#L31)
 
 the kubectl package to install
 
