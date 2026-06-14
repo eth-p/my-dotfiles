@@ -18,5 +18,6 @@
     ./todos.nix
     ./devcontainers.nix
     ./ssh.nix
+    ./devenv.nix
   ];
 }

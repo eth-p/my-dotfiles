@@ -965,6 +965,16 @@ add support for running VS Code in dev containers
 
 **Example:** `true`
 
+## [`my-dotfiles.vscode.devenv.enable`](programs/vscode/feature/devenv.nix#L23)
+
+add devenv support
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.vscode.editor.rulers`](programs/vscode/editor.nix#L26)
 
 Column numbers to draw a ruler at.
