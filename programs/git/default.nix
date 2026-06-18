@@ -63,6 +63,7 @@ in
             lg = "log --oneline --graph";
             r = "rebase --interactive --autosquash";
             rc = "rebase --continue";
+            force-push = "push --force-with-lease";
 
             # Aliases to get diffs:
             sdiff = "diff --staged";
