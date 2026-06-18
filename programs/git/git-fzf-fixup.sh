@@ -1,5 +1,4 @@
-# variables defined when installed:
-#  * useDelta (0/1)
+#!/usr/bin/env bash
 set -euo pipefail
 
 branch="${1:-origin}"
@@ -15,12 +14,33 @@ ui_show() {
 }
 
 ui_preview() {
-	local printer="cat"
-	if [[ "$useDelta" -eq 1 ]]; then
-		printer="delta"
+	local previewer="cat"
+	local git_show_flags=()
+
+	previewer="$(git config pager.show)" || true
+	if [[ -z "$previewer" ]]; then
+		previewer="$(git config --get core.pager)" || true
+	fi
+	if [[ -z "$previewer" ]]; then
+		previewer="less"
 	fi
 
-	git show "$1" --color=always | "$printer"
+	echo "$previewer"
+	case "$(basename -- "$previewer")" in
+	delta)
+		git_show_flags+=(--color=always)
+		;;
+	more|less|cat)
+		git_show_flags+=(--color=always)
+		previewer="cat"
+		;;
+	*)
+		# Unknown tool, just try it.
+		:
+		;;
+	esac
+	
+	git show "${git_show_flags[@]}" "$1" | "$previewer"
 }
 
 # Alternate entry point for showing the preview.

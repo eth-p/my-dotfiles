@@ -153,10 +153,7 @@ in
           ]
           ++ (if cfg.useDelta then [ pkgs.delta ] else [ ]);
 
-          text = ''
-            useDelta=${toString cfg.useDelta}
-            ${builtins.readFile ./git-fzf-fixup.sh}
-          '';
+          text = builtins.readFile ./git-fzf-fixup.sh;
         })
       ];
       programs.git.settings.alias = {
