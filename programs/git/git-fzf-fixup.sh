@@ -30,6 +30,12 @@ if [[ $# -ge 1 ]] && [[ "$1" = "_preview" ]]; then
 fi
 
 # Main entry point.
+if git diff --quiet --name-only --cached >/dev/null; then
+	echo "No staged changes to fixup. Use 'git add' to stage changes first:"
+	git status --short
+	exit 1
+fi
+
 commit="$(cut -d' ' -f1 < <(ui_show < <(ui_input)))"
 if [[ "$commit" != "" ]]; then
 	git commit --fixup "$commit"
