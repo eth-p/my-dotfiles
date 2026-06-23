@@ -20,6 +20,7 @@ let
 in
 {
   imports = [
+    ./extension-klock.nix
     ./my-aliases.nix
     ./my-defaults.nix
     ./shell-aliases.nix
