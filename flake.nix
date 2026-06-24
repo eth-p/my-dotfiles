@@ -19,7 +19,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # vicinae: https://github.com/vicinaehq/vicinae
-    vicinae.url = "github:vicinaehq/vicinae/v0.21.4";
+    vicinae.url = "github:vicinaehq/vicinae/v0.22.0";
 
     # My own packages:
     kubesel.url = "github:eth-p/kubesel";
