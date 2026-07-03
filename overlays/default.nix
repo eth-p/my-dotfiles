@@ -26,8 +26,8 @@ rec {
     in
     {
       vscode-extensions = lib.foldAttrs (i: acc: acc // i) { } [
-        prev.vscode-extensions
         extensions
+        prev.vscode-extensions
       ];
     };
 }
