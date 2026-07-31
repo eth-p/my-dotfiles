@@ -474,23 +474,7 @@ install kubectl
 
 **Example:** `true`
 
-## [`my-dotfiles.kubectl.enableFishAliases`](programs/kubectl/shell-aliases.nix#L29)
-
-add fish shell aliases and abbreviations for kubectl commands
-
-**Type:** `lib.types.bool`
-
-**Default:** `cfg.enableShellAliases`
-
-## [`my-dotfiles.kubectl.enableShellAliases`](programs/kubectl/shell-aliases.nix#L23)
-
-add shell aliases and abbreviations for kubectl commands
-
-**Type:** `lib.types.bool`
-
-**Default:** `true`
-
-## [`my-dotfiles.kubectl.extensions.klock.enable`](programs/kubectl/extension-klock.nix#L30)
+## [`my-dotfiles.kubectl.extensions.klock.enable`](programs/kubectl/extension-klock.nix#L26)
 
 install kubectl-klock
 
@@ -500,7 +484,7 @@ install kubectl-klock
 
 **Example:** `true`
 
-## [`my-dotfiles.kubectl.extensions.klock.package`](programs/kubectl/extension-klock.nix#L32)
+## [`my-dotfiles.kubectl.extensions.klock.package`](programs/kubectl/extension-klock.nix#L28)
 
 the kubectl-klock package to install
 
@@ -564,6 +548,94 @@ the kubectl package to install
 ## [`my-dotfiles.kubectl.serverSideApply`](programs/kubectl/my-defaults.nix#L19)
 
 use server-side apply by default
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.k.enable`](programs/kubectl/shell-aliases.nix#L31)
+
+enable the k alias
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.k.to`](programs/kubectl/shell-aliases.nix#L36)
+
+the command to alias for the k alias
+
+**Type:** `lib.types.str`
+
+**Default:** `"kubectl"`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kd.enable`](programs/kubectl/shell-aliases.nix#L59)
+
+enable the kd alias
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kd.to`](programs/kubectl/shell-aliases.nix#L64)
+
+the command to alias for the kd alias
+
+**Type:** `lib.types.str`
+
+**Default:** `"kubectl describe"`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kg.enable`](programs/kubectl/shell-aliases.nix#L45)
+
+enable the kg alias
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kg.to`](programs/kubectl/shell-aliases.nix#L50)
+
+the command to alias for the kg alias
+
+**Type:** `lib.types.str`
+
+**Default:** `"kubectl get"`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kgo.enable`](programs/kubectl/shell-aliases.nix#L73)
+
+enable the kgo alias
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kgo.to`](programs/kubectl/shell-aliases.nix#L78)
+
+the command to alias for the kgo alias
+
+**Type:** `lib.types.str`
+
+**Default:** `"kubectl get -oyaml"`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.klog.enable`](programs/kubectl/shell-aliases.nix#L87)
+
+enable the klog alias
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.klog.to`](programs/kubectl/shell-aliases.nix#L92)
+
+the command to alias for the klog alias
+
+**Type:** `lib.types.str`
+
+**Default:** `"kubectl logs"`
+
+## [`my-dotfiles.kubectl.shellAliases.enable`](programs/kubectl/shell-aliases.nix#L24)
+
+add shell aliases and abbreviations for kubectl commands
 
 **Type:** `lib.types.bool`
 

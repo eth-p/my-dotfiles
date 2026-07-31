@@ -14,10 +14,6 @@ let
   inherit (lib) mkIf mkMerge;
   cfgKubectl = config.my-dotfiles.kubectl;
   cfg = config.my-dotfiles.kubectl.extensions.klock;
-
-  kuberc = (import ./kuberc.nix) { inherit lib; };
-  yamlFormat = pkgs.formats.yaml { };
-
 in
 {
   imports = [
