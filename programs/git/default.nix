@@ -103,6 +103,16 @@ in
       };
     }
 
+    # Add 'git-wtclone' script.
+    {
+      home.packages = [
+        (pkgs.writeShellApplication {
+          name = "git-wtclone";
+          text = builtins.readFile ./git-wtclone.sh;
+        })
+      ];
+    }
+
     # Configure ignore rules for Mac.
     (mkIf cfg.ignoreMacFiles {
       programs.git.ignores = [
