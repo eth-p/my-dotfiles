@@ -464,6 +464,22 @@ alias to list resources by name
 
 **Default:** `false`
 
+## [`my-dotfiles.kubectl.color.enable`](programs/kubectl/default.nix#L70)
+
+use kubecolor for kubectl output
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.color.package`](programs/kubectl/default.nix#L76)
+
+the kubecolor package to install
+
+**Type:** `lib.types.package`
+
+**Default:** `pkgs.kubecolor`
+
 ## [`my-dotfiles.kubectl.enable`](programs/kubectl/default.nix#L30)
 
 install kubectl

@@ -65,6 +65,20 @@ in
         };
       };
     };
+
+    color = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "use kubecolor for kubectl output";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.kubecolor;
+        description = "the kubecolor package to install";
+      };
+    };
   };
 
   config =
@@ -93,6 +107,20 @@ in
       # Configure kubectl.
       (mkIf (configKuberc != emptyKuberc) {
         home.file.".kube/kuberc".source = yamlFormat.generate "kubectl-kuberc" configKuberc;
+      })
+
+      # Install kubecolor.
+      (mkIf cfg.color.enable {
+        home.packages = [
+          cfg.color.package
+        ];
+
+        programs.fish.functions.kubectl = {
+          wraps = "kubectl";
+          body = ''
+            kubecolor $argv
+          '';
+        };
       })
 
       # Add carapace overlay for custom aliases.
