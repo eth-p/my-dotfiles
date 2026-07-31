@@ -16,12 +16,6 @@ let
   cfg = config.my-dotfiles.kubectl.extensions.klock;
 in
 {
-  imports = [
-    ./my-aliases.nix
-    ./my-defaults.nix
-    ./shell-aliases.nix
-  ];
-
   options.my-dotfiles.kubectl.extensions.klock = {
     enable = lib.mkEnableOption "install kubectl-klock";
 

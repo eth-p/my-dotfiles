@@ -474,7 +474,7 @@ install kubectl
 
 **Example:** `true`
 
-## [`my-dotfiles.kubectl.extensions.klock.enable`](programs/kubectl/extension-klock.nix#L26)
+## [`my-dotfiles.kubectl.extensions.klock.enable`](programs/kubectl/extension-klock.nix#L20)
 
 install kubectl-klock
 
@@ -484,7 +484,7 @@ install kubectl-klock
 
 **Example:** `true`
 
-## [`my-dotfiles.kubectl.extensions.klock.package`](programs/kubectl/extension-klock.nix#L28)
+## [`my-dotfiles.kubectl.extensions.klock.package`](programs/kubectl/extension-klock.nix#L22)
 
 the kubectl-klock package to install
 
