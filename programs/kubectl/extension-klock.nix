@@ -39,6 +39,10 @@ in
       home.packages = [
         cfg.package
       ];
+
+      my-dotfiles.kubectl.shellAliases.alias.kwatch = {
+        to = "kubectl klock";
+      };
     }
 
   ]);

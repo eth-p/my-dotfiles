@@ -96,6 +96,20 @@ in
         description = "the command to alias for the klog alias";
       };
     };
+
+    alias.kwatch = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "enable the kwatch alias";
+      };
+      to = lib.mkOption {
+        visible = false;
+        type = lib.types.str;
+        default = "kubectl watch";
+        description = "the command to alias for the kwatch alias";
+      };
+    };
   };
 
   config =

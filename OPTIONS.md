@@ -633,6 +633,22 @@ the command to alias for the klog alias
 
 **Default:** `"kubectl logs"`
 
+## [`my-dotfiles.kubectl.shellAliases.alias.kwatch.enable`](programs/kubectl/shell-aliases.nix#L101)
+
+enable the kwatch alias
+
+**Type:** `lib.types.bool`
+
+**Default:** `true`
+
+## [`my-dotfiles.kubectl.shellAliases.alias.kwatch.to`](programs/kubectl/shell-aliases.nix#L106)
+
+the command to alias for the kwatch alias
+
+**Type:** `lib.types.str`
+
+**Default:** `"kubectl watch"`
+
 ## [`my-dotfiles.kubectl.shellAliases.enable`](programs/kubectl/shell-aliases.nix#L24)
 
 add shell aliases and abbreviations for kubectl commands
