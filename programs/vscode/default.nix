@@ -39,7 +39,7 @@ in
       type = lib.types.bool;
       description = "Use a FHS environment for VS Code.";
       default = false;
-      readOnly = !pkgs.stdenv.isLinux;
+      readOnly = !pkgs.stdenv.hostPlatform.isLinux;
     };
 
     dependencies.packages = lib.mkOption {

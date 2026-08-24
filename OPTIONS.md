@@ -143,7 +143,7 @@ whether Discord is supported on the current platform
 
 **Type:** `lib.types.bool`
 
-**Default:** `pkgs.stdenv.isLinux`
+**Default:** `pkgs.stdenv.hostPlatform.isLinux`
 
 ## [`my-dotfiles.ets.enable`](programs/ets/default.nix#L18)
 
@@ -205,7 +205,7 @@ Ignore system files created by MacOS.
 
 **Type:** `lib.types.bool`
 
-**Default:** `pkgs.stdenv.isDarwin`
+**Default:** `pkgs.stdenv.hostPlatform.isDarwin`
 
 ## [`my-dotfiles.fish.enable`](programs/fish/default.nix#L23)
 
@@ -223,7 +223,7 @@ fix the PATH variable on login
 
 **Type:** `lib.types.bool`
 
-**Default:** `pkgs.stdenv.isDarwin`
+**Default:** `pkgs.stdenv.hostPlatform.isDarwin`
 
 ## [`my-dotfiles.fish.isSHELL`](programs/fish/default.nix#L25)
 
@@ -279,7 +279,7 @@ Ignore system files created by MacOS.
 
 **Type:** `lib.types.bool`
 
-**Default:** `pkgs.stdenv.isDarwin`
+**Default:** `pkgs.stdenv.hostPlatform.isDarwin`
 
 ## [`my-dotfiles.git.inPrompt`](programs/git/default.nix#L21)
 

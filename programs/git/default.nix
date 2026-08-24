@@ -45,7 +45,7 @@ in
     ignoreMacFiles = lib.mkOption {
       type = lib.types.bool;
       description = "Ignore system files created by MacOS.";
-      default = pkgs.stdenv.isDarwin;
+      default = pkgs.stdenv.hostPlatform.isDarwin;
     };
   };
 

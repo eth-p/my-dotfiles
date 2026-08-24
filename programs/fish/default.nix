@@ -26,7 +26,7 @@ in
     fixPATH = lib.mkOption {
       type = lib.types.bool;
       description = "fix the PATH variable on login";
-      default = pkgs.stdenv.isDarwin;
+      default = pkgs.stdenv.hostPlatform.isDarwin;
     };
   };
 

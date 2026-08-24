@@ -21,7 +21,7 @@ in
       readOnly = true;
       type = lib.types.bool;
       description = "whether Discord is supported on the current platform";
-      default = pkgs.stdenv.isLinux;
+      default = pkgs.stdenv.hostPlatform.isLinux;
     };
 
     source = lib.mkOption {

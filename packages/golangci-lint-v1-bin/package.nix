@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
   dontConfigure = true;
   dontBuild = true;
 
-  nativeBuildInputs = if stdenv.isLinux then [ autoPatchelfHook ] else [ ];
+  nativeBuildInputs = if stdenv.hostPlatform.isLinux then [ autoPatchelfHook ] else [ ];
 
   installPhase = ''
     runHook preInstall

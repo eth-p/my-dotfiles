@@ -30,7 +30,7 @@ ui_preview() {
 	delta)
 		git_show_flags+=(--color=always)
 		;;
-	more|less|cat)
+	more | less | cat)
 		git_show_flags+=(--color=always)
 		previewer="cat"
 		;;
@@ -39,7 +39,7 @@ ui_preview() {
 		:
 		;;
 	esac
-	
+
 	git show "${git_show_flags[@]}" "$1" | "$previewer"
 }
 
