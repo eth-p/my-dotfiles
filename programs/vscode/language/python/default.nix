@@ -39,6 +39,9 @@ in
           # https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-python-envs
           ms-python.vscode-python-envs
 
+          # Install the Ruff extension.
+          charliermarsh.ruff
+
           # Install the autoDocstring extension.
           # https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring
           njpwerner.autodocstring
