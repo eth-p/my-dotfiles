@@ -31,6 +31,10 @@ in
           # https://marketplace.visualstudio.com/items?itemName=ms-python.python
           ms-python.python
 
+          # Install the Pylance extension (required by the Python extension).
+          # https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
+          ms-python.vscode-pylance
+
           # Install the Python Environments extension.
           # https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-python-envs
           ms-python.vscode-python-envs
@@ -39,6 +43,11 @@ in
           # https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring
           njpwerner.autodocstring
         ];
+
+        # Configure Python type checking.
+        profiles.default.userSettings = {
+          "python.analysis.typeCheckingMode" = "basic";
+        };
       };
     }
 
