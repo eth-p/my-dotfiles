@@ -256,16 +256,16 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1784388228,
-        "narHash": "sha256-/5fGvMWlLlyd5ibK7y1dqIK1MTpLABj3v1M0r/VArww=",
+        "lastModified": 1786962391,
+        "narHash": "sha256-Of1YU59mj9BZwQi7lbj/+XGaCs+MTGFCZ12bgcNbEu0=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "c55e85716e3e7a68f4b0f6ef6299d02a49623c7c",
+        "rev": "1f6de859a4142e24e73f7cc8a70df1a6e8d77a0e",
         "type": "github"
       },
       "original": {
         "owner": "vicinaehq",
-        "ref": "v0.23.2",
+        "ref": "v0.26.3",
         "repo": "vicinae",
         "type": "github"
       }
