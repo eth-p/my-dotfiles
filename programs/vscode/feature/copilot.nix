@@ -25,12 +25,23 @@ in
   config = mkIf (vscodeCfg.enable && cfg.enable) (mkMerge [
 
     {
-      programs.vscode = {
-        profiles.default.extensions = with extensions; [
+      programs.vscode.profiles.default = {
+        extensions = with extensions; [
           # Install the GitHub Copilot extension.
           # https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
           github.copilot-chat
         ];
+
+        userSettings = {
+          # Always use bash for the terminal profile.
+          # LLMs assume a bash-compatible shell.
+          "chat.tools.terminal.terminalProfile.osx" = {
+            path = "bash";
+          };
+          "chat.tools.terminal.terminalProfile.linux" = {
+            path = "bash";
+          };
+        };
       };
     }
 
