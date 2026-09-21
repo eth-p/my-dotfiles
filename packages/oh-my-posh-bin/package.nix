@@ -16,15 +16,11 @@ let
   downloads = {
     "x86_64-linux" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-amd64";
-      hash = "sha256-B5/r9okydEpsjQUXmieYvKCDYTJ17KbeQbHv6cguFcg=";
+      hash = "sha256-kqJTtgfbxjL55Fyd4Gy5ZQoaPnw23yASp7dgDyLcrYA=";
     };
     "aarch64-linux" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-arm64";
-      hash = "sha256-NNgdKHHNKyEYeNPjG7fI18XnAIgXDuUmviIqLmuEPE0=";
-    };
-    "x86_64-darwin" = {
-      url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-darwin-amd64";
-      hash = "sha256-DRqNZ4SKI2jXlhdB/RSM938c1aNPl7UTDUVtw6R3J/k=";
+      hash = "sha256-Y4ihHPDiKOWRo21qYCTsc9v2SdW1PzRC2Fuzfxhx8e0=";
     };
     "aarch64-darwin" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-darwin-arm64";

@@ -23,7 +23,6 @@ fi
 downloads=(
 	"x86_64-linux :: https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-amd64"
 	"aarch64-linux :: https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-arm64"
-	"x86_64-darwin :: https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-darwin-amd64"
 	"aarch64-darwin :: https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-darwin-arm64"
 )
 
