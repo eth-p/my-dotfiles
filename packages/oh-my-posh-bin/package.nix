@@ -12,7 +12,7 @@
   autoPatchelfHook,
 }:
 let
-  version = "30.6.5";
+  version = "31.3.0";
   downloads = {
     "x86_64-linux" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-linux-amd64";
@@ -24,7 +24,7 @@ let
     };
     "aarch64-darwin" = {
       url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v${version}/posh-darwin-arm64";
-      hash = "sha256-J7PU1DYy8zNHJmX4rkJg9mpYuNGv6nQYc+8ki2FSGGg=";
+      hash = "sha256-kDEfbeTneLapVhps0M7YE/u+ytgCkI7Z27/1aoR93Qo=";
     };
   };
 in
