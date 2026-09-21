@@ -1018,6 +1018,16 @@ install ripgrep
 
 **Example:** `true`
 
+## [`my-dotfiles.uv.enable`](programs/uv/default.nix#L21)
+
+install and configure uv
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:** `true`
+
 ## [`my-dotfiles.vicinae.enable`](programs/vicinae/default.nix#L18)
 
 install vicinae

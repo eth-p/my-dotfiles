@@ -16,6 +16,7 @@
     vcs_unknown = "#774444";
     envs_bg = "#666666";
     envs_fg_devenv = "#c1abff";
+    envs_fg_venv = "#5fa1d8";
     kubectl_bg = "#0f3074";
     kubectl_fg = "#a0b4d4";
   };
@@ -37,6 +38,7 @@
     vcs_unknown = "#e64c4c";
     envs_bg = "#999999";
     envs_fg_devenv = "#382078";
+    envs_fg_venv = "#5fa1d8";
     kubectl_bg = "#9db8e9";
     kubectl_fg = "#123786";
   };
