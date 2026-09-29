@@ -54,7 +54,7 @@ in
           name = "Close Active Editor";
           key = "ctrl+w c";
           command = "workbench.action.closeActiveEditor";
-          when = "editorFocus";
+          when = "!terminalFocus && editorFocus";
         }
 
         # Select editor from list.
@@ -115,7 +115,7 @@ in
               name = "Focus Editor Left";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusLeftGroup";
-              when = "editorFocus";
+              when = "!terminalFocus && editorFocus";
             }
           ])
           [
@@ -129,7 +129,7 @@ in
               name = "Focus Editor Right";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusRightGroup";
-              when = "editorFocus";
+              when = "!terminalFocus && editorFocus";
             }
           ])
           [
@@ -143,7 +143,7 @@ in
               name = "Focus Editor Above";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusAboveGroup";
-              when = "editorFocus";
+              when = "!terminalFocus && editorFocus";
             }
           ])
           [
@@ -157,7 +157,7 @@ in
               name = "Focus Editor Below";
               key = "ctrl+w ${key}";
               command = "workbench.action.focusBelowGroup";
-              when = "editorFocus";
+              when = "!terminalFocus && editorFocus";
             }
           ])
           [
@@ -192,6 +192,12 @@ in
           key = "ctrl+w";
           command = "-workbench.action.closeGroup";
           when = "activeEditorGroupEmpty && multipleEditorGroups";
+        }
+
+        # "Switch window..."
+        {
+          key = "ctrl+w";
+          command = "-workbench.action.switchWindow";
         }
 
       ];

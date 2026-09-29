@@ -107,6 +107,7 @@ in
           name = "Focus TODOs";
           key = "ctrl+w g l";
           command = "workbench.view.extension.todo-tree-container";
+          when = "!terminalFocus";
         }
 
       ];
