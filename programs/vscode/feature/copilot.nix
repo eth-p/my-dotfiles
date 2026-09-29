@@ -45,5 +45,20 @@ in
       };
     }
 
+    # Keybindings
+    (mkIf (vscodeCfg.keymap.bind-cw) {
+      my-dotfiles.vscode.keymap.bindings = [
+
+        # View: Toggle Chat
+        {
+          name = "Focus/Toggle Chat";
+          key = "ctrl+w g c";
+          command = "workbench.panel.chat";
+          when = "!terminalFocus";
+        }
+
+      ];
+    })
+
   ]);
 }
