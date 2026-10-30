@@ -1,0 +1,149 @@
+# my-dotfiles | Copyright (C) 2025 eth-p
+# Repository: https://github.com/eth-p/my-dotfiles
+#
+# Program: https://github.com/eth-p/kubesel
+# ==============================================================================
+{
+  lib,
+  config,
+  pkgs,
+  my-dotfiles,
+  ...
+}@inputs:
+let
+  inherit (lib) mkIf mkMerge;
+  inherit (my-dotfiles.lib.generators) toGoTemplate;
+  cfg = config.my-dotfiles.programs.kubesel;
+  cfgGlobal = config.my-dotfiles.global;
+in
+{
+  imports = [
+    ./shell-aliases.nix
+  ];
+
+  options.my-dotfiles.programs.kubesel = {
+    enable = lib.mkEnableOption "install kubesel";
+
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.kubesel; # via overlay
+      description = "the kubesel package to install";
+    };
+
+    kubeconfigs = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "glob pattern matching kubeconfig files";
+      example = "~/.kube/configs/*.yaml";
+    };
+
+    inPrompt = lib.mkEnableOption "show kubesel info in the shell prompt";
+
+    inPromptClusterOverrides = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      description = "override the name or color for specific clusters";
+      example = {
+        "docker-desktop" = {
+          name = "docker";
+          fg = "#FFFFFF";
+          bg = "#1D63ED";
+        };
+      };
+    };
+  };
+
+  config = mkIf cfg.enable (mkMerge [
+
+    # Install kubesel.
+    {
+      home.packages = [
+        cfg.package
+      ];
+
+      programs.fish.interactiveShellInit = ''
+        # Initialize kubesel.
+        ${lib.getExe cfg.package} init fish ${
+          if cfg.kubeconfigs == null then "" else "--add-kubeconfigs='${cfg.kubeconfigs}'"
+        } | source
+      '';
+    }
+
+    # Configure oh-my-posh to show kubernetes info.
+    (mkIf cfg.inPrompt {
+      my-dotfiles.programs.oh-my-posh.extraBlocks.kubernetes =
+        let
+          icons =
+            if cfgGlobal.nerdfonts then
+              {
+                leading = " "; # e81d (kubernetes)
+                trailing = "";
+              }
+            else
+              {
+                leading = "";
+                trailing = "³";
+              };
+
+          # raiseAttr picks a property from an attribute set and raises it.
+          # Example: `"bar" {foo = { bar = "baz" }} -> { foo = "baz" }
+          raiseAttr = name: lib.attrsets.mapAttrs (k: v: v.${name});
+
+          # rekeyToAlias changes the attribute names to be keyed using the
+          # cluster name alias instead of the original cluster name.
+          rekeyToAlias = lib.attrsets.mapAttrs' (
+            k: v: {
+              name = v.name;
+              value = v;
+            }
+          );
+
+          fgColorLUT = raiseAttr "fg" (rekeyToAlias cfg.inPromptClusterOverrides);
+          bgColorLUT = raiseAttr "bg" (rekeyToAlias cfg.inPromptClusterOverrides);
+          clusterAliases = raiseAttr "name" cfg.inPromptClusterOverrides;
+          generateGoTemplate = toGoTemplate { multiline = false; };
+        in
+        {
+          priority = 50;
+
+          type = "prompt";
+          alignment = "left";
+          leading_diamond = " ";
+          trailing_diamond = "";
+
+          segments = [
+            {
+              type = "kubectl";
+
+              foreground_templates = [
+                "{{- $lut := ${generateGoTemplate fgColorLUT} }}{{ (get $lut .Cluster | default \"\") }}"
+                "p:kubectl_fg"
+              ];
+              background_templates = [
+                "{{- $lut := ${generateGoTemplate bgColorLUT} }}{{ (get $lut .Cluster | default \"\") }}"
+                "p:kubectl_bg"
+              ];
+
+              style = "diamond";
+              leading_diamond = " ";
+              trailing_diamond = "";
+
+              template = (
+                builtins.concatStringsSep "" [
+                  "{{if ne .Cluster \"\"}}"
+                  " ${icons.leading}{{.Cluster}}{{if .Namespace}}/{{.Namespace}}{{end}}${icons.trailing} "
+                  "{{end}}"
+                ]
+              );
+
+              options = {
+                parse_kubeconfig = true;
+                cluster_aliases = clusterAliases;
+              };
+            }
+          ];
+
+        };
+    })
+  ]);
+}

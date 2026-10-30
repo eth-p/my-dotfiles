@@ -27,7 +27,7 @@ in
   # getConfig returns the config for the my-dotfiles Visual Studio Code module.
   #
   # getConfig :: config -> attrset
-  getConfig = config: config.my-dotfiles.vscode;
+  getConfig = config: config.my-dotfiles.programs.vscode;
 
   # getTerminalPlatformName returns the platform name used for configuring
   # integrated terminal settings.

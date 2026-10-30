@@ -138,8 +138,8 @@
       # passed through as `my-dotfiles`.
       homeManagerModules = {
         default = {
-          imports = (import ./programs) ++ [
-            ./programs/globals.nix
+          imports = [
+            ./modules
           ];
         };
       };
